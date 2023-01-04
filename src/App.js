@@ -23,6 +23,7 @@ function App() {
   //loginRegister(dispatch, {});
   // createEvent(dispatch, {}, {});
   // createPass(dispatch, {}, {});
+
   return (
     <div className="App">
       <Navbar />

@@ -23,6 +23,7 @@ export const fetchEvents = async (dispatch) => {
       dispatch(events(data.events));
     });
 };
+
 export const fetchUpcoming = async (dispatch) => {
   console.log("upcoming Fetched");
   await fetch(`${url}/events/upcoming`, {
@@ -36,6 +37,7 @@ export const fetchUpcoming = async (dispatch) => {
       dispatch(upcoming(data.events));
     });
 };
+
 export const fetchCompleted = async (dispatch) => {
   console.log("Completed Fetched");
   await fetch(`${url}/events/completed`, {
@@ -49,6 +51,7 @@ export const fetchCompleted = async (dispatch) => {
       dispatch(completed(data.events));
     });
 };
+
 export const fetchUpdates = async (dispatch) => {
   console.log("Updates Fetched");
   await fetch(`${url}/events/updates`, {
