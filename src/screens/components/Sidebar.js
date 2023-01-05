@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import toggle from "../../images/toggle.png";
 
-function SidebarSuperAdmin(props) {
+function SidebarAdmin(props) {
   const { data, optactive, setactive } = props;
   const [isSidebar, SetSidebar] = useState(true);
 
@@ -38,4 +38,4 @@ function SidebarSuperAdmin(props) {
   );
 }
 
-export default SidebarSuperAdmin;
+export default SidebarAdmin;

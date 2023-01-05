@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import create from "../../../../../images/create_event.png";
 import { storage } from "../../../../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { useSelector } from "react-redux";
 import EventTab from "./EventTab";
 function SuperEvent() {
   const [tabactive, settab] = useState("All Events");
-
+  const events = useSelector((state) => state.auth.events);
   const onUpload = () => {
     const file = document.getElementById("eventImg");
-    const storageRef = ref(storage, `events/event2`);
+    const storageRef = ref(storage, `events/pass2`);
     if (file != null) {
       const uploadTask = uploadBytesResumable(storageRef, file.files[0]);
       uploadTask.on(
@@ -34,9 +35,14 @@ function SuperEvent() {
             onClick={() => {
               settab("All Events");
             }}
+            style={
+              tabactive === "All Events"
+                ? { color: "black" }
+                : { color: "rgba(0, 0, 0, 0.6)" }
+            }
           >
             {" "}
-            All Events(30)
+            All Events({events.length})
             {tabactive === "All Events" ? (
               <div className="tab-active"></div>
             ) : null}
@@ -46,6 +52,11 @@ function SuperEvent() {
             onClick={() => {
               settab("Past Events");
             }}
+            style={
+              tabactive === "Past Events"
+                ? { color: "black" }
+                : { color: "rgba(0, 0, 0, 0.6)" }
+            }
           >
             {" "}
             Past Events

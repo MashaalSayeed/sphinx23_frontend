@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SidebarSuperAdmin from "../../../components/Sidebar";
+import SidebarAdmin from "../../../components/Sidebar";
 import EventTab from "./Event/EventTab";
 import SuperEvent from "./Event/SuperEvent";
 import UserDetails from "./UserDetails/userDetails";
@@ -7,6 +7,7 @@ import Payment from "./Payment/payment";
 import Ambassador from "./Ambassador/ambassador";
 import { useSelector } from "react-redux";
 import { getUsers, getAmbassadors, getPayments } from "../../../../api";
+import Passes from "./Pass/Passes";
 
 export default function DashboardSuperAdmin() {
   const Sdata = {
@@ -35,17 +36,13 @@ export default function DashboardSuperAdmin() {
   return (
     <div>
       <div className="space-top"></div>
-      <SidebarSuperAdmin
-        data={Sdata}
-        optactive={optactive}
-        setactive={setactive}
-      />
+      <SidebarAdmin data={Sdata} optactive={optactive} setactive={setactive} />
       <div className="super-main">
         {
           {
             Profile: <></>,
             Events: <SuperEvent />,
-            Pass: <></>,
+            Pass: <Passes />,
             Payment: <Payment payments={Payments} />,
             "User Details": <UserDetails users={Users} />,
             Ambassador: <Ambassador ambassadors={Ambassadors} />,

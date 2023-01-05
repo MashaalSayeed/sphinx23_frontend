@@ -15,7 +15,9 @@ import {
   getUsers,
 } from "./api";
 import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./screens/components/Footer";
+import PassDetail from "./screens/containers/Dashboard/SuperAdmin/Pass/passdetails/PassDetail";
 
 function App() {
   // const token1 =
@@ -45,12 +47,27 @@ function App() {
   // console.log(getUsers("", token1));
 
   return (
-    <div className="App">
-      <Navbar />
-      {curruser != null ? <DashboardSuperAdmin /> : <></>}
+    // <div className="App">
+    //   <Navbar />
+    //   {curruser != null ? <DashboardSuperAdmin /> : <></>}
 
-      {/* <Footer /> */}
-    </div>
+    //   {/* <Footer /> */}
+
+    // </div>
+    <BrowserRouter>
+      <div className="App">
+        <Navbar />
+        {curruser != null ? (
+          <Routes>
+            <Route exact path="/" element={<DashboardSuperAdmin />} />
+            <Route path="/superAdmin/pass/:id" element={<PassDetail />}></Route>
+          </Routes>
+        ) : (
+          <></>
+        )}
+        {/* <Footer /> */}
+      </div>
+    </BrowserRouter>
   );
 }
 
