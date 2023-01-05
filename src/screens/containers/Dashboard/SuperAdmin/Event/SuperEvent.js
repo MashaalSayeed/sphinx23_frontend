@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import create from "../../../../images/create_event.png";
-import { storage } from "../../../../firebase";
+import create from "../../../../../images/create_event.png";
+import { storage } from "../../../../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import EventTab from "./EventTab";
 function SuperEvent() {
   const [tabactive, settab] = useState("All Events");
 
   const onUpload = () => {
-    const storageRef = ref(storage, "events/event");
     const file = document.getElementById("eventImg");
+    const storageRef = ref(storage, `events/event2`);
     if (file != null) {
       const uploadTask = uploadBytesResumable(storageRef, file.files[0]);
       uploadTask.on(
@@ -54,14 +55,15 @@ function SuperEvent() {
           </div>
         </div>
         <div className="tab-function">
-          <button className="create-event" onClick={onUpload}>
+          <button className="create-event" onClick={() => {}}>
             <img className="create-icon" alt="" src={create}></img>
             <span className="create-text">Create Event</span>
           </button>
         </div>
       </div>
       <div className="tab-line"></div>
-      <input type={"file"} id="eventImg"></input>
+      {/* <input type={"file"} id="eventImg"></input> */}
+      <EventTab />
     </div>
   );
 }

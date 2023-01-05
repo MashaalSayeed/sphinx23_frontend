@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import toggle from "../../images/toggle.png";
 
 function SidebarSuperAdmin(props) {
-  const { data } = props;
+  const { data, optactive, setactive } = props;
   const [isSidebar, SetSidebar] = useState(true);
-  const [optactive, setactive] = useState(data.options[0]);
+
   return (
     <div className={isSidebar ? "sidebar" : `sidebar sidebar-exit`}>
       <div className="sidebar-header">

@@ -81,12 +81,6 @@ export const fetchPasses = async (dispatch) => {
 };
 
 export const loginRegister = async (dispatch, creds) => {
-  const dummy = {
-    email: "2021uec1533@mnit.ac.in",
-    password: "123456",
-    confirmPassword: "123456",
-  };
-  creds = dummy;
   console.log("Login Called");
   await fetch(`${url}/users`, {
     headers: {
@@ -95,7 +89,7 @@ export const loginRegister = async (dispatch, creds) => {
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",
-    body: JSON.stringify(dummy),
+    body: JSON.stringify(creds),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -130,8 +124,6 @@ export const createEvent = async (dispatch, eventData, token) => {
     minTeamSize: 2,
     maxTeamSize: 4,
   };
-  token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjYzYjMwM2EyZGJhMGJlNWZlMDE1YTVmOSIsImlhdCI6MTY3Mjc2NTgxMn0.Qnlbq4MgW7B-1zFr3ra0hh9fNkKRWi3mTC9txTSCABI";
   eventData = dummy;
   console.log("Create Event Called");
   await fetch(`${url}/events/create`, {
@@ -142,7 +134,7 @@ export const createEvent = async (dispatch, eventData, token) => {
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",
-    body: JSON.stringify(dummy),
+    body: JSON.stringify(eventData),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -189,5 +181,113 @@ export const createPass = async (dispatch, passData, token) => {
     })
     .catch((error) => {
       console.log(error);
+    });
+};
+
+export const getUsersByPass = async (passID, token) => {
+  // passID = "63b4721c1d749a92894a47e4";
+  console.log("getUsersByPass");
+  await fetch(`${url}/passes/users/${passID}`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        console.log(data.users);
+        return data.users;
+      } else {
+        console.log(data.error);
+        return data.error;
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      return error;
+    });
+};
+
+export const getUsers = (userID, token, setUsers) => {
+  console.log("getUsers");
+  fetch(`${url}/users/${userID}`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        console.log(data);
+        if (data.user) setUsers(data.user);
+        else {
+          setUsers(data.users);
+        }
+      } else {
+        console.log(data.error);
+        setUsers([]);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      setUsers([]);
+    });
+};
+
+export const getAmbassadors = (token, setAmbassadors) => {
+  console.log("getUsers");
+  fetch(`${url}/ambassadors`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        console.log(data.success);
+        setAmbassadors(data.ambassador);
+      } else {
+        console.log(data.error);
+        setAmbassadors([]);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      setAmbassadors([]);
+    });
+};
+
+export const getPayments = (token, setPayments) => {
+  console.log("getUsers");
+  fetch(`${url}/payment/userby`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        console.log(data.message);
+        setPayments(data.payments);
+      } else {
+        console.log(data.error);
+        setPayments([]);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      setPayments([]);
     });
 };
