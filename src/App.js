@@ -18,6 +18,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./screens/components/Footer";
 import PassDetail from "./screens/containers/Dashboard/SuperAdmin/Pass/passdetails/PassDetail";
+import CreatePass from "./screens/containers/Dashboard/SuperAdmin/Pass/createPass";
+import DashboardEventAdmin from "./screens/containers/Dashboard/EventAdmin/DashboardEventAdmin";
+import EventDetails from "./screens/containers/Dashboard/EventAdmin/Event/EventDetails";
 
 function App() {
   // const token1 =
@@ -59,8 +62,16 @@ function App() {
         <Navbar />
         {curruser != null ? (
           <Routes>
-            <Route exact path="/" element={<DashboardSuperAdmin />} />
+            <Route exact path="/" element={<DashboardEventAdmin />} />
             <Route path="/superAdmin/pass/:id" element={<PassDetail />}></Route>
+            <Route
+              path="/EventAdmin/event/:id"
+              element={<EventDetails />}
+            ></Route>
+            <Route
+              path="/superAdmin/createPass"
+              element={<CreatePass />}
+            ></Route>
           </Routes>
         ) : (
           <></>

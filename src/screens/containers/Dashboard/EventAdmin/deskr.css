@@ -1,0 +1,201 @@
+.desktop14-main{
+    font-family: 'Montserrat';
+    font-style: normal;
+    line-height: 29px;
+    letter-spacing: 0.02em;
+    /* padding: 3rem; */
+    
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    /* justify-content: flex-start; */
+    }
+    
+    .desktop14-head{
+        margin: 30px;
+        font-weight: 700;
+        font-size: 1.5rem;
+        align-self: flex-start;
+    }
+    
+    .desktop14-btns{
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        /* padding: 3rem; */
+        width: 90%;
+        /* margin: 20px 30px; */
+        /* border: matrix(1, 0, 0, -1, 0, 0);; */
+    }
+    .desktop14-tabChangebtn{
+    height: 30px;
+    font-style: normal;
+    font-weight: 500;
+    /* font-size: 18px; */
+    line-height: 22px;
+    /* identical to box height */
+    
+    letter-spacing: 0.02em;
+    
+    /* color: rgba(0, 0, 1, 0); */
+    }
+    .desktop14-btn{
+        height: 100%;
+        /* width: 130px; */
+        border: none;
+        background:transparent;
+        margin: 0px 30px;
+        font-size: 18px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.8);
+    
+        
+    }
+    .desktop14-edit-btn{
+        background: linear-gradient(86.27deg, #000000 0%, #3E3E3E 100%);;
+        color: #FF8762;
+        border-radius: 6px;
+        border: none;
+        height: 54px;
+        width: 135px;
+        margin: 10px 0;
+    
+    }
+    .desktop14-btn-inner{
+        display: flex;
+        
+        font-weight: 400;
+    font-size: 18px;
+    line-height: 26px;
+    align-items: center;
+    justify-content: space-around;
+    /* identical to box height, or 144% */
+    
+    letter-spacing: 0.02em;
+    }
+    .desktop14-btn-inner img{
+        width: 24px;
+        height: 24px;
+    }
+    .desktop14-border{
+        width: 100%;
+    border-bottom:1px solid rgba(0, 0, 0, 0.2); 
+    margin-bottom: 10px;}
+    
+    
+    .aboutSec-img-btn{
+        display: flex;
+        align-items: flex-start;
+
+        justify-content: space-between;
+        padding: 1rem;
+        
+    }
+    .aboutSection{
+        margin: 2rem;
+        width: 80%;
+        margin: auto;
+    }
+    .aboutSec-img{
+       width: fit-content;
+    }
+    .aboutSec-p{
+        /* width: 80%; */
+    text-align: justify;
+    margin: 1rem;
+
+    }
+
+    .event-link>.eventTab-Ecard
+    {
+        width: 100%;
+    }
+    .event-link>.eventTab-Ecard
+    {
+       aspect-ratio: auto;
+    }
+
+
+
+
+
+    .teamTab-heading h2{
+        font-family: 'Montserrat';
+    font-style: normal;
+
+    
+    color: #000000;
+    
+    }
+    .teamTab-main-element{
+        display: flex;
+        margin: 10px 20px;
+        width: 80%;
+        flex-wrap: wrap;
+        
+    }
+    .Team-frame{
+    width: 20%;
+    margin-top: 3em;
+    
+    
+    }
+    
+    .team-member-img{
+        border-radius: 50%;
+    }
+    .team-member-post p{
+    font-family: 'Inter';
+    font-style: normal;
+    
+    /* letter-spacing: 0.02em; */
+    color: rgba(0, 0, 0, 0.7);
+    }
+    .team-member-name h3{
+        font-family: 'Inter';
+        font-style: normal;
+        color: rgba(0, 0, 0, 0.7);  
+    }
+    .teamtab-addIcon{
+        position: absolute;
+        top:300px;
+        bottom: 100px;
+        left:200px;
+        margin-left: 30em;
+        width: 50%;
+        height: 300px;
+    }
+    @media (max-width:600px) {
+        .teamTab-main-element{
+            flex-direction: column;
+        }
+        .Team-frame{
+            width: 100%;
+            margin-top: 3em;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-left: 0em;
+            
+        }
+        .teamTab-heading h2{
+            font-family: 'Montserrat';
+        font-style: normal;
+       align-items: center;
+       text-align: center;
+     
+       margin-left: -10em;
+        
+        color: #000000;
+        
+        }
+        .teamtab-addIcon{
+            position: absolute;
+           margin-top: 300px;
+           max-width: 100px;
+        }
+       
+    }

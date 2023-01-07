@@ -151,15 +151,6 @@ export const createEvent = async (dispatch, eventData, token) => {
 };
 
 export const createPass = async (dispatch, passData, token) => {
-  const dummy = {
-    name: "Second Day",
-    detail: "Demo Pass",
-    amount: 400,
-    eventId: ["63b40575f6d5f6bad291012b"],
-  };
-  token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjYzYjMwM2EyZGJhMGJlNWZlMDE1YTVmOSIsImlhdCI6MTY3Mjc2NTgxMn0.Qnlbq4MgW7B-1zFr3ra0hh9fNkKRWi3mTC9txTSCABI";
-  passData = dummy;
   console.log("Create PASS Called");
   await fetch(`${url}/passes`, {
     headers: {
@@ -169,7 +160,7 @@ export const createPass = async (dispatch, passData, token) => {
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",
-    body: JSON.stringify(dummy),
+    body: JSON.stringify(passData),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -184,8 +175,7 @@ export const createPass = async (dispatch, passData, token) => {
     });
 };
 
-export const getUsersByPass = async (passID, token) => {
-  // passID = "63b4721c1d749a92894a47e4";
+export const getUsersByPass = async (passID, token, setUsersByPass) => {
   console.log("getUsersByPass");
   await fetch(`${url}/passes/users/${passID}`, {
     headers: {
@@ -199,15 +189,15 @@ export const getUsersByPass = async (passID, token) => {
     .then((data) => {
       if (data.error == null) {
         console.log(data.users);
-        return data.users;
+        setUsersByPass(data.users);
       } else {
         console.log(data.error);
-        return data.error;
+        setUsersByPass([]);
       }
     })
     .catch((error) => {
       console.log(error);
-      return error;
+      setUsersByPass([]);
     });
 };
 

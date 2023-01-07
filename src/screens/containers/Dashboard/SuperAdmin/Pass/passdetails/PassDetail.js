@@ -1,9 +1,9 @@
-import { passDetailData } from "./Data";
 import PassDetailCard from "./PassDetailCard";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "../desktop27.css";
+import PassUsers from "./PassUsers";
 
 export default function PassDetail() {
   const params = useParams();
@@ -11,9 +11,9 @@ export default function PassDetail() {
   const passes = useSelector((state) => state.auth.allpasses);
   const passNames = {
     "First Day": "Cleopetra Pass",
-    "SECOND DAY": "PASS NAME",
-    "THIRD DAY": "PASS NAME",
-    "GOLDEN PASS": "GOLDEN PASS",
+    "Second Day": "Cleopetra Pass",
+    "Third Day": "Cleopetra Pass",
+    "Golden Pass": "Cleopetra Pass",
   };
   const currpass = passes.find((x) => x.name === passName);
 
@@ -65,6 +65,11 @@ export default function PassDetail() {
       {inAboutTab && (
         <div className="desktop27-passDetail">
           <PassDetailCard pass={currpass} />
+        </div>
+      )}
+      {inRegStudentTab && (
+        <div className="desktop27-userDetail">
+          <PassUsers pass={currpass} />
         </div>
       )}
     </div>

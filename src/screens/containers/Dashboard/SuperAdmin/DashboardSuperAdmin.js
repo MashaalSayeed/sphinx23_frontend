@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import SidebarAdmin from "../../../components/Sidebar";
-import EventTab from "./Event/EventTab";
 import SuperEvent from "./Event/SuperEvent";
 import UserDetails from "./UserDetails/userDetails";
 import Payment from "./Payment/payment";

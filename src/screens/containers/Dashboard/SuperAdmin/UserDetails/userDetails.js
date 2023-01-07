@@ -16,17 +16,6 @@ import CardMembershipOutlinedIcon from "@mui/icons-material/CardMembershipOutlin
 import { Avatar } from "@mui/material";
 import * as xlImg from "../../../../../images/excel.png";
 const UserDetails = (props) => {
-  const Sdata = {
-    title: "Admin Login",
-    options: [
-      "Profile",
-      "Events",
-      "Pass",
-      "Payment",
-      "User Details",
-      "Ambassador",
-    ],
-  };
   const { users } = props;
   const [contacts, setContacts] = useState(data);
   const [addFormData, setAddFormData] = useState({
