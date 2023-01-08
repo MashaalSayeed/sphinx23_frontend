@@ -62,7 +62,7 @@ function App() {
         <Navbar />
         {curruser != null ? (
           <Routes>
-            <Route exact path="/" element={<DashboardEventAdmin />} />
+            <Route exact path="/" element={<DashboardSuperAdmin />} />
             <Route path="/superAdmin/pass/:id" element={<PassDetail />}></Route>
             <Route
               path="/EventAdmin/event/:id"
