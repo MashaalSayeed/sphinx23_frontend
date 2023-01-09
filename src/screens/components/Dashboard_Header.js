@@ -1,0 +1,63 @@
+import React from "react";
+import excel_png from "../../images/excel.png";
+import certify_png from "../../images/certify.png";
+import create from "../../images/create_event.png";
+
+function createEventBtn() {
+  return (
+    <button className="create-event" onClick={() => {}}>
+      <img className="create-icon" alt="" src={create}></img>
+      <span className="create-text">Create Event</span>
+    </button>
+  );
+}
+
+function Dashboard_Header(props) {
+  const { settab, tabactive, title, tabs, excel, certify, createEventBool } =
+    props;
+  console.log(tabs);
+  return (
+    <div className="dashboard-header">
+      {" "}
+      <div className="super-title">{title}</div>
+      <div className="super-tabmenu">
+        <div className="tab-options">
+          {tabs.map((tab, i) => (
+            <div
+              className="tab-opt"
+              onClick={() => {
+                settab(tab);
+              }}
+              style={
+                tabactive === tab
+                  ? { color: "black" }
+                  : { color: "rgba(0, 0, 0, 0.6)" }
+              }
+              key={i}
+            >
+              {tab}
+              {tabactive === tab ? <div className="tab-active"></div> : null}
+            </div>
+          ))}
+        </div>
+        <div className="tab-function">
+          {certify && (
+            <button className="certification-btn" onClick={() => {}}>
+              <img src={certify_png} className=""></img>
+              <span>Certification</span>
+            </button>
+          )}
+          {excel && (
+            <button className="excel-btn" onClick={() => {}}>
+              <img src={excel_png}></img>
+            </button>
+          )}
+          {createEventBool && createEventBtn()}
+        </div>
+      </div>
+      <div className="tab-line"></div>
+    </div>
+  );
+}
+
+export default Dashboard_Header;

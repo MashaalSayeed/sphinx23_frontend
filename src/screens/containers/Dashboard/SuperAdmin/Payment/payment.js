@@ -1,7 +1,7 @@
 import { useState, Fragment } from "react";
-import "./App.css";
+
 import { nanoid } from "nanoid";
-import data from "./mock-data.json";
+
 import { Button, Stack, TextField } from "@mui/material";
 import ReadOnlyRow from "./ReadOnlyRow";
 import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";

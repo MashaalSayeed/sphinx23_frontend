@@ -3,14 +3,11 @@
     font-style: normal;
     line-height: 29px;
     letter-spacing: 0.02em;
+    margin: auto;
     /* padding: 3rem; */
     
     color: #000000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    padding: 0;
+
     /* justify-content: flex-start; */
     }
     .desktop27-head{
@@ -168,4 +165,10 @@ margin: 20px;
     font-weight: 400;
     font-size: 16px;
     margin: 20px;
+}
+
+.passDetailCard-main
+{
+    width: 80%;
+    margin: auto;
 }

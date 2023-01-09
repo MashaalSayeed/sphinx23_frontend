@@ -11,14 +11,7 @@ import Passes from "./Pass/Passes";
 export default function DashboardSuperAdmin() {
   const Sdata = {
     title: "Admin Login",
-    options: [
-      "Profile",
-      "Events",
-      "Pass",
-      "Payment",
-      "User Details",
-      "Ambassador",
-    ],
+    options: ["Profile", "Events", "Pass", "User Details", "Ambassador"],
   };
   const token = useSelector((state) => state.auth.curruser.token);
   const [optactive, setactive] = useState(Sdata.options[1]);
@@ -42,7 +35,7 @@ export default function DashboardSuperAdmin() {
             Profile: <></>,
             Events: <SuperEvent />,
             Pass: <Passes />,
-            Payment: <Payment payments={Payments} />,
+            // Payment: <Payment payments={Payments} />,
             "User Details": <UserDetails users={Users} />,
             Ambassador: <Ambassador ambassadors={Ambassadors} />,
           }[optactive]

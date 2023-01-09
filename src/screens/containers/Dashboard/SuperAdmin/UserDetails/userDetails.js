@@ -1,23 +1,12 @@
 import { useState, Fragment } from "react";
-import "./App.css";
 import { nanoid } from "nanoid";
-import data from "./mock-data.json";
-import { Button, Stack, TextField } from "@mui/material";
 import ReadOnlyRow from "./ReadOnlyRow";
-import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import EditableRow from "./EditableRow";
-
-// import SidebarSuperAdmin from "../../../components/Sidebar";
-
-import Reactdom from "react-dom";
-import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
-import CardMembershipOutlinedIcon from "@mui/icons-material/CardMembershipOutlined";
-import { Avatar } from "@mui/material";
-import * as xlImg from "../../../../../images/excel.png";
+import Dashboard_Header from "../../../../components/Dashboard_Header";
 const UserDetails = (props) => {
   const { users } = props;
-  const [contacts, setContacts] = useState(data);
+  const [tabActive, setTab] = useState("All Students");
+  const [contacts, setContacts] = useState(null);
   const [addFormData, setAddFormData] = useState({
     srNo: "",
     branch: "",
@@ -144,73 +133,16 @@ const UserDetails = (props) => {
 
   return (
     <div>
-      {/* <SidebarSuperAdmin data={Sdata} /> */}
       <div className="app-container">
-        <h2>User Details</h2>
-        <div className="buttons">
-          <Button variant="text">All Students</Button>
-          <Button variant="text">Team Members</Button>
-        </div>
-        <hr />
-        <Stack
-          spacing={4}
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          className="resp-m-l-r"
-        >
-          <TextField
-            id="outlined-basic"
-            variant="outlined"
-            inputProps={{
-              style: {
-                width: "300px",
-                float: "right",
-              },
-            }}
-            label="Search"
-          />
-
-          {/* <AddCircleOutlinedIcon fontSize='large' float='right'
-          style={{ color: "blue" }}
-        /> */}
-          <Stack direction="row" spacing="4">
-            <Button
-              variant="text"
-              style={{
-                boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
-                borderRadius: "4px",
-                margin: "5px",
-              }}
-            >
-              <CardMembershipOutlinedIcon />
-              Certification
-            </Button>
-            <Button
-              variant="text"
-              color="primary"
-              startIcon={<Avatar src={xlImg.default} />}
-              style={{
-                // boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
-                borderRadius: "4px",
-                margin: "5px",
-              }}
-            />
-            <Button
-              variant="text"
-              style={{
-                boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
-                borderRadius: "4px",
-                margin: "5px",
-              }}
-            >
-              <TuneOutlinedIcon />
-              Filter
-            </Button>
-          </Stack>
-        </Stack>
-
-        <hr />
+        {/* <h2>User Details</h2> */}
+        <Dashboard_Header
+          settab={setTab}
+          tabactive={tabActive}
+          title={"User Details"}
+          tabs={["All Students", "Team Members"]}
+          excel={true}
+          certify={true}
+        />
 
         <form onSubmit={handleEditFormSubmit}>
           <table>

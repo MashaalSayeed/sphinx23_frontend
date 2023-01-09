@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "../desktop27.css";
 import PassUsers from "./PassUsers";
+import { Dashboard } from "@mui/icons-material";
+import Dashboard_Header from "../../../../../components/Dashboard_Header";
 
 export default function PassDetail() {
   const params = useParams();
@@ -22,56 +24,24 @@ export default function PassDetail() {
   const [inRegStudentTab, setInRegStudentEventTab] = useState(false);
   const passNo = 0;
 
-  function changeToRegStudentTab() {
-    setInRegStudentEventTab(true);
-    setInAboutTab(false);
-  }
-  function changeToAboutTab() {
-    setInRegStudentEventTab(false);
-    setInAboutTab(true);
-  }
+  const [tabActive, setTab] = useState("About");
   return (
     <div className="desktop27-main">
       <div className="space-top"></div>
-      <h3 className="desktop27-head">
-        {passName + ": " + passNames[passName]}
-      </h3>
+      <Dashboard_Header
+        settab={setTab}
+        tabactive={tabActive}
+        title={passName + ": " + passNames[passName]}
+        tabs={["About", "Registered Students"]}
+        excel={tabActive == "Registered Students" ? true : false}
+      />
 
-      <div className="desktop27-tabChangebtn">
-        <button
-          className="desktop27-btn"
-          onClick={changeToAboutTab}
-          style={{
-            borderBottom: inAboutTab ? "2px solid blue" : "none",
-            color: !inAboutTab ? "rgba(0,0,0,0.6)" : "",
-          }}
-        >
-          About
-        </button>
-        <button
-          className="desktop27-btn"
-          onClick={changeToRegStudentTab}
-          style={{
-            borderBottom: inRegStudentTab ? "2px solid blue" : "none",
-            color: !inRegStudentTab ? "rgba(0,0,0,0.6)" : "",
-          }}
-        >
-          Registered Students
-        </button>
-      </div>
-
-      <div className="desktop27-border"></div>
-
-      {inAboutTab && (
-        <div className="desktop27-passDetail">
-          <PassDetailCard pass={currpass} />
-        </div>
-      )}
-      {inRegStudentTab && (
-        <div className="desktop27-userDetail">
-          <PassUsers pass={currpass} />
-        </div>
-      )}
+      {
+        {
+          About: <PassDetailCard pass={currpass} />,
+          "Registered Students": <PassUsers pass={currpass} />,
+        }[tabActive]
+      }
     </div>
   );
 }

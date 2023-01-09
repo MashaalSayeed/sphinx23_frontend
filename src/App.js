@@ -19,8 +19,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./screens/components/Footer";
 import PassDetail from "./screens/containers/Dashboard/SuperAdmin/Pass/passdetails/PassDetail";
 import CreatePass from "./screens/containers/Dashboard/SuperAdmin/Pass/createPass";
-import DashboardEventAdmin from "./screens/containers/Dashboard/EventAdmin/DashboardEventAdmin";
-import EventDetails from "./screens/containers/Dashboard/EventAdmin/Event/EventDetails";
+import EventDetails from "./screens/components/EventDetails/EventDetails";
 
 function App() {
   // const token1 =
@@ -76,7 +75,7 @@ function App() {
         ) : (
           <></>
         )}
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </BrowserRouter>
   );

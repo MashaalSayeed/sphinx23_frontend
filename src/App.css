@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 .space-top
 {
   height: max(12vh,110px);
@@ -181,8 +182,10 @@ border-radius: 9px;
 {
   width: 85%;
   margin-left: auto;
-  margin-top: 25px;
+  margin-top: 20px;
+  padding: 5px 15px;
 }
+
 .super-title
 {
   font-family: 'Montserrat';
@@ -196,7 +199,7 @@ color: #000000;
 .super-tabmenu
 {
   
-  margin-top: 30px;
+  margin-top: 40px;
   
   display: flex;
  align-items: flex-end;
@@ -259,7 +262,7 @@ color: #FF8762;
 .tab-active
 {
 width: 100%;
-margin-top: 1px;
+margin-top: 8px;
 height: 3px;
 margin-bottom: -4px;
 transform: matrix(1, 0, 0, -1, 0, 0);
@@ -363,4 +366,141 @@ border-radius: 8px;
   box-shadow: 0px 4.38349px 15.3422px rgba(0, 0, 0, 0.55);
 
 
+}
+
+.dashboard-header
+{
+  margin: 20px 15px;
+}
+
+
+.excel-btn
+{
+  border: none;
+  background: #FFFFFF;
+  padding: 3px;
+box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+border-radius: 4px;
+}
+.certification-btn
+{
+  display: flex;
+  border: transparent;
+  padding: 6px 10px;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+border-radius: 4px;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 21px;
+/* identical to box height */
+letter-spacing: 0.02em;
+color: rgba(0, 0, 0, 0.7);
+margin-right: 25px;
+}
+.certification-btn>img{
+  margin-right: 7px;
+}
+
+
+
+
+/*TABLE*/
+
+
+.app-container {
+  /* display: flex; */
+
+  /* flex-direction: column; */
+  gap: 10px;
+  padding: 1rem;
+}
+
+.h2-Heading {
+  font-family: 'Montserrat', sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+
+  border-bottom: 0.01px solid grey;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  /* text-align: left; */
+  text-align: center;
+  padding: 8px;
+  font-size: 15px;
+}
+
+th {
+  background-color: white;
+}
+
+td {
+  background-color: white;
+}
+
+form {
+  /* display: flex; */
+  gap: 5px;
+}
+
+form td:last-child {
+  /* display: flex; */
+  justify-content: space-evenly;
+}
+
+form * {
+  font-size: 20px;
+}
+
+
+.buttons {
+  display: inline-block;
+  display: flex;
+}
+
+
+
+/* .add{
+  
+  float: right;
+} */
+
+.MuiAddCircleOutlinedIcon-root {
+  float: right;
+}
+
+@media only screen and (min-width: 500px) {
+  .resp-m-l-r {
+    margin-left: 70px;
+    margin-right: 50px;
+  }
+}
+
+.resp-m-l-r
+{
+  margin: auto 15px
+}
+.desktop27-main
+{
+  min-height: 104vh;
+}
+.super-main
+{
+  min-height: 104vh;
+}
+.desktop14-sections
+{
+  min-height: 70vh;
 }
