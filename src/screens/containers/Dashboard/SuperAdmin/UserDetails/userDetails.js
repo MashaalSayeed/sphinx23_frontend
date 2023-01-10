@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
 import Dashboard_Header from "../../../../components/Dashboard_Header";
+import Pagination from "../../../../components/Pagination";
 const UserDetails = (props) => {
   const { users } = props;
   const [tabActive, setTab] = useState("All Students");
@@ -131,6 +132,14 @@ const UserDetails = (props) => {
     setContacts(newContacts);
   };
 
+  // User is currently on this page
+  const [currentPage, setCurrentPage] = useState(1);
+  // No of Records to be displayed on each page
+  const [recordsPerPage] = useState(1);
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords = users.slice(indexOfFirstRecord, indexOfLastRecord);
+  const nPages = Math.ceil(users.length / recordsPerPage);
   return (
     <div>
       <div className="app-container">
@@ -157,7 +166,7 @@ const UserDetails = (props) => {
               </tr>
             </thead>
             <tbody>
-              {users.map((contact, i) => (
+              {currentRecords.map((contact, i) => (
                 <Fragment>
                   {editContactId === contact.id ? (
                     <EditableRow
@@ -178,6 +187,11 @@ const UserDetails = (props) => {
           </table>
         </form>
       </div>
+      <Pagination
+        nPages={nPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
 
       {/* <h2>Add a Contact</h2>
       <form onSubmit={handleAddFormSubmit}>
