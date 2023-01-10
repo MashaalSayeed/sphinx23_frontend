@@ -4,9 +4,15 @@ import certify_png from "../../images/certify.png";
 import create from "../../images/create_event.png";
 import add_btn from "../../images/add_btn.png";
 
-function createEventBtn() {
+function createEventBtn(setCreateEvent) {
   return (
-    <button className="create-event" onClick={() => {}}>
+    <button
+      className="create-event"
+      onClick={() => {
+        console.log("setTrues");
+        setCreateEvent(true);
+      }}
+    >
       <img className="create-icon" alt="" src={create}></img>
       <span className="create-text">Create Event</span>
     </button>
@@ -30,6 +36,9 @@ function Dashboard_Header(props) {
     certify,
     createEventBool,
     addBtnBool,
+    dashBool,
+    paginate,
+    setCreateEvent,
   } = props;
   console.log(tabs);
   return (
@@ -57,7 +66,7 @@ function Dashboard_Header(props) {
           ))}
         </div>
         <div className="tab-function">
-          {certify && (
+          {/* {certify && (
             <button className="certification-btn" onClick={() => {}}>
               <img src={certify_png} className=""></img>
               <span>Certification</span>
@@ -68,11 +77,33 @@ function Dashboard_Header(props) {
             <button className="excel-btn" onClick={() => {}}>
               <img src={excel_png}></img>
             </button>
-          )}
-          {createEventBool && createEventBtn()}
+          )} */}
+          {createEventBool && createEventBtn(setCreateEvent)}
         </div>
       </div>
       <div className="tab-line"></div>
+      {dashBool && (
+        <>
+          <div className="dashboard-function">
+            <div className="dashboard-paginate"> {paginate}</div>
+            <div className="dashboard-icons">
+              {certify && (
+                <button className="certification-btn" onClick={() => {}}>
+                  <img src={certify_png} className=""></img>
+                  <span>Certification</span>
+                </button>
+              )}
+              {addBtnBool && addBtn()}
+              {excel && (
+                <button className="excel-btn" onClick={() => {}}>
+                  <img src={excel_png}></img>
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="tab-line"></div>
+        </>
+      )}
     </div>
   );
 }

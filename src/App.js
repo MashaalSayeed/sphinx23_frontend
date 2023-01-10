@@ -5,6 +5,7 @@ import DashboardSuperAdmin from "./screens/containers/Dashboard/SuperAdmin/Dashb
 import "./styles/footer.css";
 import "./styles/desktop27.css";
 import "./styles/deskr.css";
+import "./styles/createEvent.css";
 import {
   fetchEvents,
   fetchPasses,

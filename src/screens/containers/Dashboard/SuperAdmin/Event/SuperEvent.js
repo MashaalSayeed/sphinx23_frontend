@@ -5,8 +5,10 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useSelector } from "react-redux";
 import EventTab from "./EventTab";
 import Dashboard_Header from "../../../../components/Dashboard_Header";
+import CreateEvent from "./CreateEvent";
 function SuperEvent() {
   const [tabActive, setTab] = useState("All Events");
+  const [createEventState, setCreate] = useState(false);
 
   const events = useSelector((state) => state.auth.events);
   const onUpload = () => {
@@ -35,8 +37,11 @@ function SuperEvent() {
         title={"Tech Events"}
         tabs={["All Events", "Past Events"]}
         createEventBool={true}
+        setCreateEvent={setCreate}
       />
       {/* <input type={"file"} id="eventImg"></input> */}
+
+      {createEventState == true ? <CreateEvent setCreate={setCreate} /> : <></>}
 
       {
         {

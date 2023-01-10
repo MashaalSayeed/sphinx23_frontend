@@ -101,6 +101,8 @@
     }
     .aboutSec-img{
        width: fit-content;
+       box-shadow: 0px 4.38349px 15.3422px rgb(0 0 0 / 55%);
+       border-radius: 10px;
     }
     .aboutSec-p{
         /* width: 80%; */
@@ -203,21 +205,25 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    background: linear-gradient(269.47deg, #dbdecf -3.54%, #bdc1c4 5.28%);
+        padding: 20px;
+        border-radius: 14px;
     }
     .event-mainDetials
     {
-        margin-left: 20px;
+        margin-left: 30px;
         padding: 20px 30px;
-        color: white;
-        background-color: #000000;
+        color: black;
+        font-weight: 500;
+     
         border-radius: 10px;
     }
     .event-mainDetials>h3
     {
-        font-family: 'Inter';
+        font-family:'Montserrat' ;
         font-style: normal;
          font-weight: 400;
-         padding: 6px;
+         padding: 12px 6px;
     }
     .aboutSec-p
     {
@@ -236,5 +242,5 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right:20px 
+        margin-right:30px 
     }

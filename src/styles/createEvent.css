@@ -1,0 +1,237 @@
+.createEvent-back
+{
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background:  rgba(0, 0, 0, 0.5);
+    min-height:120vh;
+    height: fit-content;
+    padding-bottom: 10vh;
+    overflow-y: hidden;
+}
+.createEvent-form
+{
+    width: 60%;
+    max-width: 920px;
+    padding: 20px;
+    margin: auto;
+    background-color: white;
+    border-radius: 8px;
+    margin-top: 60px;
+}
+.createEvent-formTitle
+{
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 600;
+font-size: 1.5rem;
+/* line-height: 38px; */
+/* identical to box height */
+
+letter-spacing: 0.03em;
+}
+.createEvent-input
+{
+
+font-size:1.1rem;
+padding: 4px;
+margin-top: 4px;
+width: 85%;
+border: 1px solid rgba(104, 103, 132, 0.71);
+border-radius: 2px;
+}
+.createEvent-label
+{
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: #236EFF;
+}
+.createEvent-sections
+{
+    width: 95%;
+    display: flex;
+    font-family: 'Montserrat';
+    margin: auto;
+    justify-content: center;
+}
+.section1
+{
+    width: 45%;
+   
+    margin-right: 10px;
+   
+}
+.section2
+{
+    width: 45%;
+  
+    margin-left: 10px;
+  
+}
+.createEvent-inputCon
+{
+    display: flex;
+    flex-direction: column;
+    margin: 28px auto;
+}
+
+.eventImg-upload
+{
+ background: #DFDFDF;
+ width: 65%;
+ aspect-ratio: 1/1.5;
+ display: flex;
+ flex-direction: column;   
+ justify-content: center;
+    margin: 28px;
+    align-items: center;
+    border-radius: 10px;
+margin-bottom: 20px;
+}
+.passImg-upload
+{
+    margin: auto;
+    margin-top: 20px;
+ background: #DFDFDF;
+ width: 95%;
+ aspect-ratio: 3;
+ display: flex;
+ flex-direction: column;   
+ justify-content: center;
+    margin: 28px;
+    align-items: center;
+    border-radius: 10px;
+margin-bottom: 20px;
+}
+
+.addImage-font
+{
+    margin-top: 5px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    color: #868585;
+}
+.createEvent-cover
+{
+    width: 100%;
+    aspect-ratio: 1/1.5;
+ display: flex;
+ flex-direction: column;   
+ justify-content: center;
+    margin: 28px;
+    align-items: center;
+    border-radius: 10px;
+margin-bottom: 5px;
+}
+.createPass-cover
+{
+    width: 100%;
+    aspect-ratio: 3;
+ display: flex;
+ flex-direction: column;   
+ justify-content: center;
+    margin: 28px;
+    align-items: center;
+    border-radius: 10px;
+margin-bottom: 5px;
+}
+.createEvent-file
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column ;
+
+}
+.createEvent-edit
+{
+    width: 60px;
+    padding: 6px;
+    border: none;
+    background-color: #868585;
+    font-family: 'Montserrat';   
+}
+
+.createEvent-submit
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    margin: auto;
+    margin-top: 45px;
+    width: fit-content;
+    color: #FF8762;
+    padding:10px 20px ;
+background: linear-gradient(86.27deg, #000000 0%, #3E3E3E 100%);
+border-radius: 6px;
+font-family: 'Roboto';
+font-style: normal;
+font-size: 1.1rem;
+font-weight: 400;
+}
+
+.createEvent-close
+{
+    background: transparent;
+    border: none;
+    position: absolute;
+    transform:translateX(50vw) translateY(20px);
+  
+}
+.createEvent-close>img
+{
+    transform: rotate(45deg);
+    width: 20px;
+
+}
+
+/* .container {
+    display: flex;
+    overflow: scroll;
+    width: 100%;
+    max-width: 100%;
+    padding-left: 14px;
+    border: 1px grey solid;
+    border-radius: 5px;
+    color: black
+  }
+  
+  .container input {
+    width: 100%;
+    min-width: 50%;
+    border: none;
+    border-radius: 5px;
+    padding: 14px;
+    padding-left: 14px;
+  }
+  
+  .tag {
+    display: flex;
+    align-items: center;
+    margin: 7px 0;
+    margin-right: 10px;
+    padding: 0 10px;
+    padding-right: 5px;
+    border: 1px solid orange;
+    border-radius: 5px;
+    background-color: orange;
+    white-space: nowrap;
+    color: white;
+  }
+  
+  .tag button {
+    display: flex;
+    padding: 6px;
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+    color: white;
+  } */

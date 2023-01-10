@@ -29,6 +29,14 @@ const Ambassador = (props) => {
           tabs={[]}
           excel={true}
           certify={true}
+          dashBool={true}
+          paginate={
+            <Pagination
+              nPages={nPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          }
         />
         <form onSubmit={() => {}} className="resp-m-l-r">
           <table>

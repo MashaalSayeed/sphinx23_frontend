@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 .space-top
 {
-  height: max(12vh,110px);
+  height: max(10vh,90px);
 }
 
 .navbar
@@ -34,7 +35,7 @@ left: 0;
 }
 .nav-mnit
 {
-font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
 font-style: normal;
 font-weight: 600;
 font-size: 1.6rem;
@@ -225,6 +226,7 @@ color: #000000;
   margin-right: 40px;
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 6px;
 }
 .create-event
 {
@@ -242,6 +244,7 @@ font-size: 1.2rem;
 line-height: 26px;
 letter-spacing: 0.02em;
 color: #FF8762;
+
 }
 .create-icon
 {
@@ -286,7 +289,7 @@ border-radius: 9px;
   margin-top: 10px;
   margin-right:90px ;
  
-  box-shadow: 0px 4px 6px rgba(103, 81, 240, 0.32), 0px 4px 20px rgba(103, 81, 240, 0.35), 0px 4px 12px rgba(103, 81, 240, 0.25), 0px 4px 13px rgba(103, 81, 240, 0.25), 0px 4px 24px rgba(103, 81, 240, 0.25), 0px 4px 40px #6751F0;
+  box-shadow: 0px 4.38349px 15.3422px rgb(0 0 0 / 55%);
   border-radius: 10px;
 }
 .Ecard-img
@@ -381,6 +384,7 @@ border-radius: 8px;
   padding: 3px;
 box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 border-radius: 4px;
+margin-right: 20px;
 }
 .certification-btn
 {
@@ -453,6 +457,8 @@ td {
 form {
   /* display: flex; */
   gap: 5px;
+  font-family: 'Montserrat';
+  font-style: normal;
 }
 
 form td:last-child {
@@ -519,15 +525,12 @@ form * {
   text-decoration: none;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.8rem;
-  
   margin:auto 8px;
   list-style: none;
   background-color: rgb(249, 244, 244);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   font-weight: 600;
   border-radius: 3px;
- 
-
 }
 .page-item>a{
   text-decoration: none;
@@ -545,4 +548,115 @@ form * {
 .page-item-active>a
 {
   color: white;
+}
+
+
+/* Profile */
+
+.user-main {
+  width: 85%;
+  margin-left: auto;
+  margin-top: 25px;
+}
+
+.user-title {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: #000000;
+}
+
+.user-tabmenu {
+  margin-top: 30px;
+  display: flex;
+  align-items: flex-end;
+}
+.profile-main{
+  /* border: 1px solid black; */
+  width: 700px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px auto;
+}
+.user-img{
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.user-img>img{
+  width: 100px;
+  height: 100px;
+  margin: 8px auto;
+}
+.user-profile-content{
+  padding: 10px;
+}
+
+.desktop26-head
+{
+  font-family: 'Montserrat';
+  font-style: normal;
+}
+tr{
+  font-family: 'Roboto';
+}
+
+.dashboard-function
+{
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-items: center;
+
+}
+.dashboard-icons
+{
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.dashboard-paginate
+{
+  width: 70%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.super-mainCon
+{
+  display: flex;
+}
+.sidebar
+{
+  position: sticky;
+ 
+}
+.closed-sidebar
+{
+  position: absolute;
+  position: absolute;
+  top: max(11vh,124px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: -32px;
+  width: 95px;
+  height: 30px;
+  background: linear-gradient(269.47deg, #1F1F1F -3.54%, #636363 95.28%);
+border-radius: 2px;
+transform: rotate(-90deg);
+}
+.closed-sidebarLine
+{
+  height: 18px;
+width: 2px;
+
+margin: 3px 2px;
+background: #FF8762;
+border-radius: 21px;
 }

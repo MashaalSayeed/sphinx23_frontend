@@ -20,8 +20,6 @@ export default function PassDetail() {
   const currpass = passes.find((x) => x.name === passName);
 
   console.log(passName);
-  const [inAboutTab, setInAboutTab] = useState(true);
-  const [inRegStudentTab, setInRegStudentEventTab] = useState(false);
   const passNo = 0;
 
   const [tabActive, setTab] = useState("About");
@@ -35,6 +33,7 @@ export default function PassDetail() {
         tabs={["About", "Registered Students"]}
         excel={tabActive == "Registered Students" ? true : false}
         addBtnBool={tabActive == "Registered Students" ? true : false}
+        dashBool={tabActive == "Registered Students" ? true : false}
       />
 
       {

@@ -7,6 +7,7 @@ import Ambassador from "./Ambassador/ambassador";
 import { useSelector } from "react-redux";
 import { getUsers, getAmbassadors, getPayments } from "../../../../api";
 import Passes from "./Pass/Passes";
+import Profile from "./Profile/Profile";
 
 export default function DashboardSuperAdmin() {
   const [isSidebar, SetSidebar] = useState(true);
@@ -29,27 +30,29 @@ export default function DashboardSuperAdmin() {
   return (
     <div>
       <div className="space-top"></div>
-      <SidebarAdmin
-        data={Sdata}
-        optactive={optactive}
-        setactive={setactive}
-        isSidebar={isSidebar}
-        SetSidebar={SetSidebar}
-      />
-      <div
-        className="super-main"
-        style={!isSidebar ? { width: "98%", margin: "auto" } : {}}
-      >
-        {
+      <div className="super-mainCon">
+        <SidebarAdmin
+          data={Sdata}
+          optactive={optactive}
+          setactive={setactive}
+          isSidebar={isSidebar}
+          SetSidebar={SetSidebar}
+        />
+        <div
+          className="super-main"
+          style={!isSidebar ? { width: "98%", margin: "auto" } : {}}
+        >
           {
-            Profile: <></>,
-            Events: <SuperEvent />,
-            Pass: <Passes />,
-            // Payment: <Payment payments={Payments} />,
-            "User Details": <UserDetails users={Users} />,
-            Ambassador: <Ambassador ambassadors={Ambassadors} />,
-          }[optactive]
-        }
+            {
+              Profile: <Profile />,
+              Events: <SuperEvent />,
+              Pass: <Passes />,
+              // Payment: <Payment payments={Payments} />,
+              "User Details": <UserDetails users={Users} />,
+              Ambassador: <Ambassador ambassadors={Ambassadors} />,
+            }[optactive]
+          }
+        </div>
       </div>
     </div>
   );

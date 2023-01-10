@@ -150,6 +150,14 @@ const UserDetails = (props) => {
           tabs={["All Students", "Team Members"]}
           excel={true}
           certify={true}
+          paginate={
+            <Pagination
+              nPages={nPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          }
+          dashBool={true}
         />
 
         <form onSubmit={handleEditFormSubmit}>
@@ -186,11 +194,6 @@ const UserDetails = (props) => {
           </table>
         </form>
       </div>
-      <Pagination
-        nPages={nPages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
 
       {/* <h2>Add a Contact</h2>
       <form onSubmit={handleAddFormSubmit}>
