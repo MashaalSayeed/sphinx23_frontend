@@ -10,7 +10,11 @@ const ReadOnlyRow = ({ user, handleEditClick, handleDeleteClick }) => {
       <td>{user.type}</td>
       <td>{user.events}</td>
       <td>{user.passes}</td>
-      <td></td>
+      <td>
+        <button className="certification-btn" onClick={() => {}}>
+          <span>Certify</span>
+        </button>
+      </td>
       {/* <td>LLLLLLLLLLLLLLLLLL
         <button
           type="button"

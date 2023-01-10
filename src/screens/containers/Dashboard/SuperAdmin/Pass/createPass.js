@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./desktop27.css";
 import { storage } from "../../../../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { async } from "@firebase/util";

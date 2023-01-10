@@ -3,113 +3,21 @@ import { useState, Fragment } from "react";
 import ReadOnlyRow from "./ReadOnlyRow";
 
 import Dashboard_Header from "../../../../components/Dashboard_Header";
+import Pagination from "../../../../components/Pagination";
 
 const Ambassador = (props) => {
   const [tabActive, setTab] = useState("");
   const { ambassadors } = props;
-  // const [addFormData, setAddFormData] = useState({
-  //   fullName: "",
-  //   address: "",
-  //   phoneNumber: "",
-  //   email: "",
-  // });
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // const [editFormData, setEditFormData] = useState({
-  //   fullName: "",
-  //   address: "",
-  //   phoneNumber: "",
-  //   email: "",
-  // });
-
-  // const [editContactId, setEditContactId] = useState(null);
-
-  // const handleAddFormChange = (event) => {
-  //   event.preventDefault();
-
-  //   const fieldName = event.target.getAttribute("name");
-  //   const fieldValue = event.target.value;
-
-  //   const newFormData = { ...addFormData };
-  //   newFormData[fieldName] = fieldValue;
-
-  //   setAddFormData(newFormData);
-  // };
-
-  // const handleEditFormChange = (event) => {
-  //   event.preventDefault();
-
-  //   const fieldName = event.target.getAttribute("name");
-  //   const fieldValue = event.target.value;
-
-  //   const newFormData = { ...editFormData };
-  //   newFormData[fieldName] = fieldValue;
-
-  //   setEditFormData(newFormData);
-  // };
-
-  // const handleAddFormSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   const newContact = {
-  //     id: nanoid(),
-  //     fullName: addFormData.fullName,
-  //     address: addFormData.address,
-  //     phoneNumber: addFormData.phoneNumber,
-  //     email: addFormData.email,
-  //   };
-
-  //   const newContacts = [...contacts, newContact];
-  //   setContacts(newContacts);
-  // };
-
-  // const handleEditFormSubmit = (event) => {
-  //   event.preventDefault();
-
-  //   const editedContact = {
-  //     id: editContactId,
-  //     fullName: editFormData.fullName,
-  //     address: editFormData.address,
-  //     phoneNumber: editFormData.phoneNumber,
-  //     email: editFormData.email,
-  //   };
-
-  //   const newContacts = [...contacts];
-
-  //   const index = contacts.findIndex((contact) => contact.id === editContactId);
-
-  //   newContacts[index] = editedContact;
-
-  //   setContacts(newContacts);
-  //   setEditContactId(null);
-  // };
-
-  // const handleEditClick = (event, contact) => {
-  //   event.preventDefault();
-  //   setEditContactId(contact.id);
-
-  //   const formValues = {
-  //     fullName: contact.fullName,
-  //     address: contact.address,
-  //     phoneNumber: contact.phoneNumber,
-  //     email: contact.email,
-  //   };
-
-  //   setEditFormData(formValues);
-  // };
-
-  // const handleCancelClick = () => {
-  //   setEditContactId(null);
-  // };
-
-  // const handleDeleteClick = (contactId) => {
-  //   const newContacts = [...contacts];
-
-  //   const index = contacts.findIndex((contact) => contact.id === contactId);
-
-  //   newContacts.splice(index, 1);
-
-  //   setContacts(newContacts);
-  // };
+  const [recordsPerPage] = useState(1);
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords = ambassadors.slice(
+    indexOfFirstRecord,
+    indexOfLastRecord
+  );
+  const nPages = Math.ceil(ambassadors.length / recordsPerPage);
 
   return (
     <div>
@@ -151,7 +59,11 @@ const Ambassador = (props) => {
             </tbody>
           </table>
           {ambassadors.length != 0 ? (
-            <></>
+            <Pagination
+              nPages={nPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
           ) : (
             <div
               style={{
@@ -169,39 +81,6 @@ const Ambassador = (props) => {
           )}
         </form>
       </div>
-
-      {/* <h2>Add a Contact</h2>
-      <form onSubmit={handleAddFormSubmit}>
-        <input
-          type="text"
-          name="fullName"
-          required="required"
-          placeholder=" Serial no."
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="address"
-          required="required"
-          placeholder=" Purpose"
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="text"
-          name="phoneNumber"
-          required="required"
-          placeholder=" Event"
-          onChange={handleAddFormChange}
-        />
-        <input
-          type="email"
-          name="email"
-          required="required"
-          placeholder="Paid to"
-          onChange={handleAddFormChange}
-        />
-        <button type="submit">Add</button>
-      </form> */}
     </div>
   );
 };

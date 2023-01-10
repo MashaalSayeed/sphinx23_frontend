@@ -2,6 +2,9 @@ import "./App.css";
 import Navbar from "./screens/components/Navbar";
 import { useEffect } from "react";
 import DashboardSuperAdmin from "./screens/containers/Dashboard/SuperAdmin/DashboardSuperAdmin";
+import "./styles/footer.css";
+import "./styles/desktop27.css";
+import "./styles/deskr.css";
 import {
   fetchEvents,
   fetchPasses,
@@ -17,7 +20,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./screens/components/Footer";
-import PassDetail from "./screens/containers/Dashboard/SuperAdmin/Pass/passdetails/PassDetail";
+import PassDetail from "./screens/containers/Dashboard/SuperAdmin/Pass/PassDetail";
 import CreatePass from "./screens/containers/Dashboard/SuperAdmin/Pass/createPass";
 import EventDetails from "./screens/components/EventDetails/EventDetails";
 

@@ -1,5 +1,4 @@
 import React from "react";
-import "./footer.css";
 import mnitLogo from "../../images/mnitlogo.png";
 import { Link } from "react-router-dom";
 

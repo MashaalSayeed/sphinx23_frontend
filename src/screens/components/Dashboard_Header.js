@@ -2,6 +2,7 @@ import React from "react";
 import excel_png from "../../images/excel.png";
 import certify_png from "../../images/certify.png";
 import create from "../../images/create_event.png";
+import add_btn from "../../images/add_btn.png";
 
 function createEventBtn() {
   return (
@@ -11,10 +12,25 @@ function createEventBtn() {
     </button>
   );
 }
+function addBtn() {
+  return (
+    <div className="add-btn">
+      <img src={add_btn}></img>
+    </div>
+  );
+}
 
 function Dashboard_Header(props) {
-  const { settab, tabactive, title, tabs, excel, certify, createEventBool } =
-    props;
+  const {
+    settab,
+    tabactive,
+    title,
+    tabs,
+    excel,
+    certify,
+    createEventBool,
+    addBtnBool,
+  } = props;
   console.log(tabs);
   return (
     <div className="dashboard-header">
@@ -47,6 +63,7 @@ function Dashboard_Header(props) {
               <span>Certification</span>
             </button>
           )}
+          {addBtnBool && addBtn()}
           {excel && (
             <button className="excel-btn" onClick={() => {}}>
               <img src={excel_png}></img>

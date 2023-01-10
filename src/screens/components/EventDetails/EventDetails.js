@@ -1,5 +1,4 @@
 import AboutSection from "./EventAbout";
-import "./deskr.css";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 

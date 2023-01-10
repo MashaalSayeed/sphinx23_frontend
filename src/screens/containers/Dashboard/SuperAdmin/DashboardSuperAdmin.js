@@ -9,6 +9,7 @@ import { getUsers, getAmbassadors, getPayments } from "../../../../api";
 import Passes from "./Pass/Passes";
 
 export default function DashboardSuperAdmin() {
+  const [isSidebar, SetSidebar] = useState(true);
   const Sdata = {
     title: "Admin Login",
     options: ["Profile", "Events", "Pass", "User Details", "Ambassador"],
@@ -28,8 +29,17 @@ export default function DashboardSuperAdmin() {
   return (
     <div>
       <div className="space-top"></div>
-      <SidebarAdmin data={Sdata} optactive={optactive} setactive={setactive} />
-      <div className="super-main">
+      <SidebarAdmin
+        data={Sdata}
+        optactive={optactive}
+        setactive={setactive}
+        isSidebar={isSidebar}
+        SetSidebar={SetSidebar}
+      />
+      <div
+        className="super-main"
+        style={!isSidebar ? { width: "98%", margin: "auto" } : {}}
+      >
         {
           {
             Profile: <></>,

@@ -2,10 +2,10 @@ import PassDetailCard from "./PassDetailCard";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import "../desktop27.css";
+
 import PassUsers from "./PassUsers";
 import { Dashboard } from "@mui/icons-material";
-import Dashboard_Header from "../../../../../components/Dashboard_Header";
+import Dashboard_Header from "../../../../components/Dashboard_Header";
 
 export default function PassDetail() {
   const params = useParams();
@@ -34,6 +34,7 @@ export default function PassDetail() {
         title={passName + ": " + passNames[passName]}
         tabs={["About", "Registered Students"]}
         excel={tabActive == "Registered Students" ? true : false}
+        addBtnBool={tabActive == "Registered Students" ? true : false}
       />
 
       {

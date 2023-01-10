@@ -456,7 +456,7 @@ form {
 }
 
 form td:last-child {
-  /* display: flex; */
+  display: flex;
   justify-content: space-evenly;
 }
 

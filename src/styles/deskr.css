@@ -198,6 +198,27 @@
        
     }
 
+    .about-content
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .event-mainDetials
+    {
+        margin-left: 20px;
+        padding: 20px 30px;
+        color: white;
+        background-color: #000000;
+        border-radius: 10px;
+    }
+    .event-mainDetials>h3
+    {
+        font-family: 'Inter';
+        font-style: normal;
+         font-weight: 400;
+         padding: 6px;
+    }
     .aboutSec-p
     {
         font-family: 'Montserrat';
@@ -205,26 +226,15 @@
         line-height: 29px;
         letter-spacing: 0.02em;
     }
-    .about-content
+
+    .add-btn
     {
+        background: linear-gradient(86.27deg, #000000 0%, #3E3E3E 100%);
+        width: 42px;
+        height: 42px;
+        border-radius:22.4px;
         display: flex;
         align-items: center;
-    }
-    .event-mainDetials
-    {
-        background-color: rgba(0, 0, 0, 0.7);
-        height: max-content;
-        padding: 20px;
-        margin: auto 10px;
-        border-radius: 10px;
-    }
-    .event-mainDetials>h3
-    {
-        font-family: 'Inter';
-        font-style: normal;
-        color: white;
-        font-weight: 400;
-        padding: 4px;
-     
-     
+        justify-content: center;
+        margin-right:20px 
     }
