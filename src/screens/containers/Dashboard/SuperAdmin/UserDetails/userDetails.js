@@ -1,144 +1,154 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import { nanoid } from "nanoid";
 import ReadOnlyRow from "./ReadOnlyRow";
 import EditableRow from "./EditableRow";
 import Dashboard_Header from "../../../../components/Dashboard_Header";
 import Pagination from "../../../../components/Pagination";
+import { getUsers } from "../../../../../api";
+import { useSelector } from "react-redux";
+
 const UserDetails = (props) => {
   const { users } = props;
   const [tabActive, setTab] = useState("All Students");
   const [contacts, setContacts] = useState(null);
-  const [addFormData, setAddFormData] = useState({
-    srNo: "",
-    branch: "",
-    batch: "",
-    club: "",
-    studentID: "",
-    name: "",
-    CGPA: "",
-    certificateGiven: "",
-  });
+  const [currentRecords, setCurrentRecords] = useState([]);
+  const token = useSelector((state) => state.auth.curruser.token);
+  // const [addFormData, setAddFormData] = useState({
+  //   srNo: "",
+  //   branch: "",
+  //   batch: "",
+  //   club: "",
+  //   studentID: "",
+  //   name: "",
+  //   CGPA: "",
+  //   certificateGiven: "",
+  // });
 
-  const [editFormData, setEditFormData] = useState({
-    srNo: "",
-    branch: "",
-    batch: "",
-    club: "",
-    studentID: "",
-    name: "",
-    CGPA: "",
-    certificateGiven: "",
-  });
+  // const [editFormData, setEditFormData] = useState({
+  //   srNo: "",
+  //   branch: "",
+  //   batch: "",
+  //   club: "",
+  //   studentID: "",
+  //   name: "",
+  //   CGPA: "",
+  //   certificateGiven: "",
+  // });
 
-  const [editContactId, setEditContactId] = useState(null);
+  // const [editContactId, setEditContactId] = useState(null);
 
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
+  // const handleAddFormChange = (event) => {
+  //   event.preventDefault();
 
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
+  //   const fieldName = event.target.getAttribute("name");
+  //   const fieldValue = event.target.value;
 
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
+  //   const newFormData = { ...addFormData };
+  //   newFormData[fieldName] = fieldValue;
 
-    setAddFormData(newFormData);
-  };
+  //   setAddFormData(newFormData);
+  // };
 
-  const handleEditFormChange = (event) => {
-    event.preventDefault();
+  // const handleEditFormChange = (event) => {
+  //   event.preventDefault();
 
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
+  //   const fieldName = event.target.getAttribute("name");
+  //   const fieldValue = event.target.value;
 
-    const newFormData = { ...editFormData };
-    newFormData[fieldName] = fieldValue;
+  //   const newFormData = { ...editFormData };
+  //   newFormData[fieldName] = fieldValue;
 
-    setEditFormData(newFormData);
-  };
+  //   setEditFormData(newFormData);
+  // };
 
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
-    var id = nanoid();
-    const newContact = {
-      id: id,
-      srNo: id,
-      branch: addFormData.branch,
-      batch: addFormData.batch,
-      club: addFormData.club,
-      studentID: addFormData.studentID,
-      name: addFormData.name,
-      CGPA: addFormData.CGPA,
-      certificateGiven: addFormData.certificateGiven,
-    };
+  // const handleAddFormSubmit = (event) => {
+  //   event.preventDefault();
+  //   var id = nanoid();
+  //   const newContact = {
+  //     id: id,
+  //     srNo: id,
+  //     branch: addFormData.branch,
+  //     batch: addFormData.batch,
+  //     club: addFormData.club,
+  //     studentID: addFormData.studentID,
+  //     name: addFormData.name,
+  //     CGPA: addFormData.CGPA,
+  //     certificateGiven: addFormData.certificateGiven,
+  //   };
 
-    const newContacts = [...contacts, newContact];
-    setContacts(newContacts);
-  };
+  //   const newContacts = [...contacts, newContact];
+  //   setContacts(newContacts);
+  // };
 
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault();
+  // const handleEditFormSubmit = (event) => {
+  //   event.preventDefault();
 
-    const editedContact = {
-      id: editContactId.id,
-      srNo: editFormData.srNo,
-      branch: editFormData.branch,
-      batch: editFormData.batch,
-      club: editFormData.club,
-      studentID: editFormData.studentID,
-      name: editFormData.name,
-      CGPA: editFormData.CGPA,
-      certificateGiven: editFormData.certificateGiven,
-    };
+  //   const editedContact = {
+  //     id: editContactId.id,
+  //     srNo: editFormData.srNo,
+  //     branch: editFormData.branch,
+  //     batch: editFormData.batch,
+  //     club: editFormData.club,
+  //     studentID: editFormData.studentID,
+  //     name: editFormData.name,
+  //     CGPA: editFormData.CGPA,
+  //     certificateGiven: editFormData.certificateGiven,
+  //   };
 
-    const newContacts = [...contacts];
+  //   const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.id === editContactId);
+  //   const index = contacts.findIndex((contact) => contact.id === editContactId);
 
-    newContacts[index] = editedContact;
+  //   newContacts[index] = editedContact;
 
-    setContacts(newContacts);
-    setEditContactId(null);
-  };
+  //   setContacts(newContacts);
+  //   setEditContactId(null);
+  // };
 
-  const handleEditClick = (event, contact) => {
-    event.preventDefault();
-    setEditContactId(contact.id);
+  // const handleEditClick = (event, contact) => {
+  //   event.preventDefault();
+  //   setEditContactId(contact.id);
 
-    const formValues = {
-      srNo: contact.srNo,
-      branch: contact.branch,
-      batch: contact.batch,
-      club: contact.club,
-      studentID: contact.studentID,
-      name: contact.name,
-      CGPA: contact.CGPA,
-      certificateGiven: contact.certificateGiven,
-    };
+  //   const formValues = {
+  //     srNo: contact.srNo,
+  //     branch: contact.branch,
+  //     batch: contact.batch,
+  //     club: contact.club,
+  //     studentID: contact.studentID,
+  //     name: contact.name,
+  //     CGPA: contact.CGPA,
+  //     certificateGiven: contact.certificateGiven,
+  //   };
 
-    setEditFormData(formValues);
-  };
+  //   setEditFormData(formValues);
+  // };
 
-  const handleCancelClick = () => {
-    setEditContactId(null);
-  };
+  // const handleCancelClick = () => {
+  //   setEditContactId(null);
+  // };
 
-  const handleDeleteClick = (contactId) => {
-    const newContacts = [...contacts];
+  // const handleDeleteClick = (contactId) => {
+  //   const newContacts = [...contacts];
 
-    const index = contacts.findIndex((contact) => contact.id === contactId);
+  //   const index = contacts.findIndex((contact) => contact.id === contactId);
 
-    newContacts.splice(index, 1);
+  //   newContacts.splice(index, 1);
 
-    setContacts(newContacts);
-  };
+  //   setContacts(newContacts);
+  // };
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [nPages, setNpage] = useState(1);
+  // const [recordsPerPage] = useState(1);
+  // const indexOfLastRecord = currentPage * recordsPerPage;
+  // const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  // const currentRecords = users.slice(indexOfFirstRecord, indexOfLastRecord);
 
-  const [recordsPerPage] = useState(1);
-  const indexOfLastRecord = currentPage * recordsPerPage;
-  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = users.slice(indexOfFirstRecord, indexOfLastRecord);
-  const nPages = Math.ceil(users.length / recordsPerPage);
+  useEffect(() => {
+    getUsers("", token, setCurrentRecords, currentPage, setNpage);
+  }, []);
+  console.log(currentRecords);
+
   return (
     <div>
       <div className="app-container">
@@ -155,12 +165,15 @@ const UserDetails = (props) => {
               nPages={nPages}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
+              apiCall={(pageNo) => {
+                getUsers("", token, setCurrentRecords, pageNo);
+              }}
             />
           }
           dashBool={true}
         />
 
-        <form onSubmit={handleEditFormSubmit}>
+        <form onSubmit={() => {}}>
           <table>
             <thead>
               <tr>
@@ -175,17 +188,18 @@ const UserDetails = (props) => {
             <tbody>
               {currentRecords.map((contact, i) => (
                 <Fragment>
-                  {editContactId === contact.id ? (
-                    <EditableRow
-                      editFormData={editFormData}
-                      handleEditFormChange={handleEditFormChange}
-                      handleCancelClick={handleCancelClick}
-                    />
+                  {false ? (
+                    <></>
                   ) : (
+                    // <EditableRow
+                    //   editFormData={editFormData}
+                    //   handleEditFormChange={handleEditFormChange}
+                    //   handleCancelClick={handleCancelClick}
+                    // />
                     <ReadOnlyRow
                       user={{ ...contact, index: i + 1 }}
-                      handleEditClick={handleEditClick}
-                      handleDeleteClick={handleDeleteClick}
+                      // handleEditClick={handleEditClick}
+                      // handleDeleteClick={handleDeleteClick}
                     />
                   )}
                 </Fragment>

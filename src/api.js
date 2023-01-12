@@ -106,71 +106,69 @@ export const loginRegister = async (dispatch, creds) => {
     });
 };
 
-export const createEvent = async (dispatch, eventData, token) => {
-  const dummy = {
-    name: "New Show",
-    description: "this is going to be the best",
-    category: "Cultural",
-    from: "2023-03-09",
-    to: "2023-03-12",
-    location: "OAT",
-    coordinators: ["63b44e39d5788fb1946061bd"],
-    admin: "63b44e39d5788fb1946061bd",
-    updates: [{ message: "Coming Soon...." }],
-    status: 1,
-    ended: false,
-    amount: 1200,
-    freeForMNIT: true,
-    minTeamSize: 2,
-    maxTeamSize: 4,
-  };
-  eventData = dummy;
+export const createEvent = async (
+  dispatch,
+  eventData,
+  token,
+  setCreateStatus
+) => {
   console.log("Create Event Called");
   await fetch(`${url}/events/create`, {
     headers: {
-      "Content-Type": "application/json",
       mode: "cors",
       Authorization: "Bearer " + token,
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",
-    body: JSON.stringify(eventData),
+    body: eventData,
   })
     .then((response) => response.json())
     .then((data) => {
       if (data.error == null) {
         console.log(data.event);
         dispatch(newEvent(data.event));
+        setCreateStatus("posted");
       } else {
         console.log(data.error);
+        setCreateStatus("fail");
+        // return false;
       }
     })
     .catch((error) => {
       console.log(error);
+      setCreateStatus("fail");
+      // return false;
     });
 };
 
-export const createPass = async (dispatch, passData, token) => {
+export const createPass = async (
+  dispatch,
+  passData,
+  token,
+  setCreateStatus
+) => {
   console.log("Create PASS Called");
   await fetch(`${url}/passes`, {
     headers: {
-      "Content-Type": "application/json",
       mode: "cors",
       Authorization: "Bearer " + token,
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",
-    body: JSON.stringify(passData),
+    body: passData,
   })
     .then((response) => response.json())
     .then((data) => {
       if (data.error == null) {
+        setCreateStatus("posted");
         console.log(data.message);
       } else {
+        setCreateStatus("fail");
         console.log(data.error);
       }
     })
     .catch((error) => {
+      setCreateStatus("fail");
       console.log(error);
     });
 };
@@ -201,9 +199,9 @@ export const getUsersByPass = async (passID, token, setUsersByPass) => {
     });
 };
 
-export const getUsers = (userID, token, setUsers) => {
-  console.log("getUsers");
-  fetch(`${url}/users/${userID}`, {
+export const getUsers = (userID, token, setCurrentRecords, currentPage) => {
+  console.log("getUsersbyPage");
+  fetch(`${url}/users/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -215,18 +213,16 @@ export const getUsers = (userID, token, setUsers) => {
     .then((data) => {
       if (data.error == null) {
         console.log(data);
-        if (data.user) setUsers(data.user);
+        if (data.user) setCurrentRecords(data.user);
         else {
-          setUsers(data.users);
+          setCurrentRecords(data.users);
         }
       } else {
         console.log(data.error);
-        setUsers([]);
       }
     })
     .catch((error) => {
       console.log(error);
-      setUsers([]);
     });
 };
 
@@ -279,5 +275,28 @@ export const getPayments = (token, setPayments) => {
     .catch((error) => {
       console.log(error);
       setPayments([]);
+    });
+};
+
+export const getUsersId = (token, email, setIds) => {
+  fetch(`${url}/users/validatemail/${email}`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        console.log(data.id);
+        setIds((prevState) => [...prevState, data.id]);
+      } else {
+        console.log(data.error);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
     });
 };

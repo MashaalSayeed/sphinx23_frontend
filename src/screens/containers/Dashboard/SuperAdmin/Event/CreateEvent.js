@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import upload_btn from "../../../../../images/add_img.png";
 import close_btn from "../../../../../images/add_btn.png";
+import InputTag from "./InputTag";
+import { createEvent, getUsersId } from "../../../../../api";
+import { useDispatch, useSelector } from "react-redux";
 
-function CreateInput({ placeholder, setField, label, type }) {
+function CreateInput({ placeholder, setField, label, type, value }) {
   return (
     <div className="createEvent-inputCon">
       <label className="createEvent-label">{label}</label>
       <input
         className="createEvent-input"
         type={type}
+        value={value}
         // placeholder={placeholder}
         onChange={(e) => {
           setField(e.target.value);
@@ -18,17 +22,48 @@ function CreateInput({ placeholder, setField, label, type }) {
   );
 }
 
-function CreateEvent({ setCreate }) {
-  const [createEventData, setEventData] = useState({});
-  const [eventName, setEventName] = useState({});
-  const [category, setCategory] = useState("");
-  const [details, setDetails] = useState("");
+function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
+  const [eventName, setEventName] = useState(null);
+  const [category, setCategory] = useState("Tech");
+  const [details, setDetails] = useState(null);
+  const [date, setDate] = useState(null);
+  const [time, setTime] = useState(null);
+  const [eventCoor, setEventCoor] = useState([]);
+  const [eventCoorIds, setEventCoorId] = useState([]);
+  const [minTeamSize, setMinTeam] = useState(null);
+  const [maxTeamSize, setMaxTeam] = useState(null);
+  const [amount, setAmount] = useState(null);
+  const [location, setLocation] = useState(null);
+  const [admin, setAdmin] = useState(null);
+  const [adminId, setAdminId] = useState([]);
+  const [update, setUpdate] = useState([]);
+  const [createStatus, setCreateStatus] = useState(null);
   const [eventImage, setImage] = useState(null);
+  const token = useSelector((state) => state.auth.curruser.token);
+  const dispatch = useDispatch();
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
+      setImage(event.target.files[0]);
     }
   };
+  useEffect(() => {
+    if (editSuperAdmin == true) {
+      console.log(currEvent.from.split("T")[0]);
+      console.log(currEvent.description);
+      setEventName(currEvent.name);
+      setAdmin(currEvent.admin);
+      setAmount(currEvent.amount);
+      setCategory(currEvent.category);
+      setDate(currEvent.from.split("T")[0]);
+      setDetails(currEvent.description);
+      setMinTeam(currEvent.minTeamSize);
+      setMaxTeam(currEvent.maxTeamSize);
+      setImage(currEvent.imageUrl);
+      setLocation(currEvent.location);
+      setTime(currEvent.time);
+      //setUpdate(currEvent.update);
+    }
+  }, []);
 
   const CategorySelect = () => {
     return (
@@ -56,12 +91,15 @@ function CreateEvent({ setCreate }) {
         <textArea
           className="createEvent-input"
           style={{ height: "110px" }}
+          value={details}
           //   type={type}
-          //   // placeholder={placeholder}
+          // placeholder={details}
           onChange={(e) => {
             setDetails(e.target.value);
           }}
-        />
+        >
+          {details}
+        </textArea>
       </div>
     );
   };
@@ -86,89 +124,104 @@ function CreateEvent({ setCreate }) {
           </div>
         ) : (
           <div className="createEvent-file">
-            <img className="eventImg-upload" src={eventImage}></img>
-            <button onClick={() => setImage(null)} className="createEvent-edit">
-              Edit
-            </button>
+            <img
+              className="eventImg-upload"
+              src={
+                editSuperAdmin ? eventImage : URL.createObjectURL(eventImage)
+              }
+            ></img>
+            {!editSuperAdmin ? (
+              <button
+                onClick={() => setImage(null)}
+                className="createEvent-edit"
+              >
+                Edit
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
         )}
       </div>
     );
   };
 
+  const submit_Event = async () => {
+    eventCoor.forEach((mail) => {
+      getUsersId(token, mail, setEventCoorId);
+    });
+    getUsersId(token, admin, setAdminId);
+
+    post_Create();
+  };
+
+  const post_Create = () => {
+    console.log(eventCoorIds);
+    const CoorsIds = Array.from(new Set(eventCoorIds));
+    console.log(CoorsIds);
+    const event_Data = {
+      name: eventName,
+      description: details,
+      category: category,
+      from: date,
+      time: time,
+      location: location,
+      coordinators: CoorsIds,
+      admin: adminId[0],
+      updates: [],
+      status: 1,
+      ended: false,
+      amount: amount,
+      freeForMNIT: true,
+      minTeamSize: minTeamSize,
+      maxTeamSize: maxTeamSize,
+      // imageUrl: "", //
+    };
+    console.log(event_Data);
+    let formData = new FormData();
+    formData.append("file", eventImage);
+    formData.append("body", JSON.stringify(event_Data));
+    console.log(formData);
+    createEvent(dispatch, formData, token, setCreateStatus);
+  };
+
   const submit = () => {
     return (
-      <div className="createEvent-submit" onClick={() => {}}>
+      <div className="createEvent-submit" onClick={() => submit_Event()}>
         Submit
       </div>
     );
   };
-  const [input, setInput] = useState("");
-  const [tags, setTags] = useState([]);
-  /*TAG LIST*/
-  const [isKeyReleased, setIsKeyReleased] = useState(false);
-
-  const onKeyDown = (e) => {
-    const { key } = e;
-    const trimmedInput = input.trim();
-
-    if (key === "," && trimmedInput.length && !tags.includes(trimmedInput)) {
-      e.preventDefault();
-      setTags((prevState) => [...prevState, trimmedInput]);
-      setInput("");
-    }
-
-    if (key === "Backspace" && !input.length && tags.length && isKeyReleased) {
-      const tagsCopy = [...tags];
-      const poppedTag = tagsCopy.pop();
-      e.preventDefault();
-      setTags(tagsCopy);
-      setInput(poppedTag);
-    }
-
-    setIsKeyReleased(false);
+  const handleEdit = () => {
+    const event_Data = {
+      name: eventName,
+      description: details,
+      category: category,
+      from: date,
+      time: time,
+      location: location,
+      // coordinators: CoorsId,
+      admin: adminId[0],
+      updates: [],
+      status: 1,
+      ended: false,
+      amount: amount,
+      freeForMNIT: true,
+      minTeamSize: minTeamSize,
+      maxTeamSize: maxTeamSize,
+      // imageUrl: "", //
+    };
+    console.log(event_Data);
   };
-
-  const onKeyUp = () => {
-    setIsKeyReleased(true);
-  };
-  const onChange = (e) => {
-    const { value } = e.target;
-    setInput(value);
-  };
-  const deleteTag = (index) => {
-    setTags((prevState) => prevState.filter((tag, i) => i !== index));
-  };
-
-  const coor_List = () => {
+  const edit = () => {
     return (
-      <div className="createEvent-inputCon">
-        <label className="createEvent-label">{"Event Coordinators"}</label>
-        <div className="container">
-          {tags.map((tag, index) => (
-            <div className="tag">
-              <div className="tag">{tag}</div>
-              <button onClick={() => deleteTag(index)}>x</button>
-            </div>
-          ))}
-          <input
-            className="createEvent-input"
-            value={input}
-            placeholder="Enter a tag"
-            onKeyDown={onKeyDown}
-            onKeyUp={onKeyUp}
-            onChange={onChange}
-            //   type={type}
-            // placeholder={placeholder}
-            //   onChange={(e) => {
-            //     setField(e.target.value);
-            //   }}
-          />
-        </div>
+      <div className="createEvent-submit" onClick={() => handleEdit()}>
+        Edit
       </div>
     );
   };
-
+  // console.log(eventCoorIds);
+  console.log(eventCoor);
   return (
     <div className="createEvent-back">
       <button
@@ -180,42 +233,83 @@ function CreateEvent({ setCreate }) {
         <img src={close_btn}></img>
       </button>
       <div className="createEvent-form">
+        {createStatus == "fail" ? <>Failed</> : <></>}
+        {createStatus == "posted" ? <>success</> : <></>}
         <div className="createEvent-formTitle">Add Events</div>
         <div className="createEvent-sections">
           <div className="section1">
-            {CreateInput({ label: "Event Name", setField: setEventName })}
+            {CreateInput({
+              label: "Event Name",
+              setField: setEventName,
+              value: eventName,
+            })}
             {CategorySelect()}
             {CreateInput({
               label: "Event Date",
-              setField: setEventName,
+              setField: setDate,
               type: "Date",
+              value: date,
             })}
             {CreateInput({
               label: "Event Time",
-              setField: setEventName,
+              setField: setTime,
               type: "Time",
+              value: time,
             })}
-            {coor_List()}
+
+            {!editSuperAdmin ? (
+              <div className="createEvent-Taglist">
+                {" "}
+                <label className="createEvent-label">
+                  {"Event Coordinators"}
+                </label>
+                <InputTag setEventCoor={setEventCoor} useData={eventCoor} />
+              </div>
+            ) : (
+              <></>
+            )}
+            {/* {coor_List()} */}
             {/* {CreateInput({
               label: "Event Coordinators",
               setField: setEventName,
             })} */}
             {CreateInput({
               label: "Min Team Size",
-              setField: setEventName,
+              setField: setMinTeam,
+              type: "Number",
+              value: minTeamSize,
             })}
             {CreateInput({
               label: "Max Team Size",
-              setField: setEventName,
+              setField: setMaxTeam,
+              type: "Number",
+              value: maxTeamSize,
             })}
             {CreateInput({
               label: "Amount",
-              setField: setEventName,
+              setField: setAmount,
+              type: "Number",
+              value: amount,
             })}
-            {CreateInput({
-              label: "Admin",
-              setField: setEventName,
-            })}
+
+            {editSuperAdmin ? (
+              <div style={{ marginTop: "40px" }}>
+                {CreateInput({
+                  label: "Updates",
+                  setField: setUpdate,
+                })}
+              </div>
+            ) : (
+              <></>
+            )}
+            {editSuperAdmin ? (
+              <></>
+            ) : (
+              CreateInput({
+                label: "Admin",
+                setField: setAdmin,
+              })
+            )}
           </div>
           <div className="section2">
             {" "}
@@ -223,9 +317,10 @@ function CreateEvent({ setCreate }) {
             {textArea()}
             {CreateInput({
               label: "Location",
-              setField: setEventName,
+              setField: setLocation,
+              value: location,
             })}
-            {submit()}
+            {editSuperAdmin ? edit() : submit()}
           </div>
         </div>
       </div>

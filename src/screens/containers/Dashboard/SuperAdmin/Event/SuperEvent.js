@@ -9,25 +9,23 @@ import CreateEvent from "./CreateEvent";
 function SuperEvent() {
   const [tabActive, setTab] = useState("All Events");
   const [createEventState, setCreate] = useState(false);
-
-  const events = useSelector((state) => state.auth.events);
-  const onUpload = () => {
-    const file = document.getElementById("eventImg");
-    const storageRef = ref(storage, `events/pass2`);
-    if (file != null) {
-      const uploadTask = uploadBytesResumable(storageRef, file.files[0]);
-      uploadTask.on(
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            console.log(downloadURL);
-          });
-        }
-      );
-    }
-  };
+  // const onUpload = () => {
+  //   const file = document.getElementById("eventImg");
+  //   const storageRef = ref(storage, `events/pass2`);
+  //   if (file != null) {
+  //     const uploadTask = uploadBytesResumable(storageRef, file.files[0]);
+  //     uploadTask.on(
+  //       (error) => {
+  //         console.log(error);
+  //       },
+  //       () => {
+  //         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+  //           console.log(downloadURL);
+  //         });
+  //       }
+  //     );
+  //   }
+  // };
 
   return (
     <div className="super-event">

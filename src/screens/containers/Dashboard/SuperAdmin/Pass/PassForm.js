@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import upload_btn from "../../../../../images/add_img.png";
 import close_btn from "../../../../../images/add_btn.png";
+import TransferList from "./TransferList";
+import { createPass } from "../../../../../api";
+import { useDispatch, useSelector } from "react-redux";
 
-function CreateInput({ setField, label, type }) {
+function CreateInput({ setField, label, type, value }) {
   return (
     <div className="createEvent-inputCon">
       <label className="createEvent-label">{label}</label>
       <input
         className="createEvent-input"
         type={type}
+        value={value}
         // placeholder={placeholder}
         onChange={(e) => {
           setField(e.target.value);
@@ -18,17 +22,29 @@ function CreateInput({ setField, label, type }) {
   );
 }
 
-function PassForm({ setCreate }) {
-  const [createEventData, setEventData] = useState({});
-  const [eventName, setEventName] = useState({});
-  const [category, setCategory] = useState("");
+function PassForm({ setCreate, edit, currpass }) {
+  const [passName, setPassName] = useState(null);
+  const [amount, setAmount] = useState("");
   const [details, setDetails] = useState("");
-  const [eventImage, setImage] = useState(null);
+  const [events, setEvents] = useState([]);
+  const [passImage, setImage] = useState(null);
+  const [createStatus, setCreateStatus] = useState(null);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.curruser.token);
+  const eventa = useSelector((state) => state.auth.events);
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
+      setImage(event.target.files[0]);
     }
   };
+  useEffect(() => {
+    if (edit == true) {
+      setAmount(currpass.amount);
+      setDetails(currpass.detail);
+      setPassName(currpass.name);
+      setImage(currpass.imageUrl);
+    }
+  });
 
   const CategorySelect = () => {
     return (
@@ -36,16 +52,16 @@ function PassForm({ setCreate }) {
         <label className="createEvent-label">Pass Name</label>
         <select
           className="createEvent-input"
-          value={category}
+          value={passName}
           onChange={(e) => {
-            setCategory(e.target.value);
+            setPassName(e.target.value);
           }}
         >
           {/* <option value=""></option> */}
           <option value="First Day">First Day</option>
           <option value="Second Day">Second Day</option>
           <option value="Third Day">Third Day</option>
-          <option value="Golden Pass">Third Day</option>
+          <option value="Golden Pass">Golden Day</option>
         </select>
       </div>
     );
@@ -62,7 +78,9 @@ function PassForm({ setCreate }) {
           onChange={(e) => {
             setDetails(e.target.value);
           }}
-        />
+        >
+          {details}
+        </textArea>
       </div>
     );
   };
@@ -70,7 +88,7 @@ function PassForm({ setCreate }) {
   const pass_img = ({ uploaded }) => {
     return (
       <div>
-        {eventImage == null ? (
+        {passImage == null ? (
           <div className="passImg-upload">
             <div className="pass-container">
               <input
@@ -87,20 +105,76 @@ function PassForm({ setCreate }) {
           </div>
         ) : (
           <div className="createEvent-file">
-            <img className="passImg-upload" src={eventImage}></img>
-            <button onClick={() => setImage(null)} className="createEvent-edit">
-              Edit
-            </button>
+            <img
+              className="passImg-upload"
+              src={edit ? passImage : URL.createObjectURL(passImage)}
+            ></img>
+            {!edit ? (
+              <button
+                onClick={() => setImage(null)}
+                className="createEvent-edit"
+              >
+                Edit
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
         )}
       </div>
     );
   };
 
+  const submit_pass = () => {
+    const newarr = [];
+    for (let i = 0; i < events.length; i++) {
+      newarr.push(eventa[events[i]]._id);
+    }
+    const pass_Data = {
+      name: passName,
+      detail: details,
+      amount: amount,
+      eventId: newarr,
+    };
+    console.log(pass_Data);
+    let formData = new FormData();
+    formData.append("pass", passImage);
+    console.log(passImage);
+    formData.append("body", JSON.stringify(pass_Data));
+    console.log(formData);
+    createPass(dispatch, formData, token, setCreateStatus);
+  };
   const submit = () => {
     return (
-      <div className="createEvent-submit" onClick={() => {}}>
+      <div className="createEvent-submit" onClick={() => submit_pass()}>
         Submit
+      </div>
+    );
+  };
+
+  const handleEdit = () => {
+    const newarr = [];
+    for (let i = 0; i < events.length; i++) {
+      newarr.push(eventa[events[i]]._id);
+    }
+    const pass_Data = {
+      name: passName,
+      detail: details,
+      amount: amount,
+      eventId: newarr,
+    };
+    console.log(pass_Data);
+    let formData = new FormData();
+    formData.append("pass", passImage);
+
+    formData.append("body", JSON.stringify(pass_Data));
+    console.log(formData);
+  };
+
+  const editbtn = () => {
+    return (
+      <div className="createEvent-submit" onClick={() => handleEdit()}>
+        Edit
       </div>
     );
   };
@@ -116,6 +190,8 @@ function PassForm({ setCreate }) {
         <img src={close_btn}></img>
       </button>
       <div className="createEvent-form">
+        {createStatus == "fail" ? <>Failed</> : <></>}
+        {createStatus == "posted" ? <>success</> : <></>}
         <div className="createEvent-formTitle">Add Pass</div>
         {pass_img({ uploaded: true })}
         <div className="createEvent-sections">
@@ -123,9 +199,17 @@ function PassForm({ setCreate }) {
             {CategorySelect()}
             {CreateInput({
               label: "Amount",
-              setField: setEventName,
+              setField: setAmount,
               type: "Number",
+              value: amount,
             })}
+            <label
+              className="createEvent-label"
+              style={{ fontFamily: "Montserrat", margin: "auto" }}
+            >
+              Add Events To Pass
+            </label>
+
             {/* {CreateInput({
               label: "Admin",
               setField: setEventName,
@@ -140,7 +224,18 @@ function PassForm({ setCreate }) {
             })} */}
           </div>
         </div>
-        {submit()}
+
+        {edit ? (
+          <TransferList
+            setEvents={setEvents}
+            edit={true}
+            present={currpass.eventId}
+          />
+        ) : (
+          <TransferList setEvents={setEvents} />
+        )}
+
+        {!edit ? submit() : editbtn()}
       </div>
     </div>
   );

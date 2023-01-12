@@ -1,6 +1,6 @@
 import "./App.css";
 import Navbar from "./screens/components/Navbar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import DashboardSuperAdmin from "./screens/containers/Dashboard/SuperAdmin/DashboardSuperAdmin";
 import "./styles/footer.css";
 import "./styles/desktop27.css";
@@ -36,8 +36,29 @@ function App() {
   const dispatch = useDispatch();
   // fetchEvents(dispatch);
   // loginRegister(dispatch, creds);
+  const [cp, setcp] = useState(null);
+  const chandra = async () => {
+    console.log("fetched");
+    await fetch(
+      "http://159.223.90.95:3000/orderManage/get_orders?user_id=639f339e68e661e3e572439f",
+      {
+        method: "POST",
+        body: JSON.stringify({}),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("found data");
+        console.log(data);
+        setcp(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
+    // chandra();
     loginRegister(dispatch, creds);
     fetchEvents(dispatch);
     fetchPasses(dispatch);
