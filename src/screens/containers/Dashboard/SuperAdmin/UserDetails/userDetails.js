@@ -138,21 +138,27 @@ const UserDetails = (props) => {
   // };
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [nPages, setNpage] = useState(1);
+  const [Pages, setNpage] = useState(1);
   // const [recordsPerPage] = useState(1);
   // const indexOfLastRecord = currentPage * recordsPerPage;
   // const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   // const currentRecords = users.slice(indexOfFirstRecord, indexOfLastRecord);
-
   useEffect(() => {
-    getUsers("", token, setCurrentRecords, currentPage, setNpage);
+    getUsers({
+      token: token,
+      currentPage: currentPage,
+      setCurrentRecords: setCurrentRecords,
+      setNpage: setNpage,
+    });
   }, []);
   console.log(currentRecords);
+  console.log(Pages);
 
   return (
     <div>
       <div className="app-container">
         {/* <h2>User Details</h2> */}
+
         <Dashboard_Header
           settab={setTab}
           tabactive={tabActive}
@@ -161,14 +167,23 @@ const UserDetails = (props) => {
           excel={true}
           certify={true}
           paginate={
-            <Pagination
-              nPages={nPages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              apiCall={(pageNo) => {
-                getUsers("", token, setCurrentRecords, pageNo);
-              }}
-            />
+            typeof Pages != "undefined" ? (
+              <Pagination
+                nPages={Pages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                apiCall={(pageNo) => {
+                  getUsers({
+                    token: token,
+                    currentPage: pageNo,
+                    setCurrentRecords: setCurrentRecords,
+                    setNpage: setNpage,
+                  });
+                }}
+              />
+            ) : (
+              <></>
+            )
           }
           dashBool={true}
         />

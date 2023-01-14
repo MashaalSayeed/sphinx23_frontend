@@ -1,0 +1,67 @@
+.desktop27-main{
+    font-family: 'Montserrat';
+    font-style: normal;
+    line-height: 29px;
+    letter-spacing: 0.02em;
+    /* padding: 3rem; */
+    
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    /* justify-content: flex-start; */
+    }
+    .desktop27-head{
+        margin: 30px;
+        font-weight: 700;
+        font-size: 1.5rem;
+        align-self: flex-start;
+    }
+    .desktop27-tabChangebtn{
+        height: 30px;
+        font-style: normal;
+        font-weight: 500;
+        /* font-size: 18px; */
+        line-height: 22px;
+        /* identical to box height */
+        
+        letter-spacing: 0.02em;
+        align-self: flex-start;
+        margin: 30px 0px 0px 20px;
+        
+        /* color: rgba(0, 0, 1, 0); */
+        }
+        .desktop27-btn{
+            height: 100%;
+            /* width: 130px; */
+            border: none;
+            background:transparent;
+            margin: 0px 30px;
+            font-size: 18px;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.8);
+        
+            
+        }
+        .desktop27-border{
+            width: 100%;
+        border-bottom:1px solid rgba(0, 0, 0, 0.2); 
+        margin-bottom: 10px;}
+
+        .passDetailCard-img{
+            border-radius: 8px;
+            box-shadow: 0px 4.38349px 15.3422px rgba(0, 0, 0, 0.55);
+            margin: 30px;
+            }
+            .passDetailCard-p{
+                font-style: normal;
+font-weight: 400;
+font-size: 16px;
+margin: 20px;
+            }
+.desktop27-passDetail{
+    width: 80%;
+    text-align: justify;
+}

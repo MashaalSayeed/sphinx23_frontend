@@ -10,8 +10,11 @@ import {
   Divider,
   List,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 
 function Profile() {
+  const currUser = useSelector((state) => state.auth.curruser.profile);
+
   return (
     <div className="profile-main">
       <Card variant="outlined">
@@ -22,20 +25,17 @@ function Profile() {
         <div className="user-profile-content">
           <List component="nav" aria-label="mailbox folders">
             <ListItem>
-              <ListItemText primary="Name : " secondary="" />
+              <ListItemText primary={`Name :  ${currUser.name}`} />
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText primary="Year : " />
+              <ListItemText primary={`Email : ${currUser.email}`} />
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText primary="Course : " />
+              <ListItemText primary={`Mobile : ${currUser.mobileNumber}`} />
             </ListItem>
             <Divider />
-            <ListItem>
-              <ListItemText primary="Events Enrolled : " />
-            </ListItem>
             <Divider />
             <ListItem>
               <ListItemText primary="Age : " />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import upload_btn from "../../../../../images/add_img.png";
 import close_btn from "../../../../../images/add_btn.png";
 import TransferList from "./TransferList";
-import { createPass } from "../../../../../api";
+import { createPass, updatePass } from "../../../../../api";
 import { useDispatch, useSelector } from "react-redux";
 
 function CreateInput({ setField, label, type, value }) {
@@ -24,8 +24,8 @@ function CreateInput({ setField, label, type, value }) {
 
 function PassForm({ setCreate, edit, currpass }) {
   const [passName, setPassName] = useState(null);
-  const [amount, setAmount] = useState("");
-  const [details, setDetails] = useState("");
+  const [amount, setAmount] = useState(null);
+  const [details, setDetails] = useState(null);
   const [events, setEvents] = useState([]);
   const [passImage, setImage] = useState(null);
   const [createStatus, setCreateStatus] = useState(null);
@@ -34,6 +34,8 @@ function PassForm({ setCreate, edit, currpass }) {
   const eventa = useSelector((state) => state.auth.events);
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
+      console.log(event.target.files[0]);
+
       setImage(event.target.files[0]);
     }
   };
@@ -44,7 +46,7 @@ function PassForm({ setCreate, edit, currpass }) {
       setPassName(currpass.name);
       setImage(currpass.imageUrl);
     }
-  });
+  }, []);
 
   const CategorySelect = () => {
     return (
@@ -137,9 +139,10 @@ function PassForm({ setCreate, edit, currpass }) {
       eventId: newarr,
     };
     console.log(pass_Data);
+    const currentTime = Date.now();
+    passImage.name = currentTime;
     let formData = new FormData();
-    formData.append("pass", passImage);
-    console.log(passImage);
+    passImage.formData.append("file", passImage);
     formData.append("body", JSON.stringify(pass_Data));
     console.log(formData);
     createPass(dispatch, formData, token, setCreateStatus);
@@ -164,11 +167,8 @@ function PassForm({ setCreate, edit, currpass }) {
       eventId: newarr,
     };
     console.log(pass_Data);
-    let formData = new FormData();
-    formData.append("pass", passImage);
 
-    formData.append("body", JSON.stringify(pass_Data));
-    console.log(formData);
+    updatePass(currpass._id, pass_Data, token, setCreateStatus);
   };
 
   const editbtn = () => {

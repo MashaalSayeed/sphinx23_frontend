@@ -6,11 +6,7 @@ import ReadOnlyRow from "./ReadOnlyRow";
 
 function PassUsers({ pass }) {
   const [usersByPass, setUsersByPass] = useState([]);
-  const token = useSelector((state) => state.auth.curruser.token);
-  useEffect(() => {
-    getUsersByPass(pass._id, token, setUsersByPass);
-    console.log("USERS AMBASSADORS PAYMENT SET");
-  }, []);
+
   return (
     <div>
       <form onSubmit={() => {}} className="resp-m-l-r usertable">

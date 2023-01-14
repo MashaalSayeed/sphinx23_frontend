@@ -1,14 +1,35 @@
 import React from "react";
+import { Button, Stack, TextField } from "@mui/material";
 
-const ReadOnlyRow = ({ user, handleEditClick, handleDeleteClick }) => {
+const ReadOnlyRow = ({ data, value }) => {
+  console.log(data);
+  console.log(value);
+  console.log(data[value[0]]);
+
+  const attendace = () => {
+    return (
+      <td>
+        {" "}
+        <Button
+          variant="contained"
+          color="success"
+          style={{
+            boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
+            borderRadius: "4px",
+            margin: "5px",
+          }}
+        >
+          Present
+        </Button>
+      </td>
+    );
+  };
   return (
     <tr>
-      <td>{user.index}</td>
-      <td>{user.email}</td>
-      <td>{user.type}</td>
-      <td>{user.events}</td>
-      <td>{user.passes}</td>
-      <td></td>
+      {value.map((ele, i) => {
+        if (ele == "attendance") return attendace();
+        else return <td key={i}>{data[ele]}</td>;
+      })}
     </tr>
   );
 };

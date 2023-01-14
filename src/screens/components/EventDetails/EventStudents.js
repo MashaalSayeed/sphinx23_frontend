@@ -1,11 +1,12 @@
 import React, { useEffect, useState, Fragment } from "react";
 import ReadOnlyRow from "./ReadOnlyRow";
 
-function EventTeams(props) {
-  const { currentRecords } = props;
+function EventStudents(props) {
+  const currentRecords = [{ name: "rupesh", mobileNumber: "8076240766" }];
+
   const data = {
-    header: ["Sr.no", "Team Name", "College", "Members", "Status"],
-    value: ["index", "name", "email", "mobileNumber", "attendace"],
+    header: ["Sr.no", "Name", "Email", "Mobile Number", "Attendance"],
+    value: ["index", "name", "email", "mobileNumber", "attendance"],
   };
 
   return (
@@ -46,7 +47,7 @@ function EventTeams(props) {
             }}
           >
             {" "}
-            No Teams Found
+            {"No data found"}
           </div>
         )}
       </form>
@@ -54,4 +55,4 @@ function EventTeams(props) {
   );
 }
 
-export default EventTeams;
+export default EventStudents;

@@ -3,8 +3,7 @@ import SidebarAdmin from "../../../components/Sidebar";
 import { useSelector } from "react-redux";
 import { getUsers, getAmbassadors, getPayments } from "../../../../api";
 import AdminEvent from "./Event/AdminEvent";
-import "./deskr.css";
-import TeamTab from "./Event/TeamTab";
+import TeamTab from "./Team/TeamTab";
 
 export default function DashboardEventAdmin() {
   const Sdata = {
@@ -13,6 +12,7 @@ export default function DashboardEventAdmin() {
   };
   const token = useSelector((state) => state.auth.curruser.token);
   const [optactive, setactive] = useState(Sdata.options[1]);
+  const [isSidebar, SetSidebar] = useState(true);
   // const [Users, setUsers] = useState([]);
   // const [Ambassadors, setAmbassadors] = useState([]);
   // const [Payments, setPayments] = useState([]);
@@ -26,16 +26,27 @@ export default function DashboardEventAdmin() {
   return (
     <div>
       <div className="space-top"></div>
-      <SidebarAdmin data={Sdata} optactive={optactive} setactive={setactive} />
-      <div className="super-main">
-        {
+      <div className="super-mainCon">
+        <SidebarAdmin
+          data={Sdata}
+          optactive={optactive}
+          setactive={setactive}
+          isSidebar={isSidebar}
+          SetSidebar={SetSidebar}
+        />
+        <div
+          className="super-main"
+          style={!isSidebar ? { width: "95%", margin: "auto" } : {}}
+        >
           {
-            Profile: <></>,
-            Events: <AdminEvent />,
-            Complaints: <></>,
-            Team: <TeamTab />,
-          }[optactive]
-        }
+            {
+              Profile: <></>,
+              Events: <AdminEvent />,
+              Complaints: <></>,
+              Team: <TeamTab />,
+            }[optactive]
+          }
+        </div>{" "}
       </div>
     </div>
   );

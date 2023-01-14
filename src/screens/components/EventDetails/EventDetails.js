@@ -1,19 +1,114 @@
 import AboutSection from "./EventAbout";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dashboard_Header from "../Dashboard_Header";
 import EventTeams from "./EventTeams";
+import Pagination from "../Pagination";
+import { getTeamsByEvent } from "../../../api";
+import EventStudents from "./EventStudents";
+import Results from "./Results";
+import ResultsSection from "../../containers/Dashboard/EventAdmin/Event/Event/ResultsSection";
+
 export default function EventDetails() {
   const [tabActive, setTab] = useState("About");
   console.log("Event Called");
   const params = useParams();
   const eventName = params.id;
   const event = useSelector((state) => state.auth.events);
+  // const type = useSelector((state) => state.auth.curruser.profile.type);
+  const type = "eventAdmin";
+
   const currevent = event.find((x) => x.name === eventName);
   const allAboutCardElements = <AboutSection event={currevent} />;
 
+  const token = useSelector((state) => state.auth.curruser.token);
+  const [currentRecords, setCurrentRecords] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [Pages, setNpage] = useState(1);
+  useEffect(() => {
+    console.log(currevent._id);
+    if (tabActive == "Registered Teams") {
+      console.log("get teams by event");
+      getTeamsByEvent(
+        currevent._id,
+        token,
+        currentPage,
+        setCurrentRecords,
+        setNpage
+      );
+    }
+
+    if (tabActive == "Registered Students")
+      console.log("get studnets by event"); //api call for reg studetnts ;
+    if (tabActive == "Results") console.log("get results by event"); //api call for results ;
+  }, [tabActive]);
+  console.log(currentRecords);
+  console.log(Pages);
+  const SuperAdmintabs = ["About", "Registered Teams"];
+  const EventAdminTabs = ["About", "Registered Students", "Results"];
+  const SuperAdminPaginate = () => {
+    return (
+      <Pagination
+        nPages={Pages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        apiCall={(pageNo) => {
+          getTeamsByEvent(
+            currevent._id,
+            token,
+            pageNo,
+            setCurrentRecords,
+            setNpage
+          );
+        }}
+      />
+    );
+  };
+  const EventStudnetsPaginate = () => {
+    return (
+      <Pagination
+        nPages={Pages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        apiCall={() => {}}
+        // apiCall={(pageNo) => {
+        //   getTeamsByEvent(
+        //     currevent._id,
+        //     token,
+        //     pageNo,
+        //     setCurrentRecords,
+        //     setNpage
+        //   );}
+      />
+    );
+  };
+
+  const EventResultPaginate = () => {
+    return (
+      <Pagination
+        nPages={Pages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        apiCall={() => {}}
+        // apiCall={(pageNo) => {
+        //   getTeamsByEvent(
+        //     currevent._id,
+        //     token,
+        //     pageNo,
+        //     setCurrentRecords,
+        //     setNpage
+        //   );}
+      />
+    );
+  };
+  const currPagePaginate = () => {
+    if (tabActive == "Registered Teams") return SuperAdminPaginate();
+    if (tabActive == "Registered Students") return EventStudnetsPaginate();
+    if (tabActive == "Results") return EventResultPaginate();
+  };
+  console.log("cuurent tab");
+  console.log(tabActive);
   return (
     <div>
       <div className="space-top"></div>
@@ -21,20 +116,56 @@ export default function EventDetails() {
         settab={setTab}
         tabactive={tabActive}
         title={currevent.name}
-        tabs={["About", "Registered Teams"]}
-      />
-      <div className="desktop14-sections">
-        {
-          {
-            About: (
-              <section className="desktop14-about">
-                {allAboutCardElements}
-              </section>
-            ),
-            "Registered Teams": <EventTeams />,
-          }[tabActive]
+        tabs={type == "superAdmin" ? SuperAdmintabs : EventAdminTabs}
+        excel={
+          tabActive == "Registered Teams" || tabActive == "Registered Students"
+            ? true
+            : false
         }
-      </div>
+        addBtnBool={
+          tabActive == "Registered Teams" || tabActive == "Registered Students"
+            ? true
+            : false
+        }
+        dashBool={
+          tabActive == "Registered Teams" || tabActive == "Registered Students"
+            ? true
+            : false
+        }
+        paginate={typeof Pages != "undefined" ? currPagePaginate() : <></>}
+      />
+      {type == "superAdmin" ? (
+        <div className="desktop14-sections">
+          {
+            {
+              About: (
+                <section className="desktop14-about">
+                  {allAboutCardElements}
+                </section>
+              ),
+              "Registered Teams": (
+                <EventTeams currentRecords={currentRecords} />
+              ),
+            }[tabActive]
+          }
+        </div>
+      ) : (
+        <div className="desktop14-sections">
+          {
+            {
+              About: (
+                <section className="desktop14-about">
+                  {allAboutCardElements}
+                </section>
+              ),
+              "Registered Students": (
+                <EventStudents currentRecords={currentRecords} />
+              ),
+              Results: <Results />,
+            }[tabActive]
+          }
+        </div>
+      )}
     </div>
   );
 }

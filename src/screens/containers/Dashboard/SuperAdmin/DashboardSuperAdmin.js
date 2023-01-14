@@ -22,10 +22,10 @@ export default function DashboardSuperAdmin() {
   const [Payments, setPayments] = useState([]);
 
   useEffect(() => {
-    getUsers("", token, setUsers);
-    getAmbassadors(token, setAmbassadors);
-    getPayments(token, setPayments);
-    console.log("USERS AMBASSADORS PAYMENT SET");
+    // getUsers("", token, setUsers);
+    // getAmbassadors(token, setAmbassadors);
+    // getPayments(token, setPayments);
+    // console.log("USERS AMBASSADORS PAYMENT SET");
   }, []);
   return (
     <div>

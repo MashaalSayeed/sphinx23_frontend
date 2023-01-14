@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import upload_btn from "../../../../../images/add_img.png";
 import close_btn from "../../../../../images/add_btn.png";
 import InputTag from "./InputTag";
-import { createEvent, getUsersId } from "../../../../../api";
+import { createEvent, getUsersId, updateEvent } from "../../../../../api";
 import { useDispatch, useSelector } from "react-redux";
 
 function CreateInput({ placeholder, setField, label, type, value }) {
@@ -23,6 +23,7 @@ function CreateInput({ placeholder, setField, label, type, value }) {
 }
 
 function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
+  console.log(currEvent);
   const [eventName, setEventName] = useState(null);
   const [category, setCategory] = useState("Tech");
   const [details, setDetails] = useState(null);
@@ -37,6 +38,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const [admin, setAdmin] = useState(null);
   const [adminId, setAdminId] = useState([]);
   const [update, setUpdate] = useState([]);
+  const [updateList, setUpdateList] = useState([]);
   const [createStatus, setCreateStatus] = useState(null);
   const [eventImage, setImage] = useState(null);
   const token = useSelector((state) => state.auth.curruser.token);
@@ -51,7 +53,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       console.log(currEvent.from.split("T")[0]);
       console.log(currEvent.description);
       setEventName(currEvent.name);
-      setAdmin(currEvent.admin);
+      setAdmin(currEvent.admin.email);
       setAmount(currEvent.amount);
       setCategory(currEvent.category);
       setDate(currEvent.from.split("T")[0]);
@@ -61,7 +63,10 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       setImage(currEvent.imageUrl);
       setLocation(currEvent.location);
       setTime(currEvent.time);
-      //setUpdate(currEvent.update);
+      const arr = currEvent.updates.map(({ message }) => {
+        return { message: message };
+      });
+      setUpdateList(arr);
     }
   }, []);
 
@@ -201,8 +206,8 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       time: time,
       location: location,
       // coordinators: CoorsId,
-      admin: adminId[0],
-      updates: [],
+      // admin: adminId[0],
+      updates: [...updateList, { message: update }],
       status: 1,
       ended: false,
       amount: amount,
@@ -211,6 +216,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       maxTeamSize: maxTeamSize,
       // imageUrl: "", //
     };
+    updateEvent(currEvent._id, event_Data, token, setCreateStatus);
     console.log(event_Data);
   };
   const edit = () => {
@@ -234,7 +240,14 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       </button>
       <div className="createEvent-form">
         {createStatus == "fail" ? <>Failed</> : <></>}
-        {createStatus == "posted" ? <>success</> : <></>}
+        {createStatus == "posted" ? (
+          () => {
+            setCreate(false);
+            return <>success</>;
+          }
+        ) : (
+          <></>
+        )}
         <div className="createEvent-formTitle">Add Events</div>
         <div className="createEvent-sections">
           <div className="section1">
@@ -302,14 +315,15 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
             ) : (
               <></>
             )}
-            {editSuperAdmin ? (
+            {/* {editSuperAdmin ? (
               <></>
-            ) : (
-              CreateInput({
-                label: "Admin",
-                setField: setAdmin,
-              })
-            )}
+            ) :  */}
+
+            {CreateInput({
+              label: "Admin",
+              setField: setAdmin,
+              value: admin,
+            })}
           </div>
           <div className="section2">
             {" "}

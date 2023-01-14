@@ -1,7 +1,13 @@
 import React from "react";
 
 const Pagination = ({ nPages, currentPage, setCurrentPage, apiCall }) => {
-  const pageNumbers = [...Array(nPages + 1).keys()].slice(1);
+  let pageNumbers;
+  console.log(nPages);
+  try {
+    pageNumbers = [...Array(nPages + 1).keys()].slice(1);
+  } catch {
+    pageNumbers = [];
+  }
 
   const nextPage = () => {
     if (currentPage !== nPages) {
@@ -31,7 +37,10 @@ const Pagination = ({ nPages, currentPage, setCurrentPage, apiCall }) => {
             } `}
           >
             <a
-              onClick={() => setCurrentPage(pgNumber)}
+              onClick={() => {
+                setCurrentPage(pgNumber);
+                apiCall(pgNumber);
+              }}
               className="page-link"
               href="#"
             >

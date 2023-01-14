@@ -1,0 +1,60 @@
+.desktop26-main{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+
+}
+.desktop26-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    font-size: 24px;
+}
+
+.desktop26-create-btn{
+    background: linear-gradient(86.27deg, #000000 0%, #3E3E3E 100%);;
+    color: #FF8762;
+    border-radius: 6px;
+    border: none;
+    height: 54px;
+    width: 194px;
+    margin: 10px 0;
+
+}
+.desktop26-btn-inner{
+    display: flex;
+    
+    font-weight: 400;
+font-size: 18px;
+line-height: 26px;
+align-items: center;
+justify-content: space-around;
+/* identical to box height, or 144% */
+
+letter-spacing: 0.02em;
+}
+.desktop26-btn-inner img{
+    width: 24px;
+    height: 24px;
+}
+.desktop26-Passes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.passCard-main{
+    margin: 2rem;
+    /* box-shadow: 0px 4.38349px 15.3422px rgba(0, 0, 0, 0.55); */
+border-radius: 8px;
+
+
+}
+.passCard-img{
+border-radius: 8px;
+    box-shadow: 0px 4.38349px 15.3422px rgba(0, 0, 0, 0.55);
+
+
+}

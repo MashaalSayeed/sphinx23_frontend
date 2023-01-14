@@ -1,3 +1,4 @@
+import { json } from "react-router-dom";
 import {
   events,
   passes,
@@ -173,9 +174,15 @@ export const createPass = async (
     });
 };
 
-export const getUsersByPass = async (passID, token, setUsersByPass) => {
+export const getUsersByPass = async (
+  passID,
+  token,
+  currentPage,
+  setCurrentRecords,
+  setNpage
+) => {
   console.log("getUsersByPass");
-  await fetch(`${url}/passes/users/${passID}`, {
+  await fetch(`${url}/passes/users/${passID}/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -186,20 +193,24 @@ export const getUsersByPass = async (passID, token, setUsersByPass) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.error == null) {
-        console.log(data.users);
-        setUsersByPass(data.users);
+        console.log(data);
+        setCurrentRecords(data.users);
+        setNpage(data.totalPages);
       } else {
         console.log(data.error);
-        setUsersByPass([]);
       }
     })
     .catch((error) => {
       console.log(error);
-      setUsersByPass([]);
     });
 };
 
-export const getUsers = (userID, token, setCurrentRecords, currentPage) => {
+export const getUsers = ({
+  token,
+  setCurrentRecords,
+  currentPage,
+  setNpage,
+}) => {
   console.log("getUsersbyPage");
   fetch(`${url}/users/${currentPage}`, {
     headers: {
@@ -213,9 +224,16 @@ export const getUsers = (userID, token, setCurrentRecords, currentPage) => {
     .then((data) => {
       if (data.error == null) {
         console.log(data);
-        if (data.user) setCurrentRecords(data.user);
-        else {
+        if (data.user) {
+          setCurrentRecords(data.user);
+          console.log(data.totalPages);
+          setNpage(data.totalPages);
+          return data.totalPages;
+        } else {
           setCurrentRecords(data.users);
+          console.log(data.totalPages);
+          setNpage(data.totalPages);
+          return data.totalPages;
         }
       } else {
         console.log(data.error);
@@ -226,9 +244,14 @@ export const getUsers = (userID, token, setCurrentRecords, currentPage) => {
     });
 };
 
-export const getAmbassadors = (token, setAmbassadors) => {
-  console.log("getUsers");
-  fetch(`${url}/ambassadors`, {
+export const getAmbassadors = ({
+  token,
+  setCurrentRecords,
+  currentPage,
+  setNpage,
+}) => {
+  console.log("get ambassadors");
+  fetch(`${url}/ambassadors/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -240,15 +263,17 @@ export const getAmbassadors = (token, setAmbassadors) => {
     .then((data) => {
       if (data.error == null) {
         console.log(data.success);
-        setAmbassadors(data.ambassador);
+        setCurrentRecords(data.ambassador);
+        setNpage(data.totalPages);
       } else {
         console.log(data.error);
-        setAmbassadors([]);
+        setCurrentRecords([]);
+        console.log(data.totalPages);
+        setNpage(data.totalPages);
       }
     })
     .catch((error) => {
       console.log(error);
-      setAmbassadors([]);
     });
 };
 
@@ -292,6 +317,99 @@ export const getUsersId = (token, email, setIds) => {
       if (data.success) {
         console.log(data.id);
         setIds((prevState) => [...prevState, data.id]);
+      } else {
+        console.log(data.error);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const updateEvent = async (
+  eventId,
+  eventData,
+  token,
+  setCreateStatus
+) => {
+  console.log("Update Event Called");
+  await fetch(`${url}/events/update/${eventId}`, {
+    headers: {
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "PUT",
+    body: eventData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        console.log(data.event);
+        setCreateStatus("posted");
+      } else {
+        console.log(data.error);
+        setCreateStatus("fail");
+        // return false;
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      setCreateStatus("fail");
+      // return false;
+    });
+};
+
+export const updatePass = async (passId, passData, token, setCreateStatus) => {
+  console.log("Update PASS Called");
+  await fetch(`${url}/passes/${passId}`, {
+    headers: {
+      mode: "cors",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "PUT",
+    body: JSON.stringify(passData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        setCreateStatus("posted");
+        console.log(data.message);
+      } else {
+        setCreateStatus("fail");
+        console.log(data.error);
+      }
+    })
+    .catch((error) => {
+      setCreateStatus("fail");
+      console.log(error);
+    });
+};
+
+export const getTeamsByEvent = async (
+  eventId,
+  token,
+  currentPage,
+  setCurrentRecords,
+  setNpage
+) => {
+  console.log("getTeamsByEvent");
+  await fetch(`${url}/participant/teams/${eventId}/${currentPage}`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        console.log(data);
+        setCurrentRecords(data.team);
+        setNpage(data.totalPages);
       } else {
         console.log(data.error);
       }

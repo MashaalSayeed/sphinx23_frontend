@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import edit from "../../../../../images/edit.png";
+import edit_img from "../../../../../images/edit.png";
 import PassForm from "./PassForm";
 export default function PassDetailCard(props) {
   const { pass } = props;
@@ -8,25 +8,29 @@ export default function PassDetailCard(props) {
   const events = useSelector((state) => state.auth.events);
   return (
     <div className="passDetailCard-main">
-      <img className="passDetailCard-img" src={pass.imageUrl}></img>
-      {edit == true ? (
-        <PassForm setCreate={setEdit} edit={true} currpass={pass} />
-      ) : (
-        <></>
-      )}
-      <button
-        className="desktop14-edit-btn"
-        onClick={() => {
-          setEdit(true);
-        }}
-      >
-        <div className="desktop14-btn-inner">
-          <div>
-            <img src={edit}></img>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <img className="passDetailCard-img" src={pass.imageUrl}></img>
+        {edit == true ? (
+          <PassForm setCreate={setEdit} edit={true} currpass={pass} />
+        ) : (
+          <></>
+        )}
+        <button
+          className="desktop14-edit-btn"
+          onClick={() => {
+            setEdit(true);
+          }}
+          style={{ marginTop: "30px" }}
+        >
+          <div className="desktop14-btn-inner">
+            <div>
+              <img src={edit_img}></img>
+            </div>
+            <p>Edit</p>
           </div>
-          <p>Edit</p>
-        </div>
-      </button>
+        </button>
+      </div>
+
       <p className="passDetailCard-p">
         <h4>Amount:{pass.amount}</h4>
         <br></br>

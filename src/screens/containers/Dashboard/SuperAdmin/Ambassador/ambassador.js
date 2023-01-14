@@ -1,23 +1,38 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 
 import ReadOnlyRow from "./ReadOnlyRow";
 
 import Dashboard_Header from "../../../../components/Dashboard_Header";
 import Pagination from "../../../../components/Pagination";
+import { getAmbassadors } from "../../../../../api";
+import { useSelector } from "react-redux";
 
 const Ambassador = (props) => {
   const [tabActive, setTab] = useState("");
   const { ambassadors } = props;
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
 
-  const [recordsPerPage] = useState(1);
-  const indexOfLastRecord = currentPage * recordsPerPage;
-  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-  const currentRecords = ambassadors.slice(
-    indexOfFirstRecord,
-    indexOfLastRecord
-  );
-  const nPages = Math.ceil(ambassadors.length / recordsPerPage);
+  // const [recordsPerPage] = useState(1);
+  // const indexOfLastRecord = currentPage * recordsPerPage;
+  // const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  // const currentRecords = ambassadors.slice(
+  //   indexOfFirstRecord,
+  //   indexOfLastRecord
+  // );
+  // const nPages = Math.ceil(ambassadors.length / recordsPerPage);
+  const [currentRecords, setCurrentRecords] = useState([]);
+  const token = useSelector((state) => state.auth.curruser.token);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [Pages, setNpage] = useState(0);
+
+  useEffect(() => {
+    getAmbassadors({
+      token: token,
+      currentPage: currentPage,
+      setCurrentRecords: setCurrentRecords,
+      setNpage: setNpage,
+    });
+  }, []);
 
   return (
     <div>
@@ -31,11 +46,24 @@ const Ambassador = (props) => {
           certify={true}
           dashBool={true}
           paginate={
-            <Pagination
-              nPages={nPages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
+            typeof Pages != "undefined" ? (
+              <Pagination
+                nPages={Pages}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                setCurrentRecords={setCurrentRecords}
+                apiCall={(pageNo) => {
+                  getAmbassadors({
+                    token: token,
+                    currentPage: pageNo,
+                    setCurrentRecords: setCurrentRecords,
+                    setNpage: setNpage,
+                  });
+                }}
+              />
+            ) : (
+              <></>
+            )
           }
         />
         <form onSubmit={() => {}} className="resp-m-l-r">
@@ -67,11 +95,7 @@ const Ambassador = (props) => {
             </tbody>
           </table>
           {ambassadors.length != 0 ? (
-            <Pagination
-              nPages={nPages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
+            <></>
           ) : (
             <div
               style={{

@@ -24,6 +24,8 @@ import Footer from "./screens/components/Footer";
 import PassDetail from "./screens/containers/Dashboard/SuperAdmin/Pass/PassDetail";
 import CreatePass from "./screens/containers/Dashboard/SuperAdmin/Pass/createPass";
 import EventDetails from "./screens/components/EventDetails/EventDetails";
+import { Dashboard } from "@mui/icons-material";
+import DashboardEventAdmin from "./screens/containers/Dashboard/EventAdmin/DashboardEventAdmin";
 
 function App() {
   // const token1 =
@@ -36,26 +38,6 @@ function App() {
   const dispatch = useDispatch();
   // fetchEvents(dispatch);
   // loginRegister(dispatch, creds);
-  const [cp, setcp] = useState(null);
-  const chandra = async () => {
-    console.log("fetched");
-    await fetch(
-      "http://159.223.90.95:3000/orderManage/get_orders?user_id=639f339e68e661e3e572439f",
-      {
-        method: "POST",
-        body: JSON.stringify({}),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("found data");
-        console.log(data);
-        setcp(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   useEffect(() => {
     // chandra();
@@ -64,7 +46,7 @@ function App() {
     fetchPasses(dispatch);
     fetchUpcoming(dispatch);
     fetchCompleted(dispatch);
-    fetchUpdates(dispatch);
+    // fetchUpdates(dispatch);
   }, []);
 
   const curruser = useSelector((state) => state.auth.curruser);
@@ -86,10 +68,10 @@ function App() {
         <Navbar />
         {curruser != null ? (
           <Routes>
-            <Route exact path="/" element={<DashboardSuperAdmin />} />
+            <Route exact path="/" element={<DashboardEventAdmin />} />
             <Route path="/superAdmin/pass/:id" element={<PassDetail />}></Route>
             <Route
-              path="/EventAdmin/event/:id"
+              path="/eventDetails/event/:id"
               element={<EventDetails />}
             ></Route>
             <Route

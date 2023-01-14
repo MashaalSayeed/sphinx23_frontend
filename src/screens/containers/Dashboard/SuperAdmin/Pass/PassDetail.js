@@ -1,11 +1,13 @@
 import PassDetailCard from "./PassDetailCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import PassUsers from "./PassUsers";
 import { Dashboard } from "@mui/icons-material";
 import Dashboard_Header from "../../../../components/Dashboard_Header";
+import Pagination from "../../../../components/Pagination";
+import { getUsersByPass } from "../../../../../api";
 
 export default function PassDetail() {
   const params = useParams();
@@ -20,9 +22,28 @@ export default function PassDetail() {
   const currpass = passes.find((x) => x.name === passName);
 
   console.log(passName);
-  const passNo = 0;
-
+  const token = useSelector((state) => state.auth.curruser.token);
   const [tabActive, setTab] = useState("About");
+  const [currentRecords, setCurrentRecords] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [Pages, setNpage] = useState(1);
+  // const [recordsPerPage] = useState(1);
+  // const indexOfLastRecord = currentPage * recordsPerPage;
+  // const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  // const currentRecords = users.slice(indexOfFirstRecord, indexOfLastRecord);
+  useEffect(() => {
+    console.log(currpass._id);
+    getUsersByPass(
+      currpass._id,
+      token,
+      currentPage,
+      setCurrentRecords,
+      setNpage
+    );
+  }, []);
+  console.log(currentRecords);
+  console.log(Pages);
+
   return (
     <div className="desktop27-main">
       <div className="space-top"></div>
@@ -34,12 +55,34 @@ export default function PassDetail() {
         excel={tabActive == "Registered Students" ? true : false}
         addBtnBool={tabActive == "Registered Students" ? true : false}
         dashBool={tabActive == "Registered Students" ? true : false}
+        paginate={
+          typeof Pages != "undefined" ? (
+            <Pagination
+              nPages={Pages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              apiCall={(pageNo) => {
+                getUsersByPass(
+                  currpass._id,
+                  token,
+                  currentPage,
+                  setCurrentRecords,
+                  setNpage
+                );
+              }}
+            />
+          ) : (
+            <></>
+          )
+        }
       />
 
       {
         {
           About: <PassDetailCard pass={currpass} />,
-          "Registered Students": <PassUsers pass={currpass} />,
+          "Registered Students": (
+            <PassUsers pass={currpass} setCurrentPage={setCurrentPage} />
+          ),
         }[tabActive]
       }
     </div>
