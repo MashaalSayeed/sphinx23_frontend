@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchAdminEvents } from "../../../../../api";
+function EventTab({ all }) {
+  const url = "http://localhost:8000";
+  const token = useSelector((state) => state.auth.curruser.token);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // chandra();
+    fetchAdminEvents(token, dispatch);
+  }, []);
 
-function EventTab() {
-  const events = useSelector((state) => state.auth.events);
+  const events = useSelector((state) => state.auth.adminevents);
+
+  console.log(events);
   console.log("Event_tab");
   return (
     <div className="eventTab-main">
-      {events.map((opt, i) => (
-        <Link to={"/eventDetails/event/" + opt.name} className="event-link">
-          <div className="eventTab-Ecard" key={i}>
-            <img className="Ecard-img" src={opt.imageUrl}></img>
-          </div>
-        </Link>
-      ))}
+      {events &&
+        events.map(
+          (opt, i) =>
+            opt.ended == !all && (
+              <Link
+                to={"/eventDetails/event/" + opt.name}
+                className="event-link"
+              >
+                <div className="eventTab-Ecard" key={i}>
+                  <img className="Ecard-img" src={opt.imageUrl}></img>
+                </div>
+              </Link>
+            )
+        )}
     </div>
   );
 }

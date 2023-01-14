@@ -49,7 +49,7 @@ export default function EventDetails() {
   console.log(currentRecords);
   console.log(Pages);
   const SuperAdmintabs = ["About", "Registered Teams"];
-  const EventAdminTabs = ["About", "Registered Students", "Results"];
+  const EventAdminTabs = ["About", "Registered Teams", "Results"];
   const SuperAdminPaginate = () => {
     return (
       <Pagination
@@ -162,7 +162,7 @@ export default function EventDetails() {
                   {allAboutCardElements}
                 </section>
               ),
-              "Registered Students": (
+              "Registered Teams": (
                 <EventStudents currentRecords={currentRecords} />
               ),
               Results: <Results />,

@@ -8,6 +8,7 @@ import {
   loginReg,
   newEvent,
   newPass,
+  adminEvents,
 } from "./store/modules/auth/auth.action";
 const url = "http://localhost:8000";
 
@@ -22,6 +23,21 @@ export const fetchEvents = async (dispatch) => {
     .then((response) => response.json())
     .then((data) => {
       dispatch(events(data.events));
+    });
+};
+export const fetchAdminEvents = async (token, dispatch) => {
+  console.log("AdminEvents Fetched");
+  await fetch(`${url}/events/eventadmin`, {
+    headers: {
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      dispatch(adminEvents(data.events));
     });
 };
 

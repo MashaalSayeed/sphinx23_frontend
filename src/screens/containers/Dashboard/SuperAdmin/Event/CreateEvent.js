@@ -5,24 +5,11 @@ import InputTag from "./InputTag";
 import { createEvent, getUsersId, updateEvent } from "../../../../../api";
 import { useDispatch, useSelector } from "react-redux";
 
-function CreateInput({ placeholder, setField, label, type, value }) {
-  return (
-    <div className="createEvent-inputCon">
-      <label className="createEvent-label">{label}</label>
-      <input
-        className="createEvent-input"
-        type={type}
-        value={value}
-        // placeholder={placeholder}
-        onChange={(e) => {
-          setField(e.target.value);
-        }}
-      />
-    </div>
-  );
-}
-
 function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
+  const userType =
+    useSelector((state) => state.auth.curruser.profile.type) === "superAdmin";
+  const disabled = editSuperAdmin ? !userType : false;
+  console.log(userType);
   console.log(currEvent);
   const [eventName, setEventName] = useState(null);
   const [category, setCategory] = useState("Tech");
@@ -48,6 +35,30 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       setImage(event.target.files[0]);
     }
   };
+  function CreateInput({
+    placeholder,
+    setField,
+    label,
+    type,
+    value,
+    disabled,
+  }) {
+    return (
+      <div className="createEvent-inputCon">
+        <label className="createEvent-label">{label}</label>
+        <input
+          className="createEvent-input"
+          type={type}
+          value={value}
+          // placeholder={placeholder}
+          onChange={(e) => {
+            setField(e.target.value);
+          }}
+          disabled={disabled}
+        />
+      </div>
+    );
+  }
   useEffect(() => {
     if (editSuperAdmin == true) {
       console.log(currEvent.from.split("T")[0]);
@@ -80,6 +91,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
           onChange={(e) => {
             setCategory(e.target.value);
           }}
+          disabled={editSuperAdmin ? !userType : false}
         >
           {/* <option value=""></option> */}
           <option value="Tech">Tech</option>
@@ -102,6 +114,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
           onChange={(e) => {
             setDetails(e.target.value);
           }}
+          disabled={editSuperAdmin ? !userType : false}
         >
           {details}
         </textArea>
@@ -207,7 +220,10 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       location: location,
       // coordinators: CoorsId,
       // admin: adminId[0],
-      updates: [...updateList, { message: update }],
+      updates:
+        update.length != 0
+          ? [...updateList, { message: update }]
+          : [...updateList],
       status: 1,
       ended: false,
       amount: amount,
@@ -257,6 +273,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
               label: "Event Name",
               setField: setEventName,
               value: eventName,
+              disabled: disabled,
             })}
             {CategorySelect()}
             {CreateInput({
@@ -293,18 +310,21 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
               setField: setMinTeam,
               type: "Number",
               value: minTeamSize,
+              disabled: disabled,
             })}
             {CreateInput({
               label: "Max Team Size",
               setField: setMaxTeam,
               type: "Number",
               value: maxTeamSize,
+              disabled: disabled,
             })}
             {CreateInput({
               label: "Amount",
               setField: setAmount,
               type: "Number",
               value: amount,
+              disabled: disabled,
             })}
 
             {editSuperAdmin ? (
@@ -325,6 +345,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
               label: "Admin",
               setField: setAdmin,
               value: admin,
+              disabled: disabled,
             })}
           </div>
           <div className="section2">
