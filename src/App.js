@@ -31,6 +31,9 @@ import CreateAccScreen from "./screens/containers/Login/CreateAccount/createAccS
 import OtpScreen from "./screens/containers/Login/Login/OTP.js/OtpScreen";
 import AddDetailscreen from "./screens/containers/Login/AddDetails/AddDetailscreen";
 import ForgotPass from "./screens/containers/Login/Login/ForgotPass";
+
+import Complaints from "./screens/containers/Dashboard/EventAdmin/Complaints/Complaints";
+
 function App() {
   // const token1 =
   //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjYzYjMwM2EyZGJhMGJlNWZlMDE1YTVmOSIsImlhdCI6MTY3MjY3NzI3Nn0.B6QG9trZX_tXQ_Bx3-hBMVn96Xz2I4vqzeeVSOT_VRc";
