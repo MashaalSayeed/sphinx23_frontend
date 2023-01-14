@@ -222,7 +222,46 @@ export const getUsersByPass = async (
       console.log(error);
     });
 };
-
+export const getResults = ({
+  token,
+  eventId,
+  round,
+  setCurrentRecords,
+  currentPage,
+  setNpage,
+}) => {
+  console.log("getUsersbyPage");
+  fetch(`${url}/participant/results/${eventId}/${round}/${currentPage}`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        console.log(data);
+        if (data.team) {
+          setCurrentRecords(data.team);
+          console.log(data.totalPages);
+          setNpage(data.totalPages);
+          return data.totalPages;
+        } else {
+          setCurrentRecords(data.team);
+          console.log(data.totalPages);
+          setNpage(data.totalPages);
+          return data.totalPages;
+        }
+      } else {
+        console.log(data.error);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 export const getUsers = ({
   token,
   setCurrentRecords,

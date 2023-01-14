@@ -4,77 +4,90 @@ import edit_img from "../../../images/edit1.png";
 import { useSelector } from "react-redux";
 import Pagination from "../Pagination";
 import ReadOnlyRow from "./ReadOnlyRow";
-function Results() {
+import { getResults } from "../../../api";
+function Results({ event }) {
   // const currentRecords = [{ name: "rupesh", mobileNumber: "8076240766" }];
-  console.log("called results");
+  console.log(event);
   const token = useSelector((state) => state.auth.curruser.token);
-  const [currentRecords, setCurrentRecords] = useState([
-    {
-      id: 21,
-      name: "old team",
-      college: "MNIT",
-      leader: "Phoneix",
-      staus: 1,
-    },
-    {
-      id: 34,
-      name: "new team",
-      college: "MNIT",
-      leader: "SKY",
-      staus: 2,
-    },
-    {
-      id: 38,
-      name: "GREED",
-      college: "MNIT",
-      leader: "SKY",
-      staus: 2,
-    },
-  ]);
+  const [currentRecords, setCurrentRecords] = useState([]);
+  // {
+  //   id: 21,
+  //   name: "old team",
+  //   college: "MNIT",
+  //   leader: "Phoneix",
+  //   staus: 1,
+  // },
+  // {
+  //   id: 34,
+  //   name: "new team",
+  //   college: "MNIT",
+  //   leader: "SKY",
+  //   staus: 2,
+  // },
+  // {
+  //   id: 38,
+  //   name: "GREED",
+  //   college: "MNIT",
+  //   leader: "SKY",
+  //   staus: 2,
+  // },
 
   const [close, setClose] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [completeCurrentResults, setCompleteCurrentResults] = useState([]);
   const [Pages, setNpage] = useState(1);
   const [decide, setDecide] = useState(false);
+  const status = event.status;
+  const [currRound, setRound] = useState(1);
   const ResultsPaginate = () => {
     return (
       <Pagination
         nPages={Pages}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-        apiCall={() => {}}
+        apiCall={(pageNo) => {
+          getResults({
+            eventId: event._id,
+            round: currRound,
+
+            token: token,
+            currentPage: pageNo,
+            setCurrentRecords: setCurrentRecords,
+            setNpage: setNpage,
+          });
+        }}
       />
     );
   };
 
   const data = {
-    header: ["Sr.no", "Team ID", "Team Name", "College", "Team Leader"],
-    value: ["index", "id", "name", "college", "leader"],
+    header: ["Sr.no", "Team ID", "Team Name"],
+    value: ["index", "teamId", "teamName"],
   };
-  const status = 4;
-  const Rdata = [
-    {
-      id: 21,
-      name: "old team",
-      college: "MNIT",
-      leader: "Phoneix",
-      staus: 1,
-    },
-    {
-      id: 34,
-      name: "new team",
-      college: "MNIT",
-      leader: "SKY",
-      staus: 2,
-    },
-    {
-      id: 38,
-      name: "GREED",
-      college: "MNIT",
-      leader: "SKY",
-      staus: 4,
-    },
-  ];
+
+  // const Rdata = [
+  //   {
+  //     id: 21,
+  //     name: "old team",
+  //     college: "MNIT",
+  //     leader: "Phoneix",
+  //     staus: 1,
+  //   },
+  //   {
+  //     id: 34,
+  //     name: "new team",
+  //     college: "MNIT",
+  //     leader: "SKY",
+  //     staus: 2,
+  //   },
+  //   {
+  //     id: 38,
+  //     name: "GREED",
+  //     college: "MNIT",
+  //     leader: "SKY",
+  //     staus: 4,
+  //   },
+  // ];
 
   const decide_winers = () => {
     return (
@@ -102,7 +115,7 @@ function Results() {
       </div>
     );
   };
-  const [currRound, setRound] = useState(status);
+
   const [checked, setChecked] = React.useState([]);
 
   const handleToggle = (value) => () => {
@@ -120,6 +133,7 @@ function Results() {
 
   const handleRound = (roundNo) => {
     setRound(roundNo);
+
     //change the currentRecords According to the roundNo;
   };
 
@@ -148,11 +162,15 @@ function Results() {
   };
 
   const CheckTeam = (value) => {
+    console.log(value);
     console.log("cheked called");
     return (
       <div className="team-chk">
         <input type={"checkbox"} onClick={() => handleToggle(value)}></input>
-        <label className="chk-label"> {currentRecords[value].name}</label>
+        <label className="chk-label">
+          {" "}
+          {completeCurrentResults[value].teamName}
+        </label>
       </div>
     );
   };
@@ -179,7 +197,7 @@ function Results() {
         >
           {<div>{roundTab()}</div>}
           <div className="decideWindow">
-            {currentRecords.map((value, i) => {
+            {completeCurrentResults.map((value, i) => {
               return CheckTeam(i);
             })}
           </div>
@@ -191,7 +209,14 @@ function Results() {
       </div>
     );
   };
+  // getResults({
+  //   eventId: event._id,
+  //   round: event.status,
 
+  //   token: token,
+  //   currentPage: 0,
+  //   setCurrentRecords: setCompleteCurrentResults,
+  // });
   useEffect(() => {
     let newdata = [];
     checked.forEach((element) => {
@@ -200,16 +225,26 @@ function Results() {
     setChecked([]);
     console.log("use effect");
     console.log(currRound);
-    Rdata.forEach((element) => {
-      console.log(element.staus);
-      if (element.staus >= currRound) {
-        newdata.push(element);
-      }
-    });
-    console.log(newdata);
-    setCurrentRecords(newdata);
-  }, [currRound]);
+    getResults({
+      eventId: event._id,
+      round: currRound,
 
+      token: token,
+      currentPage: currentPage,
+      setCurrentRecords: setCurrentRecords,
+      setNpage: setNpage,
+    });
+
+    // Rdata.forEach((element) => {
+    //   console.log(element.staus);
+    //   if (element.staus >= currRound) {
+    //     newdata.push(element);
+    //   }
+    // });
+    // console.log(newdata);
+    // setCurrentRecords(newdata);
+  }, [currRound]);
+  console.log(currentRecords);
   return (
     <div>
       {decide ? DecidePop() : <></>}
@@ -238,10 +273,8 @@ function Results() {
             {currentRecords.map((user, i) => (
               <Fragment>
                 <ReadOnlyRow
-                  data={{ ...user, index: i }}
+                  data={{ ...user, index: i + 1 }}
                   value={data.value}
-                  handleEditClick={() => {}}
-                  handleDeleteClick={() => {}}
                 />
               </Fragment>
             ))}

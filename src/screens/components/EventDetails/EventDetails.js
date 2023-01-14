@@ -68,47 +68,47 @@ export default function EventDetails() {
       />
     );
   };
-  const EventStudnetsPaginate = () => {
-    return (
-      <Pagination
-        nPages={Pages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        apiCall={() => {}}
-        // apiCall={(pageNo) => {
-        //   getTeamsByEvent(
-        //     currevent._id,
-        //     token,
-        //     pageNo,
-        //     setCurrentRecords,
-        //     setNpage
-        //   );}
-      />
-    );
-  };
+  // const EventStudnetsPaginate = () => {
+  //   return (
+  //     <Pagination
+  //       nPages={Pages}
+  //       currentPage={currentPage}
+  //       setCurrentPage={setCurrentPage}
+  //       apiCall={() => {}}
+  //       // apiCall={(pageNo) => {
+  //       //   getTeamsByEvent(
+  //       //     currevent._id,
+  //       //     token,
+  //       //     pageNo,
+  //       //     setCurrentRecords,
+  //       //     setNpage
+  //       //   );}
+  //     />
+  //   );
+  // };
 
-  const EventResultPaginate = () => {
-    return (
-      <Pagination
-        nPages={Pages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        apiCall={() => {}}
-        // apiCall={(pageNo) => {
-        //   getTeamsByEvent(
-        //     currevent._id,
-        //     token,
-        //     pageNo,
-        //     setCurrentRecords,
-        //     setNpage
-        //   );}
-      />
-    );
-  };
+  // const EventResultPaginate = () => {
+  //   return (
+  //     <Pagination
+  //       nPages={Pages}
+  //       currentPage={currentPage}
+  //       setCurrentPage={setCurrentPage}
+  //       apiCall={() => {}}
+  //       // apiCall={(pageNo) => {
+  //       //   getTeamsByEvent(
+  //       //     currevent._id,
+  //       //     token,
+  //       //     pageNo,
+  //       //     setCurrentRecords,
+  //       //     setNpage
+  //       //   );}
+  //     />
+  //   );
+  // };
   const currPagePaginate = () => {
     if (tabActive == "Registered Teams") return SuperAdminPaginate();
-    if (tabActive == "Registered Students") return EventStudnetsPaginate();
-    if (tabActive == "Results") return EventResultPaginate();
+    // if (tabActive == "Registered Students") return EventStudnetsPaginate();
+    // if (tabActive == "Results") return EventResultPaginate();
   };
   console.log("cuurent tab");
   console.log(tabActive);
@@ -165,7 +165,7 @@ export default function EventDetails() {
               "Registered Teams": (
                 <EventStudents currentRecords={currentRecords} />
               ),
-              Results: <Results />,
+              Results: <Results event={currevent} />,
             }[tabActive]
           }
         </div>
