@@ -448,27 +448,33 @@ td {
 
 th {
   background-color: white;
+  font-size: 20px;
+  font-family: 'Montserrat';
+  font-style: normal;
 }
 
 td {
   background-color: white;
-}
-
-form {
-  /* display: flex; */
-  gap: 5px;
+  font-size: 20px;
   font-family: 'Montserrat';
   font-style: normal;
 }
+
+/* form {
+  display: flex;
+  gap: 5px;
+  font-family: 'Montserrat';
+  font-style: normal;
+} */
 
 /* form td:last-child {
   display: flex;
   justify-content: space-evenly;
 } */
 
-form * {
+/* form * {
   font-size: 20px;
-}
+} */
 
 
 .buttons {
@@ -496,8 +502,11 @@ form * {
 
 .resp-m-l-r
 {
-  margin: auto 15px
-}
+  margin: auto 15px;
+  font-size: 20px;
+  font-family: 'Montserrat';
+  font-style: normal;
+ }
 .desktop27-main
 {
   min-height: 104vh;

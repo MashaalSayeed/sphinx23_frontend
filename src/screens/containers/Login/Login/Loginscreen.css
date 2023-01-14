@@ -1,0 +1,164 @@
+.login-main{
+position: absolute;    
+width: 34%;
+height: 85%;
+border-color: #0000;
+top: 8%;
+
+
+
+right: 10%;
+background-color: #ffff;
+border-radius: 5px;
+/* box-shadow: rgba(14, 14, 14, 0.99) 1px 15px 40px; */
+}
+.login-heading h2{
+    margin-right: 15.6em;
+    margin-top: 3em;
+    
+}
+.login-bg{
+    width: 100%;
+    position: relative;
+    /* background-image: url('./image\ 6.png');
+    background-repeat: no-repeat; */
+}
+.backimgstyle{
+    width: 100%;
+}
+.login-subtitle{
+    display: flex;
+    margin-left: 2em;
+    margin-top: -1.6em;
+  
+}
+/* .login-subtitle-s2 a{
+    margin-left: 1em;
+    color: blue;
+    text-decoration: none;
+   
+} */
+.create-account{
+   margin-top: 1.2em;
+    margin-left: 1.5em;
+    color: blue;
+    text-decoration: none;
+    font: 1em sans-serif;
+    cursor: pointer;
+    
+}
+.login-subtitle-s1 p{
+    color:rgba(0, 0, 0, 0.7);
+}
+.Form-Container{
+    width: 100%;
+    margin: 0.5em;
+    
+    
+}
+.formCenter{
+    margin-top: -1em;
+    width: 100%;
+}
+.formFieldInput{
+    width: 100%;
+}
+.formField{
+    /* margin-top: 2em;
+    margin-bottom: 2em; */
+    margin-right: 3em;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.5em;
+    margin-left: 2em;
+    
+
+}
+.formFieldCheckbox{
+    border-color: blue;
+    color: blue;
+}
+
+.checkbox{
+    display: flex;
+    margin-left: 2em;
+    margin-top: -1em;
+
+}
+.forgot-password {
+    margin-top: 2em;
+    margin-left: 12em;
+    color: blue;
+}
+
+  
+.formFieldButton{
+    margin-top: 0em;
+    width: 84%;
+}
+.signin-img{
+    margin-top: 2em;
+    word-spacing: 2em;
+    margin-right: 0em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.div-signin-google,.div-signin-fb,.div-signin-apple{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+
+    
+    background-color: rgb(252, 254, 254);
+    margin: 1.5em;
+
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    margin-left: 2.5em;
+    /* box-shadow: rgba(179, 168, 168, 0); */
+
+}
+
+.signin-google,.signin-apple,.signin-fb{
+    padding-top: 1em;
+   
+
+
+}
+.checkbox a{
+    text-decoration: none;
+    color: rgb(39, 12, 220);
+}
+.mid-line{
+    display: flex;
+    margin-top: 2em;
+    margin-bottom: -2em;
+}
+.mid-line-left {
+    width: 75%;
+    height: 0.4px;
+    border-bottom: 1px solid rgb(170, 170, 170);
+    margin-left: 2.7em;
+    margin-right: 0.4em;
+    
+    background-color: rgb(170, 170, 170);
+}
+.mid-line-right {
+    width: 75%;
+    height: 0.4px;
+    border-bottom: 1px solid rgb(170, 170, 170);
+    margin-right: 2.7em;
+    margin-left: 0.4em;
+    
+    background-color: rgb(170, 170, 170);
+}
+.mid-line-mid p{
+    margin-top:-1em;
+    color: rgb(170, 170, 170);
+}
+.formFieldCheckbox{
+    margin-top: 2.7em;
+    margin-right: 0em;
+    margin-left: -0em;
+}

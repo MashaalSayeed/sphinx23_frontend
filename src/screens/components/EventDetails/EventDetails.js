@@ -8,7 +8,9 @@ import Pagination from "../Pagination";
 import { getTeamsByEvent } from "../../../api";
 import EventStudents from "./EventStudents";
 import Results from "./Results";
-import ResultsSection from "../../containers/Dashboard/EventAdmin/Event/Event/ResultsSection";
+
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 export default function EventDetails() {
   const [tabActive, setTab] = useState("About");
@@ -16,7 +18,8 @@ export default function EventDetails() {
   const params = useParams();
   const eventName = params.id;
   const event = useSelector((state) => state.auth.events);
-  // const type = useSelector((state) => state.auth.curruser.profile.type);
+  //const type = useSelector((state) => state.auth.curruser.profile.type);
+  //make it dynamic
   const type = "eventAdmin";
 
   const currevent = event.find((x) => x.name === eventName);
@@ -111,6 +114,7 @@ export default function EventDetails() {
   console.log(tabActive);
   return (
     <div>
+      <Navbar />
       <div className="space-top"></div>
       <Dashboard_Header
         settab={setTab}
@@ -166,6 +170,7 @@ export default function EventDetails() {
           }
         </div>
       )}
+      <Footer />
     </div>
   );
 }

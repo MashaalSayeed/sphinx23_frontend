@@ -35,7 +35,7 @@ function Results() {
   const [close, setClose] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [Pages, setNpage] = useState(1);
-  const [decide, setDecide] = useState(true);
+  const [decide, setDecide] = useState(false);
   const ResultsPaginate = () => {
     return (
       <Pagination

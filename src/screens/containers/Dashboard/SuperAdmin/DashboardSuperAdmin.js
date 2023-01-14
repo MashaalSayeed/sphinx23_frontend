@@ -8,6 +8,9 @@ import { useSelector } from "react-redux";
 import { getUsers, getAmbassadors, getPayments } from "../../../../api";
 import Passes from "./Pass/Passes";
 import Profile from "./Profile/Profile";
+import UserProfile from "./Profile/UserProfile";
+import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
 
 export default function DashboardSuperAdmin() {
   const [isSidebar, SetSidebar] = useState(true);
@@ -29,6 +32,7 @@ export default function DashboardSuperAdmin() {
   }, []);
   return (
     <div>
+      <Navbar />
       <div className="space-top"></div>
       <div className="super-mainCon">
         <SidebarAdmin
@@ -44,7 +48,12 @@ export default function DashboardSuperAdmin() {
         >
           {
             {
-              Profile: <Profile />,
+              Profile: (
+                <>
+                  <UserProfile></UserProfile>
+                  <Profile />
+                </>
+              ),
               Events: <SuperEvent />,
               Pass: <Passes />,
               // Payment: <Payment payments={Payments} />,
@@ -54,6 +63,7 @@ export default function DashboardSuperAdmin() {
           }
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

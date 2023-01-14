@@ -6,6 +6,8 @@ import AdminEvent from "./Event/AdminEvent";
 import TeamTab from "./Team/TeamTab";
 import UserProfile from "./Profile/UserProfile";
 import Profile from "./Profile/Profile";
+import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
 
 export default function DashboardEventAdmin() {
   const Sdata = {
@@ -27,6 +29,8 @@ export default function DashboardEventAdmin() {
   // }, []);
   return (
     <div>
+      <Navbar />
+
       <div className="space-top"></div>
       <div className="super-mainCon">
         <SidebarAdmin
@@ -55,6 +59,7 @@ export default function DashboardEventAdmin() {
           }
         </div>{" "}
       </div>
+      <Footer />
     </div>
   );
 }
