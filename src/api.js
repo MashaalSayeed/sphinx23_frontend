@@ -9,7 +9,7 @@ import {
   newEvent,
   newPass,
 } from "./store/modules/auth/auth.action";
-const url = "http://192.168.56.1:8000";
+const url = "http://localhost:8000";
 
 export const fetchEvents = async (dispatch) => {
   console.log("Events Fetched");
@@ -83,6 +83,7 @@ export const fetchPasses = async (dispatch) => {
 
 export const loginRegister = async (dispatch, creds) => {
   console.log("Login Called");
+  console.log(creds);
   await fetch(`${url}/users`, {
     headers: {
       "Content-Type": "application/json",
@@ -94,6 +95,7 @@ export const loginRegister = async (dispatch, creds) => {
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       if (data.success) {
         const profile = { token: data.token, profile: data.profile };
         console.log(profile);
@@ -333,14 +335,16 @@ export const updateEvent = async (
   setCreateStatus
 ) => {
   console.log("Update Event Called");
+  console.log(eventData);
   await fetch(`${url}/events/update/${eventId}`, {
     headers: {
       mode: "cors",
+      "Content-Type": "application/json",
       Authorization: "Bearer " + token,
       "Access-Control-Allow-Origin": "*",
     },
     method: "PUT",
-    body: eventData,
+    body: JSON.stringify(eventData),
   })
     .then((response) => response.json())
     .then((data) => {

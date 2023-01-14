@@ -3,18 +3,23 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ReadOnlyRow = ({ user, handleEditClick, handleDeleteClick }) => {
+  console.log(user.index);
   return (
     <tr>
       <td>{user.index}</td>
+      <td>{user.name}</td>
       <td>{user.email}</td>
       <td>{user.type}</td>
-      <td>{user.events}</td>
-      <td>{user.passes}</td>
-      <td>
+      <td>{user.phoneNumber}</td>
+      <td>{user.collegeName}</td>
+
+      {/* <td>{user.events}</td>
+      <td>{user.passes}</td> */}
+      {/* <td>
         <button className="certification-btn" onClick={() => {}}>
           <span>Certify</span>
         </button>
-      </td>
+      </td> */}
       {/* <td>LLLLLLLLLLLLLLLLLL
         <button
           type="button"

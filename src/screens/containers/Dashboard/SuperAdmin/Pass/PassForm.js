@@ -139,10 +139,10 @@ function PassForm({ setCreate, edit, currpass }) {
       eventId: newarr,
     };
     console.log(pass_Data);
-    const currentTime = Date.now();
-    passImage.name = currentTime;
+    // const currentTime = Date.now();
+    // passImage.name = currentTime;
     let formData = new FormData();
-    passImage.formData.append("file", passImage);
+    formData.append("file", passImage);
     formData.append("body", JSON.stringify(pass_Data));
     console.log(formData);
     createPass(dispatch, formData, token, setCreateStatus);

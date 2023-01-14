@@ -18,9 +18,9 @@ export default function EventDetails() {
   const params = useParams();
   const eventName = params.id;
   const event = useSelector((state) => state.auth.events);
-  //const type = useSelector((state) => state.auth.curruser.profile.type);
+  const type = useSelector((state) => state.auth.curruser.profile.type);
   //make it dynamic
-  const type = "eventAdmin";
+  // const type = "eventAdmin";
 
   const currevent = event.find((x) => x.name === eventName);
   const allAboutCardElements = <AboutSection event={currevent} />;

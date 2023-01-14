@@ -248,7 +248,9 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
         ) : (
           <></>
         )}
-        <div className="createEvent-formTitle">Add Events</div>
+        <div className="createEvent-formTitle">
+          {editSuperAdmin ? "Edit Event" : "Add Event"}
+        </div>
         <div className="createEvent-sections">
           <div className="section1">
             {CreateInput({

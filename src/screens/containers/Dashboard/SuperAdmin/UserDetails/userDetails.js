@@ -193,11 +193,12 @@ const UserDetails = (props) => {
             <thead>
               <tr>
                 <th>Sr. No.</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Type</th>
-                <th>Passes</th>
-                <th>Events</th>
-                <th>Give Certificate</th>
+                <th>Mobile No.</th>
+                <th>College</th>
+                {/* <th>Give Certificate</th> */}
               </tr>
             </thead>
             <tbody>

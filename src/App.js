@@ -35,9 +35,9 @@ function App() {
   // const token1 =
   //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjYzYjMwM2EyZGJhMGJlNWZlMDE1YTVmOSIsImlhdCI6MTY3MjY3NzI3Nn0.B6QG9trZX_tXQ_Bx3-hBMVn96Xz2I4vqzeeVSOT_VRc";
   const creds = {
-    email: "2021uec1533@mnit.ac.in",
-    password: "123456",
-    confirmPassword: "123456",
+    email: "namujain266@gmail.com",
+    password: "Naman",
+    confirmPassword: "Naman",
   };
   const dispatch = useDispatch();
   // fetchEvents(dispatch);
