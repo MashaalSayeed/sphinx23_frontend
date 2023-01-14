@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import create from "../../../../../images/create_event.png";
-import { storage } from "../../../../../firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useSelector } from "react-redux";
 import EventTab from "./EventTab";
-import { Dashboard } from "@mui/icons-material";
 import Dashboard_Header from "../../../../components/Dashboard_Header";
 function AdminEvent() {
   const [tabActive, setTab] = useState("All Events");

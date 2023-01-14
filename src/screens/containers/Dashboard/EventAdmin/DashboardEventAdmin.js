@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { getUsers, getAmbassadors, getPayments } from "../../../../api";
 import AdminEvent from "./Event/AdminEvent";
 import TeamTab from "./Team/TeamTab";
+import UserProfile from "./Profile/UserProfile";
+import Profile from "./Profile/Profile";
 
 export default function DashboardEventAdmin() {
   const Sdata = {
@@ -40,7 +42,12 @@ export default function DashboardEventAdmin() {
         >
           {
             {
-              Profile: <></>,
+              Profile: (
+                <>
+                  <UserProfile />
+                  <Profile />
+                </>
+              ),
               Events: <AdminEvent />,
               Complaints: <></>,
               Team: <TeamTab />,

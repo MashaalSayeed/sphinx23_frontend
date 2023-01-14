@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import close_img from "../../../images/close.png";
 import edit_img from "../../../images/edit1.png";
 import { useSelector } from "react-redux";
@@ -16,10 +16,26 @@ function Results() {
       leader: "Phoneix",
       staus: 1,
     },
+    {
+      id: 34,
+      name: "new team",
+      college: "MNIT",
+      leader: "SKY",
+      staus: 2,
+    },
+    {
+      id: 38,
+      name: "GREED",
+      college: "MNIT",
+      leader: "SKY",
+      staus: 2,
+    },
   ]);
+
   const [close, setClose] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [Pages, setNpage] = useState(1);
+  const [decide, setDecide] = useState(true);
   const ResultsPaginate = () => {
     return (
       <Pagination
@@ -35,8 +51,15 @@ function Results() {
     header: ["Sr.no", "Team ID", "Team Name", "College", "Team Leader"],
     value: ["index", "id", "name", "college", "leader"],
   };
-  const status = 2;
+  const status = 4;
   const Rdata = [
+    {
+      id: 21,
+      name: "old team",
+      college: "MNIT",
+      leader: "Phoneix",
+      staus: 1,
+    },
     {
       id: 34,
       name: "new team",
@@ -45,11 +68,11 @@ function Results() {
       staus: 2,
     },
     {
-      id: 21,
-      name: "old team",
+      id: 38,
+      name: "GREED",
       college: "MNIT",
-      leader: "Phoneix",
-      staus: 1,
+      leader: "SKY",
+      staus: 4,
     },
   ];
 
@@ -58,12 +81,15 @@ function Results() {
       <div
         className="createEvent-submit"
         style={{ marginTop: "0px", margin: "0px 6px" }}
-        onClick={() => {}}
+        onClick={() => {
+          setDecide(true);
+        }}
       >
         Decide Winners
       </div>
     );
   };
+
   const close_btn = () => {
     return (
       <div
@@ -76,24 +102,117 @@ function Results() {
       </div>
     );
   };
+  const [currRound, setRound] = useState(status);
+  const [checked, setChecked] = React.useState([]);
+
+  const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  };
+
+  const handleRound = (roundNo) => {
+    setRound(roundNo);
+    //change the currentRecords According to the roundNo;
+  };
 
   const roundBtn = (roundNo) => {
-    return <button className="Rounds-btn">Round {roundNo}</button>;
+    return (
+      <button
+        className={roundNo == currRound ? "roundBtn activeRound" : "roundBtn "}
+        onClick={() => {
+          handleRound(roundNo);
+        }}
+      >
+        Round {roundNo}
+      </button>
+    );
   };
 
   const roundTab = () => {
     const arr = Array.from({ length: status }, (_, index) => index + 1);
     return (
       <div className="roundTab">
-        {arr.map(() => {
-          return roundBtn();
+        {arr.map((i) => {
+          return roundBtn(i);
         })}
       </div>
     );
   };
 
+  const CheckTeam = (value) => {
+    console.log("cheked called");
+    return (
+      <div className="team-chk">
+        <input type={"checkbox"} onClick={() => handleToggle(value)}></input>
+        <label className="chk-label"> {currentRecords[value].name}</label>
+      </div>
+    );
+  };
+
+  const DecidePop = () => {
+    return (
+      <div className="createEvent-back">
+        <button
+          className=" close-decide"
+          onClick={() => {
+            setDecide(false);
+          }}
+        >
+          <img src={close_img}></img>
+        </button>
+        <div
+          className="createEvent-form"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {<div>{roundTab()}</div>}
+          <div className="decideWindow">
+            {currentRecords.map((value, i) => {
+              return CheckTeam(i);
+            })}
+          </div>
+          <div className="decide-bottom">
+            <button className="decideNext">Move To Next Round</button>
+            <button className="decideWinners">Declare Winners</button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    let newdata = [];
+    checked.forEach((element) => {
+      handleToggle(element);
+    });
+    setChecked([]);
+    console.log("use effect");
+    console.log(currRound);
+    Rdata.forEach((element) => {
+      console.log(element.staus);
+      if (element.staus >= currRound) {
+        newdata.push(element);
+      }
+    });
+    console.log(newdata);
+    setCurrentRecords(newdata);
+  }, [currRound]);
+
   return (
     <div>
+      {decide ? DecidePop() : <></>}
       <div style={{ margin: "0px 15px" }}>
         <div className="dashboard-function">
           <div className="dashboard-paginate"> {ResultsPaginate()}</div>
@@ -102,6 +221,7 @@ function Results() {
             {decide_winers()}
           </div>
         </div>
+        {roundTab()}
         <div className="tab-line"></div>
       </div>
 
