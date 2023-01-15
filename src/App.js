@@ -27,6 +27,7 @@ import EventDetails from "./screens/components/EventDetails/EventDetails";
 import DashboardEventAdmin from "./screens/containers/Dashboard/EventAdmin/DashboardEventAdmin";
 import LoginScreen from "./screens/containers/Login/LoginScreen";
 import Landing from "./screens/containers/Home/home";
+import TimeMachine from "./screens/containers/Home/TimeMachine";
 
 function App() {
   // const token1 =
@@ -66,6 +67,7 @@ function App() {
     // </div>
     <BrowserRouter>
       <div className="App">
+        {/* <TimeMachine /> */}
         <Landing />
         {/* <Navbar /> */}
         {/* {curruser != null ? (
