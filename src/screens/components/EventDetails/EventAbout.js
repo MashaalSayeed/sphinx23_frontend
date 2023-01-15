@@ -6,6 +6,7 @@ import { render } from "@testing-library/react";
 
 export default function AboutSection(props) {
   const { event } = props;
+  console.log(event.ended);
   const curruser = useSelector((state) => state.auth.curruser);
   const [editEvent, setEdit] = useState(false);
   const type = curruser.profile.type;
@@ -38,20 +39,22 @@ export default function AboutSection(props) {
           </div>
         </div>
 
-        <button
-          className="desktop14-edit-btn"
-          onClick={() => {
-            setEdit(true);
-            handleEdit();
-          }}
-        >
-          <div className="desktop14-btn-inner">
-            <div>
-              <img src={edit}></img>
+        {!event.ended && (
+          <button
+            className="desktop14-edit-btn"
+            onClick={() => {
+              setEdit(true);
+              handleEdit();
+            }}
+          >
+            <div className="desktop14-btn-inner">
+              <div>
+                <img src={edit}></img>
+              </div>
+              <p>Edit</p>
             </div>
-            <p>Edit</p>
-          </div>
-        </button>
+          </button>
+        )}
       </div>
 
       <p className="aboutSec-p">{event.description}</p>

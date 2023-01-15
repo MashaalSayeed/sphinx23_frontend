@@ -1,3 +1,4 @@
+import { Widgets } from "@mui/icons-material";
 import { json } from "react-router-dom";
 import {
   events,
@@ -159,7 +160,58 @@ export const createEvent = async (
       // return false;
     });
 };
-
+export const addTeamsToRound = async (token, data) => {
+  console.log("Create PASS Called");
+  await fetch(`${url}/events/edit_result`, {
+    headers: {
+      mode: "cors",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        console.log(data);
+        alert("Results Added");
+        // window.location.href = "/eventAdmin";
+      } else {
+        console.log(data.error);
+      }
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+};
+export const addResults = async (token, data) => {
+  console.log("Add Results Called");
+  await fetch(`${url}/events/add_result`, {
+    headers: {
+      mode: "cors",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        console.log(data);
+        alert("Results Added");
+        window.location.href = "/eventAdmin";
+      } else {
+        console.log(data.error);
+      }
+    })
+    .catch((error) => {
+      alert(error.message);
+    });
+};
 export const createPass = async (
   dispatch,
   passData,
@@ -320,6 +372,7 @@ export const getAmbassadors = ({
     .then((data) => {
       if (data.error == null) {
         console.log(data.success);
+        console.log(data);
         setCurrentRecords(data.ambassador);
         setNpage(data.totalPages);
       } else {

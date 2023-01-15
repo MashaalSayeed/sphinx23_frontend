@@ -4,10 +4,10 @@ import edit_img from "../../../images/edit1.png";
 import { useSelector } from "react-redux";
 import Pagination from "../Pagination";
 import ReadOnlyRow from "./ReadOnlyRow";
-import { getResults } from "../../../api";
+import { getResults, addTeamsToRound, addResults } from "../../../api";
 function Results({ event }) {
   // const currentRecords = [{ name: "rupesh", mobileNumber: "8076240766" }];
-  console.log(event);
+  // console.log(event);
   const token = useSelector((state) => state.auth.curruser.token);
   const [currentRecords, setCurrentRecords] = useState([]);
   // {
@@ -39,6 +39,8 @@ function Results({ event }) {
   const [decide, setDecide] = useState(false);
   const status = event.status;
   const [currRound, setRound] = useState(1);
+  const [currResultRound, setResultRound] = useState(1);
+  // const [check, setCheck] = useState(0);
   const ResultsPaginate = () => {
     return (
       <Pagination
@@ -119,6 +121,7 @@ function Results({ event }) {
   const [checked, setChecked] = React.useState([]);
 
   const handleToggle = (value) => () => {
+    console.log("toggle called");
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -127,7 +130,6 @@ function Results({ event }) {
     } else {
       newChecked.splice(currentIndex, 1);
     }
-
     setChecked(newChecked);
   };
 
@@ -136,13 +138,22 @@ function Results({ event }) {
 
     //change the currentRecords According to the roundNo;
   };
+  const handleResultRound = (roundNo) => {
+    console.log("Round", roundNo);
+    setResultRound(roundNo);
+  };
 
-  const roundBtn = (roundNo) => {
+  const roundBtn = (roundNo, editable) => {
     return (
       <button
-        className={roundNo == currRound ? "roundBtn activeRound" : "roundBtn "}
+        className={
+          (!editable && roundNo == currRound) ||
+          (editable && roundNo == currResultRound)
+            ? "roundBtn activeRound"
+            : "roundBtn "
+        }
         onClick={() => {
-          handleRound(roundNo);
+          editable ? handleResultRound(roundNo) : handleRound(roundNo);
         }}
       >
         Round {roundNo}
@@ -150,23 +161,46 @@ function Results({ event }) {
     );
   };
 
-  const roundTab = () => {
+  const roundTab = (editable) => {
     const arr = Array.from({ length: status }, (_, index) => index + 1);
     return (
       <div className="roundTab">
         {arr.map((i) => {
-          return roundBtn(i);
+          return roundBtn(i, editable);
         })}
       </div>
     );
   };
+  const handleResultUpdate = (complete) => {
+    console.log("Callled");
+    console.log(checked);
+    var teamIds = [];
+    checked.forEach((index) => {
+      teamIds.push(completeCurrentResults[index]._id);
+    });
+    var body = { event: event._id, teamIds, complete };
+    if (currResultRound == event.status) {
+      console.log("Latest Results");
+      addResults(token, body);
+    } else {
+      addTeamsToRound(token, body);
+    }
+  };
 
   const CheckTeam = (value) => {
-    console.log(value);
-    console.log("cheked called");
+    console.log(completeCurrentResults[value], currResultRound);
+    var flag =
+      currResultRound < event.status &&
+      completeCurrentResults[value].status > currResultRound;
+    // setCheck(flag);
     return (
       <div className="team-chk">
-        <input type={"checkbox"} onClick={() => handleToggle(value)}></input>
+        <input
+          type={"checkbox"}
+          checked={flag ? flag : checked.includes(value)}
+          disabled={flag}
+          onChange={handleToggle(value)}
+        ></input>
         <label className="chk-label">
           {" "}
           {completeCurrentResults[value].teamName}
@@ -195,15 +229,27 @@ function Results({ event }) {
             justifyContent: "center",
           }}
         >
-          {<div>{roundTab()}</div>}
+          {<div>{roundTab(true)}</div>}
           <div className="decideWindow">
             {completeCurrentResults.map((value, i) => {
               return CheckTeam(i);
             })}
           </div>
           <div className="decide-bottom">
-            <button className="decideNext">Move To Next Round</button>
-            <button className="decideWinners">Declare Winners</button>
+            <button
+              className="decideNext"
+              onClick={() => handleResultUpdate(false)}
+            >
+              Move To Next Round
+            </button>
+            {currResultRound == event.status && (
+              <button
+                className="decideWinners"
+                onClick={() => handleResultUpdate(true)}
+              >
+                Declare Winners
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -218,7 +264,6 @@ function Results({ event }) {
   //   setCurrentRecords: setCompleteCurrentResults,
   // });
   useEffect(() => {
-    let newdata = [];
     checked.forEach((element) => {
       handleToggle(element);
     });
@@ -234,6 +279,14 @@ function Results({ event }) {
       setCurrentRecords: setCurrentRecords,
       setNpage: setNpage,
     });
+    getResults({
+      eventId: event._id,
+      round: currResultRound,
+
+      token: token,
+      currentPage: 0,
+      setCurrentRecords: setCompleteCurrentResults,
+    });
 
     // Rdata.forEach((element) => {
     //   console.log(element.staus);
@@ -243,8 +296,8 @@ function Results({ event }) {
     // });
     // console.log(newdata);
     // setCurrentRecords(newdata);
-  }, [currRound]);
-  console.log(currentRecords);
+  }, [currRound, currResultRound]);
+  // console.log(currentRecords);
   return (
     <div>
       {decide ? DecidePop() : <></>}
@@ -252,11 +305,11 @@ function Results({ event }) {
         <div className="dashboard-function">
           <div className="dashboard-paginate"> {ResultsPaginate()}</div>
           <div className="dashboard-icons">
-            {close_btn()}
-            {decide_winers()}
+            {/* {close_btn()} */}
+            {!event.ended && decide_winers()}
           </div>
         </div>
-        {roundTab()}
+        {roundTab(false)}
         <div className="tab-line"></div>
       </div>
 

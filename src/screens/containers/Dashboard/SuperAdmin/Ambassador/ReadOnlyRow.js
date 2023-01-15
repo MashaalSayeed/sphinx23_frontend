@@ -2,14 +2,17 @@ import React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const ReadOnlyRow = ({ contact, handleEditClick, handleDeleteClick }) => {
+const ReadOnlyRow = ({ ambassador, handleEditClick, handleDeleteClick }) => {
+  console.log(ambassador);
   return (
     <tr>
-      <td>{contact.index}</td>
-      <td>{contact.college}</td>
-      <td>{contact.name}</td>
-      <td>{contact.email}</td>
-      <td>{contact.profit}</td>
+      <td>{ambassador.index + 1}</td>
+      <td>{ambassador.user.name}</td>
+      <td>{ambassador.user.phoneNumber}</td>
+      <td>{ambassador.user.email}</td>
+      <td>{ambassador.user.collegeName}</td>
+      <td>{ambassador.profit}</td>
+
       <td></td>
       {/* <td></td>
       <td></td> */}
