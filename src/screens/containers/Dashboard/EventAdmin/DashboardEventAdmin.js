@@ -8,11 +8,12 @@ import UserProfile from "./Profile/UserProfile";
 import Profile from "./Profile/Profile";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
+import Complaints from "./Complaints/Complaints";
 
 export default function DashboardEventAdmin() {
   const Sdata = {
     title: "Event Admin",
-    options: ["Profile", "Events", "Complaints", "Team"],
+    options: ["Profile", "Events", "Query", "Team"],
   };
   const token = useSelector((state) => state.auth.curruser.token);
   const [optactive, setactive] = useState(Sdata.options[1]);
@@ -53,7 +54,7 @@ export default function DashboardEventAdmin() {
                 </>
               ),
               Events: <AdminEvent />,
-              Complaints: <></>,
+              Query: <Complaints />,
               Team: <TeamTab />,
             }[optactive]
           }
