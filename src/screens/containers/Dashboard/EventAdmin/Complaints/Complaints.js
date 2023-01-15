@@ -1,30 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Dashboard_Header from "../../../../components/Dashboard_Header";
+import Pagination from "../../../../components/Pagination";
 import ComplaintsTable from "./Complaints_table";
 
 function Complaints() {
-  const currentRecords = [
-    {
-      id: "#1227",
-      college: "MNIT",
-      Institute_id: "2021uec1527",
-      name: "Ankit",
-      topic: "Ted Talk Team",
-      sub: "Registration Error",
-    },
-    {
-      id: "#1227",
-      college: "MNIT",
-      Institute_id: "2021uec1527",
-      name: "Ankit",
-      topic: "Ted Talk Team",
-      sub: "Registration Error",
-    },
-  ];
   // useEffect(() => {}, [tabActive]);
   const [tabActive, setTab] = useState("All Complaints");
-  const [createEventState, setCreate] = useState(false);
+
   const data = {
     header: [
       "Sr.no",
@@ -48,6 +31,44 @@ function Complaints() {
     ],
   };
 
+  const [currentRecords, setCurrentRecords] = useState([
+    {
+      id: "#1227",
+      college: "MNIT",
+      Institute_id: "2021uec1527",
+      name: "Ankit",
+      topic: "Ted Talk Team",
+      sub: "Registration Error",
+    },
+    {
+      id: "#1227",
+      college: "MNIT",
+      Institute_id: "2021uec1527",
+      name: "Ankit",
+      topic: "Ted Talk Team",
+      sub: "Registration Error",
+    },
+  ]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [Pages, setNpage] = useState(1);
+
+  useEffect(() => {
+    if (tabActive == "All Complaints") {
+    } // get all complaints
+    if (tabActive == "Pending Complaints") {
+    } //get pending compliants
+    if (tabActive == "Approved Complaints") {
+    } //get approved complaints
+
+    // getUsersByPass(
+    //   currpass._id,
+    //   token,
+    //   currentPage,
+    //   setCurrentRecords,
+    //   setNpage
+    // );
+  }, [tabActive]);
+
   return (
     <div className="super-event">
       <Dashboard_Header
@@ -57,6 +78,27 @@ function Complaints() {
         tabs={["All Complaints", "Pending Complaints", "Approved Complaints"]}
         createEventBool={false}
         excel={true}
+        dashBool={true}
+        paginate={
+          typeof Pages != "undefined" ? (
+            <Pagination
+              nPages={Pages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              apiCall={(pageNo) => {
+                // getUsersByPass(
+                //   currpass._id,
+                //   token,
+                //   pageNo,
+                //   setCurrentRecords,
+                //   setNpage
+                // );
+              }}
+            />
+          ) : (
+            <></>
+          )
+        }
       />
       {/* <input type={"file"} id="eventImg"></input> */}
       <div>
