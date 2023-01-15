@@ -1,6 +1,7 @@
 const initialState = {
   curruser: null,
   events: [],
+  adminevents: [],
   upcoming: [],
   ongoing: [],
   completed: [],
@@ -17,6 +18,8 @@ export default (state = initialState, { type, payload }) => {
       return { ...state, curruser: null };
     case "FETCH_EVENTS":
       return { ...state, events: payload };
+    case "FETCH_ADMIN_EVENTS":
+      return { ...state, adminevents: payload };
     case "ADD_EVENTS":
       return { ...state, events: state.events.concat(payload) };
     case "ADD_PASS":

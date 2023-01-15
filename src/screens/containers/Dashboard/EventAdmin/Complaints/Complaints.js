@@ -22,6 +22,7 @@ function Complaints() {
       sub: "Registration Error",
     },
   ];
+  // useEffect(() => {}, [tabActive]);
   const [tabActive, setTab] = useState("All Complaints");
   const [createEventState, setCreate] = useState(false);
   const data = {

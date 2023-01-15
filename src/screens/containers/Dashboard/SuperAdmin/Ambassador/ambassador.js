@@ -33,7 +33,7 @@ const Ambassador = (props) => {
       setNpage: setNpage,
     });
   }, []);
-
+  console.log(Pages);
   return (
     <div>
       <div className="app-container">
@@ -71,15 +71,16 @@ const Ambassador = (props) => {
             <thead>
               <tr>
                 <th>Sr. No.</th>
-                <th>College</th>
                 <th>Name</th>
+                <th>Phone Number</th>
                 <th>Email</th>
+                <th>College Name</th>
                 <th>Profit</th>
               </tr>
             </thead>
 
             <tbody>
-              {ambassadors.map((ambassador, i) => (
+              {currentRecords.map((ambassador, i) => (
                 <Fragment>
                   {/* {editContactId === contact.id ? (
                     <EditableRow
@@ -94,7 +95,7 @@ const Ambassador = (props) => {
               ))}
             </tbody>
           </table>
-          {ambassadors.length != 0 ? (
+          {currentRecords.length != 0 ? (
             <></>
           ) : (
             <div

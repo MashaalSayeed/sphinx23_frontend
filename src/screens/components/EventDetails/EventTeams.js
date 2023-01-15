@@ -4,10 +4,10 @@ import ReadOnlyRow from "./ReadOnlyRow";
 function EventTeams(props) {
   const { currentRecords } = props;
   const data = {
-    header: ["Sr.no", "Team Name", "College", "Members", "Status"],
-    value: ["index", "name", "email", "mobileNumber", "attendace"],
+    header: ["Sr.no", "TeamID", "Team Name", "Round Status"],
+    value: ["index", "teamId", "teamName", "status"],
   };
-
+  console.log(currentRecords);
   return (
     <div>
       <form onSubmit={() => {}} className="resp-m-l-r teams">
@@ -23,7 +23,7 @@ function EventTeams(props) {
             {currentRecords.map((user, i) => (
               <Fragment>
                 <ReadOnlyRow
-                  data={{ ...user, index: i }}
+                  data={{ ...user, index: i + 1 }}
                   value={data.value}
                   handleEditClick={() => {}}
                   handleDeleteClick={() => {}}

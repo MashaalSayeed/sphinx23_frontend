@@ -7,6 +7,10 @@ export const events = (payload) => ({
   type: "FETCH_EVENTS",
   payload: payload,
 });
+export const adminEvents = (payload) => ({
+  type: "FETCH_ADMIN_EVENTS",
+  payload: payload,
+});
 export const newEvent = (payload) => ({
   type: "ADD_EVENT",
   payload: payload,

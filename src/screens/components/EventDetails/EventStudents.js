@@ -1,13 +1,14 @@
 import React, { useEffect, useState, Fragment } from "react";
 import ReadOnlyRow from "./ReadOnlyRow";
 
-function EventStudents(props) {
-  const currentRecords = [{ name: "rupesh", mobileNumber: "8076240766" }];
-
+function EventStudents({ currentRecords }) {
+  // const currentRecords = [{ name: "rupesh", mobileNumber: "8076240766" }];
+  console.log("Called");
   const data = {
-    header: ["Sr.no", "Name", "Email", "Mobile Number", "Attendance"],
-    value: ["index", "name", "email", "mobileNumber", "attendance"],
+    header: ["Sr.no", "TeamID", "Team Name", "Round Status"],
+    value: ["index", "teamId", "teamName", "status"],
   };
+  console.log(currentRecords);
 
   return (
     <div>
@@ -24,7 +25,7 @@ function EventStudents(props) {
             {currentRecords.map((user, i) => (
               <Fragment>
                 <ReadOnlyRow
-                  data={{ ...user, index: i }}
+                  data={{ ...user, index: i + 1 }}
                   value={data.value}
                   handleEditClick={() => {}}
                   handleDeleteClick={() => {}}
