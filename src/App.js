@@ -65,32 +65,37 @@ function App() {
     //   {/* <Footer /> */}
 
     // </div>
-    <BrowserRouter>
-      <div className="App">
-        {/* <TimeMachine /> */}
-        {/* <Landing /> */}
-        {/* <Navbar /> */}
-        {curruser != null ? (
-          <Routes>
-            <Route exact path="/" element={<LoginScreen />} />
-            <Route path="/eventAdmin" element={<DashboardEventAdmin />} />
-            <Route path="/superAdmin" element={<DashboardSuperAdmin />} />
-            <Route path="/superAdmin/pass/:id" element={<PassDetail />}></Route>
-            <Route
-              path="/eventDetails/event/:id"
-              element={<EventDetails />}
-            ></Route>
-            <Route
-              path="/superAdmin/createPass"
-              element={<CreatePass />}
-            ></Route>
-          </Routes>
-        ) : (
-          <></>
-        )}
-        {/* <Footer /> */}
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          {/* <TimeMachine /> */}
+          {/* <Landing /> */}
+          {/* <Navbar /> */}
+          <Route exact path="/" element={<LoginScreen />} />
+          {curruser != null ? (
+            <>
+              <Route path="/eventAdmin" element={<DashboardEventAdmin />} />
+              <Route path="/superAdmin" element={<DashboardSuperAdmin />} />
+              <Route
+                path="/superAdmin/pass/:id"
+                element={<PassDetail />}
+              ></Route>
+              <Route
+                path="/eventDetails/event/:id"
+                element={<EventDetails />}
+              ></Route>
+              <Route
+                path="/superAdmin/createPass"
+                element={<CreatePass />}
+              ></Route>
+            </>
+          ) : (
+            <></>
+          )}
+          {/* <Footer /> */}
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
