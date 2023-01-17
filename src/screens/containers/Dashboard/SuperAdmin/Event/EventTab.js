@@ -13,7 +13,7 @@ function EventTab(props) {
   return (
     <div className="eventTab-main">
       {events.map((opt, i) => (
-        <Link to={"/eventDetails/event/" + opt.name} className="event-link">
+        <Link to={"/eventDetails/event/" + opt._id} className="event-link">
           <div className="eventTab-Ecard" key={i}>
             <img className="Ecard-img" src={opt.imageUrl}></img>
           </div>

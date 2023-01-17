@@ -1,7 +1,21 @@
-export const loginReg = (payload) => ({
-  type: "LOGIN_REGISTER",
-  payload: payload,
-});
+// export const loginReg = (payload) => ({
+//   type: "LOGIN_REGISTER",
+//   payload: payload,
+// });
+import Session from "../../../Session";
+export const loginReg = (data) => (dispatch) => {
+  Session.setObject("profile", data);
+
+  dispatch(
+    {
+      payload: data,
+      type: "LOGIN_REGISTER",
+    },
+    () => {
+      console.log("callback");
+    }
+  );
+};
 
 export const events = (payload) => ({
   type: "FETCH_EVENTS",
@@ -29,6 +43,10 @@ export const completed = (payload) => ({
 });
 export const updates = (payload) => ({
   type: "FETCH_UPDATES",
+  payload: payload,
+});
+export const loading = (payload) => ({
+  type: "SET_LOADING",
   payload: payload,
 });
 export const passes = (payload) => ({

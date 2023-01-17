@@ -1,5 +1,8 @@
-import React from "react";
-
+import React, { useState } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import { useSelector, useDispatch } from "react-redux";
+import { loading } from "../../store/modules/auth/auth.action";
+import Loader from "../../Loader";
 const Pagination = ({ nPages, currentPage, setCurrentPage, apiCall }) => {
   let pageNumbers;
   console.log(nPages);
@@ -22,39 +25,48 @@ const Pagination = ({ nPages, currentPage, setCurrentPage, apiCall }) => {
     }
   };
   return (
-    <nav>
-      <ul className="pagination justify-content-center">
-        <li className="page-item">
-          <a className="page-link" onClick={prevPage} href="#">
-            Previous
-          </a>
-        </li>
-        {pageNumbers.map((pgNumber) => (
-          <li
-            key={pgNumber}
-            className={`page-item ${
-              currentPage == pgNumber ? "page-item-active" : ""
-            } `}
-          >
-            <a
-              onClick={() => {
-                setCurrentPage(pgNumber);
-                apiCall(pgNumber);
-              }}
-              className="page-link"
-              href="#"
+    <>
+      <Loader />
+
+      <nav>
+        <ul className="pagination justify-content-center">
+          {currentPage != 1 && (
+            <li className="page-item">
+              <a className="page-link" onClick={prevPage} href="#">
+                Previous
+              </a>
+            </li>
+          )}
+          {pageNumbers.map((pgNumber) => (
+            <li
+              key={pgNumber}
+              className={`page-item ${
+                currentPage == pgNumber ? "page-item-active" : ""
+              } `}
             >
-              {pgNumber}
-            </a>
-          </li>
-        ))}
-        <li className="page-item">
-          <a className="page-link" onClick={nextPage} href="#">
-            Next
-          </a>
-        </li>
-      </ul>
-    </nav>
+              <a
+                onClick={() => {
+                  setCurrentPage(pgNumber);
+                  console.log("Queries Called", pgNumber);
+                  apiCall(pgNumber);
+                }}
+                className="page-link"
+                href="#"
+              >
+                {pgNumber}
+              </a>
+            </li>
+          ))}
+          {currentPage != nPages && (
+            <li className="page-item">
+              <a className="page-link" onClick={nextPage} href="#">
+                Next
+              </a>
+            </li>
+          )}
+        </ul>
+      </nav>
+    </>
   );
 };
 
