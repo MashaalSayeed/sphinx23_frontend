@@ -24,19 +24,84 @@ body{
     0% {
       
         transform: scaleX(1) scaleY(1) translateY(0);
-        filter: brightness(1);
+        /* filter: brightness(1); */
         border-radius: 0;
     }
 
     100% 
     {
         /* transform: scaleX(0.26); */
-        transform: scaleX(0.23) scaleY(0.32) translateY(-5%);
-        filter: brightness(0.08);
+        transform: scaleX(0.23) scaleY(0.36) translateY(-7%);
+        /* filter: brightness(0.08); */
         }
 
 }
-@keyframes exitAnimTitle {
+
+.low-bright
+{
+    animation: exitBright 2000ms ease-in-out;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.newNavbar
+{
+    width: 100%;
+    margin: 2px auto;
+}
+
+@keyframes exitBright {
+    0% {
+      
+      
+        filter: brightness(1);
+        border-radius: 0px;
+    }
+
+    100% 
+    {
+        /* transform: scaleX(0.26); */
+        filter: brightness(0.08);
+        border-radius: 25%;
+    }
+
+}
+@keyframes titleAnim {
+    0% 
+    {
+
+       
+        transform:  scaleX(1) scaleY(1) translateY(0);
+        z-index: 1;
+    }
+
+    100% 
+    {
+        z-index: 20;
+        font-size: 14rem;
+        transform: scaleX(1.35) scaleY(1.42) translateY(55%);
+    }
+
+}
+
+@keyframes radiusBorder {
+    0% {
+      
+        filter: brightness(1);
+        border-radius: 0;
+      
+    }
+
+    100% 
+    {
+        /* transform: scaleX(0.26); */
+       border-radius: 5%;
+       filter: brightness(0.08);
+    }
+
+}
+
+@keyframes exitHide {
     0% {
       
       
@@ -47,9 +112,8 @@ body{
     100% 
     {
         /* transform: scaleX(0.26); */
-        transform: scaleX(0.23) scaleY(0.32) translateY(-5%);
-        filter: brightness(0.08);
-        }
+        filter: brightness(0);
+    }
 
 }
 .exit-anim
@@ -167,6 +231,43 @@ color: #FFFFFF;
     -webkit-animation-fill-mode: forwards;
 }
 
+.landing-titleanim
+{
+    font-family: 'Noto Sans Adlam Unjoined', sans-serif;
+    font-style: normal;
+    /* width: fit-content; */
+    margin: 5px auto;
+    font-weight: 300;
+    font-size: 10rem;
+    /* line-height: 2rem; */
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    /* padding: auto 10px;  */
+    width: fit-content;
+   
+    letter-spacing: 0.20em;
+    color: #FFFFFF;
+    transition: ease-in;
+    animation: titleNew  2000ms ease-in-out; 
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+
+}
+
+@keyframes titleNew{
+    0%
+    {
+        filter: brightness(1);
+
+    }
+    100%
+    {
+        filter: brightness(200);
+    }
+
+}
 
 .landing-pyramids
 {
