@@ -66,11 +66,12 @@ function App() {
 
     // </div>
     <div className="App">
-      <BrowserRouter>
+      {/* <TimeMachine /> */}
+
+      {/* <Navbar /> */}
+      <Landing />
+      {/* <BrowserRouter>
         <Routes>
-          {/* <TimeMachine /> */}
-          {/* <Landing /> */}
-          {/* <Navbar /> */}
           <Route exact path="/" element={<LoginScreen />} />
           {curruser != null ? (
             <>
@@ -92,9 +93,9 @@ function App() {
           ) : (
             <></>
           )}
-          {/* <Footer /> */}
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      {/* <Footer /> */}
     </div>
   );
 }
