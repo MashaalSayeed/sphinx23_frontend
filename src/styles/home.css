@@ -8,6 +8,7 @@ body{
     min-height: 100vh;
     overflow: hidden;
     animation: hideScroll 2500ms;
+    background: black;
 }
 
 .landing-main
@@ -24,14 +25,23 @@ body{
     0% {
       
         transform: scaleX(1) scaleY(1) translateY(0);
+
         /* filter: brightness(1); */
+      
         border-radius: 0;
+        z-index: 100;
+    }
+    
+    90%
+    {
+        z-index: -2;
     }
 
     100% 
     {
         /* transform: scaleX(0.26); */
-        transform: scaleX(0.23) scaleY(0.36) translateY(-7%);
+        transform: scaleX(0.23) scaleY(0.34) ;
+        z-index: -100;
         /* filter: brightness(0.08); */
         }
 
@@ -56,6 +66,7 @@ body{
       
         filter: brightness(1);
         border-radius: 0px;
+        
     }
 
     100% 
@@ -63,23 +74,7 @@ body{
         /* transform: scaleX(0.26); */
         filter: brightness(0.08);
         border-radius: 25%;
-    }
-
-}
-@keyframes titleAnim {
-    0% 
-    {
-
-       
-        transform:  scaleX(1) scaleY(1) translateY(0);
-        z-index: 1;
-    }
-
-    100% 
-    {
-        z-index: 20;
-        font-size: 14rem;
-        transform: scaleX(1.35) scaleY(1.42) translateY(55%);
+      
     }
 
 }
@@ -96,6 +91,7 @@ body{
     {
         /* transform: scaleX(0.26); */
        border-radius: 5%;
+       z-index: -5;
        filter: brightness(0.08);
     }
 
@@ -112,7 +108,7 @@ body{
     100% 
     {
         /* transform: scaleX(0.26); */
-        filter: brightness(0);
+        filter: brightness(0) opacity(0);
     }
 
 }
@@ -123,6 +119,7 @@ body{
     z-index: 20;
     display: flex;
     height: 100vh;
+   
     flex-direction: column;
     animation: exitAnim 2000ms ease-in-out;
     animation-fill-mode: forwards;
@@ -168,7 +165,9 @@ body{
     
     padding-top: 20px;
     z-index: 10;
+    height: 60px;
     position: relative;
+    
     /* margin: auto; */
     display: flex;
     width: 98%;
@@ -184,6 +183,7 @@ body{
 .parallax-container>.landing-navbar
 {
     animation-delay: 2.4s;
+
 }
 
 
@@ -208,8 +208,10 @@ color: #FFFFFF;
     /* position: absolute; */
     font-family: 'Noto Sans Adlam Unjoined', sans-serif;
     font-style: normal;
+    position: absolute;
     /* width: fit-content; */
-    margin: 5px auto;
+
+    margin: 60px auto;
     font-weight: 300;
     font-size: 10rem;
     /* line-height: 2rem; */
@@ -217,6 +219,7 @@ color: #FFFFFF;
     right: 0; 
     margin-left: auto; 
     margin-right: auto;
+   
     /* padding: auto 10px;  */
     width: fit-content;
    
@@ -235,8 +238,11 @@ color: #FFFFFF;
 {
     font-family: 'Noto Sans Adlam Unjoined', sans-serif;
     font-style: normal;
+    position: absolute;
     /* width: fit-content; */
-    margin: 5px auto;
+    width: 30%;
+    margin: 60px auto;
+    
     font-weight: 300;
     font-size: 10rem;
     /* line-height: 2rem; */
@@ -260,14 +266,42 @@ color: #FFFFFF;
     0%
     {
         filter: brightness(1);
+        
 
     }
     100%
     {
         filter: brightness(200);
+       
     }
 
 }
+@keyframes titleAnim {
+    0% 
+    {
+        z-index: 1;
+      
+       
+     
+     
+      font-size: 10rem;
+    }
+    
+   
+
+    100% 
+    {
+
+        z-index: 20;
+        font-size: 8rem;
+        font-size: 10rem;
+       
+        transform: translateY(min(40%,100px));
+       
+    }
+
+}
+
 
 .landing-pyramids
 {

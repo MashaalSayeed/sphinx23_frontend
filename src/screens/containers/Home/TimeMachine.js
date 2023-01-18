@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import machine from "./../../../images/home/timeMach.png";
+import machine from "./../../../images/home/timeMach1.png";
 import Landing from "./home";
 import HomeNav from "./homeNav";
 
