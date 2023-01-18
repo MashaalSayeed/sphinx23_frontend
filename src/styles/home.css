@@ -40,7 +40,7 @@ body{
     100% 
     {
         /* transform: scaleX(0.26); */
-        transform: scaleX(0.23) scaleY(0.34) ;
+        transform: scaleX(0.23) scaleY(0.34) translateY(-7%);
         z-index: -100;
         /* filter: brightness(0.08); */
         }
@@ -296,7 +296,7 @@ color: #FFFFFF;
         font-size: 8rem;
         font-size: 10rem;
        
-        transform: translateY(min(40%,100px));
+        transform: translateY(min(45%,120px));
        
     }
 
