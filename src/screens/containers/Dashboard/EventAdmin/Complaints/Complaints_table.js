@@ -1,59 +1,89 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Stack, TextField } from "@mui/material";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import TextareaAutosize from "@mui/base/TextareaAutosize";
+import { useSelector } from "react-redux";
 import { red } from "@mui/material/colors";
 import dropdown from "../../../../../images/akar-icons_chevron-down.png";
 import dropdownsubmit from "../../../../../images/material-symbols_chat-rounded.png";
 import "../../../../../App.css";
-const ComplaintsTable = ({ data, value }) => {
+import { submitQueryResponse } from "../../../../../api";
+const ComplaintsTable = ({ data, value, fetchComplaints }) => {
   console.log(data);
   console.log(value);
   console.log(data[value[0]]);
-  const [Status, setStatus] = useState("Pending");
+  const [subject, setSubject] = useState("");
+  const [description, setDescription] = useState("");
   const [fetchbutton, setfetchbutton] = useState(false);
-  const [buttonbg, setbuttonbg] = useState("#FFE0C2");
-  const [buttontext, setbuttontext] = useState("#FF0000");
+  // const [reply, setReply] = useState("");
+  const token = useSelector((state) => state.auth.curruser.token);
+  const [open, setOpen] = useState(false);
+  const complaintReplyTextArea = useRef();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    alert(`Sent Successfully`);
-    setStatus("Approved");
-    setbuttonbg("#C8FFBF");
-    setbuttontext("#038400");
-  };
-  function OpenPopUp() {
+  // const handleReplyChange = (e) => {
+  //   console.log("Text", e.target.value);
+  //   setReply(e.target.value);
+  // };
+
+  function OpenPopUp({ isApproved, id, response }) {
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const reply = complaintReplyTextArea.current.value;
+      console.log(reply);
+      let body = { queryId: id, responseDesc: reply };
+
+      submitQueryResponse(token, body);
+      // fetchComplaints();
+      window.location.href = "/eventAdmin";
+    };
     return (
       <td colSpan={8} className="Form-Container">
         <div className="Form-sub-Container">
-          <h4>Registration Error</h4>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam
-            eligend esse dolorem repellat iusto placeat, praesentium atque
-            laudantium? Officia rerum quam nisi sequi beatae! Tempore iusto
-            tempora fuga beatae sed.
-          </p>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi,
-            facilis delectus pariatur quidem, excepturi nihil incidunt
-            minusdolorem ullam deserunt expedita iusto rerum voluptas iure autem
-            officiis, cum provident ab.
-          </p>
+          <h4>{subject}</h4>
+          <p>Description:{description}</p>
+          {isApproved && <p>Response:{response}</p>}
         </div>
-        <div className="Pop-up-submit">
-          <div className="Pop-up-submit-icon">
-            <img src={dropdownsubmit} onClick={handleSubmit} alt="Image"></img>
-          </div>
-          <div className="Pop-up-submit-text">
-            <p>Reply</p>
-          </div>
-        </div>
+        {open && (
+          <TextareaAutosize
+            aria-label="minimum height"
+            ref={complaintReplyTextArea}
+            minRows={7}
+            maxRows={10}
+            placeholder="Reply to Query"
+            style={{ width: "90%", margin: "1%", marginLeft: "4em" }}
+          />
+        )}
+        {!isApproved && (
+          <button
+            className="Pop-up-submit"
+            style={{ width: "10%" }}
+            onClick={open ? handleSubmit : handleReply}
+          >
+            <div className="Pop-up-submit-icon">
+              <img src={dropdownsubmit} alt="Image"></img>
+            </div>
+
+            <div className="Pop-up-submit-text">
+              <p>{open ? "Submit" : "Reply"}</p>
+            </div>
+          </button>
+        )}
       </td>
     );
   }
-
-  const status = () => {
+  const handleReply = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const status = (isApproved, subject, text) => {
     const handleClick = () => {
       console.log("icon-clicked");
       setfetchbutton(!fetchbutton);
+      setSubject(subject);
+      setDescription(text);
     };
 
     return (
@@ -65,8 +95,8 @@ const ComplaintsTable = ({ data, value }) => {
             boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.8)",
             borderRadius: "4px",
             margin: "5px",
-            color: buttontext,
-            backgroundColor: buttonbg,
+            color: isApproved ? "#038400" : "#FFE0C2",
+            backgroundColor: isApproved ? "#C8FFBF" : "#FF0000",
           }}
         >
           {/* <Dropdown title={Status} 
@@ -80,7 +110,7 @@ const ComplaintsTable = ({ data, value }) => {
           }} >
         
         </Dropdown> */}
-          {Status}
+          {isApproved ? "Approved" : "Pending"}
         </Button>
         <img src={dropdown} onClick={handleClick} alt="image"></img>
       </td>
@@ -90,11 +120,30 @@ const ComplaintsTable = ({ data, value }) => {
     <>
       <tr>
         {value.map((ele, i) => {
-          if (ele == "Status") return status();
+          if (ele == "status")
+            return status(
+              data["isApproved"],
+              data["subject"],
+              data["queryDesc"]
+            );
+          else if (ele == "name") return <td key={i}>{data["user"].name}</td>;
+          else if (ele == "email") return <td key={i}>{data["user"].email}</td>;
+          else if (ele == "college")
+            return <td key={i}>{data["user"].collegeName}</td>;
+          else if (ele == "event") return <td key={i}>{data["event"].name}</td>;
           else return <td key={i}>{data[ele]}</td>;
         })}
       </tr>
-      <tr className="Pop-Up-Screen"> {fetchbutton && <OpenPopUp />}</tr>
+      <tr className="Pop-Up-Screen">
+        {" "}
+        {fetchbutton && (
+          <OpenPopUp
+            isApproved={data["isApproved"]}
+            id={data["_id"]}
+            response={data["responseDesc"]}
+          />
+        )}
+      </tr>
     </>
   );
 };

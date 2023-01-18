@@ -7,8 +7,9 @@ import ReadOnlyRow from "./ReadOnlyRow";
 import { getResults, addTeamsToRound, addResults } from "../../../api";
 function Results({ event }) {
   // const currentRecords = [{ name: "rupesh", mobileNumber: "8076240766" }];
-  // console.log(event);
+
   const token = useSelector((state) => state.auth.curruser.token);
+  console.log(token);
   const [currentRecords, setCurrentRecords] = useState([]);
   // {
   //   id: 21,
@@ -134,12 +135,14 @@ function Results({ event }) {
   };
 
   const handleRound = (roundNo) => {
+    setCurrentPage(1);
     setRound(roundNo);
 
     //change the currentRecords According to the roundNo;
   };
   const handleResultRound = (roundNo) => {
     console.log("Round", roundNo);
+
     setResultRound(roundNo);
   };
 

@@ -1,5 +1,10 @@
+import Session from "../../../Session";
+let profile = Session.getObject("profile") || undefined;
+console.log(profile);
 const initialState = {
-  curruser: null,
+  curruser: Session.getObject("profile")
+    ? Session.getObject("profile")
+    : undefined,
   events: [],
   adminevents: [],
   upcoming: [],
@@ -8,12 +13,15 @@ const initialState = {
   updates: [],
   allpasses: [],
   userpasses: [],
+  loading: false,
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case "LOGIN_REGISTER":
       return { ...state, curruser: payload };
+    case "SET_LOADING":
+      return { ...state, loading: payload };
     case "LOGOUT":
       return { ...state, curruser: null };
     case "FETCH_EVENTS":

@@ -23,7 +23,7 @@ function EventTab({ all }) {
           (opt, i) =>
             opt.ended == !all && (
               <Link
-                to={"/eventDetails/event/" + opt.name}
+                to={"/eventDetails/event/" + opt._id}
                 className="event-link"
               >
                 <div className="eventTab-Ecard" key={i}>

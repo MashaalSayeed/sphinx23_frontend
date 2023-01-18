@@ -8,7 +8,7 @@ import Pagination from "../Pagination";
 import { getTeamsByEvent } from "../../../api";
 import EventStudents from "./EventStudents";
 import Results from "./Results";
-
+import { fetchOneEvent } from "../../../api";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
@@ -17,24 +17,24 @@ export default function EventDetails() {
   console.log("Event Called");
   const params = useParams();
   const eventName = params.id;
+
   const event = useSelector((state) => state.auth.events);
+  console.log(event);
   const type = useSelector((state) => state.auth.curruser.profile.type);
   //make it dynamic
   // const type = "eventAdmin";
-
-  const currevent = event.find((x) => x.name === eventName);
-  const allAboutCardElements = <AboutSection event={currevent} />;
+  const [currevent, setEvent] = useState();
 
   const token = useSelector((state) => state.auth.curruser.token);
+  console.log(token);
   const [currentRecords, setCurrentRecords] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [Pages, setNpage] = useState(1);
   useEffect(() => {
-    console.log(currevent._id);
     if (tabActive == "Registered Teams") {
-      console.log("get teams by event");
+      console.log("get teams by event", token);
       getTeamsByEvent(
-        currevent._id,
+        eventName,
         token,
         currentPage,
         setCurrentRecords,
@@ -46,6 +46,10 @@ export default function EventDetails() {
       console.log("get studnets by event"); //api call for reg studetnts ;
     if (tabActive == "Results") console.log("get results by event"); //api call for results ;
   }, [tabActive]);
+  useEffect(() => {
+    fetchOneEvent(setEvent, eventName);
+    console.log("API Called");
+  }, []);
   console.log(currentRecords);
   console.log(Pages);
   const SuperAdmintabs = ["About", "Registered Teams"];
@@ -58,7 +62,7 @@ export default function EventDetails() {
         setCurrentPage={setCurrentPage}
         apiCall={(pageNo) => {
           getTeamsByEvent(
-            currevent._id,
+            eventName,
             token,
             pageNo,
             setCurrentRecords,
@@ -116,35 +120,40 @@ export default function EventDetails() {
     <div>
       <Navbar />
       <div className="space-top"></div>
-      <Dashboard_Header
-        settab={setTab}
-        tabactive={tabActive}
-        title={currevent.name}
-        tabs={type == "superAdmin" ? SuperAdmintabs : EventAdminTabs}
-        excel={
-          tabActive == "Registered Teams" || tabActive == "Registered Students"
-            ? true
-            : false
-        }
-        addBtnBool={
-          tabActive == "Registered Teams" || tabActive == "Registered Students"
-            ? true
-            : false
-        }
-        dashBool={
-          tabActive == "Registered Teams" || tabActive == "Registered Students"
-            ? true
-            : false
-        }
-        paginate={typeof Pages != "undefined" ? currPagePaginate() : <></>}
-      />
-      {type == "superAdmin" ? (
+      {currevent && (
+        <Dashboard_Header
+          settab={setTab}
+          tabactive={tabActive}
+          title={currevent.name}
+          tabs={type == "superAdmin" ? SuperAdmintabs : EventAdminTabs}
+          excel={
+            tabActive == "Registered Teams" ||
+            tabActive == "Registered Students"
+              ? true
+              : false
+          }
+          addBtnBool={
+            tabActive == "Registered Teams" ||
+            tabActive == "Registered Students"
+              ? true
+              : false
+          }
+          dashBool={
+            tabActive == "Registered Teams" ||
+            tabActive == "Registered Students"
+              ? true
+              : false
+          }
+          paginate={typeof Pages != "undefined" ? currPagePaginate() : <></>}
+        />
+      )}
+      {currevent && type == "superAdmin" ? (
         <div className="desktop14-sections">
           {
             {
               About: (
                 <section className="desktop14-about">
-                  {allAboutCardElements}
+                  <AboutSection event={currevent} />
                 </section>
               ),
               "Registered Teams": (
@@ -153,13 +162,13 @@ export default function EventDetails() {
             }[tabActive]
           }
         </div>
-      ) : (
+      ) : currevent ? (
         <div className="desktop14-sections">
           {
             {
               About: (
                 <section className="desktop14-about">
-                  {allAboutCardElements}
+                  <AboutSection event={currevent} />
                 </section>
               ),
               "Registered Teams": (
@@ -169,6 +178,8 @@ export default function EventDetails() {
             }[tabActive]
           }
         </div>
+      ) : (
+        <></>
       )}
       <Footer />
     </div>

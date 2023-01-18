@@ -7,11 +7,19 @@ import fb from "./Facebook.png";
 import sphinxLogo from "./sphinxLogo.png";
 import Fest from "./Group16.png";
 import Institute from "./Group12.png";
+import {
+  loginRegister,
+  sendVerificationMail,
+  verifyMailOTP,
+} from "../../../api";
+import { useDispatch, useSelector } from "react-redux";
+
 import bg1 from "./bg1.png";
 import bg2 from "./bg2.png";
 import bg3 from "./bg3.png";
 import bg4 from "./bg4.png";
 import bg0 from "./bg0.png";
+import Session from "../../../Session";
 
 function handleChange(event, setter) {
   const { name, value, type, checked } = event.target;
@@ -48,6 +56,7 @@ function SocialIcons() {
 }
 
 function Login(props) {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -56,10 +65,19 @@ function Login(props) {
   const navigate = useNavigate();
   function handleSubmit(event) {
     props.setBg((present) => !present);
+    formData.isRegistration = false;
     console.log(formData);
     event.preventDefault();
-    alert(`Login Successfully`);
-    navigate("/home");
+    loginRegister(dispatch, formData)
+      .then((data) => {
+        console.log(data);
+        alert("Success");
+      })
+      .catch((err) => {
+        alert(err);
+      });
+    // alert(`Login Successfully`);
+    // navigate("/eventAdmin");
   }
 
   return (
@@ -133,6 +151,50 @@ function Login(props) {
 }
 
 function RegScreen1(props) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.curruser);
+  useEffect(() => {
+    console.log("Use Effect Called", user);
+    if (user && !user.profile.isEmailVerified) {
+      sendVerificationMail()
+        .then((res) => {
+          alert("Mail Sent");
+
+          props.setter(2);
+          props.setBg((present) => !present);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
+    // chandra();
+    // loginRegister(dispatch, creds);
+    // fetchUpdates(dispatch);
+  }, []);
+
+  const handleSubmit = async () => {
+    console.log("Called", props.formData);
+    props.formData.isRegistration = true;
+
+    loginRegister(dispatch, props.formData)
+      .then((res) => {
+        console.log(res);
+        sendVerificationMail()
+          .then((res) => {
+            alert("Mail Sent");
+
+            props.setter(2);
+
+            props.setBg((present) => !present);
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
   return (
     <>
       <div className="login-form-title">Create an Account</div>
@@ -180,13 +242,7 @@ function RegScreen1(props) {
           />
         </div>
       </div>
-      <div
-        className="login-form-submit-btn"
-        onClick={() => {
-          props.setter(2);
-          props.setBg((present) => !present);
-        }}
-      >
+      <div className="login-form-submit-btn" onClick={handleSubmit}>
         Continue
       </div>
     </>
@@ -194,6 +250,15 @@ function RegScreen1(props) {
 }
 
 function RegScreen2(props) {
+  const token = useSelector((state) => state.auth.curruser.token);
+  console.log(Session.get("time"), parseInt(Date.now()));
+  useEffect(() => {
+    console.log("Use Effect Called", token);
+
+    // chandra();
+    // loginRegister(dispatch, creds);
+    // fetchUpdates(dispatch);
+  }, []);
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(30);
@@ -204,9 +269,33 @@ function RegScreen2(props) {
       element.nextSibling.focus();
     }
   };
+  function handleResend() {
+    console.log("called");
+    sendVerificationMail()
+      .then((res) => {
+        alert("Mail Sent");
+
+        props.setter(2);
+        props.setBg((present) => !present);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
   function handleSubmit() {
-    props.setter(3);
-    props.setBg((present) => !present);
+    console.log(otp.join(""));
+    let otp_string = otp.join("");
+    let body = { otp: otp_string };
+
+    verifyMailOTP(body)
+      .then((res) => {
+        alert("Verified");
+        props.setter(3);
+        props.setBg((present) => !present);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
   function ResetOtp() {
     setMinutes(1);
@@ -256,6 +345,7 @@ function RegScreen2(props) {
           );
         })}
       </div>
+
       <div className="login-form-submit-btn" onClick={handleSubmit}>
         Continue
       </div>

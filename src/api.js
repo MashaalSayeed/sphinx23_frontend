@@ -1,5 +1,7 @@
 import { Widgets } from "@mui/icons-material";
 import { json } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Session from "./Session";
 import {
   events,
   passes,
@@ -10,7 +12,9 @@ import {
   newEvent,
   newPass,
   adminEvents,
+  loading,
 } from "./store/modules/auth/auth.action";
+import { queries } from "@testing-library/react";
 const url = "http://localhost:8000";
 
 export const fetchEvents = async (dispatch) => {
@@ -97,6 +101,73 @@ export const fetchPasses = async (dispatch) => {
       dispatch(passes(data.pass));
     });
 };
+export const fetchOneEvent = async (setEvent, eventId) => {
+  console.log("Event Fetched");
+  await fetch(`${url}/events/${eventId}`, {
+    headers: {
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      setEvent(data.event);
+    });
+};
+export const verifyMailOTP = async (body) => {
+  console.log(Session.getObject("profile").token);
+  console.log(body);
+  await fetch(`${url}/verification/verifyEmailOTP`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        console.log(data);
+        return data.success;
+      }
+      throw data;
+    })
+    .catch((error) => {
+      throw error;
+      // window.location.href = "/";
+      // console.log(error);
+    });
+};
+export const sendVerificationMail = async () => {
+  console.log(Session.getObject("profile").token);
+
+  await fetch(`${url}/verification/sendEmailOTP`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        Session.set("time", data.time);
+        return data.time;
+      }
+      throw data;
+    })
+    .catch((error) => {
+      throw error;
+      // window.location.href = "/";
+      // console.log(error);
+    });
+};
 
 export const loginRegister = async (dispatch, creds) => {
   console.log("Login Called");
@@ -115,14 +186,16 @@ export const loginRegister = async (dispatch, creds) => {
       console.log(data);
       if (data.success) {
         const profile = { token: data.token, profile: data.profile };
-        console.log(profile);
+        console.log(data.success);
         dispatch(loginReg(profile));
-      } else {
-        console.log(data.error);
+        return data.success;
       }
+      throw data;
     })
     .catch((error) => {
-      console.log("Login Failed");
+      throw error;
+      // window.location.href = "/";
+      // console.log(error);
     });
 };
 
@@ -160,8 +233,10 @@ export const createEvent = async (
       // return false;
     });
 };
-export const addTeamsToRound = async (token, data) => {
+
+export const addTeamsToRound = async (token, body) => {
   console.log("Create PASS Called");
+  // console.log(data.event);
   await fetch(`${url}/events/edit_result`, {
     headers: {
       mode: "cors",
@@ -170,14 +245,14 @@ export const addTeamsToRound = async (token, data) => {
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",
-    body: JSON.stringify(data),
+    body: JSON.stringify(body),
   })
     .then((response) => response.json())
     .then((data) => {
       if (data.error == null) {
         console.log(data);
-        alert("Results Added");
-        // window.location.href = "/eventAdmin";
+        alert(data.message);
+        window.location.href = "/eventDetails/event/" + body.event;
       } else {
         console.log(data.error);
       }
@@ -186,7 +261,7 @@ export const addTeamsToRound = async (token, data) => {
       alert(error.message);
     });
 };
-export const addResults = async (token, data) => {
+export const addResults = async (token, body) => {
   console.log("Add Results Called");
   await fetch(`${url}/events/add_result`, {
     headers: {
@@ -196,14 +271,14 @@ export const addResults = async (token, data) => {
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",
-    body: JSON.stringify(data),
+    body: JSON.stringify(body),
   })
     .then((response) => response.json())
     .then((data) => {
       if (data.error == null) {
         console.log(data);
-        alert("Results Added");
-        window.location.href = "/eventAdmin";
+        alert(data.message);
+        window.location.href = "/eventDetails/event/" + body.event;
       } else {
         console.log(data.error);
       }
@@ -243,7 +318,32 @@ export const createPass = async (
       console.log(error);
     });
 };
-
+export const submitQueryResponse = async (token, body) => {
+  console.log("getUsersByPass");
+  await fetch(`${url}/queries/update`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        alert(data.message);
+      } else {
+        console.log(data.error);
+        alert(data.error);
+      }
+    })
+    .catch((error) => {
+      alert(error.message);
+      console.log(error);
+    });
+};
 export const getUsersByPass = async (
   passID,
   token,
@@ -312,6 +412,57 @@ export const getResults = ({
     })
     .catch((error) => {
       console.log(error);
+    });
+};
+export const getQueriesByEvent = ({
+  token,
+  dispatch,
+  tabActive,
+  setCurrentRecords,
+  currentPage,
+  setNpage,
+}) => {
+  let status;
+  if (tabActive == "Pending Complaints") {
+    status = 0;
+  } else if (tabActive == "Approved Complaints") {
+    status = 1;
+  } else {
+    status = 2;
+  }
+  console.log("getUsersbyPage", token);
+  fetch(`${url}/queries/eid/${currentPage}/${status}`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.error == null) {
+        console.log(data);
+        if (data.queries) {
+          dispatch(loading(true));
+          setCurrentRecords(data.queries);
+          console.log(status, currentPage, data.queries);
+          setNpage(data.totalPages);
+          dispatch(loading(false));
+          return data.totalPages;
+        } else {
+          setCurrentRecords(data.queries);
+          console.log(data.totalPages);
+          setNpage(data.totalPages);
+        }
+      } else {
+        console.log(data.error);
+        alert(data.error.message);
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      alert(error.message);
     });
 };
 export const getUsers = ({
@@ -507,7 +658,8 @@ export const getTeamsByEvent = async (
   setCurrentRecords,
   setNpage
 ) => {
-  console.log("getTeamsByEvent");
+  let profile = Session.getObject("profile");
+  console.log(eventId, profile.profile.token);
   await fetch(`${url}/participant/teams/${eventId}/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",

@@ -43,7 +43,7 @@ function App() {
 
   useEffect(() => {
     // chandra();
-    loginRegister(dispatch, creds);
+    // loginRegister(dispatch, creds);
     fetchEvents(dispatch);
     fetchPasses(dispatch);
     fetchUpcoming(dispatch);
