@@ -69,10 +69,11 @@ function App() {
       {/* <TimeMachine /> */}
 
       {/* <Navbar /> */}
-      <Landing />
-      {/* <BrowserRouter>
+      {/* <Landing /> */}
+      <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LoginScreen />} />
+          <Route path="/home" element={<Landing />} />
           {curruser != null ? (
             <>
               <Route path="/eventAdmin" element={<DashboardEventAdmin />} />
@@ -94,7 +95,7 @@ function App() {
             <></>
           )}
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
       {/* <Footer /> */}
     </div>
   );
