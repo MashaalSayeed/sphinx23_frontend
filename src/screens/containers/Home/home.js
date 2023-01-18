@@ -61,7 +61,7 @@ function Landing() {
               Loading || !Scroll
                 ? {}
                 : {
-                    animation: "exitHide 2000ms ease-in-out",
+                    animation: "exitHide 1000ms ease-in-out",
                     animationFillMode: "forwards",
                   }
             }

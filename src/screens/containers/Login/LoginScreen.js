@@ -13,7 +13,7 @@ import {
   verifyMailOTP,
 } from "../../../api";
 import { useDispatch, useSelector } from "react-redux";
-import Timer from "otp-timer";
+
 import bg1 from "./bg1.png";
 import bg2 from "./bg2.png";
 import bg3 from "./bg3.png";
@@ -260,6 +260,8 @@ function RegScreen2(props) {
     // fetchUpdates(dispatch);
   }, []);
   const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(30);
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
@@ -295,6 +297,32 @@ function RegScreen2(props) {
         alert(err);
       });
   }
+  function ResetOtp() {
+    setMinutes(1);
+    setSeconds(30);
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+
+      if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(interval);
+        } else {
+          setSeconds(59);
+          setMinutes(minutes - 1);
+        }
+      }
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [seconds]);
+
   return (
     <>
       <div className="login-form-title">Enter OTP</div>
@@ -321,17 +349,70 @@ function RegScreen2(props) {
       <div className="login-form-submit-btn" onClick={handleSubmit}>
         Continue
       </div>
-      {/* <div className="login-form-otp-resend">
-        <div className="login-form-otp-resend-que">Didn't recieve code?</div>
-        <Link className="login-form-otp-resend-link" onClick={() => {}}>
-          Resend
-        </Link>
-      </div> */}
+      <div className="login-form-otp-resend">
+        {seconds > 0 || minutes > 0 ? (
+          <p className="login-form-timer">
+            Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
+            {seconds < 10 ? `0${seconds}` : seconds}
+          </p>
+        ) : (
+          <></>
+        )}
+      </div>
+      {!(seconds > 0 || minutes > 0) ? (
+        <div className="login-form-otp-resend">
+          <div className="login-form-otp-resend-que">Didn't recieve code?</div>
+          <Link className="login-form-otp-resend-link" onClick={ResetOtp}>
+            Resend
+          </Link>
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   );
 }
 
 function RegScreen3(props) {
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [sendOtp, setSendOtp] = useState(false);
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(30);
+
+  const handleChangeOtp = (element, index) => {
+    if (isNaN(element.value)) return false;
+    setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
+    if (element.nextSibling) {
+      element.nextSibling.focus();
+    }
+  };
+  function ResetOtp() {
+    setMinutes(1);
+    setSeconds(30);
+  }
+
+  useEffect(() => {
+    if (sendOtp) {
+      const interval = setInterval(() => {
+        if (seconds > 0) {
+          setSeconds(seconds - 1);
+        }
+
+        if (seconds === 0) {
+          if (minutes === 0) {
+            clearInterval(interval);
+          } else {
+            setSeconds(59);
+            setMinutes(minutes - 1);
+          }
+        }
+      }, 1000);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [seconds, sendOtp]);
   return (
     <>
       <div className="login-form-title">Add Details</div>
@@ -344,20 +425,6 @@ function RegScreen3(props) {
           name="name"
           type={"text"}
           value={props.formData.name}
-          onChange={(e) => {
-            handleChange(e, props.setFormData);
-          }}
-        />
-      </div>
-      <div className="login-form-input-grp">
-        <label className="login-form-text-label" htmlFor="mobile">
-          Mobile
-        </label>
-        <input
-          className="login-form-text-inputs"
-          name="mobile"
-          type={"tel"}
-          value={props.formData.mobile}
           onChange={(e) => {
             handleChange(e, props.setFormData);
           }}
@@ -377,7 +444,49 @@ function RegScreen3(props) {
           }}
         />
       </div>
-      <div className="login-form-bio">
+      <div className="login-form-input-grp">
+        <label className="login-form-text-label" htmlFor="college">
+          Campus Ambassador
+        </label>
+        <input
+          className="login-form-text-inputs"
+          name="Campus Ambassador"
+          type={"text"}
+          value={props.formData.campusAmbassador}
+          onChange={(e) => {
+            handleChange(e, props.setFormData);
+          }}
+        />
+      </div>
+      <div className="login-form-input-grp">
+        <label className="login-form-text-label" htmlFor="mobile">
+          Mobile
+        </label>
+        <input
+          className="login-form-text-inputs"
+          name="mobile"
+          type={"tel"}
+          value={props.formData.mobile}
+          onChange={(e) => {
+            handleChange(e, props.setFormData);
+          }}
+        />
+      </div>
+      {!sendOtp && (
+        <div className="login-form-input-grp">
+          <Link
+            className="login-form-text-label login-form-otp-resend-link"
+            style={{ fontSize: "0.9rem" }}
+            htmlFor="mobile"
+            onClick={() => {
+              setSendOtp(true);
+            }}
+          >
+            Verify Mobile
+          </Link>
+        </div>
+      )}
+      {/* <div className="login-form-bio">
         <div className="login-form-input-grp">
           <label className="login-form-text-label" htmlFor="gender">
             Gender
@@ -406,7 +515,71 @@ function RegScreen3(props) {
             }}
           />
         </div>
-      </div>
+      </div> */}
+      {sendOtp ? (
+        <>
+          {" "}
+          <div className="login-form-text-label" style={{ fontSize: "0.8rem" }}>
+            Enter OTP
+          </div>
+          <div className="login-form-text-label">{`A 6 digit code has been sent to ${props.formData.mobile}`}</div>
+          <div className="login-form-otp-row">
+            {otp.map((data, index) => {
+              return (
+                <input
+                  id="standard-basic"
+                  variant="standard"
+                  className="login-form-otp-cell"
+                  name="otp"
+                  type="text"
+                  key={index}
+                  value={data}
+                  maxLength="1"
+                  onChange={(e) => handleChangeOtp(e.target, index)}
+                  onFocus={(e) => e.target.select()}
+                />
+              );
+            })}
+          </div>
+          <div className="login-form-otp-resend">
+            {seconds > 0 || minutes > 0 ? (
+              <p className="login-form-timer">
+                Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
+                {seconds < 10 ? `0${seconds}` : seconds}
+              </p>
+            ) : (
+              <></>
+            )}
+          </div>
+          {!(seconds > 0 || minutes > 0) ? (
+            <div className="login-form-otp-resend">
+              <div className="login-form-otp-resend-que">
+                Didn't recieve code?
+              </div>
+              <Link className="login-form-otp-resend-link" onClick={ResetOtp}>
+                Resend
+              </Link>
+            </div>
+          ) : (
+            <></>
+          )}
+          <div className="login-form-otp-resend">
+            <Link
+              className="login-form-otp-resend-link"
+              style={{
+                fontSize: "0.9rem",
+                background: "white",
+              }}
+              onClick={() => {}}
+            >
+              SUBMIT
+            </Link>
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
+
       <div
         className="login-form-submit-btn"
         onClick={() => {
@@ -451,8 +624,7 @@ function Registration(props) {
     name: "",
     mobile: "",
     college: "",
-    gender: "",
-    dob: "",
+    campusAmbassador: "",
   });
   const [stepCount, setStepCount] = useState(1);
   return (
