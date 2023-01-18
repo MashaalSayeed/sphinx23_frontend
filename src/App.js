@@ -66,11 +66,20 @@ function App() {
 
     // </div>
     <div className="App">
+<<<<<<< HEAD
       <BrowserRouter>
         <Routes>
           {/* <TimeMachine /> */}
           {/* <Landing /> */}
           {/* <Navbar /> */}
+=======
+      {/* <TimeMachine /> */}
+
+      {/* <Navbar /> */}
+      <Landing />
+      {/* <BrowserRouter>
+        <Routes>
+>>>>>>> 4aca1a91e88f9e6ff4063eb7c23ac9c37479fdab
           <Route exact path="/" element={<LoginScreen />} />
           {curruser != null ? (
             <>
@@ -92,9 +101,15 @@ function App() {
           ) : (
             <></>
           )}
+<<<<<<< HEAD
           {/* <Footer /> */}
         </Routes>
       </BrowserRouter>
+=======
+        </Routes>
+      </BrowserRouter> */}
+      {/* <Footer /> */}
+>>>>>>> 4aca1a91e88f9e6ff4063eb7c23ac9c37479fdab
     </div>
   );
 }

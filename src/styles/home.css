@@ -6,6 +6,7 @@
 html,body{margin:0;padding:0;}
 body{
     min-height: 100vh;
+    overflow: hidden;
     animation: hideScroll 2500ms;
 }
 
@@ -13,6 +14,119 @@ body{
 {
 
     width: 100%;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+ 
+}
+
+@keyframes exitAnim {
+    0% {
+      
+        transform: scaleX(1) scaleY(1) translateY(0);
+        /* filter: brightness(1); */
+        border-radius: 0;
+    }
+
+    100% 
+    {
+        /* transform: scaleX(0.26); */
+        transform: scaleX(0.23) scaleY(0.36) translateY(-7%);
+        /* filter: brightness(0.08); */
+        }
+
+}
+
+.low-bright
+{
+    animation: exitBright 2000ms ease-in-out;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.newNavbar
+{
+    width: 100%;
+    margin: 2px auto;
+}
+
+@keyframes exitBright {
+    0% {
+      
+      
+        filter: brightness(1);
+        border-radius: 0px;
+    }
+
+    100% 
+    {
+        /* transform: scaleX(0.26); */
+        filter: brightness(0.08);
+        border-radius: 25%;
+    }
+
+}
+@keyframes titleAnim {
+    0% 
+    {
+
+       
+        transform:  scaleX(1) scaleY(1) translateY(0);
+        z-index: 1;
+    }
+
+    100% 
+    {
+        z-index: 20;
+        font-size: 14rem;
+        transform: scaleX(1.35) scaleY(1.42) translateY(55%);
+    }
+
+}
+
+@keyframes radiusBorder {
+    0% {
+      
+        filter: brightness(1);
+        border-radius: 0;
+      
+    }
+
+    100% 
+    {
+        /* transform: scaleX(0.26); */
+       border-radius: 5%;
+       filter: brightness(0.08);
+    }
+
+}
+
+@keyframes exitHide {
+    0% {
+      
+      
+        filter: brightness(1);
+      
+    }
+
+    100% 
+    {
+        /* transform: scaleX(0.26); */
+        filter: brightness(0);
+    }
+
+}
+.exit-anim
+{ 
+    position: absolute;
+    width: 100%;
+    z-index: 20;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    animation: exitAnim 2000ms ease-in-out;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
 }
 .landing-gradient
 {
@@ -55,7 +169,7 @@ body{
     padding-top: 20px;
     z-index: 10;
     position: relative;
-    margin: auto;
+    /* margin: auto; */
     display: flex;
     width: 98%;
     align-items: center;
@@ -66,6 +180,10 @@ body{
     animation-delay: 1s;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
+}
+.parallax-container>.landing-navbar
+{
+    animation-delay: 2.4s;
 }
 
 
@@ -87,19 +205,19 @@ color: #FFFFFF;
 
 .landing-title
 {
-    position: absolute;
+    /* position: absolute; */
     font-family: 'Noto Sans Adlam Unjoined', sans-serif;
     font-style: normal;
-    width: fit-content;
-    margin: 60px auto;
+    /* width: fit-content; */
+    margin: 5px auto;
     font-weight: 300;
     font-size: 10rem;
-    line-height: 2rem;
+    /* line-height: 2rem; */
     left: 0; 
     right: 0; 
     margin-left: auto; 
     margin-right: auto;
-    padding: auto 10px; 
+    /* padding: auto 10px;  */
     width: fit-content;
    
     letter-spacing: 0.20em;
@@ -113,6 +231,43 @@ color: #FFFFFF;
     -webkit-animation-fill-mode: forwards;
 }
 
+.landing-titleanim
+{
+    font-family: 'Noto Sans Adlam Unjoined', sans-serif;
+    font-style: normal;
+    /* width: fit-content; */
+    margin: 5px auto;
+    font-weight: 300;
+    font-size: 10rem;
+    /* line-height: 2rem; */
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    /* padding: auto 10px;  */
+    width: fit-content;
+   
+    letter-spacing: 0.20em;
+    color: #FFFFFF;
+    transition: ease-in;
+    animation: titleNew  2000ms ease-in-out; 
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+
+}
+
+@keyframes titleNew{
+    0%
+    {
+        filter: brightness(1);
+
+    }
+    100%
+    {
+        filter: brightness(200);
+    }
+
+}
 
 .landing-pyramids
 {
@@ -130,7 +285,7 @@ color: #FFFFFF;
    -webkit-animation-fill-mode: forwards;
 }
 .landing-pyramids-img{
-  position: absolute;
+  position: relative;
  aspect-ratio: 2.8;
   width: 100%;
   height: auto;
@@ -138,7 +293,7 @@ color: #FFFFFF;
 .landing-line-img
 {
     
-    
+    position: absolute;
     width: 100%;
     margin-bottom: 4%;
     height: min(1vh,3px);
@@ -184,7 +339,7 @@ color: #FFFFFF;
 
     0% {
         opacity: 0.8; 
-         transform: translateY(2600%);
+         transform: translateY(380%);
       
     }
 
@@ -261,7 +416,7 @@ color: #FFFFFF;
     z-index: -1;
     object-fit: cover;
     animation: machine-bright 1.2s ease-in-out;
-    animation-delay: 1.2s;
+    animation-delay: 2.4s;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
 }
@@ -318,7 +473,7 @@ margin-bottom: 5px;
    opacity: 0;
  
    animation: machine-content 1.2s ease-in-out;
-   animation-delay: 1.2s;
+   animation-delay: 2.4s;
    animation-fill-mode: forwards;
    -webkit-animation-fill-mode: forwards;
 }
@@ -361,4 +516,27 @@ margin-bottom: 15px;
     font-size: 1.2rem;
     letter-spacing: 0.04em;
     color: #FFFFFF;
+}
+
+@keyframes machine-anim {
+
+    0% {
+      
+      scale: 3.6;
+      overflow: hidden;
+    }
+
+ 
+    100% {
+       scale: 1;
+       overflow: hidden;
+    }
+}
+.parallax-container
+{
+   
+    animation: machine-anim 2s ease-in-out;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+
 }
