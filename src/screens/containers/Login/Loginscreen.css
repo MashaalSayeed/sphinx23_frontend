@@ -75,6 +75,10 @@
 	overflow-y: auto;
 	overflow-x: hidden;
 }
+.login-form-content::-webkit-scrollbar
+{
+	display: none;
+}
 .login-form-title {
 	font-family: "Open Sans";
 	font-style: normal;
