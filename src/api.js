@@ -132,7 +132,74 @@ export const verifyMailOTP = async (body) => {
       console.log(data);
       if (data.success) {
         console.log(data);
+        let profile = Session.getObject("profile");
+        profile.profile = data.profile;
+        console.log(profile);
+        Session.setObject("profile", profile);
+        Session.remove("time");
         return data.success;
+      }
+      throw data;
+    })
+    .catch((error) => {
+      throw error;
+      // window.location.href = "/";
+      // console.log(error);
+    });
+};
+
+export const verifyMobileOTP = async (body) => {
+  console.log(Session.getObject("profile").token);
+  console.log(body);
+  await fetch(`${url}/verification/verifyMobileOTP`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        console.log(data);
+        let profile = Session.getObject("profile");
+        profile.profile = data.profile;
+        console.log(profile);
+        Session.setObject("profile", profile);
+        Session.remove("time");
+        return data.success;
+      }
+      throw data;
+    })
+    .catch((error) => {
+      throw error;
+      // window.location.href = "/";
+      // console.log(error);
+    });
+};
+export const sendMobileOTP = async (data) => {
+  console.log(Session.getObject("profile").token);
+
+  await fetch(`${url}/verification/sendMobileOTP`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        Session.set("time", data.time);
+        return data.time;
       }
       throw data;
     })
@@ -564,8 +631,8 @@ export const getPayments = (token, setPayments) => {
     });
 };
 
-export const getUsersId = (token, email, setIds) => {
-  fetch(`${url}/users/validatemail/${email}`, {
+export const getUsersId = async (token, email, setIds) => {
+  await fetch(`${url}/users/validatemail/${email}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -579,11 +646,12 @@ export const getUsersId = (token, email, setIds) => {
         console.log(data.id);
         setIds((prevState) => [...prevState, data.id]);
       } else {
-        console.log(data.error);
+        throw data;
       }
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
+      // console.log(error);
     });
 };
 

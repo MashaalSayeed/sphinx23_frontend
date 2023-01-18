@@ -11,6 +11,9 @@ import {
   loginRegister,
   sendVerificationMail,
   verifyMailOTP,
+  sendMobileOTP,
+  getUsersId,
+  verifyMobileOTP,
 } from "../../../api";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -20,9 +23,12 @@ import bg3 from "./bg3.png";
 import bg4 from "./bg4.png";
 import bg0 from "./bg0.png";
 import Session from "../../../Session";
+import { LeakRemoveTwoTone } from "@mui/icons-material";
 
 function handleChange(event, setter) {
+  // console.log("Handle Called");
   const { name, value, type, checked } = event.target;
+  console.log(name, value);
   setter((prevformData) => ({
     ...prevformData,
     [name]: type === "checkbox" ? checked : value,
@@ -63,6 +69,24 @@ function Login(props) {
     remember: false,
   });
   const navigate = useNavigate();
+  // const profile = useSelector((state) => state.auth.curruser.profile);
+  // useEffect(() => {
+  //   // if (profile && !profile.isEmailVerified) {
+  //   //   props.setter(2);
+  //   //   props.setBg((present) => !present);
+  //   // }
+  //   // if (profile && profile.isEmailVerified && !profile.isMobileNumberVerified) {
+  //   //   props.setter(3);
+  //   //   props.setBg((present) => !present);
+  //   // }
+  //   // if (profile && profile.isEmailVerified && profile.isMobileNumberVerified) {
+  //   //   navigate("/home");
+  //   // }
+  //   // //
+  //   // chandra();
+  //   // loginRegister(dispatch, creds);
+  //   // fetchUpdates(dispatch);
+  // }, []);
   function handleSubmit(event) {
     props.setBg((present) => !present);
     formData.isRegistration = false;
@@ -152,10 +176,12 @@ function Login(props) {
 
 function RegScreen1(props) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.curruser);
   useEffect(() => {
     console.log("Use Effect Called", user);
     if (user && !user.profile.isEmailVerified) {
+      console.log("mail");
       sendVerificationMail()
         .then((res) => {
           alert("Mail Sent");
@@ -166,6 +192,25 @@ function RegScreen1(props) {
         .catch((err) => {
           alert(err);
         });
+    }
+    if (
+      user &&
+      user.profile.isEmailVerified &&
+      !user.profile.isMobileNumberVerified
+    ) {
+      console.log("Called");
+      alert("Profile is not complete.");
+      props.setter(3);
+      props.setBg((present) => !present);
+    }
+    if (
+      user &&
+      user.profile.isEmailVerified &&
+      user.profile.isMobileNumberVerified
+    ) {
+      console.log("Called");
+      alert("Already Logged In");
+      navigate("/home");
     }
     // chandra();
     // loginRegister(dispatch, creds);
@@ -251,17 +296,22 @@ function RegScreen1(props) {
 
 function RegScreen2(props) {
   const token = useSelector((state) => state.auth.curruser.token);
-  console.log(Session.get("time"), parseInt(Date.now()));
+  const profile = useSelector((state) => state.auth.curruser.profile);
+
   useEffect(() => {
     console.log("Use Effect Called", token);
-
+    if (profile && profile.isEmailVerified) {
+      props.setter(3);
+      props.setBg((present) => !present);
+    }
     // chandra();
     // loginRegister(dispatch, creds);
     // fetchUpdates(dispatch);
   }, []);
   const [otp, setOtp] = useState(new Array(6).fill(""));
-  const [minutes, setMinutes] = useState(1);
-  const [seconds, setSeconds] = useState(30);
+  let time = Session.get("time") - parseInt(Date.now() / 1000);
+  const [minutes, setMinutes] = useState(parseInt(time / 60));
+  const [seconds, setSeconds] = useState(parseInt(time % 60));
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
@@ -269,37 +319,38 @@ function RegScreen2(props) {
       element.nextSibling.focus();
     }
   };
-  function handleResend() {
+
+  function handleSubmit() {
+    console.log(otp.join(""));
+    let otp_string = otp.join("");
+    if (otp_string == "") alert("OTP is Required");
+    else {
+      let body = { otp: otp_string };
+
+      verifyMailOTP(body)
+        .then((res) => {
+          alert("Verified");
+
+          props.setter(3);
+          props.setBg((present) => !present);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
+  }
+  function ResetOtp() {
     console.log("called");
     sendVerificationMail()
       .then((res) => {
         alert("Mail Sent");
-
-        props.setter(2);
-        props.setBg((present) => !present);
+        let time = Session.get("time") - parseInt(Date.now() / 1000);
+        setMinutes(parseInt(time / 60));
+        setSeconds(parseInt(time % 60));
       })
       .catch((err) => {
         alert(err);
       });
-  }
-  function handleSubmit() {
-    console.log(otp.join(""));
-    let otp_string = otp.join("");
-    let body = { otp: otp_string };
-
-    verifyMailOTP(body)
-      .then((res) => {
-        alert("Verified");
-        props.setter(3);
-        props.setBg((present) => !present);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }
-  function ResetOtp() {
-    setMinutes(1);
-    setSeconds(30);
   }
 
   useEffect(() => {
@@ -326,7 +377,7 @@ function RegScreen2(props) {
   return (
     <>
       <div className="login-form-title">Enter OTP</div>
-      <div className="login-form-comments">{`A 6 digit code has been sent to ${props.formData.email}`}</div>
+      <div className="login-form-comments">{`A 6 digit code has been sent to ${profile.email}`}</div>
       <div className="login-form-otp-row">
         {otp.map((data, index) => {
           return (
@@ -378,7 +429,9 @@ function RegScreen3(props) {
   const [sendOtp, setSendOtp] = useState(false);
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(30);
-
+  const [ambassadorId, setambassadorId] = useState([]);
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.curruser.token);
   const handleChangeOtp = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
@@ -387,10 +440,91 @@ function RegScreen3(props) {
     }
   };
   function ResetOtp() {
-    setMinutes(1);
-    setSeconds(30);
+    let body = { phoneNumber: props.formData.mobile };
+    sendMobileOTP(body)
+      .then((res) => {
+        alert("OTP Sent");
+        setSendOtp(true);
+        let time = Session.get("time") - parseInt(Date.now() / 1000);
+        setMinutes(parseInt(time / 60));
+        setSeconds(parseInt(time % 60));
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
+  const handleSubmit = async () => {
+    if (
+      props.formData.name == "" ||
+      props.formData.college == "" ||
+      props.formData.mobile == ""
+    )
+      alert("Name,College Name and Mobile  are Mandatory");
+    else if (sendOtp && otp.join("") == "") {
+      alert("OTP is Mandataory");
+    } else if (!sendOtp) {
+      alert("Mobile Must be Verified");
+    } else {
+      console.log("Called", otp.join(""));
+      console.log(ambassadorId);
+      let body = {
+        name: props.formData.name,
+        collegeName: props.formData.college,
+        otp: otp.join(""),
+      };
+      console.log(body);
+      if (props.formData.campusAmbassador) {
+        getUsersId(token, props.formData.campusAmbassador, setambassadorId)
+          .then((res) => {
+            console.log("Ambassador Correct", ambassadorId);
+            body.refererId = props.formData.campusAmbassador;
+            console.log(body);
+            verifyMobileOTP(body)
+              .then((res) => {
+                alert("Registration Completed");
+                navigate("/home");
+              })
+              .catch((err) => {
+                alert(err);
+              });
+          })
+          .catch((err) => {
+            alert("Referer is Invalid");
+            setambassadorId([]);
+          });
+      } else {
+        verifyMobileOTP(body)
+          .then((res) => {
+            console.log("Registration Completed");
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      }
 
+      console.log(body);
+      props.setBg((present) => !present);
+    }
+  };
+
+  const sendOTP = () => {
+    console.log(props.formData.mobile);
+
+    let body = { phoneNumber: props.formData.mobile };
+    sendMobileOTP(body)
+      .then((res) => {
+        alert("OTP Sent");
+        setSendOtp(true);
+        let time = Session.get("time") - parseInt(Date.now() / 1000);
+        setMinutes(parseInt(time / 60));
+        setSeconds(parseInt(time % 60));
+      })
+      .catch((err) => {
+        alert(err);
+      });
+
+    // if (props.formData.mobile.length) setSendOtp(true);
+  };
   useEffect(() => {
     if (sendOtp) {
       const interval = setInterval(() => {
@@ -423,7 +557,7 @@ function RegScreen3(props) {
         <input
           className="login-form-text-inputs"
           name="name"
-          type={"text"}
+          type="text"
           value={props.formData.name}
           onChange={(e) => {
             handleChange(e, props.setFormData);
@@ -437,7 +571,7 @@ function RegScreen3(props) {
         <input
           className="login-form-text-inputs"
           name="college"
-          type={"text"}
+          type="text"
           value={props.formData.college}
           onChange={(e) => {
             handleChange(e, props.setFormData);
@@ -450,8 +584,8 @@ function RegScreen3(props) {
         </label>
         <input
           className="login-form-text-inputs"
-          name="Campus Ambassador"
-          type={"text"}
+          name="campusAmbassador"
+          type="text"
           value={props.formData.campusAmbassador}
           onChange={(e) => {
             handleChange(e, props.setFormData);
@@ -465,7 +599,8 @@ function RegScreen3(props) {
         <input
           className="login-form-text-inputs"
           name="mobile"
-          type={"tel"}
+          type="tel"
+          pattern="[1-9][0-9]{9}"
           value={props.formData.mobile}
           onChange={(e) => {
             handleChange(e, props.setFormData);
@@ -478,9 +613,7 @@ function RegScreen3(props) {
             className="login-form-text-label login-form-otp-resend-link"
             style={{ fontSize: "0.9rem" }}
             htmlFor="mobile"
-            onClick={() => {
-              setSendOtp(true);
-            }}
+            onClick={sendOTP}
           >
             Verify Mobile
           </Link>
@@ -563,7 +696,7 @@ function RegScreen3(props) {
           ) : (
             <></>
           )}
-          <div className="login-form-otp-resend">
+          {/* <div className="login-form-otp-resend">
             <Link
               className="login-form-otp-resend-link"
               style={{
@@ -574,19 +707,14 @@ function RegScreen3(props) {
             >
               SUBMIT
             </Link>
-          </div>
+          </div> */}
         </>
       ) : (
         <></>
       )}
 
-      <div
-        className="login-form-submit-btn"
-        onClick={() => {
-          props.setBg((present) => !present);
-        }}
-      >
-        Continue
+      <div className="login-form-submit-btn" onClick={handleSubmit}>
+        Submit
       </div>
     </>
   );
