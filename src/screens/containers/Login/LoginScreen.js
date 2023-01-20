@@ -6,7 +6,9 @@ import google from "./Google.png";
 import fb from "./Facebook.png";
 import sphinxLogo from "./sphinxLogo.png";
 import Fest from "./Group16.png";
+import axios from "axios";
 import Institute from "./Group12.png";
+import { gapi } from "gapi-script";
 import {
   loginRegister,
   sendVerificationMail,
@@ -15,6 +17,7 @@ import {
   getUsersId,
   verifyMobileOTP,
 } from "../../../api";
+import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 
 import bg1 from "./bg1.png";
@@ -45,18 +48,29 @@ function Seprator() {
   );
 }
 
-function SocialIcons() {
+function SocialIcons({ handleSuccess, handleFailure, isRegistration }) {
   return (
     <div className="login-social-icons-row">
-      <div className="login-social-icon-container">
-        <img className="login-social-icons" src={google} />
-      </div>
-      <div className="login-social-icon-container">
+      {/* <div className="login-social-icon-container" onClick={handleGoogleLogin}>
+        <img
+          className="login-social-icons"
+          src={google}
+          style={{ scale: "1.50" }}
+        />
+      </div> */}
+      {/* <div className="login-social-icon-container">
         <img className="login-social-icons" src={apple} />
       </div>
       <div className="login-social-icon-container">
         <img className="login-social-icons" src={fb} />
-      </div>
+      </div> */}
+
+      <GoogleLogin
+        clientId="253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com"
+        buttonText={isRegistration ? "Signup with Google" : "Login with Google"}
+        onSuccess={handleSuccess}
+        onFailure={handleFailure}
+      />
     </div>
   );
 }
@@ -68,7 +82,41 @@ function Login(props) {
     password: "",
     remember: false,
   });
+  const handleSuccess = (response) => {
+    console.log(response);
+    let body = {
+      email: response.profileObj.email,
+      password: response.googleId,
+      isRegistration: false,
+    };
+    console.log(body);
+    props.setBg((present) => !present);
+
+    loginRegister(dispatch, body)
+      .then((data) => {
+        console.log(data);
+        alert("Success");
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+  const handleFailure = (err) => {
+    alert(err);
+  };
   const navigate = useNavigate();
+  const clientId =
+    "253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com";
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "",
+      });
+    }
+    gapi.load("client:auth2", start);
+  });
   // const profile = useSelector((state) => state.auth.curruser.profile);
   // useEffect(() => {
   //   // if (profile && !profile.isEmailVerified) {
@@ -149,7 +197,7 @@ function Login(props) {
         </div>
         <div className="login-form-side-options">
           <div className="login-form-side-options-check">
-            <input
+            {/* <input
               className="login-form-checkbox"
               type={"checkbox"}
               name="remember"
@@ -160,24 +208,64 @@ function Login(props) {
             />
             <label className="login-form-checkbox-label" htmlFor="remember">
               Remember me
-            </label>
+            </label> */}
           </div>
           <Link className="login-form-forgot-pass">Forgot Password?</Link>
         </div>
       </div>
-      <div className="login-form-submit-btn" onClick={handleSubmit}>
-        Continue
-      </div>
+      <button className="login-form-submit-btn" onClick={handleSubmit}>
+        Login
+      </button>
       <Seprator />
-      <SocialIcons />
+      <SocialIcons
+        handleSuccess={handleSuccess}
+        handleFailure={handleFailure}
+        isRegistration={false}
+      />
     </>
   );
 }
 
 function RegScreen1(props) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const user = useSelector((state) => state.auth.curruser);
+  const handleSuccess = (response) => {
+    console.log(response);
+    let body = {
+      email: response.profileObj.email,
+      password: response.googleId,
+      isRegistration: true,
+    };
+    console.log(body);
+    props.setBg((present) => !present);
+
+    loginRegister(dispatch, body)
+      .then((res) => {
+        console.log(res);
+        sendVerificationMail()
+          .then((res) => {
+            alert("Mail Sent");
+
+            props.setter(2);
+
+            props.setBg((present) => !present);
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+  const handleFailure = (err) => {
+    alert(err);
+  };
+  const navigate = useNavigate();
+  const clientId =
+    "253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com";
+
   useEffect(() => {
     console.log("Use Effect Called", user);
     if (user && !user.profile.isEmailVerified) {
@@ -212,6 +300,13 @@ function RegScreen1(props) {
       alert("Already Logged In");
       navigate("/home");
     }
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "",
+      });
+    }
+    gapi.load("client:auth2", start);
     // chandra();
     // loginRegister(dispatch, creds);
     // fetchUpdates(dispatch);
@@ -243,7 +338,11 @@ function RegScreen1(props) {
   return (
     <>
       <div className="login-form-title">Create an Account</div>
-      <SocialIcons />
+      <SocialIcons
+        handleSuccess={handleSuccess}
+        handleFailure={handleFailure}
+        isRegistration={true}
+      />
       <Seprator />
       <div className="login-form-sub-title">Sign-up with email</div>
       <div className="login-form-signup">
@@ -287,9 +386,9 @@ function RegScreen1(props) {
           />
         </div>
       </div>
-      <div className="login-form-submit-btn" onClick={handleSubmit}>
+      <button className="login-form-submit-btn" onClick={handleSubmit}>
         Continue
-      </div>
+      </button>
     </>
   );
 }
@@ -344,6 +443,7 @@ function RegScreen2(props) {
     sendVerificationMail()
       .then((res) => {
         alert("Mail Sent");
+        setOtp(new Array(6).fill(""));
         let time = Session.get("time") - parseInt(Date.now() / 1000);
         setMinutes(parseInt(time / 60));
         setSeconds(parseInt(time % 60));
@@ -397,9 +497,9 @@ function RegScreen2(props) {
         })}
       </div>
 
-      <div className="login-form-submit-btn" onClick={handleSubmit}>
+      <button className="login-form-submit-btn" onClick={handleSubmit}>
         Continue
-      </div>
+      </button>
       <div className="login-form-otp-resend">
         {seconds > 0 || minutes > 0 ? (
           <p className="login-form-timer">
@@ -444,7 +544,8 @@ function RegScreen3(props) {
     sendMobileOTP(body)
       .then((res) => {
         alert("OTP Sent");
-        setSendOtp(true);
+        // setSendOtp(true);
+        setOtp(new Array(6).fill(""));
         let time = Session.get("time") - parseInt(Date.now() / 1000);
         setMinutes(parseInt(time / 60));
         setSeconds(parseInt(time % 60));
@@ -495,7 +596,8 @@ function RegScreen3(props) {
       } else {
         verifyMobileOTP(body)
           .then((res) => {
-            console.log("Registration Completed");
+            alert("Registration Completed");
+            navigate("/home");
           })
           .catch((err) => {
             alert(err);
@@ -552,7 +654,7 @@ function RegScreen3(props) {
       <div className="login-form-title">Add Details</div>
       <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="name">
-          Name
+          Name *
         </label>
         <input
           className="login-form-text-inputs"
@@ -562,11 +664,12 @@ function RegScreen3(props) {
           onChange={(e) => {
             handleChange(e, props.setFormData);
           }}
+          required={true}
         />
       </div>
       <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="college">
-          College
+          College *
         </label>
         <input
           className="login-form-text-inputs"
@@ -594,7 +697,7 @@ function RegScreen3(props) {
       </div>
       <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="mobile">
-          Mobile
+          Mobile *
         </label>
         <input
           className="login-form-text-inputs"
@@ -713,9 +816,13 @@ function RegScreen3(props) {
         <></>
       )}
 
-      <div className="login-form-submit-btn" onClick={handleSubmit}>
+      <button
+        className="login-form-submit-btn"
+        disabled={!sendOtp}
+        onClick={handleSubmit}
+      >
         Submit
-      </div>
+      </button>
     </>
   );
 }
@@ -807,3 +914,10 @@ export default function LoginScreen() {
     </div>
   );
 }
+
+// https://accounts.google.com/o/oauth2/v2/auth?
+//  scope=https://www.googleapis.com/auth/drive.metadata.readonly&
+//  include_granted_scopes=true&
+//  response_type=token&
+//  redirect_uri=http://localhost:3000/&
+//  client_id=253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com

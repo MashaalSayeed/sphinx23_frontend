@@ -4,7 +4,7 @@ import close_btn from "../../../../../images/add_btn.png";
 import TransferList from "./TransferList";
 import { createPass, updatePass } from "../../../../../api";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 function CreateInput({ setField, label, type, value }) {
   return (
     <div className="createEvent-inputCon">
@@ -28,6 +28,7 @@ function PassForm({ setCreate, edit, currpass }) {
   const [details, setDetails] = useState(null);
   const [events, setEvents] = useState([]);
   const [passImage, setImage] = useState(null);
+  const navigate = useNavigate();
   const [createStatus, setCreateStatus] = useState(null);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.curruser.token);
@@ -145,7 +146,13 @@ function PassForm({ setCreate, edit, currpass }) {
     formData.append("file", passImage);
     formData.append("body", JSON.stringify(pass_Data));
     console.log(formData);
-    createPass(dispatch, formData, token, setCreateStatus);
+    createPass(dispatch, formData, token, setCreateStatus)
+      .then((res) => {
+        console.log("PAss Added");
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
   const submit = () => {
     return (
@@ -168,7 +175,14 @@ function PassForm({ setCreate, edit, currpass }) {
     };
     console.log(pass_Data);
 
-    updatePass(currpass._id, pass_Data, token, setCreateStatus);
+    updatePass(currpass._id, pass_Data, token)
+      .then((res) => {
+        alert("Updated");
+        window.location.href = "/superAdmin/pass/" + currpass._id;
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   const editbtn = () => {
@@ -192,7 +206,9 @@ function PassForm({ setCreate, edit, currpass }) {
       <div className="createEvent-form">
         {createStatus == "fail" ? <>Failed</> : <></>}
         {createStatus == "posted" ? <>success</> : <></>}
-        <div className="createEvent-formTitle">Add Pass</div>
+        <div className="createEvent-formTitle">
+          {edit ? "Edit" : "Add"} Pass
+        </div>
         {pass_img({ uploaded: true })}
         <div className="createEvent-sections">
           <div className="section1">

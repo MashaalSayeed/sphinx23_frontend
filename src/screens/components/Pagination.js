@@ -15,13 +15,25 @@ const Pagination = ({ nPages, currentPage, setCurrentPage, apiCall }) => {
   const nextPage = () => {
     if (currentPage !== nPages) {
       setCurrentPage(currentPage + 1);
-      apiCall(currentPage + 1);
+      apiCall(currentPage + 1)
+        .then((res) => {
+          console.log("Fetched");
+        })
+        .catch((err) => {
+          alert(err);
+        });
     }
   };
   const prevPage = () => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1);
-      apiCall(currentPage - 1);
+      apiCall(currentPage - 1)
+        .then((res) => {
+          console.log("Fetched");
+        })
+        .catch((err) => {
+          alert(err);
+        });
     }
   };
   return (
@@ -57,7 +69,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage, apiCall }) => {
               </a>
             </li>
           ))}
-          {currentPage != nPages && (
+          {currentPage != nPages && nPages != 0 && (
             <li className="page-item">
               <a className="page-link" onClick={nextPage} href="#">
                 Next

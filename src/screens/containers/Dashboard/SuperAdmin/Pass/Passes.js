@@ -10,8 +10,8 @@ export default function Passes() {
   const [createPassBool, setCreate] = useState(false);
   const passCardElements = passes.map((onePass, i) => {
     return (
-      <Link to={"pass/" + onePass.name}>
-        <PassCard key={onePass.name} image={onePass.imageUrl} />
+      <Link to={"pass/" + onePass._id}>
+        <PassCard key={onePass._id} image={onePass.imageUrl} />
       </Link>
     );
   });

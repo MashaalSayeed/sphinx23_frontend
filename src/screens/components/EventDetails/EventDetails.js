@@ -17,7 +17,7 @@ export default function EventDetails() {
   console.log("Event Called");
   const params = useParams();
   const eventName = params.id;
-
+  const tab = params.tab;
   const event = useSelector((state) => state.auth.events);
   console.log(event);
   const type = useSelector((state) => state.auth.curruser.profile.type);
@@ -31,7 +31,7 @@ export default function EventDetails() {
   const [currentPage, setCurrentPage] = useState(1);
   const [Pages, setNpage] = useState(1);
   useEffect(() => {
-    if (tabActive == "Registered Teams") {
+    if (tab == 1 || tabActive == "Registered Teams") {
       console.log("get teams by event", token);
       getTeamsByEvent(
         eventName,
@@ -42,12 +42,19 @@ export default function EventDetails() {
       );
     }
 
-    if (tabActive == "Registered Students")
-      console.log("get studnets by event"); //api call for reg studetnts ;
+    //api call for reg studetnts ;
     if (tabActive == "Results") console.log("get results by event"); //api call for results ;
   }, [tabActive]);
   useEffect(() => {
-    fetchOneEvent(setEvent, eventName);
+    if (tab == 1) setTab("Registered Teams");
+    if (tab == 2) setTab("Results");
+    fetchOneEvent(setEvent, eventName)
+      .then((res) => {
+        console.log("Event Fetched");
+      })
+      .catch((err) => {
+        alert(err);
+      });
     console.log("API Called");
   }, []);
   console.log(currentRecords);

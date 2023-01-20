@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 function Profile() {
   const currUser = useSelector((state) => state.auth.curruser.profile);
-
+  console.log(currUser);
   return (
     <div className="profile-main">
       <Card variant="outlined">
@@ -33,21 +33,16 @@ function Profile() {
             </ListItem>
             <Divider />
             <ListItem>
-              <ListItemText primary={`Mobile : ${currUser.mobileNumber}`} />
+              <ListItemText primary={`Mobile : ${currUser.phoneNumber}`} />
             </ListItem>
             <Divider />
             <Divider />
             <ListItem>
-              <ListItemText primary="Age : " />
+              <ListItemText
+                primary={`College Name : ${currUser.collegeName}`}
+              />
             </ListItem>
             <Divider />
-            <ListItem>
-              <ListItemText primary="Valid till : " />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <ListItemText primary="OTHER DETAILS" />
-            </ListItem>
           </List>
         </div>
       </Card>

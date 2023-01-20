@@ -29,7 +29,7 @@ const ReadOnlyRow = ({ data, value }) => {
     <tr>
       {value.map((ele, i) => {
         if (ele == "attendance") return attendace();
-        else return <td key={i}>{data[ele]}</td>;
+        else return <td>{data[ele]}</td>;
       })}
     </tr>
   );

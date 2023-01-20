@@ -44,7 +44,13 @@ function App() {
   useEffect(() => {
     // chandra();
     // loginRegister(dispatch, creds);
-    fetchEvents(dispatch);
+    fetchEvents(dispatch)
+      .then((res) => {
+        console.log("Events Fetched");
+      })
+      .catch((err) => {
+        alert(err);
+      });
     fetchPasses(dispatch);
     fetchUpcoming(dispatch);
     fetchCompleted(dispatch);
@@ -79,11 +85,11 @@ function App() {
               <Route path="/eventAdmin" element={<DashboardEventAdmin />} />
               <Route path="/superAdmin" element={<DashboardSuperAdmin />} />
               <Route
-                path="/superAdmin/pass/:id"
+                path="/superAdmin/pass/:id/:tab?"
                 element={<PassDetail />}
               ></Route>
               <Route
-                path="/eventDetails/event/:id"
+                path="/eventDetails/event/:id/:tab?"
                 element={<EventDetails />}
               ></Route>
               <Route

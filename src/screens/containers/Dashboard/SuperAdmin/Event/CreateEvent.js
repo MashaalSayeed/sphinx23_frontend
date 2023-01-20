@@ -2,15 +2,20 @@ import React, { useEffect, useState } from "react";
 import upload_btn from "../../../../../images/add_img.png";
 import close_btn from "../../../../../images/add_btn.png";
 import InputTag from "./InputTag";
-import { createEvent, getUsersId, updateEvent } from "../../../../../api";
+import { createEvent, updateEvent } from "../../../../../api";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Navigate } from "react-router-dom";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
+  const url = "http://localhost:8000";
   const userType =
     useSelector((state) => state.auth.curruser.profile.type) === "superAdmin";
   const disabled = editSuperAdmin ? !userType : false;
   console.log(userType);
   console.log(currEvent);
+  const navigate = useNavigate();
+  const [submitV, setSubmit] = useState(false);
   const [eventName, setEventName] = useState(null);
   const [category, setCategory] = useState("Tech");
   const [details, setDetails] = useState(null);
@@ -29,6 +34,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const [createStatus, setCreateStatus] = useState(null);
   const [eventImage, setImage] = useState(null);
   const token = useSelector((state) => state.auth.curruser.token);
+  console.log(token);
   const dispatch = useDispatch();
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -80,6 +86,13 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       setUpdateList(arr);
     }
   }, []);
+  useEffect(() => {
+    if (submitV) post_Create();
+  }, [adminId]);
+
+  // useEffect(() => {
+  //   post_Create();
+  // }, [eventCoorIds]);
 
   const CategorySelect = () => {
     return (
@@ -165,18 +178,50 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   };
 
   const submit_Event = async () => {
-    eventCoor.forEach((mail) => {
-      getUsersId(token, mail, setEventCoorId);
-    });
-    getUsersId(token, admin, setAdminId);
-
-    post_Create();
+    console.log(setEventCoorId);
+    setEventCoorId([]);
+    let a = [];
+    console.log(eventCoor, "kunal");
+    for (let i in eventCoor) {
+      try {
+        let mail = eventCoor[i];
+        console.log("mail", mail);
+        const id = await getUsersId(token, mail);
+        a.push(id);
+      } catch (err) {
+        alert(err);
+      }
+    }
+    console.log(admin, "ip");
+    setEventCoorId(a);
+    if (!admin) {
+      alert("Admin is Required.");
+      return;
+    }
+    try {
+      const id = await getUsersId(token, admin);
+      if (!id) {
+        alert("Admin Invalid");
+        return;
+      }
+      setAdminId([id]);
+      setSubmit(true);
+      // post_Create();
+    } catch (err) {
+      alert("Admin not Valid");
+    }
   };
 
   const post_Create = () => {
     console.log(eventCoorIds);
+    console.log(adminId, "POST CALLED");
     const CoorsIds = Array.from(new Set(eventCoorIds));
     console.log(CoorsIds);
+    if (adminId.length == 0) {
+      alert("No admin ids found");
+      return;
+    }
+    console.log(adminId[0]);
     const event_Data = {
       name: eventName,
       description: details,
@@ -200,7 +245,14 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
     formData.append("file", eventImage);
     formData.append("body", JSON.stringify(event_Data));
     console.log(formData);
-    createEvent(dispatch, formData, token, setCreateStatus);
+    createEvent(dispatch, formData, token)
+      .then((res) => {
+        alert("Created Event");
+        window.location.href = "/superAdmin";
+      })
+      .catch((err) => {
+        alert(err);
+      });
   };
 
   const submit = () => {
@@ -232,7 +284,16 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       maxTeamSize: maxTeamSize,
       // imageUrl: "", //
     };
-    updateEvent(currEvent._id, event_Data, token, setCreateStatus);
+    updateEvent(currEvent._id, event_Data, token, setCreateStatus)
+      .then((res) => {
+        console.log("Event Updated");
+        // navigate(`/eventDetails/event/${currEvent._id}`);
+        console.log(`/eventDetails/event/${currEvent._id}`);
+        window.location.href = `/eventDetails/event/${currEvent._id}`;
+      })
+      .catch((err) => {
+        alert(err);
+      });
     console.log(event_Data);
   };
   const edit = () => {
@@ -241,6 +302,41 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
         Edit
       </div>
     );
+  };
+
+  const getUsersId = async (token, email) => {
+    // let userData = [];
+    return fetch(`${url}/users/validatemail/${email}`, {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: "Bearer " + token,
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response, "manvir");
+        console.log(response.id);
+        return response.id;
+      })
+      .catch((err) => {
+        alert(err);
+      });
+
+    //
+    // .then((data) => {
+    //   if (data.success) {
+    //     console.log(data.id);
+    //     console.log(prevState);
+    //     setIds([...prevState, data.id]);
+    //   }
+    // })
+    // .catch((error) => {
+    //   alert(error);
+    //   // console.log(error);
+    // });
+    // return userData;
   };
   // console.log(eventCoorIds);
   console.log(eventCoor);

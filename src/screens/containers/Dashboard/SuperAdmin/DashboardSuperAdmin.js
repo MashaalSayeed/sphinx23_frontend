@@ -11,6 +11,7 @@ import Profile from "./Profile/Profile";
 import UserProfile from "./Profile/UserProfile";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
+import { useNavigate, Navigate } from "react-router-dom";
 
 export default function DashboardSuperAdmin() {
   const [isSidebar, SetSidebar] = useState(true);
@@ -18,13 +19,20 @@ export default function DashboardSuperAdmin() {
     title: "Admin Login",
     options: ["Profile", "Events", "Pass", "User Details", "Ambassador"],
   };
+  const navigate = useNavigate();
   const token = useSelector((state) => state.auth.curruser.token);
+  const profile = useSelector((state) => state.auth.curruser.profile);
   const [optactive, setactive] = useState(Sdata.options[1]);
   const [Users, setUsers] = useState([]);
   const [Ambassadors, setAmbassadors] = useState([]);
   const [Payments, setPayments] = useState([]);
 
   useEffect(() => {
+    if (profile && profile.type != "superAdmin") {
+      alert("Unauthorized");
+      navigate("/");
+    }
+
     // getUsers("", token, setUsers);
     // getAmbassadors(token, setAmbassadors);
     // getPayments(token, setPayments);

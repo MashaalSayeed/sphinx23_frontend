@@ -9,7 +9,13 @@ function EventTab({ all }) {
   const dispatch = useDispatch();
   useEffect(() => {
     // chandra();
-    fetchAdminEvents(token, dispatch);
+    fetchAdminEvents(token, dispatch)
+      .then((res) => {
+        console.log("ADmin Events Fethced");
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }, []);
 
   const events = useSelector((state) => state.auth.adminevents);

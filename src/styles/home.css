@@ -6,9 +6,9 @@
 html,body{margin:0;padding:0;}
 body{
     min-height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden; */
     animation: hideScroll 2500ms;
-    background: black;
+    /* background: black; */
 }
 
 .landing-main

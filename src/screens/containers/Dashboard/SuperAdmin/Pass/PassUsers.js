@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import ReadOnlyRow from "./ReadOnlyRow";
 // import { Button, Stack, TextField } from "@mui/material";
 
-function PassUsers({ pass }) {
-  const [usersByPass, setUsersByPass] = useState([]);
-
+function PassUsers({ pass, users }) {
+  // const [usersByPass, setUsersByPass] = useState([]);
+  console.log(users);
   return (
     <div>
       <form onSubmit={() => {}} className="resp-m-l-r usertable">
@@ -14,26 +14,27 @@ function PassUsers({ pass }) {
           <thead>
             <tr>
               <th>Sr. No.</th>
-              <th>Pass ID</th>
-              <th>College</th>
               <th>Student Name</th>
+              <th>College</th>
+              <th>Email</th>
+              <th>Mobile Number</th>
               <th>Mode of payment</th>
-              <th>Payment</th>
             </tr>
           </thead>
           <tbody>
-            {usersByPass.map((user, i) => (
-              <Fragment>
-                <ReadOnlyRow
-                  payment={{ ...user, index: i }}
-                  handleEditClick={() => {}}
-                  handleDeleteClick={() => {}}
-                />
-              </Fragment>
-            ))}
+            {users &&
+              users.map((user, i) => (
+                <Fragment>
+                  <ReadOnlyRow
+                    user={{ ...user, index: i }}
+                    handleEditClick={() => {}}
+                    handleDeleteClick={() => {}}
+                  />
+                </Fragment>
+              ))}
           </tbody>
         </table>
-        {usersByPass.length != 0 ? (
+        {users.length != 0 ? (
           <></>
         ) : (
           <div

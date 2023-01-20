@@ -7,13 +7,15 @@ import PassUsers from "./PassUsers";
 import { Dashboard } from "@mui/icons-material";
 import Dashboard_Header from "../../../../components/Dashboard_Header";
 import Pagination from "../../../../components/Pagination";
-import { getUsersByPass } from "../../../../../api";
+import { getUsersByPass, fetchOnePass } from "../../../../../api";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
 
 export default function PassDetail() {
   const params = useParams();
   const passName = params.id;
+  const tab = params.tab;
+  console.log("Tab", tab);
   const passes = useSelector((state) => state.auth.allpasses);
   const passNames = {
     "First Day": "Cleopetra Pass",
@@ -21,7 +23,7 @@ export default function PassDetail() {
     "Third Day": "Cleopetra Pass",
     "Golden Pass": "Cleopetra Pass",
   };
-  const currpass = passes.find((x) => x.name === passName);
+  const [currpass, setPass] = useState();
 
   console.log(passName);
   const token = useSelector((state) => state.auth.curruser.token);
@@ -34,14 +36,26 @@ export default function PassDetail() {
   // const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   // const currentRecords = users.slice(indexOfFirstRecord, indexOfLastRecord);
   useEffect(() => {
-    console.log(currpass._id);
-    getUsersByPass(
-      currpass._id,
-      token,
-      currentPage,
-      setCurrentRecords,
-      setNpage
-    );
+    console.log(passName);
+    if (tab == 1) {
+      setTab("Registered Students");
+    }
+    console.log("Pass Called");
+    fetchOnePass(setPass, passName)
+      .then((res) => {
+        console.log("Fetched PAss", currpass);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+
+    getUsersByPass(passName, token, currentPage, setCurrentRecords, setNpage)
+      .then((res) => {
+        console.log("Users Fetched");
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }, []);
   console.log(currentRecords);
   console.log(Pages);
@@ -49,47 +63,53 @@ export default function PassDetail() {
   return (
     <div style={{ minHeight: "100vh" }}>
       <Navbar />
-      <div className="desktop27-main">
-        <div className="space-top"></div>
-        <Dashboard_Header
-          settab={setTab}
-          tabactive={tabActive}
-          title={passName + ": " + passNames[passName]}
-          tabs={["About", "Registered Students"]}
-          excel={tabActive == "Registered Students" ? true : false}
-          addBtnBool={tabActive == "Registered Students" ? true : false}
-          dashBool={tabActive == "Registered Students" ? true : false}
-          paginate={
-            typeof Pages != "undefined" ? (
-              <Pagination
-                nPages={Pages}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                apiCall={(pageNo) => {
-                  getUsersByPass(
-                    currpass._id,
-                    token,
-                    currentPage,
-                    setCurrentRecords,
-                    setNpage
-                  );
-                }}
-              />
-            ) : (
-              <></>
-            )
-          }
-        />
+      {currpass && (
+        <div className="desktop27-main">
+          <div className="space-top"></div>
+          <Dashboard_Header
+            settab={setTab}
+            tabactive={tabActive}
+            title={currpass.name}
+            tabs={["About", "Registered Students"]}
+            excel={tabActive == "Registered Students" ? true : false}
+            addBtnBool={tabActive == "Registered Students" ? true : false}
+            dashBool={tabActive == "Registered Students" ? true : false}
+            paginate={
+              typeof Pages != "undefined" ? (
+                <Pagination
+                  nPages={Pages}
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  apiCall={(pageNo) => {
+                    getUsersByPass(
+                      currpass._id,
+                      token,
+                      pageNo,
+                      setCurrentRecords,
+                      setNpage
+                    );
+                  }}
+                />
+              ) : (
+                <></>
+              )
+            }
+          />
 
-        {
           {
-            About: <PassDetailCard pass={currpass} />,
-            "Registered Students": (
-              <PassUsers pass={currpass} setCurrentPage={setCurrentPage} />
-            ),
-          }[tabActive]
-        }
-      </div>
+            {
+              About: <PassDetailCard pass={currpass} />,
+              "Registered Students": (
+                <PassUsers
+                  pass={currpass}
+                  setCurrentPage={setCurrentPage}
+                  users={currentRecords}
+                />
+              ),
+            }[tabActive]
+          }
+        </div>
+      )}
       <Footer />
     </div>
   );
