@@ -39,19 +39,25 @@ import Theme from "./screens/containers/Home/theme";
 function App() {
   // const token1 =
   //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjYzYjMwM2EyZGJhMGJlNWZlMDE1YTVmOSIsImlhdCI6MTY3MjY3NzI3Nn0.B6QG9trZX_tXQ_Bx3-hBMVn96Xz2I4vqzeeVSOT_VRc";
-  const creds = {
-    email: "namujain266@gmail.com",
-    password: "Naman",
-    confirmPassword: "Naman",
-  };
+  // const creds = {
+  //   email: "namujain266@gmail.com",
+  //   password: "Naman",
+  //   confirmPassword: "Naman",
+  // };
   const dispatch = useDispatch();
   // fetchEvents(dispatch);
   // loginRegister(dispatch, creds);
 
   useEffect(() => {
     // chandra();
-    loginRegister(dispatch, creds);
-    fetchEvents(dispatch);
+    // loginRegister(dispatch, creds);
+    fetchEvents(dispatch)
+      .then((res) => {
+        console.log("Events Fetched");
+      })
+      .catch((err) => {
+        alert(err);
+      });
     fetchPasses(dispatch);
     fetchUpcoming(dispatch);
     fetchCompleted(dispatch);
@@ -86,11 +92,11 @@ function App() {
               <Route path="/eventAdmin" element={<DashboardEventAdmin />} />
               <Route path="/superAdmin" element={<DashboardSuperAdmin />} />
               <Route
-                path="/superAdmin/pass/:id"
+                path="/superAdmin/pass/:id/:tab?"
                 element={<PassDetail />}
               ></Route>
               <Route
-                path="/eventDetails/event/:id"
+                path="/eventDetails/event/:id/:tab?"
                 element={<EventDetails />}
               ></Route>
               <Route

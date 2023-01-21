@@ -28,6 +28,9 @@ export const fetchEvents = async (dispatch) => {
     .then((response) => response.json())
     .then((data) => {
       dispatch(events(data.events));
+    })
+    .catch((err) => {
+      throw err;
     });
 };
 export const fetchAdminEvents = async (token, dispatch) => {
@@ -43,6 +46,9 @@ export const fetchAdminEvents = async (token, dispatch) => {
     .then((data) => {
       console.log(data);
       dispatch(adminEvents(data.events));
+    })
+    .catch((err) => {
+      throw err;
     });
 };
 
@@ -57,6 +63,9 @@ export const fetchUpcoming = async (dispatch) => {
     .then((response) => response.json())
     .then((data) => {
       dispatch(upcoming(data.events));
+    })
+    .catch((err) => {
+      throw err;
     });
 };
 
@@ -71,6 +80,9 @@ export const fetchCompleted = async (dispatch) => {
     .then((response) => response.json())
     .then((data) => {
       dispatch(completed(data.events));
+    })
+    .catch((err) => {
+      throw err;
     });
 };
 
@@ -85,6 +97,9 @@ export const fetchUpdates = async (dispatch) => {
     .then((response) => response.json())
     .then((data) => {
       dispatch(updates(data.updates));
+    })
+    .catch((err) => {
+      throw err;
     });
 };
 
@@ -99,6 +114,9 @@ export const fetchPasses = async (dispatch) => {
     .then((response) => response.json())
     .then((data) => {
       dispatch(passes(data.pass));
+    })
+    .catch((err) => {
+      throw err;
     });
 };
 export const fetchOneEvent = async (setEvent, eventId) => {
@@ -112,6 +130,26 @@ export const fetchOneEvent = async (setEvent, eventId) => {
     .then((response) => response.json())
     .then((data) => {
       setEvent(data.event);
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+export const fetchOnePass = async (setPass, passId) => {
+  console.log("Pass Fetched");
+  await fetch(`${url}/passes/${passId}`, {
+    headers: {
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.pass);
+      setPass(data.pass);
+    })
+    .catch((err) => {
+      throw err;
     });
 };
 export const verifyMailOTP = async (body) => {
@@ -132,7 +170,76 @@ export const verifyMailOTP = async (body) => {
       console.log(data);
       if (data.success) {
         console.log(data);
+        let profile = Session.getObject("profile");
+        profile.profile = data.profile;
+        console.log(profile);
+        Session.setObject("profile", profile);
+        Session.remove("time");
         return data.success;
+      }
+      throw data;
+    })
+    .catch((error) => {
+      throw error;
+      // window.location.href = "/";
+      // console.log(error);
+    });
+};
+
+export const verifyMobileOTP = async (body) => {
+  console.log(Session.getObject("profile").token);
+  console.log(body);
+  await fetch(`${url}/verification/verifyMobileOTP`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        console.log(data);
+        let profile = Session.getObject("profile");
+        profile.profile = data.profile;
+        console.log(profile);
+        Session.setObject("profile", profile);
+        Session.remove("time");
+        return data.success;
+      } else {
+        throw data;
+      }
+    })
+    .catch((error) => {
+      console.log("ERROR");
+      throw error;
+      // window.location.href = "/";
+      // console.log(error);
+    });
+};
+export const sendMobileOTP = async (data) => {
+  console.log(Session.getObject("profile").token);
+
+  await fetch(`${url}/verification/sendMobileOTP`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        Session.set("time", data.time);
+        return data.time;
       }
       throw data;
     })
@@ -199,13 +306,8 @@ export const loginRegister = async (dispatch, creds) => {
     });
 };
 
-export const createEvent = async (
-  dispatch,
-  eventData,
-  token,
-  setCreateStatus
-) => {
-  console.log("Create Event Called");
+export const createEvent = async (dispatch, eventData, token) => {
+  console.log("Create Event Called", token);
   await fetch(`${url}/events/create`, {
     headers: {
       mode: "cors",
@@ -217,19 +319,17 @@ export const createEvent = async (
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
+      if (data.success) {
         console.log(data.event);
         dispatch(newEvent(data.event));
-        setCreateStatus("posted");
       } else {
-        console.log(data.error);
-        setCreateStatus("fail");
+        throw data;
         // return false;
       }
     })
     .catch((error) => {
-      console.log(error);
-      setCreateStatus("fail");
+      throw error;
+
       // return false;
     });
 };
@@ -249,16 +349,14 @@ export const addTeamsToRound = async (token, body) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
+      if (data.success) {
         console.log(data);
-        alert(data.message);
-        window.location.href = "/eventDetails/event/" + body.event;
-      } else {
-        console.log(data.error);
+        alert(data.success);
+        window.location.href = "/eventDetails/event/" + body.event + "/2";
       }
     })
     .catch((error) => {
-      alert(error.message);
+      throw error;
     });
 };
 export const addResults = async (token, body) => {
@@ -275,16 +373,14 @@ export const addResults = async (token, body) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
+      if (data.success) {
         console.log(data);
-        alert(data.message);
-        window.location.href = "/eventDetails/event/" + body.event;
-      } else {
-        console.log(data.error);
+        alert(data.success);
+        window.location.href = "/eventDetails/event/" + body.event + "/2";
       }
     })
     .catch((error) => {
-      alert(error.message);
+      throw error;
     });
 };
 export const createPass = async (
@@ -305,17 +401,12 @@ export const createPass = async (
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
-        setCreateStatus("posted");
-        console.log(data.message);
-      } else {
-        setCreateStatus("fail");
-        console.log(data.error);
+      if (data.success) {
+        alert(data.success);
       }
     })
     .catch((error) => {
-      setCreateStatus("fail");
-      console.log(error);
+      throw error;
     });
 };
 export const submitQueryResponse = async (token, body) => {
@@ -332,16 +423,12 @@ export const submitQueryResponse = async (token, body) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
+      if (data.success) {
         alert(data.message);
-      } else {
-        console.log(data.error);
-        alert(data.error);
       }
     })
     .catch((error) => {
-      alert(error.message);
-      console.log(error);
+      throw error;
     });
 };
 export const getUsersByPass = async (
@@ -362,16 +449,14 @@ export const getUsersByPass = async (
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
-        console.log(data);
+      if (data.success) {
+        console.log(data.users);
         setCurrentRecords(data.users);
         setNpage(data.totalPages);
-      } else {
-        console.log(data.error);
       }
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 };
 export const getResults = ({
@@ -393,25 +478,18 @@ export const getResults = ({
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
+      if (data.success) {
         console.log(data);
         if (data.team) {
           setCurrentRecords(data.team);
           console.log(data.totalPages);
           setNpage(data.totalPages);
           return data.totalPages;
-        } else {
-          setCurrentRecords(data.team);
-          console.log(data.totalPages);
-          setNpage(data.totalPages);
-          return data.totalPages;
         }
-      } else {
-        console.log(data.error);
       }
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 };
 export const getQueriesByEvent = ({
@@ -441,28 +519,18 @@ export const getQueriesByEvent = ({
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
-        console.log(data);
-        if (data.queries) {
-          dispatch(loading(true));
-          setCurrentRecords(data.queries);
-          console.log(status, currentPage, data.queries);
-          setNpage(data.totalPages);
-          dispatch(loading(false));
-          return data.totalPages;
-        } else {
-          setCurrentRecords(data.queries);
-          console.log(data.totalPages);
-          setNpage(data.totalPages);
-        }
-      } else {
-        console.log(data.error);
-        alert(data.error.message);
+      console.log(data);
+      if (data.queries) {
+        dispatch(loading(true));
+        setCurrentRecords(data.queries);
+        console.log(status, currentPage, data.queries);
+        setNpage(data.totalPages);
+        dispatch(loading(false));
+        return data.totalPages;
       }
     })
     .catch((error) => {
-      console.log(error);
-      alert(error.message);
+      throw error;
     });
 };
 export const getUsers = ({
@@ -482,25 +550,18 @@ export const getUsers = ({
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
+      if (data.success) {
         console.log(data);
-        if (data.user) {
-          setCurrentRecords(data.user);
-          console.log(data.totalPages);
-          setNpage(data.totalPages);
-          return data.totalPages;
-        } else {
+        if (data.users) {
           setCurrentRecords(data.users);
           console.log(data.totalPages);
           setNpage(data.totalPages);
           return data.totalPages;
         }
-      } else {
-        console.log(data.error);
       }
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 };
 
@@ -521,20 +582,17 @@ export const getAmbassadors = ({
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
+      if (data.success) {
         console.log(data.success);
         console.log(data);
+
         setCurrentRecords(data.ambassador);
         setNpage(data.totalPages);
-      } else {
-        console.log(data.error);
-        setCurrentRecords([]);
-        console.log(data.totalPages);
-        setNpage(data.totalPages);
+        return data.success;
       }
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 };
 
@@ -550,21 +608,19 @@ export const getPayments = (token, setPayments) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
+      if (data.success) {
         console.log(data.message);
         setPayments(data.payments);
-      } else {
-        console.log(data.error);
-        setPayments([]);
       }
     })
     .catch((error) => {
-      console.log(error);
       setPayments([]);
+      throw error;
     });
 };
 
-export const getUsersId = (token, email, setIds) => {
+export const getUsersId = async (token, email, setIds) => {
+  let userData = [];
   fetch(`${url}/users/validatemail/${email}`, {
     headers: {
       "Content-Type": "application/json",
@@ -577,14 +633,16 @@ export const getUsersId = (token, email, setIds) => {
     .then((data) => {
       if (data.success) {
         console.log(data.id);
+        // console.log(setIds);
+        // console.log(setIds);
         setIds((prevState) => [...prevState, data.id]);
-      } else {
-        console.log(data.error);
       }
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
+      // console.log(error);
     });
+  // return userData;
 };
 
 export const updateEvent = async (
@@ -607,23 +665,17 @@ export const updateEvent = async (
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
-        console.log(data.event);
-        setCreateStatus("posted");
-      } else {
-        console.log(data.error);
-        setCreateStatus("fail");
-        // return false;
+      if (data.success) {
+        alert(data.success);
       }
     })
     .catch((error) => {
-      console.log(error);
-      setCreateStatus("fail");
+      throw error;
       // return false;
     });
 };
 
-export const updatePass = async (passId, passData, token, setCreateStatus) => {
+export const updatePass = async (passId, passData, token) => {
   console.log("Update PASS Called");
   await fetch(`${url}/passes/${passId}`, {
     headers: {
@@ -637,17 +689,12 @@ export const updatePass = async (passId, passData, token, setCreateStatus) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
-        setCreateStatus("posted");
-        console.log(data.message);
-      } else {
-        setCreateStatus("fail");
-        console.log(data.error);
+      if (data.success) {
+        return data.pass;
       }
     })
     .catch((error) => {
-      setCreateStatus("fail");
-      console.log(error);
+      throw error;
     });
 };
 
@@ -670,15 +717,13 @@ export const getTeamsByEvent = async (
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error == null) {
+      if (data.success) {
         console.log(data);
         setCurrentRecords(data.team);
         setNpage(data.totalPages);
-      } else {
-        console.log(data.error);
       }
     })
     .catch((error) => {
-      console.log(error);
+      throw error;
     });
 };

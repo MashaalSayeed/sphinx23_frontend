@@ -23,8 +23,8 @@ export default function PassDetailCard(props) {
           style={{ marginTop: "30px" }}
         >
           <div className="desktop14-btn-inner">
-            <div>
-              <img src={edit_img}></img>
+            <div style={{ display: "flex" }}>
+              <img src={edit_img} style={{ margin: "auto" }}></img>
             </div>
             <p>Edit</p>
           </div>

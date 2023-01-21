@@ -180,10 +180,16 @@ font-weight: 400;
 
 .createEvent-close
 {
-    background: transparent;
+    
     border: none;
     position: absolute;
-    transform:translateX(50vw) translateY(20px);
+    transform:translateX(50vw) translateY(10px);
+    background:  linear-gradient(86.27deg, #000000 0%, #3E3E3E 100%);
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   
 }
 .createEvent-close>img

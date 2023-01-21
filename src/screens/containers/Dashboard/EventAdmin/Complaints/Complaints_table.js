@@ -126,16 +126,14 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
               data["subject"],
               data["queryDesc"]
             );
-          else if (ele == "name") return <td key={i}>{data["user"].name}</td>;
-          else if (ele == "email") return <td key={i}>{data["user"].email}</td>;
-          else if (ele == "college")
-            return <td key={i}>{data["user"].collegeName}</td>;
-          else if (ele == "event") return <td key={i}>{data["event"].name}</td>;
-          else return <td key={i}>{data[ele]}</td>;
+          else if (ele == "name") return <td>{data["user"].name}</td>;
+          else if (ele == "email") return <td>{data["user"].email}</td>;
+          else if (ele == "college") return <td>{data["user"].collegeName}</td>;
+          else if (ele == "event") return <td>{data["event"].name}</td>;
+          else return <td>{data[ele]}</td>;
         })}
       </tr>
       <tr className="Pop-Up-Screen">
-        {" "}
         {fetchbutton && (
           <OpenPopUp
             isApproved={data["isApproved"]}

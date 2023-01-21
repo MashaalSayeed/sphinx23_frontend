@@ -6,12 +6,18 @@ import google from "./Google.png";
 import fb from "./Facebook.png";
 import sphinxLogo from "./sphinxLogo.png";
 import Fest from "./Group16.png";
+import axios from "axios";
 import Institute from "./Group12.png";
+import { gapi } from "gapi-script";
 import {
   loginRegister,
   sendVerificationMail,
   verifyMailOTP,
+  sendMobileOTP,
+  getUsersId,
+  verifyMobileOTP,
 } from "../../../api";
+import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
 
 import bg1 from "./bg1.png";
@@ -20,9 +26,12 @@ import bg3 from "./bg3.png";
 import bg4 from "./bg4.png";
 import bg0 from "./bg0.png";
 import Session from "../../../Session";
+import { LeakRemoveTwoTone } from "@mui/icons-material";
 
 function handleChange(event, setter) {
+  // console.log("Handle Called");
   const { name, value, type, checked } = event.target;
+  console.log(name, value);
   setter((prevformData) => ({
     ...prevformData,
     [name]: type === "checkbox" ? checked : value,
@@ -39,18 +48,29 @@ function Seprator() {
   );
 }
 
-function SocialIcons() {
+function SocialIcons({ handleSuccess, handleFailure, isRegistration }) {
   return (
     <div className="login-social-icons-row">
-      <div className="login-social-icon-container">
-        <img className="login-social-icons" src={google} />
-      </div>
-      <div className="login-social-icon-container">
+      {/* <div className="login-social-icon-container" onClick={handleGoogleLogin}>
+        <img
+          className="login-social-icons"
+          src={google}
+          style={{ scale: "1.50" }}
+        />
+      </div> */}
+      {/* <div className="login-social-icon-container">
         <img className="login-social-icons" src={apple} />
       </div>
       <div className="login-social-icon-container">
         <img className="login-social-icons" src={fb} />
-      </div>
+      </div> */}
+
+      <GoogleLogin
+        clientId="253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com"
+        buttonText={isRegistration ? "Signup with Google" : "Login with Google"}
+        onSuccess={handleSuccess}
+        onFailure={handleFailure}
+      />
     </div>
   );
 }
@@ -62,7 +82,59 @@ function Login(props) {
     password: "",
     remember: false,
   });
+  const handleSuccess = (response) => {
+    console.log(response);
+    let body = {
+      email: response.profileObj.email,
+      password: response.googleId,
+      isRegistration: false,
+    };
+    console.log(body);
+    props.setBg((present) => !present);
+
+    loginRegister(dispatch, body)
+      .then((data) => {
+        console.log(data);
+        alert("Success");
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+  const handleFailure = (err) => {
+    alert(err);
+  };
   const navigate = useNavigate();
+  const clientId =
+    "253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com";
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "",
+      });
+    }
+    gapi.load("client:auth2", start);
+  });
+  // const profile = useSelector((state) => state.auth.curruser.profile);
+  // useEffect(() => {
+  //   // if (profile && !profile.isEmailVerified) {
+  //   //   props.setter(2);
+  //   //   props.setBg((present) => !present);
+  //   // }
+  //   // if (profile && profile.isEmailVerified && !profile.isMobileNumberVerified) {
+  //   //   props.setter(3);
+  //   //   props.setBg((present) => !present);
+  //   // }
+  //   // if (profile && profile.isEmailVerified && profile.isMobileNumberVerified) {
+  //   //   navigate("/home");
+  //   // }
+  //   // //
+  //   // chandra();
+  //   // loginRegister(dispatch, creds);
+  //   // fetchUpdates(dispatch);
+  // }, []);
   function handleSubmit(event) {
     props.setBg((present) => !present);
     formData.isRegistration = false;
@@ -125,7 +197,7 @@ function Login(props) {
         </div>
         <div className="login-form-side-options">
           <div className="login-form-side-options-check">
-            <input
+            {/* <input
               className="login-form-checkbox"
               type={"checkbox"}
               name="remember"
@@ -136,26 +208,68 @@ function Login(props) {
             />
             <label className="login-form-checkbox-label" htmlFor="remember">
               Remember me
-            </label>
+            </label> */}
           </div>
           <Link className="login-form-forgot-pass">Forgot Password?</Link>
         </div>
       </div>
-      <div className="login-form-submit-btn" onClick={handleSubmit}>
-        Continue
-      </div>
+      <button className="login-form-submit-btn" onClick={handleSubmit}>
+        Login
+      </button>
       <Seprator />
-      <SocialIcons />
+      <SocialIcons
+        handleSuccess={handleSuccess}
+        handleFailure={handleFailure}
+        isRegistration={false}
+      />
     </>
   );
 }
 
 function RegScreen1(props) {
   const dispatch = useDispatch();
+
   const user = useSelector((state) => state.auth.curruser);
+  const handleSuccess = (response) => {
+    console.log(response);
+    let body = {
+      email: response.profileObj.email,
+      password: response.googleId,
+      isRegistration: true,
+    };
+    console.log(body);
+    props.setBg((present) => !present);
+
+    loginRegister(dispatch, body)
+      .then((res) => {
+        console.log(res);
+        sendVerificationMail()
+          .then((res) => {
+            alert("Mail Sent");
+
+            props.setter(2);
+
+            props.setBg((present) => !present);
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+  const handleFailure = (err) => {
+    alert(err);
+  };
+  const navigate = useNavigate();
+  const clientId =
+    "253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com";
+
   useEffect(() => {
     console.log("Use Effect Called", user);
     if (user && !user.profile.isEmailVerified) {
+      console.log("mail");
       sendVerificationMail()
         .then((res) => {
           alert("Mail Sent");
@@ -167,6 +281,32 @@ function RegScreen1(props) {
           alert(err);
         });
     }
+    if (
+      user &&
+      user.profile.isEmailVerified &&
+      !user.profile.isMobileNumberVerified
+    ) {
+      console.log("Called");
+      alert("Profile is not complete.");
+      props.setter(3);
+      props.setBg((present) => !present);
+    }
+    if (
+      user &&
+      user.profile.isEmailVerified &&
+      user.profile.isMobileNumberVerified
+    ) {
+      console.log("Called");
+      alert("Already Logged In");
+      navigate("/home");
+    }
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "",
+      });
+    }
+    gapi.load("client:auth2", start);
     // chandra();
     // loginRegister(dispatch, creds);
     // fetchUpdates(dispatch);
@@ -198,7 +338,11 @@ function RegScreen1(props) {
   return (
     <>
       <div className="login-form-title">Create an Account</div>
-      <SocialIcons />
+      <SocialIcons
+        handleSuccess={handleSuccess}
+        handleFailure={handleFailure}
+        isRegistration={true}
+      />
       <Seprator />
       <div className="login-form-sub-title">Sign-up with email</div>
       <div className="login-form-signup">
@@ -242,26 +386,31 @@ function RegScreen1(props) {
           />
         </div>
       </div>
-      <div className="login-form-submit-btn" onClick={handleSubmit}>
+      <button className="login-form-submit-btn" onClick={handleSubmit}>
         Continue
-      </div>
+      </button>
     </>
   );
 }
 
 function RegScreen2(props) {
   const token = useSelector((state) => state.auth.curruser.token);
-  console.log(Session.get("time"), parseInt(Date.now()));
+  const profile = useSelector((state) => state.auth.curruser.profile);
+
   useEffect(() => {
     console.log("Use Effect Called", token);
-
+    if (profile && profile.isEmailVerified) {
+      props.setter(3);
+      props.setBg((present) => !present);
+    }
     // chandra();
     // loginRegister(dispatch, creds);
     // fetchUpdates(dispatch);
   }, []);
   const [otp, setOtp] = useState(new Array(6).fill(""));
-  const [minutes, setMinutes] = useState(1);
-  const [seconds, setSeconds] = useState(30);
+  let time = Session.get("time") - parseInt(Date.now() / 1000);
+  const [minutes, setMinutes] = useState(parseInt(time / 60));
+  const [seconds, setSeconds] = useState(parseInt(time % 60));
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
@@ -269,37 +418,39 @@ function RegScreen2(props) {
       element.nextSibling.focus();
     }
   };
-  function handleResend() {
+
+  function handleSubmit() {
+    console.log(otp.join(""));
+    let otp_string = otp.join("");
+    if (otp_string == "") alert("OTP is Required");
+    else {
+      let body = { otp: otp_string };
+
+      verifyMailOTP(body)
+        .then((res) => {
+          alert("Verified");
+
+          props.setter(3);
+          props.setBg((present) => !present);
+        })
+        .catch((err) => {
+          alert(err);
+        });
+    }
+  }
+  function ResetOtp() {
     console.log("called");
     sendVerificationMail()
       .then((res) => {
         alert("Mail Sent");
-
-        props.setter(2);
-        props.setBg((present) => !present);
+        setOtp(new Array(6).fill(""));
+        let time = Session.get("time") - parseInt(Date.now() / 1000);
+        setMinutes(parseInt(time / 60));
+        setSeconds(parseInt(time % 60));
       })
       .catch((err) => {
         alert(err);
       });
-  }
-  function handleSubmit() {
-    console.log(otp.join(""));
-    let otp_string = otp.join("");
-    let body = { otp: otp_string };
-
-    verifyMailOTP(body)
-      .then((res) => {
-        alert("Verified");
-        props.setter(3);
-        props.setBg((present) => !present);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }
-  function ResetOtp() {
-    setMinutes(1);
-    setSeconds(30);
   }
 
   useEffect(() => {
@@ -326,7 +477,7 @@ function RegScreen2(props) {
   return (
     <>
       <div className="login-form-title">Enter OTP</div>
-      <div className="login-form-comments">{`A 6 digit code has been sent to ${props.formData.email}`}</div>
+      <div className="login-form-comments">{`A 6 digit code has been sent to ${profile.email}`}</div>
       <div className="login-form-otp-row">
         {otp.map((data, index) => {
           return (
@@ -346,9 +497,9 @@ function RegScreen2(props) {
         })}
       </div>
 
-      <div className="login-form-submit-btn" onClick={handleSubmit}>
+      <button className="login-form-submit-btn" onClick={handleSubmit}>
         Continue
-      </div>
+      </button>
       <div className="login-form-otp-resend">
         {seconds > 0 || minutes > 0 ? (
           <p className="login-form-timer">
@@ -378,7 +529,9 @@ function RegScreen3(props) {
   const [sendOtp, setSendOtp] = useState(false);
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(30);
-
+  const [ambassadorId, setambassadorId] = useState([]);
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.auth.curruser.token);
   const handleChangeOtp = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
@@ -387,10 +540,93 @@ function RegScreen3(props) {
     }
   };
   function ResetOtp() {
-    setMinutes(1);
-    setSeconds(30);
+    let body = { phoneNumber: props.formData.mobile };
+    sendMobileOTP(body)
+      .then((res) => {
+        alert("OTP Sent");
+        // setSendOtp(true);
+        setOtp(new Array(6).fill(""));
+        let time = Session.get("time") - parseInt(Date.now() / 1000);
+        setMinutes(parseInt(time / 60));
+        setSeconds(parseInt(time % 60));
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
+  const handleSubmit = async () => {
+    if (
+      props.formData.name == "" ||
+      props.formData.college == "" ||
+      props.formData.mobile == ""
+    )
+      alert("Name,College Name and Mobile  are Mandatory");
+    else if (sendOtp && otp.join("") == "") {
+      alert("OTP is Mandataory");
+    } else if (!sendOtp) {
+      alert("Mobile Must be Verified");
+    } else {
+      console.log("Called", otp.join(""));
+      console.log(ambassadorId);
+      let body = {
+        name: props.formData.name,
+        collegeName: props.formData.college,
+        otp: otp.join(""),
+      };
+      console.log(body);
+      if (props.formData.campusAmbassador) {
+        getUsersId(token, props.formData.campusAmbassador, setambassadorId)
+          .then((res) => {
+            console.log("Ambassador Correct", ambassadorId);
+            body.refererId = props.formData.campusAmbassador;
+            console.log(body);
+            verifyMobileOTP(body)
+              .then((res) => {
+                alert("Registration Completed");
+                navigate("/home");
+              })
+              .catch((err) => {
+                alert(err);
+              });
+          })
+          .catch((err) => {
+            alert("Referer is Invalid");
+            setambassadorId([]);
+          });
+      } else {
+        verifyMobileOTP(body)
+          .then((res) => {
+            alert("Registration Completed");
+            navigate("/home");
+          })
+          .catch((err) => {
+            alert(err);
+          });
+      }
 
+      console.log(body);
+      props.setBg((present) => !present);
+    }
+  };
+
+  const sendOTP = () => {
+    console.log(props.formData.mobile);
+
+    let body = { phoneNumber: props.formData.mobile };
+    sendMobileOTP(body)
+      .then((res) => {
+        alert("OTP Sent");
+        setSendOtp(true);
+        let time = Session.get("time") - parseInt(Date.now() / 1000);
+        setMinutes(parseInt(time / 60));
+        setSeconds(parseInt(time % 60));
+      })
+      .catch((err) => {
+        alert(err);
+      });
+
+    // if (props.formData.mobile.length) setSendOtp(true);
+  };
   useEffect(() => {
     if (sendOtp) {
       const interval = setInterval(() => {
@@ -418,26 +654,27 @@ function RegScreen3(props) {
       <div className="login-form-title">Add Details</div>
       <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="name">
-          Name
+          Name *
         </label>
         <input
           className="login-form-text-inputs"
           name="name"
-          type={"text"}
+          type="text"
           value={props.formData.name}
           onChange={(e) => {
             handleChange(e, props.setFormData);
           }}
+          required={true}
         />
       </div>
       <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="college">
-          College
+          College *
         </label>
         <input
           className="login-form-text-inputs"
           name="college"
-          type={"text"}
+          type="text"
           value={props.formData.college}
           onChange={(e) => {
             handleChange(e, props.setFormData);
@@ -450,8 +687,8 @@ function RegScreen3(props) {
         </label>
         <input
           className="login-form-text-inputs"
-          name="Campus Ambassador"
-          type={"text"}
+          name="campusAmbassador"
+          type="text"
           value={props.formData.campusAmbassador}
           onChange={(e) => {
             handleChange(e, props.setFormData);
@@ -460,12 +697,13 @@ function RegScreen3(props) {
       </div>
       <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="mobile">
-          Mobile
+          Mobile *
         </label>
         <input
           className="login-form-text-inputs"
           name="mobile"
-          type={"tel"}
+          type="tel"
+          pattern="[1-9][0-9]{9}"
           value={props.formData.mobile}
           onChange={(e) => {
             handleChange(e, props.setFormData);
@@ -478,9 +716,7 @@ function RegScreen3(props) {
             className="login-form-text-label login-form-otp-resend-link"
             style={{ fontSize: "0.9rem" }}
             htmlFor="mobile"
-            onClick={() => {
-              setSendOtp(true);
-            }}
+            onClick={sendOTP}
           >
             Verify Mobile
           </Link>
@@ -563,7 +799,7 @@ function RegScreen3(props) {
           ) : (
             <></>
           )}
-          <div className="login-form-otp-resend">
+          {/* <div className="login-form-otp-resend">
             <Link
               className="login-form-otp-resend-link"
               style={{
@@ -574,20 +810,19 @@ function RegScreen3(props) {
             >
               SUBMIT
             </Link>
-          </div>
+          </div> */}
         </>
       ) : (
         <></>
       )}
 
-      <div
+      <button
         className="login-form-submit-btn"
-        onClick={() => {
-          props.setBg((present) => !present);
-        }}
+        disabled={!sendOtp}
+        onClick={handleSubmit}
       >
-        Continue
-      </div>
+        Submit
+      </button>
     </>
   );
 }
@@ -679,3 +914,10 @@ export default function LoginScreen() {
     </div>
   );
 }
+
+// https://accounts.google.com/o/oauth2/v2/auth?
+//  scope=https://www.googleapis.com/auth/drive.metadata.readonly&
+//  include_granted_scopes=true&
+//  response_type=token&
+//  redirect_uri=http://localhost:3000/&
+//  client_id=253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com

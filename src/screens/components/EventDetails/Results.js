@@ -184,9 +184,21 @@ function Results({ event }) {
     var body = { event: event._id, teamIds, complete };
     if (currResultRound == event.status) {
       console.log("Latest Results");
-      addResults(token, body);
+      addResults(token, body)
+        .then((res) => {
+          console.log("Teams Added");
+        })
+        .catch((err) => {
+          alert(err);
+        });
     } else {
-      addTeamsToRound(token, body);
+      addTeamsToRound(token, body)
+        .then((res) => {
+          console.log("Teams Added");
+        })
+        .catch((err) => {
+          alert(err);
+        });
     }
   };
 
@@ -282,6 +294,7 @@ function Results({ event }) {
       setCurrentRecords: setCurrentRecords,
       setNpage: setNpage,
     });
+
     getResults({
       eventId: event._id,
       round: currResultRound,

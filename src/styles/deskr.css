@@ -59,8 +59,10 @@
         color: #FF8762;
         border-radius: 6px;
         border: none;
+        width: 20%;
+        max-width: 130px;
         height: 54px;
-        width: 135px;
+        min-width: 110px;
         margin: 10px 0;
     
     }

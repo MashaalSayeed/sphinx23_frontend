@@ -7,7 +7,7 @@ body{
     min-height: 100vh;
     /* overflow: hidden; */
     animation: hideScroll 2500ms;
-    background: black;
+    /* background: black; */
 }
 body::-webkit-scrollbar{
     display: none;
