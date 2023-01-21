@@ -28,7 +28,7 @@ function Landing() {
   };
 
   return (
-    <>
+    <div className="home-con">
       <div>
         <div
           className={Loading || !Scroll ? "landing-main" : "exit-anim"}
@@ -145,7 +145,7 @@ function Landing() {
           <TimeMachine />
         </>
       )}
-    </>
+    </div>
   );
 }
 

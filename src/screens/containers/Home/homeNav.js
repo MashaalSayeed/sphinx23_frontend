@@ -2,9 +2,9 @@ import React from "react";
 import logo from "../../../images/home/homeLogo.png";
 import burger from "../../../images/home/burger.png";
 
-function HomeNav({ setCurrTab, currTab, Tabs }) {
+function HomeNav({ setCurrTab, currTab, Tabs, notanimation }) {
   return (
-    <div className="landing-navbar">
+    <div className={notanimation ? "landing-navbar-notAnim" : "landing-navbar"}>
       <div className="landing-logo">
         <img src={logo}></img>
       </div>

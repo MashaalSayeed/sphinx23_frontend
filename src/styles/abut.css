@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+.about-page {
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	background: linear-gradient(114.65deg, #532800 9.51%, #e1b981 83.88%);
+	position: relative;
+}
+.about-page-background-img {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100vh;
+	width: 100vw;
+	z-index: 0;
+	background-image: url("../images/about/PyramidBack.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.about-page-side-rectangle {
+	position: absolute;
+	width: 50vw;
+	height: 70vh;
+	right: -25vw;
+	top: -25vh;
+	transform: rotate(-45deg);
+	background: #291400;
+	filter: blur(200px);
+	border-radius: 100%;
+}
+.about-page-center-rectangle {
+	position: absolute;
+	width: 25vw;
+	height: 35vh;
+	left: 46.5vw;
+	top: 23vh;
+	border-radius: 100%;
+	filter: blur(125px);
+	background: #ffc978;
+}
+
+.about-page-bg-overlay {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100vh;
+	width: 100vw;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, 0.56);
+}
+.about-page-content {
+	position: absolute;
+	z-index: 2;
+	top: 0px;
+	left: 0px;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
+}
+.about-page-content-text {
+	width: 40%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	margin-left: 4%;
+	gap: 20px;
+}
+.about-page--text-head {
+	font-family: 'Noto Sans Adlam Unjoined', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 4.5rem;
+	line-height: 5.2rem;
+	letter-spacing: 0.05em;
+	color: #ffffff;
+}
+.about-page--text-body {
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.2rem;
+	letter-spacing: 0.04em;
+	color: #ffffff;
+	text-align: left;
+}
+.about-page--text-button {
+	background: linear-gradient(92.11deg, #ffa617 2.72%, #fffefc 99.57%);
+	border-radius: 5px;
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 1.2rem;
+	line-height: 1.4rem;
+	letter-spacing: 0.04em;
+	color: #423300;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	margin-bottom: 20px;
+}
+
+.about-page-foreground-img {
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+	z-index: 3;
+	top: 0px;
+	left: 0px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: url("../images/about/PyramidFront.png");
+}
+
+.simple-scroll
+{
+	position: absolute;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+@media (max-width: 1200px) {
+	.about-page-foreground-img {
+		z-index: 2;
+	}
+	.about-page-content {
+		z-index: 3;
+	}
+}

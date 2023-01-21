@@ -1,9 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Adlam+Unjoined:wght@700&display=swap');
+ @font-face {
+  font-family: 'HeadLineA';
+  src: url('images/headlinea.ttf');
+}
 .space-top
 {
   height: max(10vh,90px);
+  background-color: white;
+}
+.super-main
+{
+
 }
 
 .navbar
@@ -65,14 +76,14 @@ color: rgba(0, 0, 0, 0.9);
 }
 .nav-notify
 {
-  width: 35px;
+  width: 20px;
   object-fit: contain;
   aspect-ratio: 1/1;
   height: fit-content;
   margin-right: 7%;
 }
 .nav-profile{
-  width: 60px;
+  width: 40px;
   padding: 2px;
   object-fit: contain;
   aspect-ratio: 1/1;
@@ -124,6 +135,7 @@ color: #FFFFFF;
   margin-left: 10px;
   object-fit: contain;
   aspect-ratio: 1/1;
+  transform: rotate(270deg);
 }
 .sidebar-options
 {
@@ -158,13 +170,52 @@ border-radius: 9px;
 {
   
   transform: rotate(180deg);
-  -webkit-transition: transform 300ms ease-in-out;
+ 
 }
 .rotate0
 {
   
-  transform: rotate(0);
-  -webkit-transition: transform 300ms ease-in-out;
+ 
+ 
+}
+@keyframes slideOut {
+  0%{
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100%
+  {
+    transform: translateX(-300%);
+    opacity: 0;
+  }
+
+  
+}
+@keyframes slideIn {
+  0%{
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  100%
+  {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  
+}
+@keyframes slideInSidebar {
+  0%{
+    transform: translateX(-120%) rotate(-90deg);
+    opacity: 0;
+  }
+  100%
+  {
+    transform: translateX(0) rotate(-90deg);
+    opacity: 1;
+  }
+
+  
 }
 .exit
 {

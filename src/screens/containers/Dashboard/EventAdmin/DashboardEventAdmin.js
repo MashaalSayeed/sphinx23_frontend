@@ -29,7 +29,7 @@ export default function DashboardEventAdmin() {
   //   console.log("USERS AMBASSADORS PAYMENT SET");
   // }, []);
   return (
-    <div>
+    <div style={{ backgroundColor: "white" }}>
       <Navbar />
 
       <div className="space-top"></div>

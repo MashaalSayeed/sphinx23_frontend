@@ -1,0 +1,88 @@
+.about-main
+{
+   width: 100%;
+    height: 100vh; 
+   margin: 0;
+   position: absolute;
+   z-index: -2;
+   background: linear-gradient(114.65deg, #532800 9.51%, #E1B981 83.88%);;
+}
+.about-pyramid
+{
+    position: absolute;
+    z-index: 1;
+    bottom: 5px;
+    right: 10%;
+}
+.about-bottom 
+{
+    width: 100%;
+    height: 100vh;
+    aspect-ratio: 1.42;
+    
+    position: absolute;
+    z-index: -1;
+    display: flex;
+    bottom: 0;
+   
+   
+}
+.about-bottom-img
+{
+    position: relative;
+    aspect-ratio:  1.42;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+
+}
+
+.about-info
+{
+    margin-left: max(5%,100px);
+    display: flex;
+    width: 40%;
+    height: 90%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.home-about-title
+{
+    font-weight: 600;
+    font-size: 2.4rem;
+    letter-spacing: 0.02em;
+    line-height: 2.8rem;
+    color: #FFFFFF;
+    padding: 4px;
+    margin-bottom: 15px;
+}
+.about-Maincontent
+{
+    width: 100%;
+    padding: 4px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: #FFFFFF;
+}
+.home-about-btn
+{
+    margin-top: 20px;
+    border: transparent;
+    border: none;
+    padding: 10px 20px;
+  
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 1rem;
+
+letter-spacing: 0.04em;
+
+color: #423300;
+    background: linear-gradient(92.11deg, #FFA617 2.72%, #FFFEFC 99.57%);
+    border-radius: 5px;
+}

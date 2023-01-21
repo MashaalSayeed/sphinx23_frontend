@@ -6,6 +6,10 @@ import "./styles/footer.css";
 import "./styles/desktop27.css";
 import "./styles/deskr.css";
 import "./styles/createEvent.css";
+import "./styles/activity.css";
+import "./styles/home.css";
+import "./styles/abut.css";
+import "./styles/about.css";
 import {
   fetchEvents,
   fetchPasses,
@@ -28,6 +32,9 @@ import DashboardEventAdmin from "./screens/containers/Dashboard/EventAdmin/Dashb
 import LoginScreen from "./screens/containers/Login/LoginScreen";
 import Landing from "./screens/containers/Home/home";
 import TimeMachine from "./screens/containers/Home/TimeMachine";
+import About from "./screens/containers/Home/about";
+import Activities from "./screens/containers/Home/Activities";
+import Theme from "./screens/containers/Home/theme";
 
 function App() {
   // const token1 =
@@ -43,7 +50,7 @@ function App() {
 
   useEffect(() => {
     // chandra();
-    // loginRegister(dispatch, creds);
+    loginRegister(dispatch, creds);
     fetchEvents(dispatch);
     fetchPasses(dispatch);
     fetchUpcoming(dispatch);
@@ -73,7 +80,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LoginScreen />} />
-          <Route path="/home" element={<Landing />} />
+          <Route path="/home" element={<Activities />} />
           {curruser != null ? (
             <>
               <Route path="/eventAdmin" element={<DashboardEventAdmin />} />

@@ -31,7 +31,7 @@ export default function DashboardSuperAdmin() {
     // console.log("USERS AMBASSADORS PAYMENT SET");
   }, []);
   return (
-    <div>
+    <div style={{ backgroundColor: "white" }}>
       <Navbar />
       <div className="space-top"></div>
       <div className="super-mainCon">
