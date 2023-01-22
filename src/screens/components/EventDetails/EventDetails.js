@@ -124,7 +124,7 @@ export default function EventDetails() {
   console.log("cuurent tab");
   console.log(tabActive);
   return (
-    <div>
+    <div style={{ background: "white" }}>
       <Navbar />
       <div className="space-top"></div>
       {currevent && (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import EventTab from "./EventTab";
 import Dashboard_Header from "../../../../components/Dashboard_Header";
@@ -6,7 +6,9 @@ function AdminEvent() {
   const [tabActive, setTab] = useState("All Events");
   const [createEventState, setCreate] = useState(false);
   const events = useSelector((state) => state.auth.events);
-
+  useEffect(() => {
+    window.history.pushState(null, "Sphinx2023", "/eventAdmin/1");
+  }, []);
   return (
     <div className="super-event">
       <Dashboard_Header

@@ -3,7 +3,7 @@
     width: 100%;
     height: 100vh; 
     margin: 0;
-    position: absolute;
+    position: relative;
     background-color: #4176FE;
     display: flex;
 }

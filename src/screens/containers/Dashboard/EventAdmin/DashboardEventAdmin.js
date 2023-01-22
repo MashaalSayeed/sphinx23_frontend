@@ -10,16 +10,22 @@ import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import Complaints from "./Complaints/Complaints";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 export default function DashboardEventAdmin() {
   const Sdata = {
     title: "Event Admin",
     options: ["Profile", "Events", "Query", "Team"],
   };
+
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.curruser.token);
   const profile = useSelector((state) => state.auth.curruser.profile);
-  const [optactive, setactive] = useState(Sdata.options[1]);
+  const [optactive, setactive] = useState(Sdata.options[0]);
   const [isSidebar, SetSidebar] = useState(true);
+  const params = useParams();
+  const currtab = params.tab;
+  console.log(currtab);
+
   // const [Users, setUsers] = useState([]);
   // const [Ambassadors, setAmbassadors] = useState([]);
   // const [Payments, setPayments] = useState([]);
@@ -27,6 +33,13 @@ export default function DashboardEventAdmin() {
     if (profile && profile.type != "eventAdmin") {
       alert("Unauthorized");
       navigate("/");
+    }
+    try {
+      const tabNo = parseInt(currtab);
+      if (tabNo >= 0 && tabNo < Sdata.options.length)
+        setactive(Sdata.options[parseInt(currtab)]);
+    } catch {
+      console.log("invalid tab");
     }
 
     // getUsers("", token, setUsers);
@@ -61,11 +74,18 @@ export default function DashboardEventAdmin() {
             {
               Profile: (
                 <>
+                  {/* {navigate("/eventAdmin/0")} */}
+                  {/* {(window.location.href = "/eventAdmin/0")} */}
                   <UserProfile />
                   <Profile />
                 </>
               ),
-              Events: <AdminEvent />,
+              Events: (
+                <>
+                  {/* {(window.location.href = "/eventAdmin/1")} */}
+                  <AdminEvent />
+                </>
+              ),
               Query: <Complaints />,
               Team: <TeamTab />,
             }[optactive]

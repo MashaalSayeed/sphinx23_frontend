@@ -17,7 +17,7 @@ function Landing() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
-    }, 3000);
+    }, 4000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -67,7 +67,12 @@ function Landing() {
             }
             className="newNavbar"
           >
-            <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
+            <HomeNav
+              setCurrTab={setCurrTab}
+              currTab={currTab}
+              Tabs={Tabs}
+              landing={true}
+            />
           </div>
 
           <div
@@ -142,7 +147,7 @@ function Landing() {
         <></>
       ) : (
         <>
-          <TimeMachine />
+          <TimeMachine landing={true} />
         </>
       )}
     </div>

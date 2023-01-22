@@ -43,7 +43,7 @@ import React, { useState } from "react";
 import HomeNav from "./homeNav";
 
 export default function About() {
-  const [currTab, setCurrTab] = useState("Home");
+  const [currTab, setCurrTab] = useState("About");
   const Tabs = ["Home", "About", "Contact"];
   return (
     <div className="about-page">

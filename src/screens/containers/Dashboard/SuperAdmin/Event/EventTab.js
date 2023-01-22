@@ -22,6 +22,7 @@ function EventTab(props) {
               >
                 <div className="eventTab-Ecard" key={i}>
                   <img className="Ecard-img" src={opt.imageUrl}></img>
+                  <div className="Ecard-title">{opt.name}</div>
                 </div>
               </Link>
             )

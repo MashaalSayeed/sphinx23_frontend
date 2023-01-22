@@ -33,7 +33,12 @@ function EventTab({ all }) {
                 className="event-link"
               >
                 <div className="eventTab-Ecard" key={i}>
-                  <img className="Ecard-img" src={opt.imageUrl}></img>
+                  <div>
+                    {" "}
+                    <img className="Ecard-img" src={opt.imageUrl}></img>
+                  </div>
+
+                  <div className="Ecard-title">{opt.name}</div>
                 </div>
               </Link>
             )

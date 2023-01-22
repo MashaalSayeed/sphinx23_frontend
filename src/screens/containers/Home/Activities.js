@@ -4,16 +4,8 @@ import pyramid from "../../../images/activityPyramid.png";
 import HomeNav from "./homeNav";
 
 function Activities() {
-  const [currTab, setCurrTab] = useState("Home");
-  const Tabs = ["Home", "About", "Contact"];
   return (
     <div className="activity-back">
-      <HomeNav
-        setCurrTab={setCurrTab}
-        currTab={currTab}
-        Tabs={Tabs}
-        notanimation={true}
-      />
       <div className="simple-scroll">
         <div className="landing-scroll-text">SCROLL</div>
         <div className="activity-scroll-line"></div>

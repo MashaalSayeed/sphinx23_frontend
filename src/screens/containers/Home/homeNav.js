@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../../../images/home/homeLogo.png";
 import burger from "../../../images/home/burger.png";
+import { useNavigate } from "react-router-dom";
 
-function HomeNav({ setCurrTab, currTab, Tabs, notanimation }) {
+function HomeNav({ setCurrTab, currTab, Tabs, notanimation, landing }) {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (currTab == "About") navigate("/about");
+    if (!landing) {
+      console.log(currTab);
+      if (currTab == "Home") navigate("/home");
+    }
+  }, [currTab]);
   return (
     <div className={notanimation ? "landing-navbar-notAnim" : "landing-navbar"}>
       <div className="landing-logo">
