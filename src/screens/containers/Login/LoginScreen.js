@@ -282,19 +282,30 @@ function RegScreen1(props) {
       .then((res) => {
         console.log(res);
         console.log("mail");
-        toast.info("Sending Mail", toastStyle);
+        // toast.info("Sending Mail", toastStyle);
+        toastId.current = toast.loading("Sending Mail");
         ConRef.current.setAttribute("disabled", true);
 
         sendVerificationMail()
           .then((res) => {
             // alert("Mail Sent");
-            toast.success("Mail Sent", toastStyle);
+            // toast.success("Mail Sent", toastStyle);
+            toast.update(toastId.current, {
+              render: "Mail Sent",
+              type: "success",
+              isLoading: false,
+            });
             props.setter(2);
             ConRef.current.removeAttribute("disabled");
             props.setBg((present) => !present);
           })
           .catch((err) => {
             toast.error(err, toastStyle);
+            toast.update(toastId.current, {
+              render: err,
+              type: "error",
+              isLoading: false,
+            });
             ConRef.current.removeAttribute("disabled");
             // toast.error(err, toastStyle);
           });
@@ -326,22 +337,17 @@ function RegScreen1(props) {
     console.log("Use Effect Called", user);
     if (user && !user.profile.isEmailVerified) {
       console.log("mail");
-      toast.info("Sending Mail", toastStyle);
+      // toast.info("Sending Mail", toastStyle);
+      toastId.current = toast.loading("Sending Mail");
       ConRef.current.setAttribute("disabled", true);
       sendVerificationMail()
         .then((res) => {
-          // toast("Mail Sent", {
-          //   position: "top-right",
-          //   autoClose: 5000,
-          //   hideProgressBar: true,
-          //   closeOnClick: true,
-          //   pauseOnHover: true,
-          //   draggable: true,
-          //   progress: undefined,
-          //   theme: "dark",
-          // });
-          // alert("Mail Sent");
-          toast.success("Mail Sent", toastStyle);
+          toast.update(toastId.current, {
+            render: "Mail Sent",
+            type: "success",
+            isLoading: false,
+            ...toastStyle,
+          });
           ConRef.current.removeAttribute("disabled");
           props.setter(2);
           props.setBg((present) => !present);
@@ -349,7 +355,13 @@ function RegScreen1(props) {
         .catch((err) => {
           // toast.error(err, toastStyle);
           ConRef.current.removeAttribute("disabled");
-          toast.error(err, toastStyle);
+          // toast.error(err, toastStyle);
+          toast.update(toastId.current, {
+            render: err,
+            type: "error",
+            isLoading: false,
+            ...toastStyle,
+          });
         });
     }
     if (
@@ -384,6 +396,7 @@ function RegScreen1(props) {
     // loginRegister(dispatch, creds);
     // fetchUpdates(dispatch);
   }, []);
+  const toastId = useRef(null);
 
   const handleSubmit = async () => {
     console.log("Called", props.formData);
@@ -392,28 +405,41 @@ function RegScreen1(props) {
     loginRegister(dispatch, props.formData)
       .then((res) => {
         console.log(res);
-        toast.info("Sending Mail", toastStyle);
+        // toast.info("Sending Mail", toastStyle);
+        toastId.current = toast.loading("Sending Mail");
         ConRef.current.setAttribute("disabled", true);
         sendVerificationMail()
           .then((res) => {
             // alert("Mail Sent");
-            toast("Mail Sent", {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "dark",
+            toast.update(toastId.current, {
+              render: "Mail Sent",
+              type: "success",
+              isLoading: false,
+              ...toastStyle,
             });
+            // toast.success("Mail Sent", {
+            //   position: "top-right",
+            //   autoClose: 3000,
+            //   hideProgressBar: true,
+            //   closeOnClick: true,
+            //   pauseOnHover: true,
+            //   draggable: true,
+            //   progress: undefined,
+            //   theme: "dark",
+            // });
             props.setter(2);
             ConRef.current.removeAttribute("disabled");
             props.setBg((present) => !present);
           })
           .catch((err) => {
             // toast.error(err, toastStyle);
-            toast.error(err, toastStyle);
+            // toast.error(err, toastStyle);
+            toast.update(toastId.current, {
+              render: err,
+              type: "error",
+              isLoading: false,
+              ...toastStyle,
+            });
             ConRef.current.removeAttribute("disabled");
           });
       })
@@ -523,6 +549,8 @@ function RegScreen2(props) {
 
     if (element.nextSibling) {
       element.nextSibling.focus();
+    } else {
+      conRef.current.focus();
     }
   };
   const handleBackChange = (element, index) => {
@@ -535,7 +563,7 @@ function RegScreen2(props) {
       element.previousSibling.focus();
     }
   };
-
+  const conRef = useRef(null);
   function handleSubmit() {
     console.log(otp.join(""));
     let otp_string = otp.join("");
@@ -620,7 +648,11 @@ function RegScreen2(props) {
         })}
       </div>
 
-      <button className="login-form-submit-btn" onClick={handleSubmit}>
+      <button
+        className="login-form-submit-btn"
+        onClick={handleSubmit}
+        ref={conRef}
+      >
         Continue
       </button>
       <div className="login-form-otp-resend">
@@ -657,6 +689,7 @@ function RegScreen3(props) {
   const clgRef = useRef(null);
   const ambRef = useRef(null);
   const mobRef = useRef(null);
+
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.curruser.token);
   const handleChangeOtp = (element, index) => {
@@ -680,18 +713,31 @@ function RegScreen3(props) {
   };
   function ResetOtp() {
     let body = { phoneNumber: props.formData.mobile };
+    toastId.current = toast.loading("Sending OTP");
     sendMobileOTP(body)
       .then((res) => {
         // alert("OTP Sent");
-        toast.info("OTP Sent", toastStyle);
+        // toast.info("OTP Sent", toastStyle);
         // setSendOtp(true);
+        toast.update(toastId.current, {
+          render: "OTP Sent",
+          type: "success",
+          isLoading: false,
+          ...toastStyle,
+        });
         setOtp(new Array(6).fill(""));
         let time = Session.get("time") - parseInt(Date.now() / 1000);
         setMinutes(parseInt(time / 60));
         setSeconds(parseInt(time % 60));
       })
       .catch((err) => {
-        toast.error(err, toastStyle);
+        // toast.error(err, toastStyle);
+        toast.update(toastId.current, {
+          render: err,
+          type: "error",
+          isLoading: false,
+          ...toastStyle,
+        });
       });
   }
   const handleSubmit = async () => {
@@ -752,14 +798,20 @@ function RegScreen3(props) {
       props.setBg((present) => !present);
     }
   };
-
+  const toastId = useRef(null);
   const sendOTP = () => {
     console.log(props.formData.mobile);
-
+    toastId.current = toast.loading("Sending OTP");
     let body = { phoneNumber: props.formData.mobile };
     sendMobileOTP(body)
       .then((res) => {
-        toast.info("OTP Sent", toastStyle);
+        toast.update(toastId.current, {
+          render: "OTP Sent",
+          type: "success",
+          isLoading: false,
+          ...toastStyle,
+        });
+        // toast.info("OTP Sent", toastStyle);
         // alert("OTP Sent");
         setSendOtp(true);
         let time = Session.get("time") - parseInt(Date.now() / 1000);
@@ -767,7 +819,13 @@ function RegScreen3(props) {
         setSeconds(parseInt(time % 60));
       })
       .catch((err) => {
-        toast.error(err, toastStyle);
+        toast.update(toastId.current, {
+          render: err,
+          type: "error",
+          isLoading: false,
+          ...toastStyle,
+        });
+        // toast.error(err, toastStyle);
       });
 
     // if (props.formData.mobile.length) setSendOtp(true);
@@ -871,7 +929,7 @@ function RegScreen3(props) {
           }}
           onKeyDown={(e) => {
             console.log(e);
-            if (e.key === "Enter") verifyRef.current.focus();
+            if (e.key === "Enter") verifyRef.current.click();
           }}
         />
       </div>

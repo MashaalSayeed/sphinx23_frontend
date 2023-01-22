@@ -2,7 +2,7 @@
 
 
 
-html,body{margin:0;padding:0;}
+html,body{margin:0;padding:0;scroll-snap-type: y mandatory;;}
 body{
     min-height: 100vh;
     /* overflow: hidden; */
@@ -623,4 +623,11 @@ margin-bottom: 15px;
 .time-main
 {
 height: 100vh;
+}
+.react-parallax
+{
+    height: 100vh;
+}
+.react-parallax>img{
+    height: 100%;
 }

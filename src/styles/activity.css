@@ -6,6 +6,8 @@
     position: relative;
     background-color: #4176FE;
     display: flex;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 .activity-sections
 {
