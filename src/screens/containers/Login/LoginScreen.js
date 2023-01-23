@@ -555,6 +555,7 @@ function RegScreen3(props) {
       });
   }
   const handleSubmit = async () => {
+    console.log(props.formData);
     if (
       props.formData.name == "" ||
       props.formData.college == "" ||
