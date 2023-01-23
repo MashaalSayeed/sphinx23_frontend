@@ -2,12 +2,12 @@
 
 
 
-html,body{margin:0;padding:0;}
+html,body{margin:0;padding:0;scroll-snap-type: y mandatory;;}
 body{
     min-height: 100vh;
     /* overflow: hidden; */
     animation: hideScroll 2500ms;
-    /* background: black; */
+    background: black;
 }
 body::-webkit-scrollbar{
     display: none;
@@ -315,9 +315,7 @@ color: #FFFFFF;
     {
 
         z-index: 20;
-        font-size: 8rem;
         font-size: 10rem;
-       
         transform: translateY(min(100%,220px));
        
     }
@@ -597,4 +595,39 @@ margin-bottom: 15px;
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
 
+}
+
+.home-title
+{
+    font-family:  'Noto Sans Adlam Unjoined', sans-serif;
+    
+    font-style: normal;
+    position: absolute;
+    font-weight: 300;
+    font-size: 3rem;
+    left: 0; 
+    transform: translateY(43%);
+    top: 0 ;
+    bottom: 0;
+    /* height: 200px; */
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: fit-content;
+    letter-spacing: 0.10em;
+    color: #FFFFFF;
+}
+
+.time-main
+{
+height: 100vh;
+}
+.react-parallax
+{
+    height: 100vh;
+}
+.react-parallax>img{
+    height: 100%;
 }

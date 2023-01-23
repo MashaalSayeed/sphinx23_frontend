@@ -6,6 +6,19 @@ import { createEvent, updateEvent } from "../../../../../api";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Navigate } from "react-router-dom";
 import { ConstructionOutlined } from "@mui/icons-material";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const toastStyle = {
+  position: "top-right",
+  autoClose: 3000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+};
 
 function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const url = "http://localhost:8000";
@@ -189,26 +202,26 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
         const id = await getUsersId(token, mail);
         a.push(id);
       } catch (err) {
-        alert(err);
+        toast.error(err, toastStyle);
       }
     }
     console.log(admin, "ip");
     setEventCoorId(a);
     if (!admin) {
-      alert("Admin is Required.");
+      toast.error("Admin is Required.", toastStyle);
       return;
     }
     try {
       const id = await getUsersId(token, admin);
       if (!id) {
-        alert("Admin Invalid");
+        toast.error("Admin Invalid", toastStyle);
         return;
       }
       setAdminId([id]);
       setSubmit(true);
       // post_Create();
     } catch (err) {
-      alert("Admin not Valid");
+      toast.error("Admin not Valid", toastStyle);
     }
   };
 
@@ -218,7 +231,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
     const CoorsIds = Array.from(new Set(eventCoorIds));
     console.log(CoorsIds);
     if (adminId.length == 0) {
-      alert("No admin ids found");
+      toast.info("No admin ids found", toastStyle);
       return;
     }
     console.log(adminId[0]);
@@ -247,11 +260,11 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
     console.log(formData);
     createEvent(dispatch, formData, token)
       .then((res) => {
-        alert("Created Event");
+        toast.info("Created Event", toastStyle);
         window.location.href = "/superAdmin";
       })
       .catch((err) => {
-        alert(err);
+        toast.error(err, toastStyle);
       });
   };
 
@@ -292,7 +305,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
         window.location.href = `/eventDetails/event/${currEvent._id}`;
       })
       .catch((err) => {
-        alert(err);
+        toast.error(err, toastStyle);
       });
     console.log(event_Data);
   };
@@ -321,7 +334,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
         return response.id;
       })
       .catch((err) => {
-        alert(err);
+        toast.error(err, toastStyle);
       });
 
     //
@@ -342,6 +355,18 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   console.log(eventCoor);
   return (
     <div className="createEvent-back">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <button
         className="createEvent-close"
         onClick={() => {

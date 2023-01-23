@@ -5,6 +5,20 @@ import TransferList from "./TransferList";
 import { createPass, updatePass } from "../../../../../api";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const toastStyle = {
+  position: "top-right",
+  autoClose: 3000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+};
+
 function CreateInput({ setField, label, type, value }) {
   return (
     <div className="createEvent-inputCon">
@@ -151,7 +165,7 @@ function PassForm({ setCreate, edit, currpass }) {
         console.log("PAss Added");
       })
       .catch((err) => {
-        alert(err);
+        toast.error(err, toastStyle);
       });
   };
   const submit = () => {
@@ -177,11 +191,11 @@ function PassForm({ setCreate, edit, currpass }) {
 
     updatePass(currpass._id, pass_Data, token)
       .then((res) => {
-        alert("Updated");
+        toast.info("Updated", toastStyle);
         window.location.href = "/superAdmin/pass/" + currpass._id;
       })
       .catch((err) => {
-        alert(err);
+        toast.error(err, toastStyle);
       });
   };
 
@@ -195,6 +209,18 @@ function PassForm({ setCreate, edit, currpass }) {
 
   return (
     <div className="createEvent-back">
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <button
         className="createEvent-close"
         onClick={() => {

@@ -10,6 +10,8 @@ import "./styles/activity.css";
 import "./styles/home.css";
 import "./styles/abut.css";
 import "./styles/about.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   fetchEvents,
   fetchPasses,
@@ -35,6 +37,7 @@ import TimeMachine from "./screens/containers/Home/TimeMachine";
 import About from "./screens/containers/Home/about";
 import Activities from "./screens/containers/Home/Activities";
 import Theme from "./screens/containers/Home/theme";
+import { Home } from "@mui/icons-material";
 
 function App() {
   // const token1 =
@@ -44,6 +47,16 @@ function App() {
   //   password: "Naman",
   //   confirmPassword: "Naman",
   // };
+  const toastStyle = {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  };
   const dispatch = useDispatch();
   // fetchEvents(dispatch);
   // loginRegister(dispatch, creds);
@@ -56,7 +69,8 @@ function App() {
         console.log("Events Fetched");
       })
       .catch((err) => {
-        alert(err);
+        toast.error(err, toastStyle);
+        // alert(err);
       });
     fetchPasses(dispatch);
     fetchUpcoming(dispatch);
@@ -83,14 +97,31 @@ function App() {
 
       {/* <Navbar /> */}
       {/* <Landing /> */}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<LoginScreen />} />
-          <Route path="/home" element={<Activities />} />
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/home" element={<TimeMachine notAnim={true} />} />
+          <Route path="/about" element={<About />} />
           {curruser != null ? (
             <>
-              <Route path="/eventAdmin" element={<DashboardEventAdmin />} />
-              <Route path="/superAdmin" element={<DashboardSuperAdmin />} />
+              <Route
+                path="/eventAdmin/:tab"
+                element={<DashboardEventAdmin />}
+              />
+              <Route path="/superAdmin/" element={<DashboardSuperAdmin />} />
               <Route
                 path="/superAdmin/pass/:id/:tab?"
                 element={<PassDetail />}

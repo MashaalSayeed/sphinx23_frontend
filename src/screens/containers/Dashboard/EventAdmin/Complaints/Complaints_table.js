@@ -35,7 +35,7 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
 
       submitQueryResponse(token, body);
       // fetchComplaints();
-      window.location.href = "/eventAdmin";
+      window.location.href = "/eventAdmin/2";
     };
     return (
       <td colSpan={8} className="Form-Container">

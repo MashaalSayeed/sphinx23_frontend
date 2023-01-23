@@ -7,6 +7,8 @@ function TeamTab() {
   const adminEvents = useSelector((state) => state.auth.adminevents);
   const [team, setTeam] = useState([]);
   useEffect(() => {
+    window.history.pushState(null, "Admin Events", "/eventAdmin/3");
+
     adminEvents.forEach((event) => {
       event.coordinators.forEach((coordinator) => {
         coordinator.event = event.name;

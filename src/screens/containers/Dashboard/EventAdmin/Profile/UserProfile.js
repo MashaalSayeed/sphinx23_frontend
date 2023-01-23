@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function UserProfile() {
   // const [tabactive, settab] = useState("All Events");
+  useEffect(() => {
+    window.history.pushState(null, "Sphinx2023", "/eventAdmin/0");
+  }, []);
 
   return (
     <div className="user-event">

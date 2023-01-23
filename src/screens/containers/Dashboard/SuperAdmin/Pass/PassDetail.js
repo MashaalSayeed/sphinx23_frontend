@@ -10,6 +10,18 @@ import Pagination from "../../../../components/Pagination";
 import { getUsersByPass, fetchOnePass } from "../../../../../api";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const toastStyle = {
+  position: "top-right",
+  autoClose: 3000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+};
 
 export default function PassDetail() {
   const params = useParams();
@@ -46,7 +58,8 @@ export default function PassDetail() {
         console.log("Fetched PAss", currpass);
       })
       .catch((err) => {
-        alert(err);
+        // alert(err);
+        toast.error(err, toastStyle);
       });
 
     getUsersByPass(passName, token, currentPage, setCurrentRecords, setNpage)
@@ -54,7 +67,8 @@ export default function PassDetail() {
         console.log("Users Fetched");
       })
       .catch((err) => {
-        alert(err);
+        // alert(err);
+        toast.error(err, toastStyle);
       });
   }, []);
   console.log(currentRecords);
@@ -63,6 +77,18 @@ export default function PassDetail() {
   return (
     <div style={{ minHeight: "100vh" }}>
       <Navbar />
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       {currpass && (
         <div className="desktop27-main">
           <div className="space-top"></div>

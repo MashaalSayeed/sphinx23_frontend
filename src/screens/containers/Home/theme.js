@@ -4,16 +4,14 @@ import theme from "../../../images/theme.png";
 import HomeNav from "./homeNav";
 
 function Theme() {
-  const [currTab, setCurrTab] = useState("Home");
-  const Tabs = ["Home", "About", "Contact"];
   return (
     <div className="activity-back" style={{ backgroundColor: "#1e1e1e" }}>
-      <HomeNav
+      {/* <HomeNav
         setCurrTab={setCurrTab}
         currTab={currTab}
         Tabs={Tabs}
         notanimation={true}
-      />
+      /> */}
 
       <div className="simple-scroll">
         <div className="landing-scroll-text">SCROLL</div>

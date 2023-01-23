@@ -39,8 +39,12 @@ function Complaints() {
       currentPage: currPage,
       setNpage,
     });
+  useEffect(() => {
+    window.history.pushState(null, "Sphinx2023", "/eventAdmin/2");
+  }, []);
 
   useEffect(() => {
+    //
     if (tabActive == "All Complaints") {
       console.log("Tab Switched");
       setStatus(2);

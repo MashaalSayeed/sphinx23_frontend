@@ -5,6 +5,18 @@ import { useSelector } from "react-redux";
 import Pagination from "../Pagination";
 import ReadOnlyRow from "./ReadOnlyRow";
 import { getResults, addTeamsToRound, addResults } from "../../../api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const toastStyle = {
+  position: "top-right",
+  autoClose: 3000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+};
 function Results({ event }) {
   // const currentRecords = [{ name: "rupesh", mobileNumber: "8076240766" }];
 
@@ -189,7 +201,8 @@ function Results({ event }) {
           console.log("Teams Added");
         })
         .catch((err) => {
-          alert(err);
+          toast.error(err, toastStyle);
+          // alert(err);
         });
     } else {
       addTeamsToRound(token, body)
@@ -197,7 +210,8 @@ function Results({ event }) {
           console.log("Teams Added");
         })
         .catch((err) => {
-          alert(err);
+          toast.error(err, toastStyle);
+          // alert(err);
         });
     }
   };
@@ -317,6 +331,18 @@ function Results({ event }) {
   return (
     <div>
       {decide ? DecidePop() : <></>}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div style={{ margin: "0px 15px" }}>
         <div className="dashboard-function">
           <div className="dashboard-paginate"> {ResultsPaginate()}</div>
