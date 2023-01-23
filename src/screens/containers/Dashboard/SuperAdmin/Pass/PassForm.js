@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import upload_btn from "../../../../../images/add_img.png";
 import close_btn from "../../../../../images/add_btn.png";
 import TransferList from "./TransferList";
@@ -37,7 +37,7 @@ function CreateInput({ setField, label, type, value }) {
 }
 
 function PassForm({ setCreate, edit, currpass }) {
-  const [passName, setPassName] = useState(null);
+  const [passName, setPassName] = useState("First Day");
   const [amount, setAmount] = useState(null);
   const [details, setDetails] = useState(null);
   const [events, setEvents] = useState([]);
@@ -160,12 +160,30 @@ function PassForm({ setCreate, edit, currpass }) {
     formData.append("file", passImage);
     formData.append("body", JSON.stringify(pass_Data));
     console.log(formData);
+    toastId.current = toast.loading("Creating Pass");
     createPass(dispatch, formData, token, setCreateStatus)
       .then((res) => {
         console.log("PAss Added");
+        console.log(toastId.current);
+        toast.update(toastId.current, {
+          render: "Pass Added",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+          ...toastStyle,
+        });
+
+        setCreate(false);
       })
       .catch((err) => {
-        toast.error(err, toastStyle);
+        toast.update(toastId.current, {
+          render: err,
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+          ...toastStyle,
+        });
+        // toast.error(err, toastStyle);
       });
   };
   const submit = () => {
@@ -188,14 +206,26 @@ function PassForm({ setCreate, edit, currpass }) {
       eventId: newarr,
     };
     console.log(pass_Data);
+    toastId.current = toast.loading("Updating Pass");
 
     updatePass(currpass._id, pass_Data, token)
       .then((res) => {
-        toast.info("Updated", toastStyle);
-        window.location.href = "/superAdmin/pass/" + currpass._id;
+        toast.update(toastId.current, {
+          render: "Pass Updated",
+          type: "success",
+          isLoading: false,
+          ...toastStyle,
+        });
+        setCreate(false);
+        // window.location.href = "/superAdmin/pass/" + currpass._id;
       })
       .catch((err) => {
-        toast.error(err, toastStyle);
+        toast.update(toastId.current, {
+          render: err,
+          type: "error",
+          isLoading: false,
+          ...toastStyle,
+        });
       });
   };
 
@@ -206,21 +236,10 @@ function PassForm({ setCreate, edit, currpass }) {
       </div>
     );
   };
+  const toastId = useRef(null);
 
   return (
     <div className="createEvent-back">
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
       <button
         className="createEvent-close"
         onClick={() => {

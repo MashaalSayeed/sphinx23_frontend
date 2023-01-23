@@ -322,6 +322,7 @@ export const createEvent = async (dispatch, eventData, token) => {
       if (data.success) {
         console.log(data.event);
         dispatch(newEvent(data.event));
+        return data;
       } else {
         throw data;
         // return false;
@@ -402,7 +403,10 @@ export const createPass = async (
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        alert(data.success);
+        // alert(data.success);
+        return data.success;
+      } else {
+        throw data;
       }
     })
     .catch((error) => {
@@ -666,7 +670,10 @@ export const updateEvent = async (
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        alert(data.success);
+        return data.success;
+        // alert(data.success);
+      } else {
+        throw data;
       }
     })
     .catch((error) => {
@@ -691,6 +698,8 @@ export const updatePass = async (passId, passData, token) => {
     .then((data) => {
       if (data.success) {
         return data.pass;
+      } else {
+        throw data;
       }
     })
     .catch((error) => {
