@@ -351,7 +351,7 @@ export const addTeamsToRound = async (token, body) => {
     .then((data) => {
       if (data.success) {
         console.log(data);
-        alert(data.success);
+        // alert(data.success);
         window.location.href = "/eventDetails/event/" + body.event + "/2";
       }
     })
@@ -375,7 +375,7 @@ export const addResults = async (token, body) => {
     .then((data) => {
       if (data.success) {
         console.log(data);
-        alert(data.success);
+        // alert(data.success);
         window.location.href = "/eventDetails/event/" + body.event + "/2";
       }
     })
@@ -401,11 +401,16 @@ export const createPass = async (
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       if (data.success) {
-        alert(data.success);
+        // alert(data.success);
+        console.log("pass added");
+      } else {
+        throw data;
       }
     })
     .catch((error) => {
+      console.log("PAss", error);
       throw error;
     });
 };
@@ -424,7 +429,10 @@ export const submitQueryResponse = async (token, body) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        alert(data.message);
+        // alert(data.message);
+        return data;
+      } else {
+        throw data;
       }
     })
     .catch((error) => {
@@ -666,7 +674,7 @@ export const updateEvent = async (
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        alert(data.success);
+        // alert(data.success);
       }
     })
     .catch((error) => {

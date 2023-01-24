@@ -383,7 +383,7 @@ function RegScreen1(props) {
       console.log("Called");
       toast.info("Already Logged In", toastStyle);
       // alert("Already Logged In");
-      // navigate("/home");
+      navigate("/home");
     }
     function start() {
       gapi.client.init({
@@ -741,21 +741,11 @@ function RegScreen3(props) {
       });
   }
   const handleSubmit = async () => {
-<<<<<<< HEAD
-    console.log(props.formData);
-    if (
-      props.formData.name == "" ||
-      props.formData.college == "" ||
-      props.formData.mobile == ""
-    )
-      alert("Name,College Name and Mobile  are Mandatory");
-=======
     if (props.formData.name == "") toast.info("Name Required", toastStyle);
     else if (props.formData.college == "")
       toast.info("College Required", toastStyle);
     else if (props.formData.mobile == "")
       toast.info("Mobile No. Required", toastStyle);
->>>>>>> bc17a158315e3960f2419d3244400143550d6e0a
     else if (sendOtp && otp.join("") == "") {
       toast.info("OTP is Mandataory", toastStyle);
       // alert("OTP is Mandataory");

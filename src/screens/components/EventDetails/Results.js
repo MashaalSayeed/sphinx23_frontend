@@ -198,7 +198,7 @@ function Results({ event }) {
       console.log("Latest Results");
       addResults(token, body)
         .then((res) => {
-          console.log("Teams Added");
+          toast.info("Results Added Successfully.", toastStyle);
         })
         .catch((err) => {
           toast.error(err, toastStyle);
@@ -207,7 +207,7 @@ function Results({ event }) {
     } else {
       addTeamsToRound(token, body)
         .then((res) => {
-          console.log("Teams Added");
+          toast.info("Results Updated Successfully.", toastStyle);
         })
         .catch((err) => {
           toast.error(err, toastStyle);

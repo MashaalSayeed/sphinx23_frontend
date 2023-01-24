@@ -270,9 +270,9 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
 
   const submit = () => {
     return (
-      <div className="createEvent-submit" onClick={() => submit_Event()}>
+      <button className="createEvent-submit" onClick={() => submit_Event()}>
         Submit
-      </div>
+      </button>
     );
   };
   const handleEdit = () => {
@@ -302,6 +302,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
         console.log("Event Updated");
         // navigate(`/eventDetails/event/${currEvent._id}`);
         console.log(`/eventDetails/event/${currEvent._id}`);
+        toast.info("Updated Event", toastStyle);
         window.location.href = `/eventDetails/event/${currEvent._id}`;
       })
       .catch((err) => {
@@ -311,9 +312,9 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   };
   const edit = () => {
     return (
-      <div className="createEvent-submit" onClick={() => handleEdit()}>
+      <button className="createEvent-submit" onClick={() => handleEdit()}>
         Edit
-      </div>
+      </button>
     );
   };
 

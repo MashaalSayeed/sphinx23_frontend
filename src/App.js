@@ -118,7 +118,7 @@ function App() {
           {curruser != null ? (
             <>
               <Route
-                path="/eventAdmin/:tab"
+                path="/eventAdmin/:tab?"
                 element={<DashboardEventAdmin />}
               />
               <Route path="/superAdmin/" element={<DashboardSuperAdmin />} />

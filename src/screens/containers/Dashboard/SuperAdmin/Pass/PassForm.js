@@ -37,7 +37,7 @@ function CreateInput({ setField, label, type, value }) {
 }
 
 function PassForm({ setCreate, edit, currpass }) {
-  const [passName, setPassName] = useState(null);
+  const [passName, setPassName] = useState("First Day");
   const [amount, setAmount] = useState(null);
   const [details, setDetails] = useState(null);
   const [events, setEvents] = useState([]);
@@ -162,9 +162,12 @@ function PassForm({ setCreate, edit, currpass }) {
     console.log(formData);
     createPass(dispatch, formData, token, setCreateStatus)
       .then((res) => {
+        toast.info("Pass Added", toastStyle);
+        window.location.href = "/superAdmin";
         console.log("PAss Added");
       })
       .catch((err) => {
+        console.log(err);
         toast.error(err, toastStyle);
       });
   };

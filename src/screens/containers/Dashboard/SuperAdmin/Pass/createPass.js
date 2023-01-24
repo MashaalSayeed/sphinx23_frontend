@@ -163,7 +163,7 @@ function CreatePass() {
           ></textarea>
 
           <button className="creatPass-upload" onClick={onCoverUpload}>
-            Create Pass
+            Submit
           </button>
           {err != null ? <>{err}</> : <></>}
         </div>
