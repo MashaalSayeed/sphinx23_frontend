@@ -170,64 +170,68 @@ function Login(props) {
     // alert(`Login Successfully`);
     // navigate("/eventAdmin");
   }
+
   const PassRef = useRef(null);
   const LoginRef = useRef(null);
+  const [forgot, setForgot] = useState(false);
   return (
     <>
-      <div className="login-form-title">Log in</div>
-      <div className="login-form-signup">
-        <div className="login-form-signup-que">New User?</div>
-        <Link
-          className="login-form-signup-link"
-          onClick={() => {
-            props.toreg(false);
-          }}
-        >
-          Create an account
-        </Link>
-      </div>
-      <div className="login-form-inputs">
-        <div className="login-form-input-grp">
-          <label className="login-form-text-label" htmlFor="email">
-            Email
-          </label>
-          <input
-            autoFocus
-            className="login-form-text-inputs"
-            name="email"
-            type="email"
-            onKeyDown={(e) => {
-              console.log(e);
-              if (e.key === "Enter") PassRef.current.focus();
-            }}
-            value={formData.email}
-            onChange={(e) => {
-              handleChange(e, setFormData);
-            }}
-          />
-        </div>
-        <div className="login-form-input-grp">
-          <label className="login-form-text-label" htmlFor="password">
-            Password
-          </label>
-          <input
-            ref={PassRef}
-            className="login-form-text-inputs"
-            name="password"
-            type={"password"}
-            value={formData.password}
-            onChange={(e) => {
-              handleChange(e, setFormData);
-            }}
-            onKeyDown={(e) => {
-              console.log(e);
-              if (e.key === "Enter") LoginRef.current.focus();
-            }}
-          />
-        </div>
-        <div className="login-form-side-options">
-          <div className="login-form-side-options-check">
-            {/* <input
+      {!forgot && (
+        <>
+          <div className="login-form-title">Log in</div>
+          <div className="login-form-signup">
+            <div className="login-form-signup-que">New User?</div>
+            <Link
+              className="login-form-signup-link"
+              onClick={() => {
+                props.toreg(false);
+              }}
+            >
+              Create an account
+            </Link>
+          </div>
+          <div className="login-form-inputs">
+            <div className="login-form-input-grp">
+              <label className="login-form-text-label" htmlFor="email">
+                Email
+              </label>
+              <input
+                autoFocus
+                className="login-form-text-inputs"
+                name="email"
+                type="email"
+                onKeyDown={(e) => {
+                  console.log(e);
+                  if (e.key === "Enter") PassRef.current.focus();
+                }}
+                value={formData.email}
+                onChange={(e) => {
+                  handleChange(e, setFormData);
+                }}
+              />
+            </div>
+            <div className="login-form-input-grp">
+              <label className="login-form-text-label" htmlFor="password">
+                Password
+              </label>
+              <input
+                ref={PassRef}
+                className="login-form-text-inputs"
+                name="password"
+                type={"password"}
+                value={formData.password}
+                onChange={(e) => {
+                  handleChange(e, setFormData);
+                }}
+                onKeyDown={(e) => {
+                  console.log(e);
+                  if (e.key === "Enter") LoginRef.current.focus();
+                }}
+              />
+            </div>
+            <div className="login-form-side-options">
+              <div className="login-form-side-options-check">
+                {/* <input
               className="login-form-checkbox"
               type={"checkbox"}
               name="remember"
@@ -239,27 +243,32 @@ function Login(props) {
             <label className="login-form-checkbox-label" htmlFor="remember">
               Remember me
             </label> */}
+              </div>
+              <div className="login-form-forgot-pass" onClick={setForgot}>
+                Forgot Password?
+              </div>
+            </div>
           </div>
-          <Link className="login-form-forgot-pass">Forgot Password?</Link>
-        </div>
-      </div>
-      <button
-        className="login-form-submit-btn"
-        ref={LoginRef}
-        onClick={handleSubmit}
-        onKeyDown={(e) => {
-          console.log(e);
-          if (e.key === "Enter") handleSubmit();
-        }}
-      >
-        Login
-      </button>
-      <Seprator />
-      <SocialIcons
-        handleSuccess={handleSuccess}
-        handleFailure={handleFailure}
-        isRegistration={false}
-      />
+          <button
+            className="login-form-submit-btn"
+            ref={LoginRef}
+            onClick={handleSubmit}
+            onKeyDown={(e) => {
+              console.log(e);
+              if (e.key === "Enter") handleSubmit();
+            }}
+          >
+            Login
+          </button>
+          <Seprator />
+          <SocialIcons
+            handleSuccess={handleSuccess}
+            handleFailure={handleFailure}
+            isRegistration={false}
+          />
+        </>
+      )}
+      {forgot && <ForgotPass />}
     </>
   );
 }
@@ -1025,6 +1034,165 @@ function RegScreen3(props) {
   );
 }
 
+function ForgotPass() {
+  const [sent, setSent] = useState(false);
+  const handleSubmit = () => {
+    setSent(true);
+  };
+
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+  let time = Session.get("time") - parseInt(Date.now() / 1000);
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(30);
+  const handleChangeOtp = (element, index) => {
+    if (isNaN(element.value)) return false;
+    setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
+    if (element.value == "") return false;
+
+    if (element.nextSibling) {
+      element.nextSibling.focus();
+    } else {
+      conRef.current.focus();
+    }
+  };
+
+  const handleBackChange = (element, index) => {
+    if (isNaN(element.value)) return false;
+    setOtp([...otp.map((d, idx) => (idx === index ? "" : d))]);
+    console.log(element.previousSibling);
+    console.log("delete");
+    if (element.previousSibling) {
+      console.log("delete");
+      element.previousSibling.focus();
+    }
+  };
+  useEffect(() => {
+    if (sent) {
+      const interval = setInterval(() => {
+        if (seconds > 0) {
+          setSeconds(seconds - 1);
+        }
+
+        if (seconds === 0) {
+          if (minutes === 0) {
+            clearInterval(interval);
+          } else {
+            setSeconds(59);
+            setMinutes(minutes - 1);
+          }
+        }
+      }, 1000);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [seconds, sent]);
+  const conRef = useRef(null);
+  return (
+    <>
+      <div className="login-form-title">Recover Password</div>
+      <div className="login-form-input-grp">
+        <label className="login-form-text-label" htmlFor="name">
+          Email
+        </label>
+        <input
+          className="login-form-text-inputs"
+          name="email"
+          autoFocus
+          type="text"
+          required={true}
+        />
+      </div>
+      {sent ? (
+        <>
+          {" "}
+          <div className="login-form-text-label" style={{ fontSize: "0.8rem" }}>
+            Enter OTP
+          </div>
+          <div className="login-form-text-label">{`A 6 digit code has been sent to ${""}`}</div>
+          <div className="login-form-otp-row">
+            {otp.map((data, index) => {
+              return (
+                <input
+                  id="standard-basic"
+                  variant="standard"
+                  className="login-form-otp-cell"
+                  name="otp"
+                  type="text"
+                  key={index}
+                  value={data}
+                  maxLength="1"
+                  onChange={(e) => handleChangeOtp(e.target, index)}
+                  onFocus={(e) => e.target.select()}
+                  onKeyDown={(e) => {
+                    if (e.key === "Backspace" || e.key === "Delete")
+                      handleBackChange(e.target, index);
+                  }}
+                />
+              );
+            })}
+          </div>
+          <div className="login-form-otp-resend">
+            {seconds > 0 || minutes > 0 ? (
+              <p className="login-form-timer">
+                Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
+                {seconds < 10 ? `0${seconds}` : seconds}
+              </p>
+            ) : (
+              <></>
+            )}
+          </div>
+          {!(seconds > 0 || minutes > 0) ? (
+            <div className="login-form-otp-resend">
+              <div className="login-form-otp-resend-que">
+                Didn't recieve code?
+              </div>
+              <Link className="login-form-otp-resend-link" onClick={() => {}}>
+                Resend
+              </Link>
+            </div>
+          ) : (
+            <></>
+          )}
+          {/* <div className="login-form-otp-resend">
+            <Link
+              className="login-form-otp-resend-link"
+              style={{
+                fontSize: "0.9rem",
+                background: "white",
+              }}
+              onClick={() => {}}
+            >
+              SUBMIT
+            </Link>
+          </div> */}
+        </>
+      ) : (
+        <></>
+      )}
+      {!sent && (
+        <button
+          className="login-form-submit-btn"
+          // disabled={!sendOtp}
+          onClick={handleSubmit}
+        >
+          Submit
+        </button>
+      )}
+      {sent && (
+        <button
+          className="login-form-submit-btn"
+          // disabled={!sendOtp}
+          onClick={() => {}}
+        >
+          Verify
+        </button>
+      )}
+    </>
+  );
+}
+
 function selector(x, setter, formData, setFormData, toreg, setBg) {
   switch (x) {
     case 1:
@@ -1098,8 +1266,10 @@ export default function LoginScreen() {
           <div className="login-form-body">
             <div className="login-form-content">
               {registered ? (
+                // <ForgotPass />
                 <Login toreg={setRegistered} setBg={setBg} />
               ) : (
+                // <ForgotPass />
                 <Registration toreg={setRegistered} setBg={setBg} />
               )}
             </div>

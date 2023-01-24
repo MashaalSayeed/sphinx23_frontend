@@ -6,6 +6,7 @@
 	box-sizing: border-box;
 }
 .footer-container {
+	position: absolute;
 	background: linear-gradient(82.32deg, #000000 12.88%, #767676 100%);
 	width: 100%;
 	height: fit-content;
