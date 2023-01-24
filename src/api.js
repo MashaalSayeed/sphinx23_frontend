@@ -35,7 +35,7 @@ export const fetchEvents = async (dispatch) => {
 };
 export const fetchAdminEvents = async (token, dispatch) => {
   console.log("AdminEvents Fetched");
-  await fetch(`${url}/events/eventadmin`, {
+  return fetch(`${url}/events/eventadmin`, {
     headers: {
       mode: "cors",
       Authorization: "Bearer " + token,
@@ -45,7 +45,9 @@ export const fetchAdminEvents = async (token, dispatch) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+
       dispatch(adminEvents(data.events));
+      return data.events;
     })
     .catch((err) => {
       throw err;
@@ -136,7 +138,7 @@ export const fetchOneEvent = async (setEvent, eventId) => {
     });
 };
 export const fetchOnePass = async (setPass, passId) => {
-  console.log("Pass Fetched");
+  console.log("Pass Fetched", passId);
   await fetch(`${url}/passes/${passId}`, {
     headers: {
       mode: "cors",
@@ -675,14 +677,10 @@ export const updateEvent = async (
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-<<<<<<< HEAD
-        // alert(data.success);
-=======
         return data.success;
         // alert(data.success);
       } else {
         throw data;
->>>>>>> e4b51783d5c3f36182129f9e04460abaab8b0cae
       }
     })
     .catch((error) => {

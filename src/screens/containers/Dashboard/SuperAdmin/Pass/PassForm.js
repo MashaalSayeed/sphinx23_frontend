@@ -219,7 +219,7 @@ function PassForm({ setCreate, edit, currpass }) {
           ...toastStyle,
         });
         setCreate(false);
-        // window.location.href = "/superAdmin/pass/" + currpass._id;
+        window.location.href = "/superAdmin/pass/" + currpass._id;
       })
       .catch((err) => {
         toast.update(toastId.current, {

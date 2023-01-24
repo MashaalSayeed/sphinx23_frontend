@@ -101,6 +101,7 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
     const handleClick = () => {
       console.log("icon-clicked");
       setfetchbutton(!fetchbutton);
+      setOpen(false);
       setSubject(subject);
       setDescription(text);
     };
@@ -116,6 +117,7 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
             margin: "5px",
             color: isApproved ? "#038400" : "#FFE0C2",
             backgroundColor: isApproved ? "#C8FFBF" : "#FF0000",
+            cursor: "auto",
           }}
         >
           {/* <Dropdown title={Status} 
@@ -131,7 +133,14 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
         </Dropdown> */}
           {isApproved ? "Approved" : "Pending"}
         </Button>
-        <img src={dropdown} onClick={handleClick} alt="image"></img>
+        <img
+          src={dropdown}
+          style={{
+            cursor: "pointer",
+          }}
+          onClick={handleClick}
+          alt="image"
+        ></img>
       </td>
     );
   };

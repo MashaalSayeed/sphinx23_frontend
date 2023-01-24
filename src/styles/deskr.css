@@ -64,6 +64,7 @@
         height: 54px;
         min-width: 110px;
         margin: 10px 0;
+        cursor: pointer;
     
     }
     .desktop14-btn-inner{

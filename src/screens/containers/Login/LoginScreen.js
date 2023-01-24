@@ -1078,17 +1078,14 @@ function Registration(props) {
 export default function LoginScreen() {
   const [bgchange, setBg] = useState(true);
   const [registered, setRegistered] = useState(true);
-  //   const arr = ["./bg0.png", "./bg1.png", "./bg2.png", "./bg3.png", "./bg4.png"];
-  //   const element = document.getElementById("bgChange");
-  //   element.style.backgroundImage = `url('./bg0.png')`;
-  useEffect(() => {
-    const randomNumber = Math.floor(Math.random() * 5);
-    // const element = document.getElementById("bgChange");
-    // element.style.backgroundImage = `url(${arr[randomNumber]})`;
-  }, [bgchange, registered]);
+  const arr = [bg0, bg1, bg2, bg3, bg4];
 
   return (
-    <div className="login-container" id="bgChange">
+    <div
+      className="login-container"
+      id="bgChange"
+      style={{ backgroundImage: `url(${arr[parseInt(Math.random() * 5)]})` }}
+    >
       <div className="login-image-darken">
         <div className="login-logo-container">
           <img className="login-logo-img" src={sphinxLogo} />

@@ -34,6 +34,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const [details, setDetails] = useState(null);
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
+  const [freeForMNIT, setfreeforMNIT] = useState(false);
   const [eventCoor, setEventCoor] = useState([]);
   const [eventCoorIds, setEventCoorId] = useState([]);
   const [minTeamSize, setMinTeam] = useState(null);
@@ -93,6 +94,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       setImage(currEvent.imageUrl);
       setLocation(currEvent.location);
       setTime(currEvent.time);
+      setfreeforMNIT(currEvent.freeForMNIT);
       const arr = currEvent.updates.map(({ message }) => {
         return { message: message };
       });
@@ -248,7 +250,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       status: 1,
       ended: false,
       amount: amount,
-      freeForMNIT: true,
+      freeForMNIT: freeForMNIT,
       minTeamSize: minTeamSize,
       maxTeamSize: maxTeamSize,
       // imageUrl: "", //
@@ -533,8 +535,11 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
                 type={"checkbox"}
                 name="freeForMnit"
                 style={{ marginRight: "5px" }}
-                // checked={formData.remember}
-                onChange={(e) => {}}
+                checked={freeForMNIT}
+                onChange={(e) => {
+                  setfreeforMNIT(!freeForMNIT);
+                }}
+                disabled={editSuperAdmin ? !userType : false}
               />
               <label className="createEvent-label" htmlFor="remember">
                 Free For Mnit
