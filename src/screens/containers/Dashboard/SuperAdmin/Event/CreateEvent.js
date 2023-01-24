@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import upload_btn from "../../../../../images/add_img.png";
 import close_btn from "../../../../../images/add_btn.png";
 import InputTag from "./InputTag";
@@ -224,7 +224,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       toast.error("Admin not Valid", toastStyle);
     }
   };
-
+  const toastId = useRef(null);
   const post_Create = () => {
     console.log(eventCoorIds);
     console.log(adminId, "POST CALLED");
@@ -258,23 +258,50 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
     formData.append("file", eventImage);
     formData.append("body", JSON.stringify(event_Data));
     console.log(formData);
+
+    toastId.current = toast.loading("Creating Event");
+    submitRef.current.setAttribute("disabled", true);
     createEvent(dispatch, formData, token)
       .then((res) => {
-        toast.info("Created Event", toastStyle);
-        window.location.href = "/superAdmin";
+        console.log(res);
+        toast.update(toastId.current, {
+          render: "Created Event",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+          ...toastStyle,
+        });
+        submitRef.current.removeAttribute("disabled");
+        // toast.info("Created Event", toastStyle);
+        setCreate(false);
+        // window.location.href = "/superAdmin";
       })
       .catch((err) => {
-        toast.error(err, toastStyle);
+        console.log(err);
+        toast.update(toastId.current, {
+          render: err,
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+          ...toastStyle,
+        });
+        submitRef.current.removeAttribute("disabled");
+        // toast.error(err, toastStyle);
       });
   };
 
   const submit = () => {
     return (
-      <button className="createEvent-submit" onClick={() => submit_Event()}>
+      <button
+        className="createEvent-submit"
+        onClick={() => submit_Event()}
+        ref={submitRef}
+      >
         Submit
       </button>
     );
   };
+
   const handleEdit = () => {
     const event_Data = {
       name: eventName,
@@ -297,22 +324,43 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       maxTeamSize: maxTeamSize,
       // imageUrl: "", //
     };
+    toastId.current = toast.loading("Updating Event");
+    submitRef.current.setAttribute("disabled", true);
     updateEvent(currEvent._id, event_Data, token, setCreateStatus)
       .then((res) => {
         console.log("Event Updated");
+        toast.update(toastId.current, {
+          render: "Event Updated",
+          type: "success",
+          isLoading: false,
+          autoClose: 2000,
+          ...toastStyle,
+        });
+        submitRef.current.removeAttribute("disabled");
         // navigate(`/eventDetails/event/${currEvent._id}`);
         console.log(`/eventDetails/event/${currEvent._id}`);
-        toast.info("Updated Event", toastStyle);
-        window.location.href = `/eventDetails/event/${currEvent._id}`;
+        setCreate(false);
+        // window.location.href = `/eventDetails/event/${currEvent._id}`;
       })
       .catch((err) => {
-        toast.error(err, toastStyle);
+        toast.update(toastId.current, {
+          render: err,
+          type: "error",
+          isLoading: false,
+          autoClose: 2000,
+          ...toastStyle,
+        });
+        // toast.error(err, toastStyle);
       });
     console.log(event_Data);
   };
   const edit = () => {
     return (
-      <button className="createEvent-submit" onClick={() => handleEdit()}>
+      <button
+        className="createEvent-submit"
+        onClick={() => handleEdit()}
+        ref={submitRef}
+      >
         Edit
       </button>
     );
@@ -353,10 +401,11 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
     // return userData;
   };
   // console.log(eventCoorIds);
+  const submitRef = useRef(null);
   console.log(eventCoor);
   return (
     <div className="createEvent-back">
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={5000}
         hideProgressBar
@@ -367,7 +416,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
         draggable
         pauseOnHover
         theme="dark"
-      />
+      /> */}
       <button
         className="createEvent-close"
         onClick={() => {
@@ -469,6 +518,28 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
               value: admin,
               disabled: disabled,
             })}
+            <div
+              className="createEvent-inputCon"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+              }}
+            >
+              {" "}
+              <input
+                className="-checkbox"
+                type={"checkbox"}
+                name="freeForMnit"
+                style={{ marginRight: "5px" }}
+                // checked={formData.remember}
+                onChange={(e) => {}}
+              />
+              <label className="createEvent-label" htmlFor="remember">
+                Free For Mnit
+              </label>
+            </div>
           </div>
           <div className="section2">
             {" "}

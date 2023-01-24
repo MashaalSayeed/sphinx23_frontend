@@ -6,6 +6,7 @@ export default function PassDetailCard(props) {
   const { pass } = props;
   const [edit, setEdit] = useState(false);
   const events = useSelector((state) => state.auth.events);
+  console.log(pass);
   return (
     <div className="passDetailCard-main">
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -31,12 +32,22 @@ export default function PassDetailCard(props) {
         </button>
       </div>
 
-      <p className="passDetailCard-p">
+      <p className="passDetailCard-p" style={{ padding: "10px" }}>
         <h4>Amount:{pass.amount}</h4>
         <br></br>
-        {pass.eventId.map((item, index) => {
-          console.log(item);
-        })}
+
+        <ul>
+          <h4>Events for the pass are</h4>
+          {pass.eventId.map((item, index) => {
+            const a = events.find((x) => x._id == item);
+            return (
+              <li>
+                {a["name"]} <br></br>{" "}
+              </li>
+            );
+          })}
+        </ul>
+        <br></br>
         {pass.detail}
       </p>
     </div>
