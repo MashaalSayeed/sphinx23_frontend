@@ -163,6 +163,8 @@ function PassForm({ setCreate, edit, currpass }) {
     toastId.current = toast.loading("Creating Pass");
     createPass(dispatch, formData, token, setCreateStatus)
       .then((res) => {
+        toast.info("Pass Added", toastStyle);
+        window.location.href = "/superAdmin";
         console.log("PAss Added");
         console.log(toastId.current);
         toast.update(toastId.current, {
@@ -217,7 +219,7 @@ function PassForm({ setCreate, edit, currpass }) {
           ...toastStyle,
         });
         setCreate(false);
-        // window.location.href = "/superAdmin/pass/" + currpass._id;
+        window.location.href = "/superAdmin/pass/" + currpass._id;
       })
       .catch((err) => {
         toast.update(toastId.current, {

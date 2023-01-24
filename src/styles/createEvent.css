@@ -117,6 +117,7 @@ margin-bottom: 20px;
     font-weight: 600;
     font-size: 16px;
     color: #868585;
+    cursor: pointer;
 }
 .createEvent-cover
 {
@@ -176,6 +177,7 @@ font-family: 'Roboto';
 font-style: normal;
 font-size: 1.1rem;
 font-weight: 400;
+cursor: pointer;
 }
 
 .createEvent-close

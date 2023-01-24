@@ -41,7 +41,7 @@ export default function DashboardEventAdmin() {
     } catch {
       console.log("invalid tab");
     }
-
+    console.log("Event Admin cAlled");
     // getUsers("", token, setUsers);
     // getAmbassadors(token, setAmbassadors);
     // getPayments(token, setPayments);

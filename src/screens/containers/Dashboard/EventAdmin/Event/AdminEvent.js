@@ -5,7 +5,7 @@ import Dashboard_Header from "../../../../components/Dashboard_Header";
 function AdminEvent() {
   const [tabActive, setTab] = useState("All Events");
   const [createEventState, setCreate] = useState(false);
-  const events = useSelector((state) => state.auth.events);
+  // const events = useSelector((state) => state.auth.adminevents);
   useEffect(() => {
     window.history.pushState(null, "Sphinx2023", "/eventAdmin/1");
   }, []);

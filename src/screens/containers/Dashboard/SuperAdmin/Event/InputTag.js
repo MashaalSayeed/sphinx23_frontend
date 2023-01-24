@@ -39,40 +39,55 @@ export default function InputTag({ setEventCoor }) {
     SetTags(newtags);
     setEventCoor(newtags);
   };
+  const [inputEmail, setEmail] = useState("");
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    if (e.target.value[e.target.value.length - 1] === " ") {
+      handleOnSubmit(e);
+      setEmail("");
+      return;
+    }
+    setEmail(e.target.value);
+  };
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    if (inputEmail === "") return;
     SetTags([...tags, tagRef.current.value]);
     setEventCoor([...tags, tagRef.current.value]);
     tagRef.current.value = "";
+    setEmail("");
   };
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <form onSubmit={handleOnSubmit}>
-        <TextField
-          inputRef={tagRef}
-          fullWidth
-          variant="standard"
-          size="small"
-          sx={{ margin: "1rem 0" }}
-          margin="none"
-          InputProps={{
-            startAdornment: (
-              <Box
-                sx={{
-                  margin: "0 0.2rem 0 0",
-                  display: "flex",
-                }}
-              >
-                {tags.map((data, index) => {
-                  return (
-                    <Tags data={data} handleDelete={handleDelete} key={index} />
-                  );
-                })}
-              </Box>
-            ),
-          }}
-        />
-      </form>
+      {/* <form onSubmit={handleOnSubmit}> */}
+      <TextField
+        inputRef={tagRef}
+        fullWidth
+        variant="standard"
+        size="small"
+        onChange={handleChange}
+        value={inputEmail}
+        onBlur={(event) => handleOnSubmit(event)}
+        sx={{ margin: "1rem 0" }}
+        margin="none"
+        InputProps={{
+          startAdornment: (
+            <Box
+              sx={{
+                margin: "0 0.2rem 0 0",
+                display: "flex",
+              }}
+            >
+              {tags.map((data, index) => {
+                return (
+                  <Tags data={data} handleDelete={handleDelete} key={index} />
+                );
+              })}
+            </Box>
+          ),
+        }}
+      />
+      {/* </form> */}
     </Box>
   );
 }

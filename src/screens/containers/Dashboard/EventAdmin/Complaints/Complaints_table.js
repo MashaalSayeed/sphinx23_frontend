@@ -8,7 +8,19 @@ import { red } from "@mui/material/colors";
 import dropdown from "../../../../../images/akar-icons_chevron-down.png";
 import dropdownsubmit from "../../../../../images/material-symbols_chat-rounded.png";
 import "../../../../../App.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { submitQueryResponse } from "../../../../../api";
+const toastStyle = {
+  position: "top-right",
+  autoClose: 3000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+};
 const ComplaintsTable = ({ data, value, fetchComplaints }) => {
   console.log(data);
   console.log(value);
@@ -33,9 +45,16 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
       console.log(reply);
       let body = { queryId: id, responseDesc: reply };
 
-      submitQueryResponse(token, body);
+      submitQueryResponse(token, body)
+        .then((res) => {
+          toast.info("Query Resolved", toastStyle);
+          window.location.href = "/eventAdmin/2";
+        })
+        .catch((err) => {
+          toast.error(err, toastStyle);
+        });
+
       // fetchComplaints();
-      window.location.href = "/eventAdmin/2";
     };
     return (
       <td colSpan={8} className="Form-Container">
@@ -82,6 +101,7 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
     const handleClick = () => {
       console.log("icon-clicked");
       setfetchbutton(!fetchbutton);
+      setOpen(false);
       setSubject(subject);
       setDescription(text);
     };
@@ -97,6 +117,7 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
             margin: "5px",
             color: isApproved ? "#038400" : "#FFE0C2",
             backgroundColor: isApproved ? "#C8FFBF" : "#FF0000",
+            cursor: "auto",
           }}
         >
           {/* <Dropdown title={Status} 
@@ -112,7 +133,14 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
         </Dropdown> */}
           {isApproved ? "Approved" : "Pending"}
         </Button>
-        <img src={dropdown} onClick={handleClick} alt="image"></img>
+        <img
+          src={dropdown}
+          style={{
+            cursor: "pointer",
+          }}
+          onClick={handleClick}
+          alt="image"
+        ></img>
       </td>
     );
   };

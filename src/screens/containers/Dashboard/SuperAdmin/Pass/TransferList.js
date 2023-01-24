@@ -80,7 +80,7 @@ export default function TransferList({ setEvents, edit, present }) {
   React.useEffect(() => {
     if (edit) {
       eventa.forEach((element, i) => {
-        const ind = present.find((x) => x == element._id);
+        const ind = present.find((x) => x._id == element._id);
         console.log(ind);
         if (typeof ind !== "undefined") {
           console.log(i);

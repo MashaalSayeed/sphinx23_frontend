@@ -35,7 +35,7 @@ export const fetchEvents = async (dispatch) => {
 };
 export const fetchAdminEvents = async (token, dispatch) => {
   console.log("AdminEvents Fetched");
-  await fetch(`${url}/events/eventadmin`, {
+  return fetch(`${url}/events/eventadmin`, {
     headers: {
       mode: "cors",
       Authorization: "Bearer " + token,
@@ -45,7 +45,9 @@ export const fetchAdminEvents = async (token, dispatch) => {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+
       dispatch(adminEvents(data.events));
+      return data.events;
     })
     .catch((err) => {
       throw err;
@@ -136,7 +138,7 @@ export const fetchOneEvent = async (setEvent, eventId) => {
     });
 };
 export const fetchOnePass = async (setPass, passId) => {
-  console.log("Pass Fetched");
+  console.log("Pass Fetched", passId);
   await fetch(`${url}/passes/${passId}`, {
     headers: {
       mode: "cors",
@@ -352,7 +354,7 @@ export const addTeamsToRound = async (token, body) => {
     .then((data) => {
       if (data.success) {
         console.log(data);
-        alert(data.success);
+        // alert(data.success);
         window.location.href = "/eventDetails/event/" + body.event + "/2";
       }
     })
@@ -376,7 +378,7 @@ export const addResults = async (token, body) => {
     .then((data) => {
       if (data.success) {
         console.log(data);
-        alert(data.success);
+        // alert(data.success);
         window.location.href = "/eventDetails/event/" + body.event + "/2";
       }
     })
@@ -402,6 +404,7 @@ export const createPass = async (
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       if (data.success) {
         // alert(data.success);
         return data.success;
@@ -410,6 +413,7 @@ export const createPass = async (
       }
     })
     .catch((error) => {
+      console.log("PAss", error);
       throw error;
     });
 };
@@ -428,7 +432,10 @@ export const submitQueryResponse = async (token, body) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        alert(data.message);
+        // alert(data.message);
+        return data;
+      } else {
+        throw data;
       }
     })
     .catch((error) => {

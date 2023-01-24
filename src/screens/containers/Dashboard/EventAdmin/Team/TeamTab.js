@@ -1,23 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchAdminEvents } from "../../../../../api";
+import dummy from "../../../../../images/dummy_user.png";
+// import { useDispatc} from "react-redux";
 // import Fab from "@material-ui/core/Fab";
 // import AddIcon from "@material-ui/icons/Add";
 
 function TeamTab() {
-  const adminEvents = useSelector((state) => state.auth.adminevents);
   const [team, setTeam] = useState([]);
+  const token = useSelector((state) => state.auth.curruser.token);
+  console.log(team);
+  const dispatch = useDispatch();
+  let adminEvents = [];
   useEffect(() => {
     window.history.pushState(null, "Admin Events", "/eventAdmin/3");
-
-    adminEvents.forEach((event) => {
-      event.coordinators.forEach((coordinator) => {
-        coordinator.event = event.name;
-        console.log(coordinator);
-        setTeam((state) => [...state, coordinator]);
+    console.log(adminEvents);
+    fetchAdminEvents(token, dispatch)
+      .then((res) => {
+        res.forEach((event) => {
+          event.coordinators.forEach((coordinator) => {
+            coordinator.event = event.name;
+            console.log(coordinator);
+            setTeam((state) => [...state, coordinator]);
+          });
+        });
+      })
+      .catch((err) => {
+        alert(err);
       });
-    });
   }, []);
-  console.log(team);
+  // adminEvents = useSelector((state) => state.auth.adminevents);
+  // console.log(adminEvents);
   // const teams = [
   //   {
   //     name: "Rupesh yadav",
@@ -65,15 +78,12 @@ function TeamTab() {
   return (
     <div className="teamTab-main">
       <div className="teamTab-heading">
-        <h2>Teams</h2>
+        <h2>Team</h2>
       </div>
       <div className="teamTab-main-element">
         {team.map((opt, i) => (
           <div className="Team-frame" key={i}>
-            <img
-              className="team-member-img"
-              src="https://media.licdn.com/dms/image/C5603AQFbXmjYtnK0jQ/profile-displayphoto-shrink_100_100/0/1645708565518?e=1678320000&v=beta&t=REnncv8IPn1PFgf5RTlkdXoxav0jk-o1NDBkXyFfnoE"
-            ></img>
+            <img className="team-member-img" src={dummy}></img>
             <div className="team-member-post">
               <h3>{opt.name}</h3>
               <p>{opt.event}</p>
