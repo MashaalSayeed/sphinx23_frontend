@@ -749,6 +749,7 @@ function RegScreen3(props) {
         });
       });
   }
+  const submitRef = useRef(null);
   const handleSubmit = async () => {
     if (props.formData.name == "") toast.info("Name Required", toastStyle);
     else if (props.formData.college == "")
@@ -841,6 +842,7 @@ function RegScreen3(props) {
   };
   useEffect(() => {
     if (sendOtp) {
+      submitRef.current.style.background = "#1a686f";
       const interval = setInterval(() => {
         if (seconds > 0) {
           setSeconds(seconds - 1);
@@ -861,6 +863,7 @@ function RegScreen3(props) {
       };
     }
   }, [seconds, sendOtp]);
+
   return (
     <>
       <div className="login-form-title">Add Details</div>
@@ -1026,6 +1029,7 @@ function RegScreen3(props) {
       <button
         className="login-form-submit-btn"
         disabled={!sendOtp}
+        ref={submitRef}
         onClick={handleSubmit}
       >
         Submit
@@ -1089,22 +1093,26 @@ function ForgotPass() {
     }
   }, [seconds, sent]);
   const conRef = useRef(null);
+  const [verified, setVerify] = useState(false);
   return (
     <>
       <div className="login-form-title">Recover Password</div>
-      <div className="login-form-input-grp">
-        <label className="login-form-text-label" htmlFor="name">
-          Email
-        </label>
-        <input
-          className="login-form-text-inputs"
-          name="email"
-          autoFocus
-          type="text"
-          required={true}
-        />
-      </div>
-      {sent ? (
+      {!sent && (
+        <div className="login-form-input-grp">
+          <label className="login-form-text-label" htmlFor="name">
+            Email
+          </label>
+          <input
+            className="login-form-text-inputs"
+            name="email"
+            autoFocus
+            type="text"
+            required={true}
+          />
+        </div>
+      )}
+
+      {sent && !verified ? (
         <>
           {" "}
           <div className="login-form-text-label" style={{ fontSize: "0.8rem" }}>
@@ -1180,13 +1188,42 @@ function ForgotPass() {
           Submit
         </button>
       )}
-      {sent && (
+      {verified && (
+        <div className="login-form-input-grp">
+          <label className="login-form-text-label" htmlFor="password">
+            New Password
+          </label>
+          <input
+            className="login-form-text-inputs"
+            name="password"
+            type={"password"}
+            // value={}
+            onChange={(e) => {}}
+            onKeyDown={(e) => {
+              console.log(e);
+              if (e.key === "Enter") conRef.current.focus();
+            }}
+          />
+        </div>
+      )}
+      {sent && !verified && (
+        <button
+          className="login-form-submit-btn"
+          // disabled={!sendOtp}
+          onClick={() => {
+            setVerify(true);
+          }}
+        >
+          Verify
+        </button>
+      )}
+      {sent && verified && (
         <button
           className="login-form-submit-btn"
           // disabled={!sendOtp}
           onClick={() => {}}
         >
-          Verify
+          Change Password
         </button>
       )}
     </>
