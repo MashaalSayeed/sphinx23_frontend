@@ -41,6 +41,8 @@ const toastStyle = {
   progress: undefined,
   theme: "dark",
 };
+const disabledCol = "#6e9efa";
+const btnCol = "#1a68ff";
 
 function handleChange(event, setter) {
   // console.log("Handle Called");
@@ -294,6 +296,7 @@ function RegScreen1(props) {
         // toast.info("Sending Mail", toastStyle);
         toastId.current = toast.loading("Sending Mail");
         ConRef.current.setAttribute("disabled", true);
+        ConRef.current.style.background = disabledCol;
 
         sendVerificationMail()
           .then((res) => {
@@ -306,6 +309,7 @@ function RegScreen1(props) {
             });
             props.setter(2);
             ConRef.current.removeAttribute("disabled");
+            ConRef.current.style.background = btnCol;
             props.setBg((present) => !present);
           })
           .catch((err) => {
@@ -316,6 +320,7 @@ function RegScreen1(props) {
               isLoading: false,
             });
             ConRef.current.removeAttribute("disabled");
+            ConRef.current.style.background = btnCol;
             // toast.error(err, toastStyle);
           });
       })
@@ -349,6 +354,7 @@ function RegScreen1(props) {
       // toast.info("Sending Mail", toastStyle);
       toastId.current = toast.loading("Sending Mail");
       ConRef.current.setAttribute("disabled", true);
+      ConRef.current.style.background = disabledCol;
       sendVerificationMail()
         .then((res) => {
           toast.update(toastId.current, {
@@ -358,12 +364,14 @@ function RegScreen1(props) {
             ...toastStyle,
           });
           ConRef.current.removeAttribute("disabled");
+          ConRef.current.style.background = btnCol;
           props.setter(2);
           props.setBg((present) => !present);
         })
         .catch((err) => {
           // toast.error(err, toastStyle);
           ConRef.current.removeAttribute("disabled");
+          ConRef.current.style.background = btnCol;
           // toast.error(err, toastStyle);
           toast.update(toastId.current, {
             render: err,
@@ -417,6 +425,7 @@ function RegScreen1(props) {
         // toast.info("Sending Mail", toastStyle);
         toastId.current = toast.loading("Sending Mail");
         ConRef.current.setAttribute("disabled", true);
+        ConRef.current.style.background = disabledCol;
         sendVerificationMail()
           .then((res) => {
             // alert("Mail Sent");
@@ -438,6 +447,7 @@ function RegScreen1(props) {
             // });
             props.setter(2);
             ConRef.current.removeAttribute("disabled");
+            ConRef.current.style.background = btnCol;
             props.setBg((present) => !present);
           })
           .catch((err) => {
@@ -450,11 +460,13 @@ function RegScreen1(props) {
               ...toastStyle,
             });
             ConRef.current.removeAttribute("disabled");
+            ConRef.current.style.background = btnCol;
           });
       })
       .catch((err) => {
         // toast.error(err, toastStyle);
         toast.error(err, toastStyle);
+        ConRef.current.style.background = btnCol;
         ConRef.current.removeAttribute("disabled");
       });
   };
@@ -1029,6 +1041,7 @@ function RegScreen3(props) {
       <button
         className="login-form-submit-btn"
         disabled={!sendOtp}
+        style={!sendOtp ? { background: disabledCol } : { background: btnCol }}
         ref={submitRef}
         onClick={handleSubmit}
       >
@@ -1264,7 +1277,7 @@ function Registration(props) {
     college: "",
     campusAmbassador: "",
   });
-  const [stepCount, setStepCount] = useState(1);
+  const [stepCount, setStepCount] = useState(3);
   return (
     <>
       <div className="login-form-step-counter">Step {stepCount} of 3</div>
