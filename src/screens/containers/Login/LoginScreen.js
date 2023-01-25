@@ -1277,7 +1277,7 @@ function Registration(props) {
     college: "",
     campusAmbassador: "",
   });
-  const [stepCount, setStepCount] = useState(3);
+  const [stepCount, setStepCount] = useState(1);
   return (
     <>
       <div className="login-form-step-counter">Step {stepCount} of 3</div>
