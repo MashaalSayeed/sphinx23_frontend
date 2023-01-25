@@ -176,12 +176,7 @@ border-radius: 9px;
   transform: rotate(180deg);
  
 }
-.rotate0
-{
-  
- 
- 
-}
+
 @keyframes slideOut {
   0%{
     transform: translateX(0);

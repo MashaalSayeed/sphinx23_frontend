@@ -251,10 +251,94 @@ export const sendMobileOTP = async (data) => {
       // console.log(error);
     });
 };
+
+export const sendForgotOTP = async (body) => {
+  console.log(Session.getObject("profile").token);
+
+  return fetch(`${url}/verification/sendForgotOTP`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        // Session.set("time", data.time);
+        return data.time;
+      }
+      throw data;
+    })
+    .catch((error) => {
+      throw error;
+      // window.location.href = "/";
+      // console.log(error);
+    });
+};
+
+export const resetPassword = async (body) => {
+  console.log(Session.getObject("profile").token);
+
+  return fetch(`${url}/verification/resetPassword`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        return data.success;
+      }
+      throw data;
+    })
+    .catch((error) => {
+      throw error;
+      // window.location.href = "/";
+      // console.log(error);
+    });
+};
+export const verifyForgotOTP = async (body) => {
+  console.log(Session.getObject("profile").token);
+
+  return fetch(`${url}/verification/verifyForgotOTP`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      if (data.success) {
+        return data.token;
+      }
+      throw data;
+    })
+    .catch((error) => {
+      throw error;
+      // window.location.href = "/";
+      // console.log(error);
+    });
+};
 export const sendVerificationMail = async () => {
   console.log(Session.getObject("profile").token);
 
-  await fetch(`${url}/verification/sendEmailOTP`, {
+  return fetch(`${url}/verification/sendEmailOTP`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -632,7 +716,7 @@ export const getPayments = (token, setPayments) => {
 
 export const getUsersId = async (token, email, setIds) => {
   let userData = [];
-  fetch(`${url}/users/validatemail/${email}`, {
+  return fetch(`${url}/users/validatemail/${email}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -647,7 +731,9 @@ export const getUsersId = async (token, email, setIds) => {
         // console.log(setIds);
         // console.log(setIds);
         setIds((prevState) => [...prevState, data.id]);
+        return data.id;
       }
+      throw data;
     })
     .catch((error) => {
       throw error;

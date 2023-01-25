@@ -16,6 +16,9 @@ import {
   sendMobileOTP,
   getUsersId,
   verifyMobileOTP,
+  sendForgotOTP,
+  verifyForgotOTP,
+  resetPassword,
 } from "../../../api";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
@@ -1053,14 +1056,86 @@ function RegScreen3(props) {
 
 function ForgotPass() {
   const [sent, setSent] = useState(false);
-  const handleSubmit = () => {
-    setSent(true);
-  };
-
-  const [otp, setOtp] = useState(new Array(6).fill(""));
-  let time = Session.get("time") - parseInt(Date.now() / 1000);
+  const [userId, setUserId] = useState([]);
+  const [id, setId] = useState("");
+  const [email, setEmail] = useState("");
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(30);
+  const ConRef = useRef(null);
+  let token = "";
+  const toastId = useRef(null);
+  const sendOTP = () => {
+    getUsersId(token, email, setUserId)
+      .then((res) => {
+        toastId.current = toast.loading("Sending Mail");
+        ConRef.current.setAttribute("disabled", true);
+        ConRef.current.style.background = disabledCol;
+        setId(res);
+        let body = { id: res };
+        sendForgotOTP(body)
+          .then((resp) => {
+            console.log(resp);
+            toast.update(toastId.current, {
+              render: "Mail Sent",
+              type: "success",
+              isLoading: false,
+              ...toastStyle,
+            });
+            // props.setter(2);
+            ConRef.current.removeAttribute("disabled");
+            ConRef.current.style.background = btnCol;
+            let time = resp - parseInt(Date.now() / 1000);
+            setMinutes(parseInt(time / 60));
+            setSeconds(parseInt(time % 60));
+            setSent(true);
+          })
+          .catch((err) => {
+            toast.update(toastId.current, {
+              render: err,
+              type: "error",
+              isLoading: false,
+              ...toastStyle,
+            });
+            ConRef.current.removeAttribute("disabled");
+            ConRef.current.style.background = btnCol;
+          });
+      })
+      .catch((err) => {
+        toast.error(err, toastStyle);
+        ConRef.current.removeAttribute("disabled");
+        ConRef.current.style.background = btnCol;
+      });
+    // setSent(true);
+  };
+  const resendOTP = () => {
+    let body = { id: id };
+    toastId.current = toast.loading("Sending Mail");
+    setOtp(new Array(6).fill(""));
+    sendForgotOTP(body)
+      .then((resp) => {
+        console.log(resp);
+        toast.update(toastId.current, {
+          render: "Mail Sent",
+          type: "success",
+          isLoading: false,
+          ...toastStyle,
+        });
+        let time = resp - parseInt(Date.now() / 1000);
+        setMinutes(parseInt(time / 60));
+        setSeconds(parseInt(time % 60));
+        setSent(true);
+      })
+      .catch((err) => {
+        toast.error(err, toastStyle);
+      });
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [password, setPassword] = useState("");
+  // let time = Session.get("time") - parseInt(Date.now() / 1000);
+  const [secret, setSecret] = useState("");
   const handleChangeOtp = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
@@ -1069,10 +1144,36 @@ function ForgotPass() {
     if (element.nextSibling) {
       element.nextSibling.focus();
     } else {
-      conRef.current.focus();
+      if (conRef.current) conRef.current.focus();
     }
   };
-
+  const handleOTPVerify = () => {
+    let body = { id: id, otp: otp.join("") };
+    console.log(body);
+    verifyForgotOTP(body)
+      .then((res) => {
+        toast.info("Verified", toastStyle);
+        setSecret(res);
+        setVerify(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err, toastStyle);
+      });
+  };
+  const handleResetPassword = () => {
+    console.log(secret, password);
+    let body = { secret: secret, password: password, id: id };
+    resetPassword(body)
+      .then((res) => {
+        console.log(res);
+        toast.info(res, toastStyle);
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        toast.error(err, toastStyle);
+      });
+  };
   const handleBackChange = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? "" : d))]);
@@ -1121,6 +1222,8 @@ function ForgotPass() {
             autoFocus
             type="text"
             required={true}
+            value={email}
+            onChange={handleEmailChange}
           />
         </div>
       )}
@@ -1131,7 +1234,7 @@ function ForgotPass() {
           <div className="login-form-text-label" style={{ fontSize: "0.8rem" }}>
             Enter OTP
           </div>
-          <div className="login-form-text-label">{`A 6 digit code has been sent to ${""}`}</div>
+          <div className="login-form-text-label">{`A 6 digit code has been sent to ${email}`}</div>
           <div className="login-form-otp-row">
             {otp.map((data, index) => {
               return (
@@ -1169,7 +1272,7 @@ function ForgotPass() {
               <div className="login-form-otp-resend-que">
                 Didn't recieve code?
               </div>
-              <Link className="login-form-otp-resend-link" onClick={() => {}}>
+              <Link className="login-form-otp-resend-link" onClick={resendOTP}>
                 Resend
               </Link>
             </div>
@@ -1196,9 +1299,10 @@ function ForgotPass() {
         <button
           className="login-form-submit-btn"
           // disabled={!sendOtp}
-          onClick={handleSubmit}
+          ref={ConRef}
+          onClick={sendOTP}
         >
-          Submit
+          Send OTP
         </button>
       )}
       {verified && (
@@ -1210,8 +1314,10 @@ function ForgotPass() {
             className="login-form-text-inputs"
             name="password"
             type={"password"}
-            // value={}
-            onChange={(e) => {}}
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             onKeyDown={(e) => {
               console.log(e);
               if (e.key === "Enter") conRef.current.focus();
@@ -1223,9 +1329,7 @@ function ForgotPass() {
         <button
           className="login-form-submit-btn"
           // disabled={!sendOtp}
-          onClick={() => {
-            setVerify(true);
-          }}
+          onClick={handleOTPVerify}
         >
           Verify
         </button>
@@ -1234,7 +1338,7 @@ function ForgotPass() {
         <button
           className="login-form-submit-btn"
           // disabled={!sendOtp}
-          onClick={() => {}}
+          onClick={handleResetPassword}
         >
           Change Password
         </button>
