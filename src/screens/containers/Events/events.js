@@ -16,29 +16,51 @@ function Events() {
     { title: "Programming", icon: proCat, col: "#9672FF", back: catCardImg },
     { title: "Programming", icon: proCat, col: "#9672FF", back: catCardImg },
   ];
-  //   const Ecat = [
-  //     {
-  //       title: "ROBOWAR",
-  //       img: eventsImg,
-  //       col: "#FF4B4B",
-  //       qr: "",
-  //       date: "29-03-10",
-  //     },
-  //     { title: "Programming", icon: proCat, col: "#9672FF", back: catCardImg },
-  //     { title: "Programming", icon: proCat, col: "#9672FF", back: catCardImg },
-  //   ];
+  const Ecat = [
+    {
+      title: "ROBO WAR",
+      img: eventsImg,
+      price: "2000",
+      date: "22-07-23",
+      venue: "VLTC",
+      col: "#FF4B4B",
+      qr: "",
+      time: "12:30",
+      date: "29-03-10",
+    },
+    {
+      title: "ROBO WAR",
+      img: eventsImg,
+      price: "2000",
+      date: "22-07-23",
+      venue: "VLTC",
+      col: "#FF4B4B",
+      qr: "",
+      date: "29-03-10",
+    },
+    {
+      title: "ROBO WAR",
+      img: eventsImg,
+      price: "2000",
+      date: "22-07-23",
+      venue: "VLTC",
+      col: "#FF4B4B",
+      qr: "",
+      date: "29-03-10",
+    },
+  ];
   return (
     <div className="eventM-main">
       <div className="eventsM-back">
         <img src={back}></img>
       </div>
-
+      <div className="eventsM-back-overlay"> avss</div>
       <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
       <div className={"eventsM-title"}>EVENTS</div>
       <div className="eventsM-category-sec">
-        {Cat.map((item, i) => {
+        {Ecat.map((item, i) => {
           console.log();
-          return <CatCard card={item} key={i} />;
+          return <EventCard card={item} key={i} index={i} />;
         })}
       </div>
     </div>
