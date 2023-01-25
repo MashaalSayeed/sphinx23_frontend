@@ -10,6 +10,7 @@ import "./styles/activity.css";
 import "./styles/home.css";
 import "./styles/abut.css";
 import "./styles/about.css";
+import "./styles/events.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -38,6 +39,7 @@ import About from "./screens/containers/Home/about";
 import Activities from "./screens/containers/Home/Activities";
 import Theme from "./screens/containers/Home/theme";
 import { Home } from "@mui/icons-material";
+import Events from "./screens/containers/Events/events";
 
 function App() {
   // const token1 =
@@ -111,7 +113,7 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<LoginScreen />} />
+          <Route exact path="/" element={<Events />} />
           <Route path="/landing" element={<Landing />} />
           <Route path="/home" element={<TimeMachine notAnim={true} />} />
           <Route path="/about" element={<About />} />
