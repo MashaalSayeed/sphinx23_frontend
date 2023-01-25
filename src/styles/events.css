@@ -1,0 +1,167 @@
+.eventsM-back
+{
+    position: relative;
+    width: 100%;
+    top: 0;
+    /* border-bottom: 80px solid;
+    border-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #ffffff 100%) 30; */
+
+}
+.eventsM-back>img{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    max-height: 55vh;
+    object-fit: cover;
+}
+.eventsM-title
+{
+    /* position: absolute; */
+    font-family: 'Noto Sans Adlam Unjoined', sans-serif;
+    font-style: normal;
+    position: absolute;
+    margin: 80px auto;
+    font-weight: 300;
+    font-size: 8rem;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+   
+    /* padding: auto 10px;  */
+    width: fit-content;
+   
+    letter-spacing: 0.07em;
+    color: #FFFFFF;
+    transition: ease-in;
+
+}
+.eventsM-category-sec
+{
+    position: relative;
+    /* bottom: 10px; */
+    position: absolute;
+    top: 60vh;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    width: fit-content;
+    width: 80%;
+    justify-content: center;
+    display: flex;
+    /* grid-template-columns: repeat(3, 1fr); */
+  /* grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+     */
+    /* grid-auto-rows: auto;
+    grid-gap: 1rem; */
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    /* gap: 30px; */
+    padding: 30px 5px;
+    
+}
+
+.eventM-catCard
+{
+    width: 40%;
+    height: fit-content;
+    border-radius: 13.5848px;;
+    max-height: 390px;
+    /* aspect-ratio: 1.3; */
+    max-width: 400px;
+    aspect-ratio: 1.1;
+    /* background: rgba(255, 255, 255, 0.5) ;
+    border-radius: 13.5848px; */
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 30px;
+display: flex;
+justify-content: center;
+align-items: flex-end;
+
+}
+
+.eventM-catCard-img
+{
+    position: absolute;
+    width: 40%;
+    /* aspect-ratio: 1.3; */
+    max-width: 400px;
+    aspect-ratio: 1.1;
+    object-fit: cover;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    /* background: #FFFFFF; */
+border: 5.7199px solid rgba(255, 255, 255, 0.5);
+box-shadow: 0px 0px 17.1597px rgba(255, 255, 255, 0.4);
+border-radius: 13.5848px;
+}
+.eventM-catCard-overlay
+{
+    background: rgba(255, 255, 255, 0.11);
+backdrop-filter: blur(15.7297px);
+min-height: 65px;
+/* Note: backdrop-filter has minimal browser support */
+    width: 90%;
+    margin-bottom: 40px;
+    /* margin: auto; */
+border-radius: 8.57985px;
+padding: 10px 5px;
+justify-content: flex-start;
+display: flex;
+}
+.eventM-catCard-overlay>img
+{
+    width: 15%;
+    min-width: 50px;
+    max-width: 90px;
+    aspect-ratio: 1;
+   margin:0px 10px;
+    background: #9672FF;
+border-radius: 2.85995px;
+padding: 8px;
+
+}
+.catCard-text
+{
+    display: flex;
+    justify-content: center;
+flex-direction: column;
+margin-left: 10px;
+}
+.catCard-category
+{
+    font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 0.9rem;
+/* font-size: 8.57985px; */
+color: #B9B9B9;
+}
+.catCard-title
+{font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    margin-top: 4px;
+    font-size: 1.4rem;
+    
+    /* identical to box height */
+    
+    letter-spacing: 0.05em;
+    
+    background: linear-gradient(176.23deg, #A98BFF 2.95%, #6934FF 112.41%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* text-fill-color: transparent; */
+
+}
+
+.eventE-imgCon
+{
+    /* border-radius: 24% 41% 31% 9%/44% 6% 32% 40%;  */
+ 
+    padding: 10px;
+   background-color: #FF4B4B;
+}
