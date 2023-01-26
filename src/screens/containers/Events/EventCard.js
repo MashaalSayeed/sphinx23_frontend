@@ -8,8 +8,10 @@ function EventCard(props) {
   ];
   const { card, index } = props;
   const curr = styles[index % 3];
+  const animDelay = (index * 6).toString() + "0ms";
+
   return (
-    <div className="eventE-card">
+    <div className="eventE-card" style={{ animationDelay: animDelay }}>
       <div className="eventE-imgCon" style={{ background: curr.backCol }}>
         <img src={card.img}></img>
       </div>
