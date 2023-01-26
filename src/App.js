@@ -40,6 +40,7 @@ import Activities from "./screens/containers/Home/Activities";
 import Theme from "./screens/containers/Home/theme";
 import { Home } from "@mui/icons-material";
 import Events from "./screens/containers/Events/events";
+import EventsCat from "./screens/containers/Events/EventsCat";
 
 function App() {
   // const token1 =
@@ -113,10 +114,13 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Events />} />
+          <Route exact path="/" element={<LoginScreen />} />
           <Route path="/landing" element={<Landing />} />
           <Route path="/home" element={<TimeMachine notAnim={true} />} />
           <Route path="/about" element={<About />} />
+          <Route path="/events/:cat" element={<EventsCat />} />
+          <Route path="/events" element={<Events />} />
+
           {curruser != null ? (
             <>
               <Route
