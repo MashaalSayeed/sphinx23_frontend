@@ -1,20 +1,145 @@
+/* @import "compass/css3"; */
+
+.circle {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+margin:auto;
+border: 100.794px solid #00F0FF;
+filter: drop-shadow(0px 0px 13.4393px #00F0FF);
+  width: max(100vh,100vw);
+  height:  max(100vh,100vw);
+  margin: auto;
+  border-radius: 100%;
+  overflow: hidden;
+  z-index: 10;
+  -webkit-animation:grow 5s;
+  -webkit-animation-fill-mode: forwards;
+ 
+
+ 
+  /* span {
+  display: block;
+  font-size:240px;
+  color: #fff;
+  height: 300px;
+  width: 300px;
+  text-align: center;
+  padding-top: 24%;
+} */
+  
+}
+/* .circle-hide
+{
+    -webkit-animation: disp 5s 5s;
+    animation-delay: 5s;
+    animation-fill-mode: forwards;
+} */
+
+/*.circle:hover {
+  background: #070338;
+}
+*/
+@keyframes disp {
+    0%{
+        display: block;
+    }
+    100%
+    {
+        display: none;
+    }
+   
+    
+}
+
+
+@keyframes grow {
+ 0% {
+   
+    opacity: 1;
+-webkit-transform: scale( 0 );-moz-transform: scale( 0 );-o-transform: scale( 0 );-ms-transform: scale( 0 );transform: scale( 0 );
+  }
+  
+  99% {
+    opacity: 0;
+  -webkit-transform: scale( 2 );-moz-transform: scale( 2 );-o-transform: scale( 2 );-ms-transform: scale( 2 );transform: scale( 2 );transform:  blur(107.514px);;
+  }
+  100%{
+    opacity: 0;
+    -webkit-transform: scale( 0 );
+
+    
+  }
+  
+ 
+}
+
+
 .eventsM-back
 {
     position: relative;
     width: 100%;
     top: 0;
+    opacity: 0;
+    animation: EventM-back 2s ease-in-out;
+    animation-fill-mode: forwards;
     /* border-bottom: 80px solid;
     border-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #ffffff 100%) 30; */
 
+}
+.eventsM-back-overlay
+{
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 30vh;
+    height:15vh;
+    opacity: 0;
+    animation: EventM-back 2s ease-in-out;
+    animation-fill-mode: forwards;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
 }
 .eventsM-back>img{
     position: absolute;
     top: 0;
     width: 100%;
-    min-height: 50vh;
-    max-height: 55vh;
+    min-height: 40vh;
+    max-height: 45vh;
     object-fit: cover;
+    opacity: 0;
+    animation: EventM-back 2s ease-in-out;
+    animation-fill-mode: forwards;
 }
+
+@keyframes EventM-title {
+
+    0% {
+        opacity: 0; 
+         transform: translateY(180%);
+      
+    }
+
+ 
+    100% {
+        opacity: 1; 
+         transform: translateY(0%);
+         
+    }
+}
+@keyframes EventM-back {
+
+    0% {
+        opacity: 0;    
+    }
+
+ 
+    100% {
+        opacity: 0.97;      
+    }
+}
+
 .eventsM-title
 {
     /* position: absolute; */
@@ -23,15 +148,18 @@
     position: absolute;
     margin: 80px auto;
     font-weight: 300;
-    font-size: 8rem;
+    font-size: 6rem;
     left: 0; 
     right: 0; 
     margin-left: auto; 
     margin-right: auto;
+    opacity: 0;
    
     /* padding: auto 10px;  */
     width: fit-content;
-   
+    animation: EventM-title 2s ease-in-out;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
     letter-spacing: 0.07em;
     color: #FFFFFF;
     transition: ease-in;
@@ -42,7 +170,7 @@
     position: relative;
     /* bottom: 10px; */
     position: absolute;
-    top: 60vh;
+    top: 45vh;
     left: 0; 
     right: 0; 
     margin-left: auto; 
@@ -159,9 +287,29 @@ color: #B9B9B9;
 
 }
 
+
+@keyframes EventM-cards {
+
+    0% {
+         transform: translateY(180%);
+         opacity: 1;
+      
+    }
+
+ 
+    100% {
+        opacity: 1;
+         transform: translateY(0%);
+         
+    }
+}
+
 .eventE-card
 {
     margin-bottom: 15px;
+    animation: EventM-cards 2.5s ease-in-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
 }
 
 .eventE-imgCon
@@ -246,14 +394,4 @@ margin-bottom: 15px;
 .eventE-sub1
 {
     margin-bottom: 10px;
-}
-.eventsM-back-overlay
-{
-    width: 100%;
-    position: absolute;
-    z-index: 120;
-    top: 40vh;
-    height: 18vh;
-    
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
 }

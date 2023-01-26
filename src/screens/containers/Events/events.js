@@ -51,10 +51,11 @@ function Events() {
   ];
   return (
     <div className="eventM-main">
+      <div class="circle circle-hide"></div>
       <div className="eventsM-back">
         <img src={back}></img>
       </div>
-      <div className="eventsM-back-overlay"> avss</div>
+      <div className="eventsM-back-overlay"></div>
       <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
       <div className={"eventsM-title"}>EVENTS</div>
       <div className="eventsM-category-sec">
