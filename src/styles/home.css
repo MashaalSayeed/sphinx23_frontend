@@ -6,6 +6,7 @@ html,body{margin:0;padding:0;}
 body{
     min-height: 100vh;
     /* overflow: hidden; */
+  
     animation: hideScroll 2500ms;
     background: black;
 }
@@ -178,7 +179,7 @@ body::-webkit-scrollbar{
     
     /* margin: auto; */
     display: flex;
-    width: 98%;
+    width: 98vw;
     align-items: center;
     justify-content: space-between;
   

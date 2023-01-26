@@ -8,14 +8,9 @@ import catCardImg from "../../../images/events/catCard.png";
 import EventCard from "./EventCard";
 import eventsImg from "../../../images/events/roboWars.png";
 
-function Events() {
-  const [currTab, setCurrTab] = useState("events");
+function EventsCat() {
+  const [currTab, setCurrTab] = useState("Events");
   const Tabs = ["Home", "About", "Contact"];
-  const Cat = [
-    { title: "Programming", icon: proCat, col: "#9672FF", back: catCardImg },
-    { title: "Programming", icon: proCat, col: "#9672FF", back: catCardImg },
-    { title: "Programming", icon: proCat, col: "#9672FF", back: catCardImg },
-  ];
   const Ecat = [
     {
       title: "ROBO WAR",
@@ -59,13 +54,13 @@ function Events() {
       <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
       <div className={"eventsM-title"}>EVENTS</div>
       <div className="eventsM-category-sec">
-        {Cat.map((item, i) => {
+        {Ecat.map((item, i) => {
           console.log();
-          return <CatCard card={item} key={i} index={i} />;
+          return <EventCard card={item} key={i} index={i} />;
         })}
       </div>
     </div>
   );
 }
 
-export default Events;
+export default EventsCat;

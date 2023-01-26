@@ -15,7 +15,7 @@ filter: drop-shadow(0px 0px 13.4393px #00F0FF);
   border-radius: 100%;
   overflow: hidden;
   z-index: 10;
-  -webkit-animation:grow 5s;
+  -webkit-animation:grow 3s;
   -webkit-animation-fill-mode: forwards;
  
 
@@ -64,7 +64,7 @@ filter: drop-shadow(0px 0px 13.4393px #00F0FF);
   
   99% {
     opacity: 0;
-  -webkit-transform: scale( 2 );-moz-transform: scale( 2 );-o-transform: scale( 2 );-ms-transform: scale( 2 );transform: scale( 2 );transform:  blur(107.514px);;
+  -webkit-transform: scale( 1 );-moz-transform: scale( 2 );-o-transform: scale( 2 );-ms-transform: scale( 2 );transform: scale( 1.2 );transform:  blur(107.514px);;
   }
   100%{
     opacity: 0;
@@ -194,6 +194,9 @@ filter: drop-shadow(0px 0px 13.4393px #00F0FF);
 
 .eventM-catCard
 {
+    animation: EventM-cards 2.5s ease-in-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
     width: 40%;
     height: fit-content;
     border-radius: 13.5848px;;
@@ -214,7 +217,7 @@ align-items: flex-end;
 .eventM-catCard-img
 {
     position: absolute;
-    width: 40%;
+    width: 100%;
     /* aspect-ratio: 1.3; */
     max-width: 400px;
     aspect-ratio: 1.1;
