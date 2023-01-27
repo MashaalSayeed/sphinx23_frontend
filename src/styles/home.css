@@ -633,3 +633,21 @@ height: 100vh;
 .react-parallax>img{
     height: 100%;
 }
+.amb-con
+{
+    position: absolute;
+    width:20%;
+    max-width: 150px;
+    bottom: 0;
+    right: 0;
+}
+.amb-conL
+{
+    position: absolute;
+    width:20%;
+    max-width: 150px;
+    top: 0;
+    left: 0;
+    transform: rotate(180deg);
+
+}
