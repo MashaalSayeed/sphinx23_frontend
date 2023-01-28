@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-import styles from "./Results.module.css"
+import styles from "./Results.module.css";
 
-import dummy_user from "../../../images/dummy_user.png"
+import dummy_user from "../../../images/dummy_user.png";
 
 function Results({ data }) {
   return (
     <section>
       <h1 className={styles.name}>{data.name}</h1>
+      <br></br>
+      <h3 style={{ alignSelf: "center" }}>Round 1 Results</h3>
       <table>
         <thead>
           <tr>
@@ -22,7 +24,11 @@ function Results({ data }) {
             <tr key={rank}>
               <td>{rank}</td>
               <td className={styles.cell}>
-                <img style={{ filter: "invert(100%)" }} className={styles.profile} src={dummy_user} />
+                <img
+                  style={{ filter: "invert(100%)" }}
+                  className={styles.profile}
+                  src={dummy_user}
+                />
                 <span>{profile.name}</span>
               </td>
               <td>{college}</td>

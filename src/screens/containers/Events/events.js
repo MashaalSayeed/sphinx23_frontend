@@ -12,9 +12,9 @@ function Events() {
   const [currTab, setCurrTab] = useState("events");
   const Tabs = ["Home", "About", "Contact"];
   const Cat = [
-    { title: "Programming", icon: proCat, col: "#9672FF", back: catCardImg },
-    { title: "Programming", icon: proCat, col: "#9672FF", back: catCardImg },
-    { title: "Programming", icon: proCat, col: "#9672FF", back: catCardImg },
+    { title: "Tech", icon: proCat, col: "#9672FF", back: catCardImg },
+    { title: "Cultural", icon: proCat, col: "#9672FF", back: catCardImg },
+    { title: "EDM", icon: proCat, col: "#9672FF", back: catCardImg },
   ];
   const Ecat = [
     {

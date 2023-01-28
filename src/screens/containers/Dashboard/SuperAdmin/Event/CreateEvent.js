@@ -104,7 +104,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   useEffect(() => {
     if (submitV) post_Create();
   }, [adminId]);
-
+  const categories = ["Tech", "Cultural", "EDM"];
   // useEffect(() => {
   //   post_Create();
   // }, [eventCoorIds]);
@@ -122,9 +122,9 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
           disabled={editSuperAdmin ? !userType : false}
         >
           {/* <option value=""></option> */}
-          <option value="Tech">Tech</option>
-          <option value="Cultural">Cultural</option>
-          <option value="EDM">EDM</option>
+          {categories.map((category) => {
+            return <option value={category}>{category}</option>;
+          })}
         </select>
       </div>
     );

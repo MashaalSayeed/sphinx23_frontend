@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../../styles/home.css";
 import Navbar from "./Navbar";
+<<<<<<< Updated upstream
 import styles from "./EventsView.module.css";
 import Results from "./Results";
 import Notification from "./Notification";
@@ -8,15 +9,35 @@ import EventD from "./EventDetails";
 import Description from "./EventDetails";
 import HomeNav from "../Home/homeNav";
 
+=======
+
+import styles from "./EventsView.module.css";
+import { useParams } from "react-router-dom";
+import Description from "./Description";
+import Results from "./Results";
+import Notification from "./Notification";
+import { fetchOneEvent } from "../../../api";
+>>>>>>> Stashed changes
 function EventsView() {
+  const [event, setEvent] = useState();
   const data = {
     name: "Robo war",
     results: [],
   };
-
-  const [currTab, setCurrTab] = useState("events");
-  const Tabs = ["Home", "About", "Contact"];
-
+  const params = useParams();
+  console.log(params.id);
+  useEffect(() => {
+    console.log("USef Eeevt");
+    fetchOneEvent(setEvent, params.id)
+      .then((res) => {
+        console.log(res);
+        setEvent(res);
+        // console.log(event);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   // TODO: remove when fetching data
   for (let i = 0; i < 5; i++)
     data.results.push({
@@ -30,39 +51,41 @@ function EventsView() {
     });
 
   const tabs = {
-    Description: <Description />,
+    Description: <Description data={event} />,
     Results: <Results data={data} />,
     Notifcation: <Notification />,
   };
-  const [currentTab, setCurrentTab] = useState("Results");
+  const [currentTab, setCurrentTab] = useState("Description");
 
   return (
     <div className={styles.container}>
-      <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
-      <div className={styles.content}>
-        <p className={styles.breadcrumb}>
-          Categories &gt; Events
-          <span> &gt; {currentTab}</span>
-        </p>
+      <Navbar />
+      {event && (
+        <div className={styles.content}>
+          <p className={styles.breadcrumb}>
+            Categories &gt; Events
+            <span> &gt; {currentTab}</span>
+          </p>
 
-        <nav>
-          <ol>
-            {Object.keys(tabs).map((tab) => (
-              <li
-                key={tab}
-                className={currentTab == tab ? styles.active : ""}
-                onClick={() => setCurrentTab(tab)}
-              >
-                {tab}
-              </li>
-            ))}
-          </ol>
-        </nav>
+          <nav>
+            <ol>
+              {Object.keys(tabs).map((tab) => (
+                <li
+                  key={tab}
+                  className={currentTab == tab ? styles.active : ""}
+                  onClick={() => setCurrentTab(tab)}
+                >
+                  {tab}
+                </li>
+              ))}
+            </ol>
+          </nav>
 
-        <hr />
+          <hr />
 
-        {tabs[currentTab]}
-      </div>
+          {tabs[currentTab]}
+        </div>
+      )}
     </div>
   );
 }

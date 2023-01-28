@@ -33,6 +33,24 @@ export const fetchEvents = async (dispatch) => {
       throw err;
     });
 };
+
+export const fetchEventsByCategory = async (category) => {
+  console.log("Events Fetched");
+  return fetch(`${url}/events/category/${category}`, {
+    headers: {
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) return data.events;
+      throw data;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
 export const fetchAdminEvents = async (token, dispatch) => {
   console.log("AdminEvents Fetched");
   return fetch(`${url}/events/eventadmin`, {
@@ -123,7 +141,7 @@ export const fetchPasses = async (dispatch) => {
 };
 export const fetchOneEvent = async (setEvent, eventId) => {
   console.log("Event Fetched");
-  await fetch(`${url}/events/${eventId}`, {
+  return fetch(`${url}/events/${eventId}`, {
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
@@ -131,7 +149,12 @@ export const fetchOneEvent = async (setEvent, eventId) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      setEvent(data.event);
+      if (data.success) {
+        setEvent(data.event);
+        console.log(data);
+        return data.event;
+      }
+      throw data;
     })
     .catch((err) => {
       throw err;
