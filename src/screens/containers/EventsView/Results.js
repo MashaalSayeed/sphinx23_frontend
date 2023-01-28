@@ -21,7 +21,7 @@ function Results({ data }) {
           {data.results.map(({ rank, profile, college, prize }) => (
             <tr key={rank}>
               <td>{rank}</td>
-              <td className={styles.cell}>
+              <td>
                 <img style={{ filter: "invert(100%)" }} className={styles.profile} src={dummy_user} />
                 <span>{profile.name}</span>
               </td>

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../../styles/home.css";
-import Navbar from "./Navbar";
 import styles from "./EventsView.module.css";
 import Results from "./Results";
 import Notification from "./Notification";
-import EventD from "./EventDetails";
 import Description from "./EventDetails";
 import HomeNav from "../Home/homeNav";
 
@@ -12,13 +10,14 @@ function EventsView() {
   const data = {
     name: "Robo war",
     results: [],
+    notifications: [],
   };
 
   const [currTab, setCurrTab] = useState("events");
   const Tabs = ["Home", "About", "Contact"];
 
   // TODO: remove when fetching data
-  for (let i = 0; i < 5; i++)
+  for (let i = 0; i < 5; i++) {
     data.results.push({
       rank: i + 1,
       profile: {
@@ -28,11 +27,18 @@ function EventsView() {
       college: "MNIT Jaipur",
       prize: "Rs 10000",
     });
+    data.notifications.push({
+      rank: i,
+      color: "orange",
+      text: "Event has started",
+      date: new Date(),
+    });
+  }
 
   const tabs = {
     Description: <Description />,
     Results: <Results data={data} />,
-    Notifcation: <Notification />,
+    Notifcation: <Notification data={data} />,
   };
   const [currentTab, setCurrentTab] = useState("Results");
 

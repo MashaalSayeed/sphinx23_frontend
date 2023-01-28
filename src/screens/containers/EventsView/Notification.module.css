@@ -2,6 +2,33 @@ section {
     margin-top: 4vh;
 }
 
-.name {
-    font-size: 2.5rem;
+.notifications {
+    margin-top: 2vh;
+    list-style-type: none;
+}
+
+.notifications li {
+    margin-bottom: 20px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    background: rgba(41, 41, 41, 0.5);
+    border: solid 0px #000;
+    border-radius: 10px;
+}
+
+.details {
+    margin-top: -4px;
+    margin-left: 25px;
+}
+
+.details span {
+    color: gray;
+    font-size: 0.7rem;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    float: left;
 }
