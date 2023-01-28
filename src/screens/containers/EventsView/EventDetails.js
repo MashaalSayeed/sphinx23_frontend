@@ -1,7 +1,7 @@
 import React from "react";
 import eventsImg from "../../../images/event1.png";
 
-function EventD(props) {
+function Description(props) {
   const card = {
     title: "ROBO WAR",
     img: eventsImg,
@@ -59,4 +59,4 @@ function EventD(props) {
   );
 }
 
-export default EventD;
+export default Description;
