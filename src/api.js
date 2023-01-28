@@ -577,6 +577,29 @@ export const getUsersByPass = async (
       throw error;
     });
 };
+export const getAllResults = (eventId) => {
+  console.log("getUsersbyPage");
+  return fetch(`${url}/participant/resultsAll/${eventId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        console.log(data);
+        if (data.team) {
+          return data.team;
+        }
+      }
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
 export const getResults = ({
   token,
   eventId,
@@ -586,14 +609,17 @@ export const getResults = ({
   setNpage,
 }) => {
   console.log("getUsersbyPage");
-  fetch(`${url}/participant/results/${eventId}/${round}/${currentPage}`, {
-    headers: {
-      "Content-Type": "application/json",
-      mode: "cors",
-      Authorization: "Bearer " + token,
-      "Access-Control-Allow-Origin": "*",
-    },
-  })
+  return fetch(
+    `${url}/participant/results/${eventId}/${round}/${currentPage}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        mode: "cors",
+        Authorization: "Bearer " + token,
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  )
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
@@ -602,7 +628,7 @@ export const getResults = ({
           setCurrentRecords(data.team);
           console.log(data.totalPages);
           setNpage(data.totalPages);
-          return data.totalPages;
+          return data.team;
         }
       }
     })

@@ -41,8 +41,8 @@ function EventsView() {
     });
 
   const tabs = {
-    Description: <Description data={event} />,
-    Results: <Results data={data} />,
+    Description: <Description card={event} />,
+    Results: <Results data={event} />,
     Notifcation: <Notification />,
   };
   const [currentTab, setCurrentTab] = useState("Description");
