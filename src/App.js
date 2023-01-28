@@ -42,7 +42,6 @@ import { Home } from "@mui/icons-material";
 import Events from "./screens/containers/Events/events";
 import EventsView from "./screens/containers/EventsView/EventsView";
 import EventsCat from "./screens/containers/Events/EventsCat";
-import EventD from "./screens/containers/Events/EventDetails";
 import Ambassador from "./screens/containers/Home/Ambassadors";
 
 function App() {
@@ -117,7 +116,7 @@ function App() {
       />
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={<Ambassador />} />
+          <Route exact path="/" element={<LoginScreen />} />
           <Route path="/landing" element={<Landing />} />
           <Route path="/home" element={<TimeMachine notAnim={true} />} />
           <Route path="/about" element={<About />} />
