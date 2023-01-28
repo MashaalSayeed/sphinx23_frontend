@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 
 import styles from "./EventsView.module.css";
 import { useParams } from "react-router-dom";
-import Description from "./Description";
+import Description from "./EventDetails";
 import Results from "./Results";
 import Notification from "./Notification";
 import { fetchOneEvent } from "../../../api";

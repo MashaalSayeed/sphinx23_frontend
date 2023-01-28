@@ -76,4 +76,4 @@ function EventD({ card }) {
   );
 }
 
-export default Description;
+export default EventD;
