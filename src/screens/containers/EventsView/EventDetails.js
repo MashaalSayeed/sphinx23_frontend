@@ -1,5 +1,7 @@
 import React from "react";
+import { useState } from "react";
 import eventsImg from "../../../images/event1.png";
+import Register from "./Register";
 
 function Description(props) {
   const card = {
@@ -14,8 +16,11 @@ function Description(props) {
     time: "12:30",
     date: "29-03-10",
   };
+  const [regState, setReg] = useState(true);
+
   return (
     <div className="eventD-con">
+      {regState && <Register />}
       <div className="eventD-sec1">
         <div className="eventD-title">{card.title}</div>
         <div className="eventD-sub">

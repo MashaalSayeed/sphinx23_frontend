@@ -5,6 +5,7 @@ import Results from "./Results";
 import Notification from "./Notification";
 import Description from "./EventDetails";
 import HomeNav from "../Home/homeNav";
+import Register from "./Register";
 
 function EventsView() {
   const data = {
