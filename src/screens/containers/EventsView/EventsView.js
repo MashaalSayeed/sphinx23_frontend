@@ -1,15 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../../styles/home.css";
 import Navbar from "./Navbar";
-<<<<<<< Updated upstream
-import styles from "./EventsView.module.css";
-import Results from "./Results";
-import Notification from "./Notification";
-import EventD from "./EventDetails";
-import Description from "./EventDetails";
-import HomeNav from "../Home/homeNav";
-
-=======
 
 import styles from "./EventsView.module.css";
 import { useParams } from "react-router-dom";
@@ -17,7 +8,6 @@ import Description from "./Description";
 import Results from "./Results";
 import Notification from "./Notification";
 import { fetchOneEvent } from "../../../api";
->>>>>>> Stashed changes
 function EventsView() {
   const [event, setEvent] = useState();
   const data = {
