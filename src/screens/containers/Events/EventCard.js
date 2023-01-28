@@ -38,7 +38,7 @@ function EventCard(props) {
                 Rs.{card.amount}
               </div>
             )}
-            <button className="eventE-register">Register</button>
+            <button className="eventE-register">Explore More</button>
           </div>
           <div className="eventE-right" style={{ color: curr.rightCol }}>
             <div className="eventE-sub">

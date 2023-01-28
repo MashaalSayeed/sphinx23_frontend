@@ -67,7 +67,13 @@ function EventD({ card }) {
           )}
         </div>
         <div className="eventD-desc">{card.description}</div>
-        <button className="eventD-reg">Register Now</button>
+        <button
+          className="eventD-reg"
+          disabled={card.status != 1}
+          onClick={() => console.log("Reg Clicked")}
+        >
+          {card.status == 1 ? "Register Now" : "Registrations Closed"}
+        </button>
       </div>
       <div className="eventD-sec2">
         <img src={card.imageUrl}></img>

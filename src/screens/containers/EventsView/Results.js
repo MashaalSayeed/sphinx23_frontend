@@ -40,32 +40,33 @@ function Results({ data }) {
       <h1 className={styles.name}>{data.name}</h1>
       <br></br>
       {/* {renderResult} */}
-      {Array(...Array(parseInt(data.status) + 1).keys()).map(
-        (round, round_idx) => {
-          if (round > 1) {
-            return (
-              <div>
-                <h3 style={{ alignSelf: "center" }}>
-                  {data.ended && round == data.status
-                    ? `Final Round Results`
-                    : `Round ${round - 1} Results`}
-                </h3>
-                <table>
-                  <thead>
-                    <tr>
-                      <th style={{ width: "50%" }}>Team Id</th>
-                      <th style={{ width: "50%" }}>Team Name</th>
-                      {/* <th style={{ width: "40%" }}>College</th>
+      {data.status > 1 ? (
+        Array(...Array(parseInt(data.status) + 1).keys()).map(
+          (round, round_idx) => {
+            if (round > 1) {
+              return (
+                <div>
+                  <h3 style={{ alignSelf: "center" }}>
+                    {data.ended && round == data.status
+                      ? `Final Round Results`
+                      : `Round ${round - 1} Results`}
+                  </h3>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th style={{ width: "50%" }}>Team Id</th>
+                        <th style={{ width: "50%" }}>Team Name</th>
+                        {/* <th style={{ width: "40%" }}>College</th>
                 <th style={{ width: "30%" }}>Prize</th> */}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {results.map((team, idx) => {
-                      if (team.status >= round) {
-                        return (
-                          <tr key={team.teamId}>
-                            <td>{team.teamId}</td>
-                            {/* <td className={styles.cell}>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {results.map((team, idx) => {
+                        if (team.status >= round) {
+                          return (
+                            <tr key={team.teamId}>
+                              <td>{team.teamId}</td>
+                              {/* <td className={styles.cell}>
                           <img
                             style={{ filter: "invert(100%)" }}
                             className={styles.profile}
@@ -73,18 +74,21 @@ function Results({ data }) {
                           />
                           <span>{profile.name}</span>
                         </td> */}
-                            <td>{team.teamName}</td>
-                            {/* <td>{prize}</td> */}
-                          </tr>
-                        );
-                      }
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            );
+                              <td>{team.teamName}</td>
+                              {/* <td>{prize}</td> */}
+                            </tr>
+                          );
+                        }
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              );
+            }
           }
-        }
+        )
+      ) : (
+        <p>Event Yet to Start</p>
       )}
     </section>
   );

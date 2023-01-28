@@ -51,6 +51,7 @@ export default function EventDetails() {
     fetchOneEvent(setEvent, eventName)
       .then((res) => {
         console.log("Event Fetched");
+        setEvent(res);
       })
       .catch((err) => {
         alert(err);

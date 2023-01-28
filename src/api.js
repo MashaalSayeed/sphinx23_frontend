@@ -600,6 +600,29 @@ export const getAllResults = (eventId) => {
       throw error;
     });
 };
+export const getUpdatesForEvent = (eventId) => {
+  console.log("getUsersbyPage");
+  return fetch(`${url}/events/updatesEvent/${eventId}`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        console.log(data);
+
+        return data.updates;
+      }
+      throw data;
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
 export const getResults = ({
   token,
   eventId,

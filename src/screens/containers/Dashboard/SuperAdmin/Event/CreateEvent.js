@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import upload_btn from "../../../../../images/add_img.png";
 import close_btn from "../../../../../images/add_btn.png";
 import InputTag from "./InputTag";
-import { createEvent, updateEvent } from "../../../../../api";
+import { createEvent, fetchOneEvent, updateEvent } from "../../../../../api";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Navigate } from "react-router-dom";
 import { ConstructionOutlined } from "@mui/icons-material";
@@ -27,6 +27,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const disabled = editSuperAdmin ? !userType : false;
   console.log(userType);
   console.log(currEvent);
+
   const navigate = useNavigate();
   const [submitV, setSubmit] = useState(false);
   const [eventName, setEventName] = useState(null);
@@ -39,6 +40,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const [eventCoorIds, setEventCoorId] = useState([]);
   const [minTeamSize, setMinTeam] = useState(null);
   const [maxTeamSize, setMaxTeam] = useState(null);
+  const [event, setEvent] = useState();
   const [amount, setAmount] = useState(null);
   const [location, setLocation] = useState(null);
   const [admin, setAdmin] = useState(null);
@@ -81,24 +83,31 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   }
   useEffect(() => {
     if (editSuperAdmin == true) {
-      console.log(currEvent.from.split("T")[0]);
-      console.log(currEvent.description);
-      setEventName(currEvent.name);
-      setAdmin(currEvent.admin.email);
-      setAmount(currEvent.amount);
-      setCategory(currEvent.category);
-      setDate(currEvent.from.split("T")[0]);
-      setDetails(currEvent.description);
-      setMinTeam(currEvent.minTeamSize);
-      setMaxTeam(currEvent.maxTeamSize);
-      setImage(currEvent.imageUrl);
-      setLocation(currEvent.location);
-      setTime(currEvent.time);
-      setfreeforMNIT(currEvent.freeForMNIT);
-      const arr = currEvent.updates.map(({ message }) => {
-        return { message: message };
-      });
-      setUpdateList(arr);
+      fetchOneEvent(setEvent, currEvent._id)
+        .then((res) => {
+          setEventName(res.name);
+          setAdmin(res.admin.email);
+          setAmount(res.amount);
+          setCategory(res.category);
+          setDate(res.from.split("T")[0]);
+          setDetails(res.description);
+          setMinTeam(res.minTeamSize);
+          setMaxTeam(res.maxTeamSize);
+          setImage(res.imageUrl);
+          setLocation(res.location);
+          setTime(res.time);
+          setfreeforMNIT(res.freeForMNIT);
+          // const arr = currEvent.updates.map(({ message }) => {
+          //   return { message: message };
+          // });
+          setUpdateList(res.updates);
+          console.log(updateList);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // console.log(currEvent.from.split("T")[0]);
+      // console.log(currEvent.description);
     }
   }, []);
   useEffect(() => {
@@ -316,7 +325,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       // admin: adminId[0],
       updates:
         update.length != 0
-          ? [...updateList, { message: update }]
+          ? [...updateList, { message: update, timestamp: Date.now() }]
           : [...updateList],
       status: 1,
       ended: false,

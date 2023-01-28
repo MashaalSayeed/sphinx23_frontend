@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../styles/home.css";
-import Navbar from "./Navbar";
+// import Navbar from "./Navbar";
 
 import styles from "./EventsView.module.css";
 import { useParams } from "react-router-dom";
@@ -8,11 +8,15 @@ import Description from "./EventDetails";
 import Results from "./Results";
 import Notification from "./Notification";
 import { fetchOneEvent } from "../../../api";
+// import Description from "./EventDetails";
+import HomeNav from "../Home/homeNav";
+
 function EventsView() {
   const [event, setEvent] = useState();
   const data = {
     name: "Robo war",
     results: [],
+    notifications: [],
   };
   const params = useParams();
   console.log(params.id);
@@ -29,7 +33,7 @@ function EventsView() {
       });
   }, []);
   // TODO: remove when fetching data
-  for (let i = 0; i < 5; i++)
+  for (let i = 0; i < 5; i++) {
     data.results.push({
       rank: i + 1,
       profile: {
@@ -39,17 +43,26 @@ function EventsView() {
       college: "MNIT Jaipur",
       prize: "Rs 10000",
     });
+    data.notifications.push({
+      rank: i,
+      color: "orange",
+      text: "Event has started",
+      date: new Date(),
+    });
+  }
 
   const tabs = {
     Description: <Description card={event} />,
     Results: <Results data={event} />,
-    Notifcation: <Notification />,
+    Notifcation: <Notification data={event} />,
   };
   const [currentTab, setCurrentTab] = useState("Description");
-
+  const [currTab, setCurrTab] = useState("Events");
+  const Tabs = ["Home", "About", "Contact"];
   return (
     <div className={styles.container}>
-      <Navbar />
+      <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
+      {/* <Navbar /> */}
       {event && (
         <div className={styles.content}>
           <p className={styles.breadcrumb}>

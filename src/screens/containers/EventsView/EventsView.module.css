@@ -54,7 +54,7 @@ nav ol li.active {
     color: white;
     text-shadow: 0 0 8px white;
     border-bottom: 3px solid transparent;
-    border-image: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(197, 197, 197, 1) 100%);
+    border-image: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgb(53, 147, 255) 100%);
     border-image-slice: 1;
 }
 
