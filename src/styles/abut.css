@@ -18,6 +18,23 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	opacity: 0;
+	-webkit-animation: abtImg 1.6s ease-in-out;
+	-webkit-animation-fill-mode: forwards;
+}
+@keyframes abtImg {
+   
+    0% {
+        opacity: 1; 
+         transform: translateY(80%) scale(0.8);
+      
+    }
+
+    100% {
+        opacity: 1;
+         transform: translateY(0%) scale(1);
+         
+    }
 }
 .about-page-side-rectangle {
 	position: absolute;
@@ -62,6 +79,20 @@
 	align-items: center;
 	justify-content: flex-start;
 }
+
+@keyframes abtText {
+	0%{
+		opacity: 0.1;
+		transform: translateX(-100%);
+	}
+	
+	100%{
+		opacity: 1;
+		transform: translateX(0);
+	}
+	
+}
+
 .about-page-content-text {
 	width: 40%;
 	height: 100%;
@@ -71,6 +102,11 @@
 	justify-content: center;
 	margin-left: 4%;
 	gap: 20px;
+	opacity: 0;
+	-webkit-animation: abtText 1.6s ease-out;
+	-webkit-animation-delay: 700ms;
+	-webkit-animation-fill-mode: forwards;
+
 }
 .about-page--text-head {
 	font-family: 'Noto Sans Adlam Unjoined', sans-serif;
@@ -119,6 +155,8 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-image: url("../images/about/PyramidFront.png");
+	-webkit-animation: abtImg 1.6s ease-in-out;
+	-webkit-animation-fill-mode: forwards;
 }
 
 .simple-scroll

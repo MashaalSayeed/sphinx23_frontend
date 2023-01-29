@@ -53,6 +53,8 @@ export default function About() {
         Tabs={Tabs}
         notanimation={true}
       />
+      <div className="about-page-foreground-img"></div>
+
       <div className="about-page-background-img">
         <div className="about-page-side-rectangle"></div>
         <div className="about-page-center-rectangle"></div>

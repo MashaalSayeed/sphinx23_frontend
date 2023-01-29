@@ -16,11 +16,11 @@ function Description(props) {
     time: "12:30",
     date: "29-03-10",
   };
-  const [regState, setReg] = useState(true);
+  const [regState, setReg] = useState(false);
 
   return (
     <div className="eventD-con">
-      {regState && <Register />}
+      {regState && <Register regState={regState} setReg={setReg} />}
       <div className="eventD-sec1">
         <div className="eventD-title">{card.title}</div>
         <div className="eventD-sub">
@@ -55,7 +55,14 @@ function Description(props) {
           </div>
         </div>
         <div className="eventD-desc">{card.desc}</div>
-        <button className="eventD-reg">Register Now</button>
+        <button
+          className="eventD-reg"
+          onClick={() => {
+            setReg(true);
+          }}
+        >
+          Register Now
+        </button>
       </div>
       <div className="eventD-sec2">
         <img src={card.img}></img>
