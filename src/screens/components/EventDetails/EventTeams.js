@@ -7,7 +7,7 @@ function EventTeams(props) {
     header: ["Sr.no", "TeamID", "Team Name", "Round Status"],
     value: ["index", "teamId", "teamName", "status"],
   };
-  console.log(currentRecords);
+  console.log(data.header);
   return (
     <div>
       <form onSubmit={() => {}} className="resp-m-l-r teams">

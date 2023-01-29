@@ -7,7 +7,7 @@ section {
     font-size: 2.5rem;
 }
 
-table {
+.rtable {
     color: white;
 
     margin-top: 2vh;
@@ -15,7 +15,7 @@ table {
     border-spacing: 0 10px;
 }
 
-th {
+.rth {
     background: transparent;
     border: none;
     padding-bottom: 0;
@@ -23,7 +23,7 @@ th {
     font-size: 0.8rem;
 }
 
-td {
+.rtd {
     border: solid 0px #000;
     border-style: solid none;
     padding: 10px;
@@ -31,7 +31,7 @@ td {
     background: rgba(41, 41, 41, 0.5)
 }
 
-td:first-child {
+/* td:first-child {
     border-left-style: solid;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -41,7 +41,7 @@ td:last-child {
     border-right-style: solid;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-}
+} */
 
 .profile {
     height: 20px;

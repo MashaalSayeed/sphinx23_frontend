@@ -10,6 +10,7 @@ import Notification from "./Notification";
 import { fetchOneEvent } from "../../../api";
 // import Description from "./EventDetails";
 import HomeNav from "../Home/homeNav";
+import Register from "./Register";
 
 function EventsView() {
   const [event, setEvent] = useState();

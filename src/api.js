@@ -139,6 +139,57 @@ export const fetchPasses = async (dispatch) => {
       throw err;
     });
 };
+export const createEventPaymentRequest = async (body) => {
+  console.log("Event Fetched", body.userList);
+  return fetch(`${url}/payment/event`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        // setEvent(data.event);
+        console.log(data);
+        return data;
+      }
+      throw data;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+export const registerForEvent = async (signature, body) => {
+  console.log("Event Fetched");
+  return fetch(`${url}/events/register`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+      "x-razorpay-signature": signature,
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        // setEvent(data.event);
+        console.log(data);
+        return data.success;
+      }
+      throw data;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
 export const fetchOneEvent = async (setEvent, eventId) => {
   console.log("Event Fetched");
   return fetch(`${url}/events/${eventId}`, {

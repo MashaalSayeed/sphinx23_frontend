@@ -3,7 +3,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ReadOnlyRow = ({ ambassador, handleEditClick, handleDeleteClick }) => {
-  console.log(ambassador);
+  console.log("A", ambassador.user);
   return (
     <tr>
       <td>{ambassador.index + 1}</td>

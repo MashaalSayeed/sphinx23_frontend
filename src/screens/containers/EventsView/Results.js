@@ -51,11 +51,15 @@ function Results({ data }) {
                       ? `Final Round Results`
                       : `Round ${round - 1} Results`}
                   </h3>
-                  <table>
+                  <table className={styles.rtable}>
                     <thead>
                       <tr>
-                        <th style={{ width: "50%" }}>Team Id</th>
-                        <th style={{ width: "50%" }}>Team Name</th>
+                        <th className={styles.rth} style={{ width: "50%" }}>
+                          Team Id
+                        </th>
+                        <th className={styles.rth} style={{ width: "50%" }}>
+                          Team Name
+                        </th>
                         {/* <th style={{ width: "40%" }}>College</th>
                 <th style={{ width: "30%" }}>Prize</th> */}
                       </tr>
@@ -65,7 +69,7 @@ function Results({ data }) {
                         if (team.status >= round) {
                           return (
                             <tr key={team.teamId}>
-                              <td>{team.teamId}</td>
+                              <td className={styles.rtd}>{team.teamId}</td>
                               {/* <td className={styles.cell}>
                           <img
                             style={{ filter: "invert(100%)" }}
@@ -74,7 +78,7 @@ function Results({ data }) {
                           />
                           <span>{profile.name}</span>
                         </td> */}
-                              <td>{team.teamName}</td>
+                              <td className={styles.rtd}>{team.teamName}</td>
                               {/* <td>{prize}</td> */}
                             </tr>
                           );
