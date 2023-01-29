@@ -30,6 +30,7 @@
 {
     width: 9px;
     height: 50px;
+    -webkit-animation: scrollGlow 2s infinite ease-in-out;
     background: linear-gradient(180deg, #8DEFFF 0%, #FFFFFF 100%);
 }
 .activity-sec2

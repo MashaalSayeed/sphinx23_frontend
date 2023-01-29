@@ -508,13 +508,44 @@ letter-spacing: 0.21em;
 
 color: #FFFFFF;
 margin-bottom: 5px;
+-webkit-animation: scrollText 2s infinite ease-in-out;
 }
+@keyframes scrollText {
+    0%
+    {
+        transform: translateY(0);
+    }
+    50%
+    {
+        transform: translateY(-15%);
+    }
+    100%
+    {
+        transform: translateY(0);
+    }    
+}
+
 
 .landing-scroll-line
 {
     width: 9px;
     height: 50px;
     background: linear-gradient(180.34deg, #FFEB77 0.29%, #AE3725 99.68%);
+    -webkit-animation: scrollGlow 2s infinite ease-in-out;
+
+}
+@keyframes scrollGlow {
+    0%{
+        filter: blur(1px);
+    }
+    50%
+    {
+        filter: blur(0.6px);
+    }
+    100%{
+filter: blur(1px);
+    }
+    
 }
 .machine-text
 {
