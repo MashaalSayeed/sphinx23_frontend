@@ -3,11 +3,40 @@ import React, { useEffect, useState } from "react";
 import styles from "./Results.module.css"
 
 import dummy_user from "../../../images/dummy_user.png"
+// TODO: change to correct icon
+import icon from "../../../images/edit.png"
+
+function Query({ onSubmit }) {
+  const [query, setQuery] = useState("");
+
+  const handleSubmit = () => onSubmit(query);
+
+  return (
+    <div className={styles.query}>
+      <label for="query">Enter Query</label>
+      <span>
+        <input id="query" type="text" placeholder=""
+          onChange={e => setQuery(e.target.value)}
+          onKeyDown={e => {
+            if (e.key === 'Enter') handleSubmit()
+          }} />
+        <img src={icon} onClick={handleSubmit} />
+      </span>
+    </div>
+  )
+}
+
 
 function Results({ data }) {
+  // TODO: handle query
+  const handleSubmit = (query) => alert(query);
+
   return (
     <section>
-      <h1 className={styles.name}>{data.name}</h1>
+      <div className={styles.topsection}>
+        <h1 className={styles.name}>{data.name}</h1>
+        <Query onSubmit={handleSubmit} />
+      </div>
       <table>
         <thead>
           <tr>
