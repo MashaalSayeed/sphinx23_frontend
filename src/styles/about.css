@@ -46,6 +46,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    opacity: 0;
+    transform: translateX(0);
 }
 .home-about-title
 {

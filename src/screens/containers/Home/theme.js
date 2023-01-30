@@ -1,11 +1,31 @@
 import { color } from "@mui/system";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import theme from "../../../images/theme.png";
 import HomeNav from "./homeNav";
+import useIntersection from "./interSection";
 
 function Theme() {
+  const ref = useRef();
+  const [view, setView] = useState(false);
+
+  // const inViewport = useIntersection(ref, "0px"); // Trigger as soon as the element becomes visible
+
+  const inViewport = useIntersection(ref, "-100px");
+  useEffect(() => {
+    if (inViewport) {
+      setTimeout(() => {
+        setView(true);
+      }, 2000);
+    }
+
+    // inViewport = true;
+  }, [inViewport]);
   return (
-    <div className="activity-back" style={{ backgroundColor: "#1e1e1e" }}>
+    <div
+      className="activity-back"
+      style={{ backgroundColor: "#1e1e1e" }}
+      ref={ref}
+    >
       {/* <HomeNav
         setCurrTab={setCurrTab}
         currTab={currTab}
@@ -19,18 +39,31 @@ function Theme() {
       </div>
       <div className="activity-sections">
         <div
-          className="activity-sec2"
+          className={
+            inViewport && !view
+              ? "activity-sec2 activity-sec2-anim"
+              : "activity-sec2"
+          }
           style={{
             background:
               "radial-gradient(62.62% 62.62% at 43.33% 37.38%, rgba(92, 49, 0, 0) 0%, rgba(0, 0, 0, 0.7) 69.27%)",
+            ...(view ? { opacity: 1 } : {}),
           }}
         >
           <img src={theme} style={{ height: "100%", objectFit: "cover" }}></img>
         </div>
         <div className="activity-sec1">
           <div
-            className="about-info"
-            style={{ width: "80%", marginLeft: "8%" }}
+            style={{
+              width: "80%",
+              marginLeft: "8%",
+              ...(view ? { opacity: 1 } : {}),
+            }}
+            className={
+              inViewport && !view
+                ? "about-info activity-info-anim2"
+                : "about-info"
+            }
           >
             <div className="activity-info-sub">SPHINX ‘23</div>
             <div className="home-about-title">THEME</div>

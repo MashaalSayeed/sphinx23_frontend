@@ -41,6 +41,24 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    opacity: 0;
+    
+
+}
+.activity-sec2-anim
+{
+    -webkit-animation: secAnim 2s ease-in-out;
+    -webkit-animation-fill-mode: forwards;
+}
+@keyframes secAnim {
+    0%
+    {
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+    
 }
 .activity-sec2>img
 {
@@ -48,6 +66,45 @@
     width: 100%;
    
 }
+
+@keyframes actText {
+	0%{
+		opacity: 0.1;
+		transform: translateX(-120%);
+	}
+	
+	100%{
+		opacity: 1;
+		transform: translateX(0%);
+	}
+	
+}
+@keyframes actText2 {
+	0%{
+		opacity: 0.1;
+		transform: translateX(120%);
+	}
+	
+	100%{
+		opacity: 1;
+		transform: translateX(0%);
+	}
+	
+}
+
+.activity-info-anim
+{
+    -webkit-animation: actText 1.6s ease-in-out;
+
+	-webkit-animation-fill-mode: forwards;
+}
+.activity-info-anim2
+{
+    -webkit-animation: actText2 1.6s ease-in-out;
+
+	-webkit-animation-fill-mode: forwards;
+}
+
 .activity-info-sub
 {
     font-family: 'Inter';

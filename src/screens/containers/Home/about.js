@@ -1,50 +1,11 @@
-// import React, { useState } from "react";
-// import pyramid from "../../../images/about/pyramid.png";
-// import Bottom from "../../../images/about/pyramidBottom.png";
-// import "../../../styles/about.css";
-// import HomeNav from "./homeNav";
-
-// function About() {
-//   const [currTab, setCurrTab] = useState("Home");
-//   const Tabs = ["Home", "About", "Contact"];
-//   return (
-//     <div className="about-main">
-//       {/* <div className="about-pyramid">
-//         <img className="about-pyramid-img" src={pyramid}></img>
-//       </div> */}
-//       <HomeNav
-//         setCurrTab={setCurrTab}
-//         currTab={currTab}
-//         Tabs={Tabs}
-//         notanimation={true}
-//       />
-//       <div className="about-bottom">
-//         <img className="about-bottom-img" src={Bottom}></img>
-//       </div>
-//       <div className="about-info">
-//         <div className="home-about-title">ABOUT US</div>
-//         <div className="about-Maincontent">
-//           Sphinx is the largest technology fest in Rajasthan, held annually at
-//           the MNIT Jaipur campus. The fest attracts thousands of students from
-//           all over the country, who come to participate in a wide range of
-//           technical and non-technical events. The event includes workshops,
-//           competitions, guest lectures and exhibitions on the latest technology
-//           and innovations.{" "}
-//         </div>
-//         <button className="home-about-btn">Learn More</button>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default About;
-
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import HomeNav from "./homeNav";
-
+import useIntersection from "./interSection";
 export default function About() {
   const [currTab, setCurrTab] = useState("About");
+  const ref = useRef(null);
   const Tabs = ["Home", "About", "Contact"];
+  useIntersection(ref, "-100px");
   return (
     <div className="about-page">
       <HomeNav

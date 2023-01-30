@@ -1,18 +1,39 @@
 import { color } from "@mui/system";
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useRef } from "react";
 import pyramid from "../../../images/activityPyramid.png";
-import HomeNav from "./homeNav";
+import useIntersection from "./interSection";
 
 function Activities() {
+  const ref = useRef();
+  const [view, setView] = useState(false);
+
+  const inViewport = useIntersection(ref, "-100px");
+  useEffect(() => {
+    if (inViewport) {
+      setTimeout(() => {
+        setView(true);
+      }, 2000);
+    }
+  }, [inViewport]);
   return (
-    <div className="activity-back">
+    <div className="activity-back" ref={ref}>
       <div className="simple-scroll">
         <div className="landing-scroll-text">SCROLL</div>
         <div className="activity-scroll-line"></div>
       </div>
       <div className="activity-sections">
         <div className="activity-sec1">
-          <div className="about-info" style={{ width: "80%" }}>
+          <div
+            style={{ width: "80%", ...(view ? { opacity: 1 } : {}) }}
+            className={
+              inViewport && !view
+                ? "about-info activity-info-anim"
+                : "about-info"
+            }
+            // style={}
+          >
             <div className="activity-info-sub">SPHINX ‘23</div>
             <div className="home-about-title">ACTIVITIES</div>
             <div className="about-Maincontent">
@@ -35,7 +56,14 @@ function Activities() {
             </button>
           </div>
         </div>
-        <div className="activity-sec2">
+        <div
+          className={
+            inViewport && !view
+              ? "activity-sec2 activity-sec2-anim"
+              : "activity-sec2"
+          }
+          style={view ? { opacity: 1 } : {}}
+        >
           <img src={pyramid}></img>
         </div>
       </div>

@@ -83,12 +83,12 @@
 @keyframes abtText {
 	0%{
 		opacity: 0.1;
-		transform: translateX(-100%);
+		transform: translateX(-120%);
 	}
 	
 	100%{
 		opacity: 1;
-		transform: translateX(0);
+		transform: translateX(0%);
 	}
 	
 }
@@ -103,7 +103,7 @@
 	margin-left: 4%;
 	gap: 20px;
 	opacity: 0;
-	-webkit-animation: abtText 1.6s ease-out;
+	-webkit-animation: abtText 1.6s ease-in-out;
 	-webkit-animation-delay: 700ms;
 	-webkit-animation-fill-mode: forwards;
 
