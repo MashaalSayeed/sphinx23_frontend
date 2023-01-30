@@ -3,13 +3,14 @@ import machine from "./../../../images/home/timeMach1.png";
 import Activities from "./Activities";
 import { ErrorBoundary } from "react-error-boundary";
 import Landing from "./home";
-
+import Ambassador from "./Ambassadors";
 import HomeNav from "./homeNav";
 import Theme from "./theme";
-import Ambassador from "./Ambassadors";
+// import Ambassador from "./Amb
 
 function TimeMachine({ notAnim, landing }) {
   const [currTab, setCurrTab] = useState("Home");
+
   const [animNotOver, setNotOver] = useState(true);
   const [title, setTitle] = useState(false);
   const Tabs = ["Home", "About", "Contact"];

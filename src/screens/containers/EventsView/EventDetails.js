@@ -5,10 +5,12 @@ import Register from "./Register";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useRazorpay from "react-razorpay";
 
 // import Razorpay from "razorpay";
 import { createEventPaymentRequest, registerForEvent } from "../../../api";
 function Description({ card }) {
+  const Razorpay = useRazorpay();
   const toastStyle = {
     position: "top-right",
     autoClose: 3000,
@@ -19,23 +21,23 @@ function Description({ card }) {
     progress: undefined,
     theme: "dark",
   };
-  const loadScript = (src) => {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  };
+  // const loadScript = (src) => {
+  //   return new Promise((resolve) => {
+  //     const script = document.createElement("script");
+  //     script.src = src;
+  //     script.onload = () => {
+  //       resolve(true);
+  //     };
+  //     script.onerror = () => {
+  //       resolve(false);
+  //     };
+  //     document.body.appendChild(script);
+  //   });
+  // };
 
-  useEffect(() => {
-    loadScript("https://checkout.razorpay.com/v1/checkout.js");
-  });
+  // useEffect(() => {
+  //   loadScript("https://checkout.razorpay.com/v1/checkout.js");
+  // });
 
   let date = new Date(card.from);
   const weekday = [
@@ -200,7 +202,7 @@ function Description({ card }) {
               },
             };
             console.log(window.env);
-            const razorpayObject = new window.Razorpay(options);
+            const razorpayObject = new Razorpay(options);
             // razorpayObject.open();
 
             // var razorpayObject = new Razorpay(options);

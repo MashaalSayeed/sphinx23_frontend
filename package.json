@@ -27,6 +27,7 @@
     "react-in-viewport": "^1.0.0-alpha.29",
     "react-otp-input": "^2.4.0",
     "react-parallax": "^3.5.1",
+    "react-razorpay": "^1.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
@@ -65,13 +66,13 @@
   },
   "react-dotenv": {
     "whitelist": [
-      "REACT_APP_URL",
-      "REACT_SERVER_URL",
-      "FREE_ORDER_ID",
-      "FREE_PAYMENT_ID",
-      "CASH_ORDER_ID",
-      "CASH_PAYMENT_ID",
-      "RAZORPAY_ID"
+      "REACT_APP_SITE_URL",
+      "REACT_APP_SERVER_URL",
+      "REACT_APP_FREE_ORDER_ID",
+      "REACT_APP_FREE_PAYMENT_ID",
+      "REACT_APP_CASH_ORDER_ID",
+      "REACT_APP_CASH_PAYMENT_ID",
+      "REACT_APP_RAZORPAY_ID"
     ]
   }
 }

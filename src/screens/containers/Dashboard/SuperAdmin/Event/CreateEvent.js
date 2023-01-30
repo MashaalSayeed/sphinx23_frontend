@@ -332,7 +332,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       status: status,
       ended: false,
       amount: amount,
-      freeForMNIT: true,
+      freeForMNIT: freeForMNIT,
       minTeamSize: minTeamSize,
       maxTeamSize: maxTeamSize,
       // imageUrl: "", //

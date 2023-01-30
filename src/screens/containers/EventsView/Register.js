@@ -4,12 +4,13 @@ import styles from "./Register.module.css";
 import close from "../../../images/close.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import useRazorpay from "react-razorpay";
 // import Razorpay from "razorpay";
 
 import { useSelector } from "react-redux";
 import { createEventPaymentRequest, registerForEvent } from "../../../api";
 function Register(props) {
+  const Razorpay = useRazorpay();
   const toastStyle = {
     position: "top-right",
     autoClose: 2000,
@@ -21,31 +22,31 @@ function Register(props) {
     theme: "dark",
   };
   const { category, name, setReg, event } = props;
-  const loadScript = (src) => {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  };
+  // const loadScript = (src) => {
+  //   return new Promise((resolve) => {
+  //     const script = document.createElement("script");
+  //     script.src = src;
+  //     script.onload = () => {
+  //       resolve(true);
+  //     };
+  //     script.onerror = () => {
+  //       resolve(false);
+  //     };
+  //     document.body.appendChild(script);
+  //   });
+  // };
   const minSize = event.minTeamSize,
     maxSize = event.maxTeamSize;
   const currUser = useSelector((state) => state.auth.curruser);
   const [members, setMembers] = useState(
     [...Array(maxSize)].map((x, i) => (i === 0 ? currUser.profile.email : ""))
   );
-  useEffect(() => {
-    // let m = members;
-    // m[0] = currUser.profile.email;
-    // setMembers(m);
-    loadScript("https://checkout.razorpay.com/v1/checkout.js");
-  }, []);
+  // useEffect(() => {
+  //   // let m = members;
+  //   // m[0] = currUser.profile.email;
+  //   // setMembers(m);
+  //   loadScript("https://checkout.razorpay.com/v1/checkout.js");
+  // }, []);
 
   // console.log(m);
 
@@ -205,7 +206,7 @@ function Register(props) {
               },
             };
             console.log(window.env);
-            const razorpayObject = new window.Razorpay(options);
+            const razorpayObject = new Razorpay(options);
             // razorpayObject.open();
 
             // var razorpayObject = new Razorpay(options);
@@ -238,6 +239,7 @@ function Register(props) {
   }, [userList]);
   const getUsersId = async (email) => {
     // let userData = [];
+    console.log(process.env);
     return fetch(
       `${process.env.REACT_APP_SERVER_URL}/users/validatemail/${email}`,
       {
