@@ -4,7 +4,36 @@ import styles from "./Results.module.css";
 
 import dummy_user from "../../../images/dummy_user.png";
 import { getAllResults } from "../../../api";
+// import dummy_user from "../../../images/dummy_user.png"
+// TODO: change to correct icon
+import icon from "../../../images/edit.png";
+
+function Query({ onSubmit }) {
+  const [query, setQuery] = useState("");
+
+  const handleSubmit = () => onSubmit(query);
+
+  return (
+    <div className={styles.query}>
+      <label for="query">Enter Query</label>
+      <span>
+        <input
+          id="query"
+          type="text"
+          placeholder=""
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleSubmit();
+          }}
+        />
+        <img src={icon} onClick={handleSubmit} />
+      </span>
+    </div>
+  );
+}
+
 function Results({ data }) {
+  const handleSubmit = (query) => alert(query);
   const [results, setResults] = useState([]);
   const [records, setCurrentRecords] = useState([]);
   const [totalPages, setNpage] = useState();
@@ -22,24 +51,16 @@ function Results({ data }) {
         console.log(err);
       });
   }, []);
-  const renderResult = () => {
-    var obj = [];
-    for (let i = 2; i <= data.status; i++) {
-      obj = [
-        ...obj,
-        results
-          .filter((result) => result.status >= i)
-          .map((res) => <p>res.status</p>),
-      ];
-    }
-    console.log(obj);
-    return obj;
-  };
+
   return (
     <section>
-      <h1 className={styles.name}>{data.name}</h1>
+      <div className={styles.topsection}>
+        <h1 className={styles.name}>{data.name}</h1>
+        <Query onSubmit={handleSubmit} />
+      </div>
+
       <br></br>
-      {/* {renderResult} */}
+
       {data.status > 1 ? (
         Array(...Array(parseInt(data.status) + 1).keys()).map(
           (round, round_idx) => {
@@ -54,10 +75,13 @@ function Results({ data }) {
                   <table className={styles.rtable}>
                     <thead>
                       <tr>
-                        <th className={styles.rth} style={{ width: "50%" }}>
+                        <th className={styles.rth} style={{ width: "20%" }}>
+                          S.No
+                        </th>
+                        <th className={styles.rth} style={{ width: "40%" }}>
                           Team Id
                         </th>
-                        <th className={styles.rth} style={{ width: "50%" }}>
+                        <th className={styles.rth} style={{ width: "40%" }}>
                           Team Name
                         </th>
                         {/* <th style={{ width: "40%" }}>College</th>
@@ -69,6 +93,7 @@ function Results({ data }) {
                         if (team.status >= round) {
                           return (
                             <tr key={team.teamId}>
+                              <td className={styles.rtd}>{idx + 1}</td>
                               <td className={styles.rtd}>{team.teamId}</td>
                               {/* <td className={styles.cell}>
                           <img

@@ -41,6 +41,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const [minTeamSize, setMinTeam] = useState(null);
   const [maxTeamSize, setMaxTeam] = useState(null);
   const [event, setEvent] = useState();
+  const [status, setStatus] = useState();
   const [amount, setAmount] = useState(null);
   const [location, setLocation] = useState(null);
   const [admin, setAdmin] = useState(null);
@@ -97,6 +98,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
           setLocation(res.location);
           setTime(res.time);
           setfreeforMNIT(res.freeForMNIT);
+          setStatus(res.status);
           // const arr = currEvent.updates.map(({ message }) => {
           //   return { message: message };
           // });
@@ -327,7 +329,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
         update.length != 0
           ? [...updateList, { message: update, timestamp: Date.now() }]
           : [...updateList],
-      status: 1,
+      status: status,
       ended: false,
       amount: amount,
       freeForMNIT: true,

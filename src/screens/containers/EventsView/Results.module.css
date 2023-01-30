@@ -2,6 +2,41 @@ section {
     margin-top: 4vh;
 }
 
+.query span input {
+    width: 30vw;
+    padding: 10px;
+    
+    color: white;
+    background-color: black;
+
+    border: solid 1px gray;
+    border-style: solid solid;
+    border-radius: 5px;
+}
+
+.query span {
+    position: relative;
+}
+
+.query span img {
+    cursor: pointer;
+    position: absolute;
+    height: 80%;
+    right: 15px;
+    top: 3px;
+}
+
+.query label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.topsection {
+    display: flex;
+    justify-content: space-between;
+}
+
 .name {
     text-transform: uppercase;
     font-size: 2.5rem;
