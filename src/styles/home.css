@@ -691,6 +691,8 @@ height: 100vh;
     max-width: 150px;
     bottom: 0;
     right: 0;
+    -webkit-animation: glow 3s infinite ;
+
 }
 .amb-conL
 {
@@ -700,5 +702,35 @@ height: 100vh;
     top: 0;
     left: 0;
     transform: rotate(180deg);
+    -webkit-animation: glow 3s infinite ;
+    z-index: 0;
 
+}
+@keyframes glow2 {
+    0%{
+        transform:   blur(0px);
+        opacity: 0.8;
+
+    }
+    100%
+    {
+        opacity: 1;
+        transform:  blur(20px);
+
+    }
+    
+}
+@keyframes glow {
+    0%{
+        transform:   rotate(180deg) blur(0px);
+        opacity: 0.8;
+
+    }
+    100%
+    {
+        opacity: 1;
+        transform:  rotate(180deg) blur(20px);
+
+    }
+    
 }

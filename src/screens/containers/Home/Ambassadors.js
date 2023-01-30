@@ -1,20 +1,38 @@
 import { color } from "@mui/system";
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useRef } from "react";
 import ambassador from "../../../images/ambassador.png";
 import ConR from "../../../images/ambCon.png";
 import HomeNav from "./homeNav";
+import useIntersection from "./interSection";
 
 function Ambassador() {
   const [currTab, setCurrTab] = useState("ambassador");
   const Tabs = ["Home", "About", "Contact"];
+  const ref = useRef();
+  const [view, setView] = useState(false);
+
+  const inViewport = useIntersection(ref, "-100px");
+  useEffect(() => {
+    if (inViewport) {
+      setTimeout(() => {
+        setView(true);
+      }, 2000);
+    }
+  }, [inViewport]);
   return (
-    <div className="activity-back" style={{ backgroundColor: "#1e1e1e" }}>
-      <HomeNav
+    <div
+      className="activity-back"
+      style={{ backgroundColor: "#1e1e1e" }}
+      ref={ref}
+    >
+      {/* <HomeNav
         setCurrTab={setCurrTab}
         currTab={currTab}
         Tabs={Tabs}
         notanimation={true}
-      />
+      /> */}
 
       <div className="simple-scroll">
         <div className="landing-scroll-text">SCROLL</div>
@@ -22,10 +40,15 @@ function Ambassador() {
       </div>
       <div className="activity-sections">
         <div
-          className="activity-sec2"
+          className={
+            inViewport && !view
+              ? "activity-sec2 activity-sec2-anim"
+              : "activity-sec2"
+          }
           style={{
             background:
               "radial-gradient(62.62% 62.62% at 43.33% 37.38%, rgba(92, 49, 0, 0) 0%, rgba(0, 0, 0, 0.7) 69.27%)",
+            ...(view && { opacity: 1 }),
           }}
         >
           <img
@@ -35,8 +58,16 @@ function Ambassador() {
         </div>
         <div className="activity-sec1">
           <div
-            className="about-info"
-            style={{ width: "80%", marginLeft: "8%" }}
+            style={{
+              width: "80%",
+              marginLeft: "8%",
+              ...(view ? { opacity: 1 } : {}),
+            }}
+            className={
+              inViewport && !view
+                ? "about-info activity-info-anim2"
+                : "about-info"
+            }
           >
             <div className="activity-info-sub">SPHINX ‘23</div>
             <div
@@ -52,10 +83,7 @@ function Ambassador() {
               <span style={{ color: "#FFA20F" }}>AMBASSADOR</span>
             </div>
 
-            <div
-              className="about-Maincontent"
-              style={{ marginTop: "20px", marginBottom: "10px" }}
-            >
+            <div className="about-Maincontent">
               Sphinx is the largest technology fest in Rajasthan, held annually
               at the MNIT Jaipur campus. The fest attracts thousands of students
               from all over the country, who come to participate in a wide range

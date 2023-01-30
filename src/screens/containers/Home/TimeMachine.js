@@ -6,6 +6,7 @@ import Landing from "./home";
 
 import HomeNav from "./homeNav";
 import Theme from "./theme";
+import Ambassador from "./Ambassadors";
 
 function TimeMachine({ notAnim, landing }) {
   const [currTab, setCurrTab] = useState("Home");
@@ -60,6 +61,7 @@ function TimeMachine({ notAnim, landing }) {
 
       {!landing || !animNotOver ? (
         <>
+          <Ambassador />
           <Activities /> <Theme />
         </>
       ) : (
