@@ -1,0 +1,52 @@
+.query {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.popup {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    z-index: 5;
+    padding: 20px;
+    background-color: black;
+    border: solid 1px lightgray;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+.popup span input {
+    width: max(30vw, 300px);
+    padding: 10px;
+    
+    color: white;
+    background-color: black;
+
+    border: solid 1px gray;
+    border-style: solid solid;
+    border-radius: 5px;
+}
+
+.popup span {
+    position: relative;
+}
+
+.popup span img {
+    cursor: pointer;
+    position: absolute;
+    height: 80%;
+    right: 15px;
+    top: 3px;
+}
+
+.popup label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.icon {
+    height: 20px;
+    cursor: pointer;
+}
