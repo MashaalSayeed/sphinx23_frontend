@@ -5,31 +5,39 @@ import styles from "./Results.module.css";
 import dummy_user from "../../../images/dummy_user.png";
 import { getAllResults } from "../../../api";
 // import dummy_user from "../../../images/dummy_user.png"
-// TODO: change to correct icon
-import icon from "../../../images/edit.png";
+import sendIcon from "../../../images/send.png";
+import questionIcon from "../../../images/question.png";
+
 
 function Query({ onSubmit }) {
   const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = () => onSubmit(query);
 
   return (
     <div className={styles.query}>
-      <label for="query">Enter Query</label>
-      <span>
-        <input
-          id="query"
-          type="text"
-          placeholder=""
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleSubmit();
-          }}
-        />
-        <img src={icon} onClick={handleSubmit} />
-      </span>
-    </div>
-  );
+      {open ?
+        (
+          <>
+            <label for="query">Enter Query</label>
+            <span>
+              <input
+                id="query"
+                type="text"
+                placeholder=""
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") handleSubmit();
+                }}
+              />
+              <img src={sendIcon} onClick={handleSubmit} />
+            </span>
+          </>
+        ) : (
+          <img class={styles.icon} src={questionIcon} onClick={() => setOpen(true)} />
+        )}
+    </div>);
 }
 
 function Results({ data }) {
