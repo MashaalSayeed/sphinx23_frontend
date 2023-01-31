@@ -11,7 +11,11 @@ export default function Passes() {
   const passCardElements = passes.map((onePass, i) => {
     return (
       <Link to={"pass/" + onePass._id}>
-        <PassCard key={onePass._id} image={onePass.imageUrl} />
+        <PassCard
+          key={onePass._id}
+          image={onePass.imageUrl}
+          name={onePass.name}
+        />
       </Link>
     );
   });

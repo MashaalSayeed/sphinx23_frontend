@@ -1,3 +1,9 @@
 window.env = {
-  "REACT_APP_SERVER_URL": "http://localhost:8000"
+  "REACT_APP_SITE_URL": "http://localhost:3000",
+  "REACT_APP_SERVER_URL": "http://localhost:8000",
+  "REACT_APP_FREE_ORDER_ID": "123456788",
+  "REACT_APP_FREE_PAYMENT_ID": "131267",
+  "REACT_APP_CASH_ORDER_ID": "1235678",
+  "REACT_APP_CASH_PAYMENT_ID": "12222",
+  "REACT_APP_RAZORPAY_ID": "rzp_test_uEsdCe11TQ6ZiX"
 };

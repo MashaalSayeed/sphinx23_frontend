@@ -15,13 +15,14 @@ function Complaints() {
   const data = {
     header: [
       "Sr.no",
+      "Query Id",
       "User Name",
       "College",
       "Email",
       "Concerned Event",
       "Status",
     ],
-    value: ["index", "name", "college", "email", "event", "status"],
+    value: ["index", "queryId", "name", "college", "email", "event", "status"],
   };
   const dispatch = useDispatch();
   const [currentRecords, setCurrentRecords] = useState([]);

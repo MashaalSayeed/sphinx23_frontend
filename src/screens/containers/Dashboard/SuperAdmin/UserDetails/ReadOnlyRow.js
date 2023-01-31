@@ -9,7 +9,7 @@ const ReadOnlyRow = ({ user, handleEditClick, handleDeleteClick }) => {
       <td>{user.index}</td>
       <td>{user.name}</td>
       <td>{user.email}</td>
-      <td>{user.type}</td>
+      <td>{user.type[0].toUpperCase() + user.type.slice(1)}</td>
       <td>{user.phoneNumber}</td>
       <td>{user.collegeName}</td>
 
