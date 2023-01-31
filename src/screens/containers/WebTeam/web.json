@@ -1,0 +1,66 @@
+[
+    {
+        "name":"Abhishek Rathore",
+        "position":"Senior",
+        "phone":9770932029,
+        "email":"2019ucp1013@mnit.ac.in",
+        "linkedUrl":"https://www.linkedin.com/in/abhishek-rathore-61668619a",
+        "imageUrl":"AbhishekRathore"
+    },
+    {
+        "name":"Aman Mittal",
+        "position":"Senior",
+        "phone":9462717901,
+        "email":"amanm3620@gmail.com",
+        "linkedUrl":"https://www.linkedin.com/in/aman-mittal-147890205",
+        "imageUrl":"AmanMittal"
+    },
+    {
+        "name":"Kunal Verma",
+        "position":"Senior",
+        "phone":7999331314,
+        "email":"2019ucp1358@mnit.ac.in",
+        "linkedUrl":"https://www.linkedin.com/mwlite/in/kunal-verma-4154b2194",
+        "imageUrl":"KunalVerma"
+    },
+    {
+        "name":"Nimish Toshniwal",
+        "position":"Junior",
+        "phone":9521060646,
+        "email":"nimishtoshniwal7@gmail.com",
+        "linkedUrl":"https://www.linkedin.com/in/nimish-toshniwal-717159213",
+        "imageUrl":"NimishToshniwal"
+    },
+    {
+        "name":"Chandramani Kumar",
+        "position":"Sophomore",
+        "phone":6206593821,
+        "email":"goluchandra1812@gmail.com",
+        "linkedUrl":"https://www.linkedin.com/in/chandramani-kumar-44b821206",
+        "imageUrl":"ChandramaniKumar"
+    },
+    {
+        "name":"Kaustav Sahoo",
+        "position":"Sophomore",
+        "phone":8810336838,
+        "email":"kaustavsahoo04@gmail.com",
+        "linkedUrl":"https://www.linkedin.com/in/kaustavsahoo",
+        "imageUrl":"KaustavSahoo"
+    },
+    {
+        "name":"Ritesh Kumar",
+        "position":"Sophomore",
+        "phone":6205791262,
+        "email":"2021uch1647@mnit.ac.in",
+        "linkedUrl":"https://www.linkedin.com/in/ritesh-kumar-a6481323a",
+        "imageUrl":"RiteshKumar"
+    },
+    {
+        "name":"Ronak Gupta",
+        "position":"Sophomore",
+        "phone":9982872237,
+        "email":"2021uec1454@mnit.ac.in",
+        "linkedUrl":"https://www.linkedin.com/in/ronak-gupta-7428a1224",
+        "imageUrl":"RonakGupta"
+    }
+]

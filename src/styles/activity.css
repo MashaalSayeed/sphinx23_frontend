@@ -30,7 +30,7 @@
 {
     width: 9px;
     height: 50px;
-    -webkit-animation: scrollGlow 2s infinite ease-in-out;
+    -webkit-animation: scrollGlowTheme 2s infinite ease-in-out;
     background: linear-gradient(180deg, #8DEFFF 0%, #FFFFFF 100%);
 }
 .activity-sec2
@@ -44,6 +44,27 @@
     opacity: 0;
     
 
+}
+.activity-sec3
+{
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(180deg, #3F75FE 0%, #FFDD86 56.25%, #3F75FE 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 1;
+    
+
+}
+.activity-sec3-img
+{
+    height: 100%;
+    width: 100%;
+}
+.activity-sec3-img>img
+{
+width: 100%;
 }
 .activity-sec2-anim
 {

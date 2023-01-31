@@ -26,6 +26,11 @@ section {
     top: 3px;
 }
 
+.icon {
+    height: 20px;
+    cursor: pointer;
+}
+
 .query label {
     display: block;
     font-size: 0.9rem;
@@ -77,7 +82,3 @@ td:last-child {
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
 } */
-
-.profile {
-    height: 20px;
-}

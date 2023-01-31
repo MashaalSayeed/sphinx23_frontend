@@ -2,6 +2,7 @@ import { color } from "@mui/system";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { Parallax, ParallaxBanner } from "react-scroll-parallax";
 import pyramid from "../../../images/activityPyramid.png";
 import useIntersection from "./interSection";
 
@@ -56,16 +57,36 @@ function Activities() {
             </button>
           </div>
         </div>
-        <div
+
+        <div className={"activity-sec3"}>
+          {/* <ParallaxBanner
+            layers={[
+              { image: "../../../images/activityPyramid.png", speed: -15 },
+            ]}
+            className={"activity-sec3-img"}
+          /> */}
+          <Parallax
+            translateY={[80, 0]}
+            opacity={[0.9, 1]}
+            speed={40}
+            // translateY={0}
+            className={"activity-sec3-img"}
+            style={{ opacity: 1 }}
+          >
+            <img src={pyramid}></img>
+          </Parallax>
+        </div>
+
+        {/* <div
           className={
             inViewport && !view
               ? "activity-sec2 activity-sec2-anim"
               : "activity-sec2"
           }
-          style={view ? { opacity: 1 } : {}}
+          style={view ? { opacity: 1 } : { opacity: 1 }}
         >
           <img src={pyramid}></img>
-        </div>
+        </div> */}
       </div>
     </div>
   );

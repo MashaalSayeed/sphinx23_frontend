@@ -1,0 +1,14 @@
+[
+    {
+        "name":"Prof. Mahesh Kumar Jat",
+        "position":"Dean(Students Welfare)",
+        "email":"dean.sw@mnit.ac.in",
+        "imageUrl":"Prof.MaheshKumarJat"
+    },
+    {
+        "name":"Dr. Nisha Verma",
+        "position":"Coordinator (Technical Societies)",
+        "email":"coordinator.technical.society@mnit.ac.in",
+        "imageUrl":"Dr.NishaVerma"
+    }
+]

@@ -556,14 +556,36 @@ margin-bottom: 5px;
 }
 @keyframes scrollGlow {
     0%{
-        filter: blur(1px);
+        box-shadow:  0px 5px 10px 0px rgba(174, 110, 37, 0.5);
+        filter: blur(0.4px); 
     }
     50%
     {
-        filter: blur(0.6px);
+        box-shadow:   0px 2px 25px 3px rgba(174, 110, 37, 0.8);
+        filter: blur(0); 
     }
     100%{
-filter: blur(1px);
+        box-shadow:  0px 5px 10px 0px rgba(174, 110, 37, 0.5);
+        filter: blur(0.4px); 
+/* filter: blur(1px); */
+    }
+    
+}
+
+@keyframes scrollGlowTheme {
+    0%{
+        box-shadow:  0px 5px 10px 0px rgba(141, 239, 255, 0.5);
+        filter: blur(0.4px); 
+    }
+    50%
+    {
+        box-shadow:   0px 2px 25px 3px rgba(141, 239, 255, 0.8);
+        filter: blur(0); 
+    }
+    100%{
+        box-shadow:  0px 5px 10px 0px rgba(141, 239, 255, 0.5);
+        filter: blur(0.4px); 
+/* filter: blur(1px); */
     }
     
 }

@@ -1,0 +1,42 @@
+[
+    {
+        "name":"Gaurav Agarwal",
+        "position":"Vice-President",
+        "phone":9108298752,
+        "email":"2020uec1649@mnit.ac.in",
+        "linkedUrl":"https://www.linkedin.com/in/gaurav-agarwal-753838204",
+        "imageUrl":"GauravAgarwal"
+    },
+    {
+        "name":"Tanishq Kakkar",
+        "position":"Technical Secretary",
+        "phone":7393894333,
+        "email":"2020UCP1778@mnit.ac.in",
+        "linkedUrl":" https://www.linkedin.com/in/tanishq-kakkar-663100201",
+        "imageUrl":"TanishqKakkar"
+    },
+    {
+        "name":"Pranshu Saraf",
+        "position":"Cultural Secretary",
+        "phone":7982514457,
+        "email":"2020uec1693@mnit.ac.in",
+        "linkedUrl":" https://linkedin.com/in/pranshu-saraf-a00b9a21b",
+        "imageUrl":"PranshuSaraf"
+    },
+    {
+        "name":"Rahul Bohra",
+        "position":"Finance Secretary",
+        "phone":7023517685,
+        "email":"2020UCE1501@mnit.ac.in",
+        "linkedUrl":"https://www.linkedin.com/in/rahul-bohra-39a71b206",
+        "imageUrl":"RahulBohra"
+    },
+    {
+        "name":"Abhi Singh",
+        "position":"Media and Publicity Secretary",
+        "phone":9897573372,
+        "email":"2020UCP1918@mnit.ac.in",
+        "linkedUrl":"https://www.linkedin.com/in/abhisingh9",
+        "imageUrl":"AbhiSingh"
+    }
+]
