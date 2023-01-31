@@ -11,16 +11,14 @@ import { fetchOneEvent } from "../../../api";
 // import Description from "./EventDetails";
 import HomeNav from "../Home/homeNav";
 import Register from "./Register";
+import Query from "./Query";
 
 function EventsView() {
   const [event, setEvent] = useState();
-  const data = {
-    name: "Robo war",
-    results: [],
-    notifications: [],
-  };
   const params = useParams();
+
   console.log(params.id);
+  
   useEffect(() => {
     console.log("USef Eeevt");
     fetchOneEvent(setEvent, params.id)
@@ -33,24 +31,9 @@ function EventsView() {
         console.log(err);
       });
   }, []);
-  // TODO: remove when fetching data
-  for (let i = 0; i < 5; i++) {
-    data.results.push({
-      rank: i + 1,
-      profile: {
-        name: "Subhranshu Shekhar",
-        picture: null,
-      },
-      college: "MNIT Jaipur",
-      prize: "Rs 10000",
-    });
-    data.notifications.push({
-      rank: i,
-      color: "orange",
-      text: "Event has started",
-      date: new Date(),
-    });
-  }
+
+  // TODO: handle query
+  const handleQuery = (query) => alert(query);
 
   const tabs = {
     Description: <Description card={event} />,
@@ -60,6 +43,7 @@ function EventsView() {
   const [currentTab, setCurrentTab] = useState("Description");
   const [currTab, setCurrTab] = useState("Events");
   const Tabs = ["Home", "About", "Contact"];
+
   return (
     <div className={styles.container}>
       <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
@@ -71,7 +55,7 @@ function EventsView() {
             <span> &gt; {currentTab}</span>
           </p>
 
-          <nav>
+          <nav className={styles.eventsnav}>
             <ol>
               {Object.keys(tabs).map((tab) => (
                 <li
@@ -83,6 +67,7 @@ function EventsView() {
                 </li>
               ))}
             </ol>
+            <Query onSubmit={handleQuery} />
           </nav>
 
           <hr />

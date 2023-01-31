@@ -2,46 +2,10 @@ import React, { useEffect, useState } from "react";
 
 import styles from "./Results.module.css";
 
-import dummy_user from "../../../images/dummy_user.png";
 import { getAllResults } from "../../../api";
 // import dummy_user from "../../../images/dummy_user.png"
-import sendIcon from "../../../images/send.png";
-import questionIcon from "../../../images/question.png";
-
-
-function Query({ onSubmit }) {
-  const [query, setQuery] = useState("");
-  const [open, setOpen] = useState(false);
-
-  const handleSubmit = () => onSubmit(query);
-
-  return (
-    <div className={styles.query}>
-      {open ?
-        (
-          <>
-            <label for="query">Enter Query</label>
-            <span>
-              <input
-                id="query"
-                type="text"
-                placeholder=""
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSubmit();
-                }}
-              />
-              <img src={sendIcon} onClick={handleSubmit} />
-            </span>
-          </>
-        ) : (
-          <img class={styles.icon} src={questionIcon} onClick={() => setOpen(true)} />
-        )}
-    </div>);
-}
 
 function Results({ data }) {
-  const handleSubmit = (query) => alert(query);
   const [results, setResults] = useState([]);
   const [records, setCurrentRecords] = useState([]);
   const [totalPages, setNpage] = useState();
@@ -64,7 +28,6 @@ function Results({ data }) {
     <section>
       <div className={styles.topsection}>
         <h1 className={styles.name}>{data.name}</h1>
-        <Query onSubmit={handleSubmit} />
       </div>
 
       <br></br>

@@ -31,18 +31,19 @@
     color: white;
 }
 
-nav {
+.eventsnav {
     margin-top: 3vh;
+    position: relative;
 }
 
-nav ol {
+.eventsnav ol {
     list-style-type: none;
     display: flex;
     justify-content: center;
     padding-left: 0;
 }
 
-nav ol li {
+.eventsnav ol li {
     margin-left: 5vw;
     margin-right: 5vw;
     padding-bottom: 5px;
@@ -50,7 +51,7 @@ nav ol li {
     color: white;
 }
 
-nav ol li.active {
+.eventsnav ol li.active {
     color: white;
     text-shadow: 0 0 8px white;
     border-bottom: 3px solid transparent;
