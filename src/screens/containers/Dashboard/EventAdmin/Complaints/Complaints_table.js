@@ -158,6 +158,7 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
           else if (ele == "email") return <td>{data["user"].email}</td>;
           else if (ele == "college") return <td>{data["user"].collegeName}</td>;
           else if (ele == "event") return <td>{data["event"].name}</td>;
+          else if (ele == "queryId") return <td>{`#${data[ele]}`}</td>;
           else return <td>{data[ele]}</td>;
         })}
       </tr>

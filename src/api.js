@@ -575,6 +575,32 @@ export const createPass = async (
       throw error;
     });
 };
+
+export const submitQuery = async (token, body) => {
+  console.log("getUsersByPass");
+  return fetch(`${url}/queries/create`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        // alert(data.message);
+        return data.success;
+      } else {
+        throw data;
+      }
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
 export const submitQueryResponse = async (token, body) => {
   console.log("getUsersByPass");
   await fetch(`${url}/queries/update`, {

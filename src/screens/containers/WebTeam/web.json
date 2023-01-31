@@ -62,5 +62,13 @@
         "email":"2021uec1454@mnit.ac.in",
         "linkedUrl":"https://www.linkedin.com/in/ronak-gupta-7428a1224",
         "imageUrl":"RonakGupta"
+    },
+    {
+        "name":"Rupesh Yadav",
+        "position":"Sophomore",
+        "phone":8076240766,
+        "email":"2021uec1533@mnit.ac.in",
+        "linkedUrl":"https://www.linkedin.com/in/rupesh-yadav-634879229/",
+        "imageUrl":"RupeshYadav"
     }
 ]
