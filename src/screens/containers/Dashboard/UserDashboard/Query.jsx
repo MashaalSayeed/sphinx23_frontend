@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./../../../../styles/userDashboard.css";
 
-const Query = () => {
+const Query = ({ data }) => {
   const approved = true;
   const [showReply, setShowReply] = useState(false);
 
@@ -13,31 +13,27 @@ const Query = () => {
   return (
     <div className="ud__query">
       <div className="ud__query__badges">
-        <span>#128432</span>
-        <span>{approved ? "✅" : "⏳"}</span>
+        <span>#{data.queryId}</span>
+        <span>{data.isApproved ? "✅" : "⏳"}</span>
       </div>
-      <h2 className="ud_query_subject">Query Title</h2>
-      <p className="ud_query_desc">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-        incidunt libero voluptatem officia inventore delectus laborum excepturi
-        at amet corrupti!
-      </p>
+      <h2 className="ud_query_subject">{data.subject}</h2>
+      <p className="ud_query_desc">{data.queryDesc}</p>
       {showReply ? (
         <p className="ud_query_reply">
-          Reply:<br></br>Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Nam, illo. Porro error harum autem commodi, sed iusto eligendi
-          quae maiores ipsa tempore, earum inventore atque labore at! Doloremque
-          sunt iste at quidem repellat odit pariatur.
+          Reply:<br></br>
+          {data.responseDesc}
         </p>
       ) : (
         <></>
       )}
-      <button
-        onClick={toggleShowReply}
-        className="ud__query__show-reply-button"
-      >
-        {showReply ? "Hide reply" : "Show reply"}
-      </button>
+      {data.isApproved && (
+        <button
+          onClick={toggleShowReply}
+          className="ud__query__show-reply-button"
+        >
+          {showReply ? "Hide reply" : "Show reply"}
+        </button>
+      )}
     </div>
   );
 };

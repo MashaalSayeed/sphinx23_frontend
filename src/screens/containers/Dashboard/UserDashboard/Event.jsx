@@ -1,6 +1,22 @@
 import "./../../../../styles/userDashboard.css";
 
-const Event = () => {
+const Event = ({ data }) => {
+  console.log(data);
+  let date = new Date(data.from);
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   return (
     <div className="ud__event">
       <img
@@ -9,12 +25,20 @@ const Event = () => {
         alt="event thumbnail"
       />
       <div className="ud__event__details">
-        <p className="ud__event__badge">Flagship Events</p>
+        <p className="ud__event__badge">{data.category}</p>
         <div className="ud__event__title-subtitle">
-          <h3 className="ud__event__title">Robo War</h3>
-          <h4 className="ud__event__subtitle">By ZINE</h4>
+          <h3 className="ud__event__title">{data.name}</h3>
+          {/* <h4 className="ud__event__subtitle">By ZINE</h4> */}
         </div>
-        <p className="ud_event_date">18 March, 2023</p>
+        <p className="ud_event_date">
+          {" "}
+          {date.getDate() +
+            " " +
+            monthNames[date.getUTCMonth()] +
+            "," +
+            date.getFullYear()}
+        </p>
+        <p className="ud_event_date"> {data.time}</p>
       </div>
       <button className="ud__event__team-details-button">Team Details</button>
     </div>

@@ -71,6 +71,44 @@ export const fetchAdminEvents = async (token, dispatch) => {
       throw err;
     });
 };
+export const fetchRegisteredEvents = async (token) => {
+  console.log("AdminEvents Fetched", Session.get("profile").token);
+  return fetch(`${url}/events/registeredEvents`, {
+    headers: {
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.events);
+
+      return data.events;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+export const fetchUserQueries = async (token) => {
+  console.log("AdminEvents Fetched", Session.get("profile").token);
+  return fetch(`${url}/queries/uid`, {
+    headers: {
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.queries);
+
+      return data.queries;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
 
 export const fetchUpcoming = async (dispatch) => {
   console.log("upcoming Fetched");
