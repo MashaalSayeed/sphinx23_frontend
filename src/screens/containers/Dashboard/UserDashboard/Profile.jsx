@@ -1,5 +1,6 @@
 import "./../../../../styles/userDashboard.css";
 import { useSelector } from "react-redux";
+
 const Profile = () => {
   const currUser = useSelector((state) => state.auth.curruser);
   return (
