@@ -14,16 +14,16 @@ import "./styles/events.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
-  fetchEvents,
-  fetchPasses,
-  fetchUpcoming,
-  fetchCompleted,
-  fetchUpdates,
-  loginRegister,
-  createEvent,
-  createPass,
-  getUsersByPass,
-  getUsers,
+	fetchEvents,
+	fetchPasses,
+	fetchUpcoming,
+	fetchCompleted,
+	fetchUpdates,
+	loginRegister,
+	createEvent,
+	createPass,
+	getUsersByPass,
+	getUsers,
 } from "./api";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -43,115 +43,116 @@ import Events from "./screens/containers/Events/events";
 import EventsView from "./screens/containers/EventsView/EventsView";
 import EventsCat from "./screens/containers/Events/EventsCat";
 import Ambassador from "./screens/containers/Home/Ambassadors";
+import UserDashboard from "./screens/containers/Dashboard/UserDashboard";
 
 function App() {
-  // const token1 =
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjYzYjMwM2EyZGJhMGJlNWZlMDE1YTVmOSIsImlhdCI6MTY3MjY3NzI3Nn0.B6QG9trZX_tXQ_Bx3-hBMVn96Xz2I4vqzeeVSOT_VRc";
-  // const creds = {
-  //   email: "namujain266@gmail.com",
-  //   password: "Naman",
-  //   confirmPassword: "Naman",
-  // };
-  const toastStyle = {
-    position: "top-right",
-    autoClose: 3000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-  };
-  const dispatch = useDispatch();
-  // fetchEvents(dispatch);
-  // loginRegister(dispatch, creds);
+	// const token1 =
+	//   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjYzYjMwM2EyZGJhMGJlNWZlMDE1YTVmOSIsImlhdCI6MTY3MjY3NzI3Nn0.B6QG9trZX_tXQ_Bx3-hBMVn96Xz2I4vqzeeVSOT_VRc";
+	// const creds = {
+	//   email: "namujain266@gmail.com",
+	//   password: "Naman",
+	//   confirmPassword: "Naman",
+	// };
+	const toastStyle = {
+		position: "top-right",
+		autoClose: 3000,
+		hideProgressBar: true,
+		closeOnClick: true,
+		pauseOnHover: true,
+		draggable: true,
+		progress: undefined,
+		theme: "dark",
+	};
+	const dispatch = useDispatch();
+	// fetchEvents(dispatch);
+	// loginRegister(dispatch, creds);
 
-  useEffect(() => {
-    // chandra();
-    // loginRegister(dispatch, creds);
-    fetchEvents(dispatch)
-      .then((res) => {
-        console.log("Events Fetched");
-      })
-      .catch((err) => {
-        toast.error(err, toastStyle);
-        // alert(err);
-      });
-    fetchPasses(dispatch);
-    fetchUpcoming(dispatch);
-    fetchCompleted(dispatch);
-    // fetchUpdates(dispatch);
-  }, []);
+	useEffect(() => {
+		// chandra();
+		// loginRegister(dispatch, creds);
+		fetchEvents(dispatch)
+			.then((res) => {
+				console.log("Events Fetched");
+			})
+			.catch((err) => {
+				toast.error(err, toastStyle);
+				// alert(err);
+			});
+		fetchPasses(dispatch);
+		fetchUpcoming(dispatch);
+		fetchCompleted(dispatch);
+		// fetchUpdates(dispatch);
+	}, []);
 
-  const curruser = useSelector((state) => state.auth.curruser);
-  // createEvent(dispatch, {}, {});
-  // createPass(dispatch, {}, {});
-  // console.log(getUsersByPass({}, {}));
-  // console.log(getUsers("", token1));
+	const curruser = useSelector((state) => state.auth.curruser);
+	// createEvent(dispatch, {}, {});
+	// createPass(dispatch, {}, {});
+	// console.log(getUsersByPass({}, {}));
+	// console.log(getUsers("", token1));
 
-  return (
-    // <div className="App">
-    //   <Navbar />
-    //   {curruser != null ? <DashboardSuperAdmin /> : <></>}
+	return (
+		// <div className="App">
+		//   <Navbar />
+		//   {curruser != null ? <DashboardSuperAdmin /> : <></>}
 
-    //   {/* <Footer /> */}
+		//   {/* <Footer /> */}
 
-    // </div>
-    <div className="App">
-      {/* <TimeMachine /> */}
+		// </div>
+		<div className="App">
+			{/* <TimeMachine /> */}
 
-      {/* <Navbar /> */}
-      {/* <Landing /> */}
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<LoginScreen />} />
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/home" element={<TimeMachine notAnim={true} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/events/:cat" element={<EventsCat />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/events/:cat/:id" element={<EventsView />} />
-
-          {curruser != null ? (
-            <>
-              <Route
-                path="/eventAdmin/:tab?"
-                element={<DashboardEventAdmin />}
-              />
-              <Route path="/superAdmin/" element={<DashboardSuperAdmin />} />
-              <Route
-                path="/superAdmin/pass/:id/:tab?"
-                element={<PassDetail />}
-              ></Route>
-              <Route
-                path="/eventDetails/event/:id/:tab?"
-                element={<EventDetails />}
-              ></Route>
-              <Route
-                path="/superAdmin/createPass"
-                element={<CreatePass />}
-              ></Route>
-            </>
-          ) : (
-            <></>
-          )}
-        </Routes>
-      </BrowserRouter>
-      {/* <Footer /> */}
-    </div>
-  );
+			{/* <Navbar /> */}
+			{/* <Landing /> */}
+			<ToastContainer
+				position="top-right"
+				autoClose={2000}
+				hideProgressBar
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="dark"
+			/>
+			<BrowserRouter>
+				<Routes>
+					<Route exact path="/" element={<LoginScreen />} />
+					<Route path="/landing" element={<Landing />} />
+					<Route path="/home" element={<TimeMachine notAnim={true} />} />
+					<Route path="/about" element={<About />} />
+					<Route path="/events/:cat" element={<EventsCat />} />
+					<Route path="/events" element={<Events />} />
+					<Route path="/events/:cat/:id" element={<EventsView />} />
+					<Route path="/dashboard" element={<UserDashboard />} />
+					{curruser != null ? (
+						<>
+							<Route
+								path="/eventAdmin/:tab?"
+								element={<DashboardEventAdmin />}
+							/>
+							<Route path="/superAdmin/" element={<DashboardSuperAdmin />} />
+							<Route
+								path="/superAdmin/pass/:id/:tab?"
+								element={<PassDetail />}
+							></Route>
+							<Route
+								path="/eventDetails/event/:id/:tab?"
+								element={<EventDetails />}
+							></Route>
+							<Route
+								path="/superAdmin/createPass"
+								element={<CreatePass />}
+							></Route>
+						</>
+					) : (
+						<></>
+					)}
+				</Routes>
+			</BrowserRouter>
+			{/* <Footer /> */}
+		</div>
+	);
 }
 
 export default App;
