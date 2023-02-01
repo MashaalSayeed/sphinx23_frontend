@@ -2,7 +2,11 @@ import { color } from "@mui/system";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { Parallax, ParallaxBanner } from "react-scroll-parallax";
+import {
+  Parallax,
+  ParallaxBanner,
+  ParallaxProvider,
+} from "react-scroll-parallax";
 import pyramid from "../../../images/activityPyramid.png";
 import useIntersection from "./interSection";
 
@@ -65,16 +69,19 @@ function Activities() {
             ]}
             className={"activity-sec3-img"}
           /> */}
-          <Parallax
-            translateY={[80, 0]}
-            opacity={[0.9, 1]}
-            speed={40}
-            // translateY={0}
-            className={"activity-sec3-img"}
-            style={{ opacity: 1 }}
-          >
-            <img src={pyramid}></img>
-          </Parallax>
+          <ParallaxProvider>
+            {" "}
+            <Parallax
+              translateY={[80, 0]}
+              opacity={[0.9, 1]}
+              speed={40}
+              // translateY={0}
+              className={"activity-sec3-img"}
+              style={{ opacity: 1 }}
+            >
+              <img src={pyramid}></img>
+            </Parallax>
+          </ParallaxProvider>
         </div>
 
         {/* <div

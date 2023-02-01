@@ -1,6 +1,6 @@
 import { color } from "@mui/system";
 import React, { useState, useEffect, useRef } from "react";
-import { Parallax } from "react-scroll-parallax";
+import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 import theme from "../../../images/theme.png";
 import HomeNav from "./homeNav";
 import useIntersection from "./interSection";
@@ -51,20 +51,23 @@ function Theme() {
             ...(view ? { opacity: 1 } : {}),
           }}
         >
-          <Parallax
-            translateY={[0, 0]}
-            translateX={[-50, 50]}
-            opacity={[0.7, 1]}
-            speedx={40}
-            // translateY={0}
-            className={"activity-sec3-img"}
-            style={{ opacity: 1 }}
-          >
-            <img
-              src={theme}
-              style={{ height: "100%", objectFit: "cover" }}
-            ></img>
-          </Parallax>
+          <ParallaxProvider>
+            {" "}
+            <Parallax
+              translateY={[0, 0]}
+              translateX={[-50, 50]}
+              opacity={[0.7, 1]}
+              speedx={40}
+              // translateY={0}
+              className={"activity-sec3-img"}
+              style={{ opacity: 1 }}
+            >
+              <img
+                src={theme}
+                style={{ height: "100%", objectFit: "cover" }}
+              ></img>
+            </Parallax>
+          </ParallaxProvider>
         </div>
         <div className="activity-sec1">
           <div

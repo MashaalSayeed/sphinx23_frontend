@@ -16,12 +16,36 @@
         "imageUrl":"GauravAgarwal"
     },
     {
+        "name":"Muskan Jain",
+        "position":"Vice-President",
+        "phone":6359788126,
+        "email":"2020uee1301@mnit.ac.in",
+        "linkedUrl":"https://www.linkedin.com/in/muskan-jain-a500a4212",
+        "imageUrl":"MuskanJain"
+    },
+    {
+        "name":"Prerit Jain",
+        "position":"General Secretary",
+        "phone":9024789017,
+        "email":"jainprerit15@gmail.com",
+        "linkedUrl":"https://www.linkedin.com/in/prerit-jain-443868209/",
+        "imageUrl":"PreritJain"
+    },
+    {
         "name":"Tanishq Kakkar",
         "position":"Technical Secretary",
         "phone":7393894333,
         "email":"2020UCP1778@mnit.ac.in",
         "linkedUrl":" https://www.linkedin.com/in/tanishq-kakkar-663100201",
         "imageUrl":"TanishqKakkar"
+    },
+    {
+        "name":"Devashish Juyal",
+        "position":"Technical Secretary",
+        "phone":7014519068,
+        "email":"juyal.devashish23@gmail.com",
+        "linkedUrl":"https://www.linkedin.com/in/devashish-juyal/",
+        "imageUrl":"DevashishJuyal"
     },
     {
         "name":"Pranshu Saraf",
@@ -45,6 +69,30 @@
         "email":"2020UCE1501@mnit.ac.in",
         "linkedUrl":"https://www.linkedin.com/in/rahul-bohra-39a71b206",
         "imageUrl":"RahulBohra"
+    },
+    {
+        "name":"Sudhanshu Raj",
+        "position":"Finance Secretary",
+        "phone":8864094170,
+        "email":"sudhanshuraj0309@gmail.com",
+        "linkedUrl":"https://www.linkedin.com/in/sudhanshu-raj-0303",
+        "imageUrl":"SudhanshuRaj"
+    },
+    {
+        "name":"Dishant Rathi",
+        "position":"Marketing and Sponsor Secretary",
+        "phone":6352480113,
+        "email":"rathidishant39@gmail.com",
+        "linkedUrl":"https://www.linkedin.com/in/dishantrathi02/",
+        "imageUrl":"DishantRathi"
+    },
+    {
+        "name":"Aishwarya Roy",
+        "position":"Marketing and Sponsor Secretary",
+        "phone":7858043753,
+        "email":"2020uch1420@mnit.ac.in",
+        "linkedUrl":"https://www.linkedin.com/in/aishwarya-roy-baa07b200/",
+        "imageUrl":"AishwaryaRoy"
     },
     {
         "name":"Abhi Singh",

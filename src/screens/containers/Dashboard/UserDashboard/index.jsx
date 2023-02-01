@@ -4,6 +4,7 @@ import Profile from "./Profile";
 import Queries from "./Queries";
 import HomeNav from "../../Home/homeNav";
 import { useState } from "react";
+
 const UserDashboard = () => {
   const Tabs = ["Home", "About", "Contact"];
   const [currTab, setCurrTab] = useState("Events");
