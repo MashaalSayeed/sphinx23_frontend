@@ -8,7 +8,8 @@ import pyramindLine from "../../../images/home/pyramidLine.png";
 import HomeNav from "./homeNav";
 import TimeMachine from "./TimeMachine";
 
-function Landing() {
+function Landing(props) {
+  const { parallax } = props;
   const [currTab, setCurrTab] = useState("Home");
   const Tabs = ["Home", "About", "Contact"];
   const [Loading, setLoading] = useState(true);
@@ -33,7 +34,7 @@ function Landing() {
         <div
           className={Loading || !Scroll ? "landing-main" : "exit-anim"}
           onWheel={() => {
-            if (!Loading) {
+            if (!Loading && !parallax) {
               setScroll(true);
             }
           }}

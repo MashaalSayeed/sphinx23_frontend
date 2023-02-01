@@ -17,8 +17,10 @@ body::-webkit-scrollbar{
 .home-con
 {
     overflow: hidden;
-    
+    /**/
+        
 } 
+
 .landing-main
 {
 
@@ -27,7 +29,8 @@ body::-webkit-scrollbar{
     height: 100vh;
     flex-direction: column;
     overflow: hidden;
- 
+     /**/
+     position: relative;
 }
 
 @keyframes exitAnim {
@@ -176,6 +179,9 @@ body::-webkit-scrollbar{
     z-index: 10;
     height: 60px;
     position: fixed;
+
+    /**/
+    
     
     /* margin: auto; */
     display: flex;
@@ -327,7 +333,10 @@ cursor: pointer;
 
 .landing-pyramids
 {
-    position: fixed;
+
+position: absolute;
+/**/
+    /* position: fixed; */
     bottom: 0;
     z-index: 8;
     width: 100%;
@@ -487,6 +496,7 @@ cursor: pointer;
    
     position: absolute;
     width: 100%;
+    /* height: 100vh; */
     height: 100%;
     scale: 1;
     z-index: -1;
@@ -698,6 +708,8 @@ margin-bottom: 15px;
 .time-main
 {
 height: 100vh;
+/**/
+position: relative;
 }
 .react-parallax
 {
