@@ -12,16 +12,9 @@ function Ambassador() {
   const [currTab, setCurrTab] = useState("ambassador");
   const Tabs = ["Home", "About", "Contact"];
   const ref = useRef();
+  const [progress, setProgress] = useState(0);
   const [view, setView] = useState(false);
 
-  const inViewport = useIntersection(ref, "-100px");
-  useEffect(() => {
-    if (inViewport) {
-      setTimeout(() => {
-        setView(true);
-      }, 2000);
-    }
-  }, [inViewport]);
   return (
     <div
       className="activity-back"
@@ -42,9 +35,7 @@ function Ambassador() {
       <div className="activity-sections">
         <div
           className={
-            inViewport && !view
-              ? "activity-sec2 activity-sec2-anim"
-              : "activity-sec2"
+            !view ? "activity-sec2 activity-sec2-anim" : "activity-sec2"
           }
           style={{
             background:
@@ -54,9 +45,9 @@ function Ambassador() {
         >
           <Parallax
             translateY={[0, 0]}
-            translateX={[-50, 50]}
+            translateX={progress < 0.5 ? [-60, 60, "easeInOut"] : []}
             opacity={[0.7, 1]}
-            speedx={80}
+            speedx={20}
             // translateY={0}
             className={"activity-sec3-img"}
             style={{ opacity: 1 }}
@@ -71,51 +62,59 @@ function Ambassador() {
           className="activity-sec1"
           style={{ background: "rgb(30, 30, 30)" }}
         >
-          <div
-            style={{
-              width: "80%",
-              marginLeft: "8%",
-              ...(view ? { opacity: 1 } : {}),
-            }}
-            className={
-              inViewport && !view
-                ? "about-info activity-info-anim2"
-                : "about-info"
-            }
+          {" "}
+          <Parallax
+            translateY={[0, 0]}
+            translateX={progress < 0.5 ? [70, -70, "easeInOut"] : []}
+            opacity={progress < 0.495 ? [0.6, 1, "easeInOut"] : [1, 1]}
+            // shouldAlwaysCompleteAnimation={true}
+            speedx={-30}
+            onProgressChange={(progress) => setProgress(progress)}
           >
-            <div className="activity-info-sub">SPHINX ‘23</div>
             <div
-              className="home-about-title"
               style={{
-                fontSize: "3rem",
-                lineHeight: "3.2rem",
-                letterSpacing: "0.4rem",
+                width: "80%",
+                marginLeft: "8%",
+                ...(view ? { opacity: 1 } : {}),
               }}
+              className={
+                !view ? "about-info activity-info-anim2" : "about-info"
+              }
             >
-              CAMPUS
-              <br></br>
-              <span style={{ color: "#FFA20F" }}>AMBASSADOR</span>
-            </div>
+              <div className="activity-info-sub">SPHINX ‘23</div>
+              <div
+                className="home-about-title"
+                style={{
+                  fontSize: "3rem",
+                  lineHeight: "3.2rem",
+                  letterSpacing: "0.4rem",
+                }}
+              >
+                CAMPUS
+                <br></br>
+                <span style={{ color: "#FFA20F" }}>AMBASSADOR</span>
+              </div>
 
-            <div className="about-Maincontent">
-              Sphinx is the largest technology fest in Rajasthan, held annually
-              at the MNIT Jaipur campus. The fest attracts thousands of students
-              from all over the country, who come to participate in a wide range
-              of technical and non-technical events. The event includes
-              workshops, competitions, guest lectures and exhibitions on the
-              latest technology and innovations.
+              <div className="about-Maincontent">
+                Sphinx is the largest technology fest in Rajasthan, held
+                annually at the MNIT Jaipur campus. The fest attracts thousands
+                of students from all over the country, who come to participate
+                in a wide range of technical and non-technical events. The event
+                includes workshops, competitions, guest lectures and exhibitions
+                on the latest technology and innovations.
+              </div>
+              <button
+                className="home-about-btn"
+                style={{
+                  background: "#FFA20F",
+                  color: "white",
+                  padding: "10px 25px",
+                }}
+              >
+                Learn More
+              </button>
             </div>
-            <button
-              className="home-about-btn"
-              style={{
-                background: "#FFA20F",
-                color: "white",
-                padding: "10px 25px",
-              }}
-            >
-              Learn More
-            </button>
-          </div>
+          </Parallax>
           <img className="amb-conL" src={ConR}></img>
           <img className="amb-con" src={ConR}></img>
         </div>

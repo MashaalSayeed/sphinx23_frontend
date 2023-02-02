@@ -99,8 +99,11 @@ function TimeMachine({ notAnim, landing }) {
       {!landing || !animNotOver ? (
         <>
           <About />
+          {/* <Ambassador />
+          <Activities /> <Theme /> */}
           <Ambassador />
-          <Activities /> <Theme />
+          <Activities />
+          <Theme />
         </>
       ) : (
         <></>

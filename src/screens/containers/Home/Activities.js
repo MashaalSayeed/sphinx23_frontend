@@ -9,15 +9,8 @@ import useIntersection from "./interSection";
 function Activities() {
   const ref = useRef();
   const [view, setView] = useState(false);
+  const [progress, setProgress] = useState(false);
 
-  const inViewport = useIntersection(ref, "-100px");
-  useEffect(() => {
-    if (inViewport) {
-      setTimeout(() => {
-        setView(true);
-      }, 2000);
-    }
-  }, [inViewport]);
   return (
     <div className="activity-back" ref={ref}>
       <div className="simple-scroll">
@@ -26,36 +19,41 @@ function Activities() {
       </div>
       <div className="activity-sections">
         <div className="activity-sec1">
-          <div
-            style={{ width: "80%", ...(view ? { opacity: 1 } : {}) }}
-            className={
-              inViewport && !view
-                ? "about-info activity-info-anim"
-                : "about-info"
-            }
-            // style={}
+          <Parallax
+            translateY={[0, 0]}
+            translateX={progress < 0.5 ? [-50, 50, "easeInOut"] : []}
+            opacity={progress < 0.5 ? [0.6, 1, "easeInOut"] : [1, 1]}
+            // shouldAlwaysCompleteAnimation={true}
+            speedx={-30}
+            onProgressChange={(progress) => setProgress(progress)}
           >
-            <div className="activity-info-sub">SPHINX ‘23</div>
-            <div className="home-about-title">ACTIVITIES</div>
-            <div className="about-Maincontent">
-              Sphinx is the largest technology fest in Rajasthan, held annually
-              at the MNIT Jaipur campus. The fest attracts thousands of students
-              from all over the country, who come to participate in a wide range
-              of technical and non-technical events. The event includes
-              workshops, competitions, guest lectures and exhibitions on the
-              latest technology and innovations.
-            </div>
-            <button
-              className="home-about-btn"
-              style={{
-                background: "#FFA20F",
-                color: "white",
-                padding: "10px 25px",
-              }}
+            <div
+              style={{ width: "80%", ...(view ? { opacity: 1 } : {}) }}
+              className={!view ? "about-info activity-info-anim" : "about-info"}
+              // style={}
             >
-              Explore
-            </button>
-          </div>
+              <div className="activity-info-sub">SPHINX ‘23</div>
+              <div className="home-about-title">ACTIVITIES</div>
+              <div className="about-Maincontent">
+                Sphinx is the largest technology fest in Rajasthan, held
+                annually at the MNIT Jaipur campus. The fest attracts thousands
+                of students from all over the country, who come to participate
+                in a wide range of technical and non-technical events. The event
+                includes workshops, competitions, guest lectures and exhibitions
+                on the latest technology and innovations.
+              </div>
+              <button
+                className="home-about-btn"
+                style={{
+                  background: "#FFA20F",
+                  color: "white",
+                  padding: "10px 25px",
+                }}
+              >
+                Explore
+              </button>
+            </div>
+          </Parallax>
         </div>
 
         <div className={"activity-sec3"}>
@@ -66,10 +64,14 @@ function Activities() {
             className={"activity-sec3-img"}
           /> */}
           <Parallax
-            translateY={[80, 0]}
-            opacity={[0.9, 1]}
-            speed={40}
+            // translateY={[0, 0]}
+            translateY={progress < 0.497 ? [50, -50, "easeInOut"] : [0, 0]}
+            // opacity={progress < 0.5 ? [0.9, 1, "easeInOut"] : [1, 1]}
+            speed={10}
             // translateY={0}
+            onProgressChange={(progress) => {
+              setProgress(progress);
+            }}
             className={"activity-sec3-img"}
             style={{ opacity: 1 }}
           >

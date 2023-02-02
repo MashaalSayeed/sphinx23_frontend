@@ -8,18 +8,23 @@ export default function About() {
   const [currTab, setCurrTab] = useState("About");
   // const ref = useRef(null);
   const Tabs = ["Home", "About", "Contact"];
+  const [progress, setProgress] = useState(0);
   // useIntersection(ref, "-100px");
   return (
     <div className="about-page">
-      <HomeNav
+      {/* <HomeNav
         setCurrTab={setCurrTab}
         currTab={currTab}
         Tabs={Tabs}
         notanimation={true}
-      />
+      /> */}
       <Parallax
-        translateY={[50, -30]}
+        translateY={progress < 0.5 ? [50, -50] : [0, 0]}
+        scale={progress < 0.5 ? [1.3, 0.7] : [1]}
         opacity={[0.7, 1]}
+        onProgressChange={(progress) => {
+          setProgress(progress);
+        }}
         speed={60}
         className="about-page-background-img"
         style={{ opacity: 1 }}

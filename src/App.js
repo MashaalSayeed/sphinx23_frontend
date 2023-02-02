@@ -44,6 +44,7 @@ import EventsView from "./screens/containers/EventsView/EventsView";
 import EventsCat from "./screens/containers/Events/EventsCat";
 import Ambassador from "./screens/containers/Home/Ambassadors";
 import { ParallaxProvider } from "react-scroll-parallax";
+import { useRef } from "react";
 
 function App() {
   // const token1 =
@@ -83,6 +84,11 @@ function App() {
     fetchCompleted(dispatch);
     // fetchUpdates(dispatch);
   }, []);
+  // const [scrollEl, setScrollElement] = useState < HTMLDivElement > null;
+  // const ref = useRef < HTMLDivElement > null;
+  // useEffect(() => {
+  //   setScrollElement(ref.current);
+  // }, []);
 
   const curruser = useSelector((state) => state.auth.curruser);
   // createEvent(dispatch, {}, {});
