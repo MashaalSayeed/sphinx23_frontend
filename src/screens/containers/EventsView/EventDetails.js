@@ -49,6 +49,20 @@ function Description({ card }) {
     "Friday",
     "Saturday",
   ];
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   const ConRef = useRef(null);
   let token = "";
   const toastId = useRef(null);
@@ -266,10 +280,9 @@ function Description({ card }) {
             <br></br>
             <span style={{ fontSize: "1.1rem", fontWeight: "300" }}>
               {date.getDate() +
-                "." +
-                date.getMonth() +
-                1 +
-                "." +
+                " " +
+                monthNames[date.getUTCMonth()] +
+                " " +
                 date.getFullYear()}
             </span>
           </div>

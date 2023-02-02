@@ -2,7 +2,7 @@ import { color } from "@mui/system";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
-import { Parallax } from "react-scroll-parallax";
+import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 import ambassador from "../../../images/ambassador.png";
 import ConR from "../../../images/ambCon.png";
 import HomeNav from "./homeNav";
@@ -52,20 +52,23 @@ function Ambassador() {
             ...(view && { opacity: 1 }),
           }}
         >
-          <Parallax
-            translateY={[0, 0]}
-            translateX={[-50, 50]}
-            opacity={[0.7, 1]}
-            speedx={80}
-            // translateY={0}
-            className={"activity-sec3-img"}
-            style={{ opacity: 1 }}
-          >
-            <img
-              src={ambassador}
-              style={{ height: "100%", objectFit: "cover" }}
-            ></img>
-          </Parallax>
+          <ParallaxProvider>
+            {" "}
+            <Parallax
+              translateY={[0, 0]}
+              translateX={[-50, 50]}
+              opacity={[0.7, 1]}
+              speedx={80}
+              // translateY={0}
+              className={"activity-sec3-img"}
+              style={{ opacity: 1 }}
+            >
+              <img
+                src={ambassador}
+                style={{ height: "100%", objectFit: "cover" }}
+              ></img>
+            </Parallax>
+          </ParallaxProvider>
         </div>
         <div
           className="activity-sec1"

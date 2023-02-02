@@ -45,7 +45,7 @@ import EventsCat from "./screens/containers/Events/EventsCat";
 import Ambassador from "./screens/containers/Home/Ambassadors";
 import { ParallaxProvider } from "react-scroll-parallax";
 import UserDashboard from "./screens/containers/Dashboard/UserDashboard";
-
+import Test from "../src/screens/containers/Test";
 function App() {
   // const token1 =
   //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjYzYjMwM2EyZGJhMGJlNWZlMDE1YTVmOSIsImlhdCI6MTY3MjY3NzI3Nn0.B6QG9trZX_tXQ_Bx3-hBMVn96Xz2I4vqzeeVSOT_VRc";
@@ -126,6 +126,7 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/events/:cat/:id" element={<EventsView />} />
           <Route path="/dashboard" element={<UserDashboard />} />
+          <Route path="/test" element={<Test />} />
           {curruser != null ? (
             <>
               <Route

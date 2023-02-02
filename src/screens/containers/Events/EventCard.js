@@ -18,6 +18,20 @@ function EventCard(props) {
     "Friday",
     "Saturday",
   ];
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   let date = new Date(card.from);
   return (
     <Link
@@ -49,10 +63,9 @@ function EventCard(props) {
                   {weekday[date.getDay()]}
                   <br></br>
                   {date.getDate() +
-                    "." +
-                    date.getMonth() +
-                    1 +
-                    "." +
+                    " " +
+                    monthNames[date.getMonth()] +
+                    " " +
                     date.getFullYear()}
                 </span>
               </div>

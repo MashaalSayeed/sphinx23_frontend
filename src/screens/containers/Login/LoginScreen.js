@@ -45,7 +45,7 @@ const toastStyle = {
   theme: "dark",
 };
 const disabledCol = "#6e9efa";
-const btnCol = "#1a68ff";
+const btnCol = "#1968ff";
 
 function handleChange(event, setter) {
   // console.log("Handle Called");
@@ -309,6 +309,7 @@ function RegScreen1(props) {
               render: "Mail Sent",
               type: "success",
               isLoading: false,
+              ...toastStyle,
             });
             props.setter(2);
             ConRef.current.removeAttribute("disabled");

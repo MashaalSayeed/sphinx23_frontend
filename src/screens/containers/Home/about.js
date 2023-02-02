@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Parallax } from "react-scroll-parallax";
+import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 import HomeNav from "./homeNav";
 import back from "../../../images/about/PyramidBack.png";
 import Front from "../../../images/about/PyramidFront.png";
@@ -17,28 +17,31 @@ export default function About() {
         Tabs={Tabs}
         notanimation={true}
       />
-      <Parallax
-        translateY={[50, -30]}
-        opacity={[0.7, 1]}
-        speed={60}
-        className="about-page-background-img"
-        style={{ opacity: 1 }}
-        shouldAlwaysCompleteAnimation={true}
-      >
-        <img
-          src={back}
-          style={{ width: "100%", height: "100vh", objectFit: "cover" }}
-        ></img>
-        {/* <img
+      <ParallaxProvider>
+        {" "}
+        <Parallax
+          translateY={[50, -30]}
+          opacity={[0.7, 1]}
+          speed={60}
+          className="about-page-background-img"
+          style={{ opacity: 1 }}
+          shouldAlwaysCompleteAnimation={true}
+        >
+          <img
+            src={back}
+            style={{ width: "100%", height: "100vh", objectFit: "cover" }}
+          ></img>
+          {/* <img
           src={Front}
           style={{ width: "100%", height: "100vh", objectFit: "cover" }}
         ></img> */}
-        {/* <div className="about-page-background-img"> */}
-        {/* <div className="about-page-side-rectangle"></div>
+          {/* <div className="about-page-background-img"> */}
+          {/* <div className="about-page-side-rectangle"></div>
         <div className="about-page-center-rectangle"></div> */}
-        {/* </div> */}
-        {/* <div></div> */}
-      </Parallax>
+          {/* </div> */}
+          {/* <div></div> */}
+        </Parallax>
+      </ParallaxProvider>
 
       {/* <div className="about-page-background-img">
         <div className="about-page-side-rectangle"></div>
