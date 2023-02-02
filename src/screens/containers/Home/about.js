@@ -1,11 +1,14 @@
 import React, { useRef, useState } from "react";
+import { Parallax } from "react-scroll-parallax";
 import HomeNav from "./homeNav";
+import back from "../../../images/about/PyramidBack.png";
+import Front from "../../../images/about/PyramidFront.png";
 import useIntersection from "./interSection";
 export default function About() {
   const [currTab, setCurrTab] = useState("About");
-  const ref = useRef(null);
+  // const ref = useRef(null);
   const Tabs = ["Home", "About", "Contact"];
-  useIntersection(ref, "-100px");
+  // useIntersection(ref, "-100px");
   return (
     <div className="about-page">
       <HomeNav
@@ -14,12 +17,33 @@ export default function About() {
         Tabs={Tabs}
         notanimation={true}
       />
-      <div className="about-page-foreground-img"></div>
+      <Parallax
+        translateY={[50, -30]}
+        opacity={[0.7, 1]}
+        speed={60}
+        className="about-page-background-img"
+        style={{ opacity: 1 }}
+        shouldAlwaysCompleteAnimation={true}
+      >
+        <img
+          src={back}
+          style={{ width: "100%", height: "100vh", objectFit: "cover" }}
+        ></img>
+        {/* <img
+          src={Front}
+          style={{ width: "100%", height: "100vh", objectFit: "cover" }}
+        ></img> */}
+        {/* <div className="about-page-background-img"> */}
+        {/* <div className="about-page-side-rectangle"></div>
+        <div className="about-page-center-rectangle"></div> */}
+        {/* </div> */}
+        {/* <div></div> */}
+      </Parallax>
 
-      <div className="about-page-background-img">
+      {/* <div className="about-page-background-img">
         <div className="about-page-side-rectangle"></div>
         <div className="about-page-center-rectangle"></div>
-      </div>
+      </div> */}
       <div className="about-page-bg-overlay"></div>
       <div className="about-page-content">
         <div className="about-page-content-text">

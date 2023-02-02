@@ -6,11 +6,12 @@ import Landing from "./home";
 import Ambassador from "./Ambassadors";
 import HomeNav from "./homeNav";
 import Theme from "./theme";
+import About from "./about";
+import { Parallax, ParallaxBanner } from "react-scroll-parallax";
 // import Ambassador from "./Amb
 
 function TimeMachine({ notAnim, landing }) {
   const [currTab, setCurrTab] = useState("Home");
-
   const [animNotOver, setNotOver] = useState(true);
   const [title, setTitle] = useState(false);
   const Tabs = ["Home", "About", "Contact"];
@@ -20,7 +21,7 @@ function TimeMachine({ notAnim, landing }) {
   };
   useEffect(() => {
     if (landing) {
-      setTimeout(handelOver, 3500);
+      setTimeout(handelOver, 3600);
     }
   }, [animNotOver]);
   useEffect(() => {
@@ -29,6 +30,41 @@ function TimeMachine({ notAnim, landing }) {
 
   return (
     <div>
+      {/* {!animNotOver && (
+        <ParallaxBanner
+          layers={[
+            {
+              children: <Landing parallax={true} />,
+              // translateY: [0, 0],
+              // translateX: [0, 0],
+              scale: [2, 0],
+              speedx: 40,
+              // shouldAlwaysCompleteAnimation: true,
+            },
+            {
+              children: (
+                <img
+                  className="machine-img"
+                  id="machine"
+                  src={machine}
+                  style={
+                    notAnim
+                      ? { animation: "none", filter: "brightness(0.4)" }
+                      : {}
+                  }
+                ></img>
+              ),
+              scale: [9, 1],
+              speedx: -40,
+              // shouldAlwaysCompleteAnimation: true,
+            },
+          ]}
+          // translateY={0}
+          // className={"activity-sec3-img"}
+          style={{ opacity: 1, height: "100vh" }}
+        ></ParallaxBanner>
+      )} */}
+
       <div className={notAnim ? "time-main" : "parallax-container"} id="home">
         <img
           className="machine-img"
@@ -62,6 +98,7 @@ function TimeMachine({ notAnim, landing }) {
 
       {!landing || !animNotOver ? (
         <>
+          <About />
           <Ambassador />
           <Activities /> <Theme />
         </>
