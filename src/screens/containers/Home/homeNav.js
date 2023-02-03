@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function HomeNav({ setCurrTab, currTab, Tabs, notanimation, landing }) {
   const navigate = useNavigate();
   useEffect(() => {
-    // if (currTab == "About") navigate("/about");
+    if (currTab == "Events") navigate("/events");
     if (!landing) {
       console.log(currTab);
       if (currTab == "Home") navigate("/home");

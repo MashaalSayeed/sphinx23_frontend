@@ -20,7 +20,7 @@ export default function About() {
       /> */}
       <Parallax
         translateY={progress < 0.5 ? [50, -50] : [0, 0]}
-        scale={progress < 0.5 ? [1.3, 0.7] : [1]}
+        scale={progress < 0.5 ? [1.5, 0.5] : [1]}
         opacity={[0.7, 1]}
         onProgressChange={(progress) => {
           setProgress(progress);

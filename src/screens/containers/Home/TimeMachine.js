@@ -14,7 +14,7 @@ function TimeMachine({ notAnim, landing }) {
   const [currTab, setCurrTab] = useState("Home");
   const [animNotOver, setNotOver] = useState(true);
   const [title, setTitle] = useState(false);
-  const Tabs = ["Home", "About", "Contact"];
+  const Tabs = ["Home", "Events", "Contact"];
   const handelOver = () => {
     console.log("set anim over");
     setNotOver(false);
