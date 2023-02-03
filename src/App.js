@@ -45,6 +45,7 @@ import EventsCat from "./screens/containers/Events/EventsCat";
 import Ambassador from "./screens/containers/Home/Ambassadors";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { useRef } from "react";
+import OurTeam from "./screens/containers/OurTeam/OurTeam";
 
 function App() {
   // const token1 =
@@ -125,6 +126,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route exact path="/" element={<LoginScreen />} />
+            <Route path="/ourteam" element={<OurTeam />} />
             <Route path="/landing" element={<Landing />} />
             <Route path="/home" element={<TimeMachine notAnim={true} />} />
             <Route path="/about" element={<About />} />
