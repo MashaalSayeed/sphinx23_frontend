@@ -292,7 +292,7 @@
 .ud__event__team-details-title {
 	font-size: xx-large;
 	font-family: "Inter";
-	border-bottom: 2px solid black;
+	/* border-bottom: 2px solid black; */
 }
 
 .ud__event__team-details-list {

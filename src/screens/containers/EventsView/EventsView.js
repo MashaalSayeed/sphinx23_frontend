@@ -68,8 +68,8 @@ function EventsView() {
     Notifcation: <Notification data={event} />,
   };
   const [currentTab, setCurrentTab] = useState("Description");
-  const [currTab, setCurrTab] = useState("Events");
-  const Tabs = ["Home", "About", "Contact"];
+  const [currTab, setCurrTab] = useState("");
+  const Tabs = ["Home", "Events", "Contact"];
 
   return (
     <div className={styles.container}>

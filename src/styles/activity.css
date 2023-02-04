@@ -4,7 +4,7 @@
     height: 100vh; 
     margin: 0;
     position: relative;
-    background-color: #4176FE;
+    background: #2B2B2B;
     display: flex;
     /* scroll-snap-align: start;
     scroll-snap-stop: always; */
@@ -37,7 +37,7 @@
 {
     width: 50%;
     height: 100%;
-    background: linear-gradient(180deg, #3F75FE 0%, #FFDD86 56.25%, #FFFFFF 100%);
+    background: linear-gradient(180deg, #FF9900 0%, #FFDD86 56.25%, #FFFFFF 100%);;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -49,7 +49,7 @@
 {
     width: 50%;
     height: 100%;
-    background: linear-gradient(180deg, #3F75FE 0%, #FFDD86 56.25%, #3F75FE 100%);
+    background: linear-gradient(180deg, #FF9900 0%, #FFDD86 56.25%, #FFFFFF 100%);;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

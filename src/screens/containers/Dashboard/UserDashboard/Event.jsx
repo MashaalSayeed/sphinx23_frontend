@@ -8,6 +8,8 @@ const Event = ({ data }) => {
 
   const openDialog = () => setDialogOpen(true);
   const closeDialog = () => setDialogOpen(false);
+  let team = data.teamId;
+  data = data.event;
 
   let date = new Date(data.from);
   const monthNames = [
@@ -32,32 +34,44 @@ const Event = ({ data }) => {
         alt="event thumbnail"
       />
       <div className="ud__event__details">
-        <p className="ud__event__badge">{data.category}</p>
-        <div className="ud__event__title-subtitle">
-          <h3 className="ud__event__title">{data.name}</h3>
-          <h4 className="ud__event__subtitle">By ZINE</h4>
-        </div>
-        <p className="ud_event_date">
+        <div>
           {" "}
-          {date.getDate() +
-            " " +
-            monthNames[date.getUTCMonth()] +
-            "," +
-            date.getFullYear()}
-        </p>
-        <p className="ud_event_date"> {data.time}</p>
+          <p className="ud__event__badge">{data.category}</p>
+          <div className="ud__event__title-subtitle">
+            <h3 className="ud__event__title">{data.name}</h3>
+          </div>
+        </div>
+        <div>
+          {" "}
+          <p className="ud_event_date">
+            {" "}
+            {date.getDate() +
+              " " +
+              monthNames[date.getUTCMonth()] +
+              "," +
+              date.getFullYear()}
+          </p>
+          <p className="ud_event_date"> {data.time}</p>
+        </div>
       </div>
       <button className="ud__event__team-details-button" onClick={openDialog}>
         Team Details
       </button>
-      \
+
       <Dialog open={dialogOpen} onClose={closeDialog}>
         <div className="ud__event__team-details-content">
-          <h4 className="ud__event__team-details-title">Team Name</h4>
+          <h3>Team Id: #{team.teamId}</h3>
+          <h4 className="ud__event__team-details-title">
+            Team Name: {team.teamName}
+          </h4>
           <ul className="ud__event__team-details-list">
-            <li>Team Member 1</li>
-            <li>Team Member 2</li>
-            <li>Team Member 3</li>
+            {team.userList.map((user) => {
+              return (
+                <li>
+                  {user.name}({user.email})
+                </li>
+              );
+            })}
           </ul>
         </div>
       </Dialog>

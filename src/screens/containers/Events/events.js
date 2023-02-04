@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import HomeNav from "../Home/homeNav";
 import back from "../../../images/events/back.png";
@@ -9,13 +9,16 @@ import EventCard from "./EventCard";
 import eventsImg from "../../../images/events/roboWars.png";
 
 function Events() {
-  const [currTab, setCurrTab] = useState("events");
-  const Tabs = ["Home", "About", "Contact"];
+  const [currTab, setCurrTab] = useState("Events");
+  const Tabs = ["Home", "Events", "Contact"];
   const Cat = [
     { title: "Tech", icon: proCat, col: "#9672FF", back: catCardImg },
     { title: "Cultural", icon: proCat, col: "#9672FF", back: catCardImg },
     { title: "EDM", icon: proCat, col: "#9672FF", back: catCardImg },
   ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const Ecat = [
     {
       title: "ROBO WAR",

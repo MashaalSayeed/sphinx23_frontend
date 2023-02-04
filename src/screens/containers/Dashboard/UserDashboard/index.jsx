@@ -6,19 +6,19 @@ import HomeNav from "../../Home/homeNav";
 import { useState } from "react";
 
 const UserDashboard = () => {
-	const Tabs = ["Home", "About", "Contact"];
-	const [currTab, setCurrTab] = useState("Events");
-	return (
-		<div>
-			{" "}
-			<HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
-			<div className="ud__containing-grid">
-				<Profile />
-				<Events />
-				<Queries />
-			</div>
-		</div>
-	);
+  const Tabs = ["Home", "Events", "Contact"];
+  const [currTab, setCurrTab] = useState("");
+  return (
+    <div>
+      {" "}
+      <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
+      <div className="ud__containing-grid">
+        <Profile />
+        <Events />
+        <Queries />
+      </div>
+    </div>
+  );
 };
 
 export default UserDashboard;

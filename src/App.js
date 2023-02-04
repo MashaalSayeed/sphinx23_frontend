@@ -47,6 +47,7 @@ import { ParallaxProvider } from "react-scroll-parallax";
 import UserDashboard from "./screens/containers/Dashboard/UserDashboard";
 import Test from "../src/screens/containers/Test";
 import { useRef } from "react";
+import OurTeam from "./screens/containers/OurTeam/OurTeam";
 
 function App() {
   // const token1 =
@@ -106,61 +107,65 @@ function App() {
     //   {/* <Footer /> */}
 
     // </div>
-    <div className="App">
-      {/* <TimeMachine /> */}
+    <ParallaxProvider>
+      {" "}
+      <div className="App">
+        {/* <TimeMachine /> */}
 
-      {/* <Navbar /> */}
-      {/* <Landing /> */}
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="dark"
-      />
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<LoginScreen />} />
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/home" element={<TimeMachine notAnim={true} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/events/:cat" element={<EventsCat />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/events/:cat/:id" element={<EventsView />} />
-          <Route path="/dashboard" element={<UserDashboard />} />
-          <Route path="/test" element={<Test />} />
-          {curruser != null ? (
-            <>
-              <Route
-                path="/eventAdmin/:tab?"
-                element={<DashboardEventAdmin />}
-              />
-              <Route path="/superAdmin/" element={<DashboardSuperAdmin />} />
-              <Route
-                path="/superAdmin/pass/:id/:tab?"
-                element={<PassDetail />}
-              ></Route>
-              <Route
-                path="/eventDetails/event/:id/:tab?"
-                element={<EventDetails />}
-              ></Route>
-              <Route
-                path="/superAdmin/createPass"
-                element={<CreatePass />}
-              ></Route>
-            </>
-          ) : (
-            <></>
-          )}
-        </Routes>
-      </BrowserRouter>
-      {/* <Footer /> */}
-    </div>
+        {/* <Navbar /> */}
+        {/* <Landing /> */}
+        <ToastContainer
+          position="top-right"
+          autoClose={2000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        <BrowserRouter>
+          <Routes>
+            <Route exact path="/" element={<LoginScreen />} />
+            <Route path="/ourteam" element={<OurTeam />} />
+            <Route path="/landing" element={<Landing />} />
+            <Route path="/home" element={<TimeMachine notAnim={true} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/events/:cat" element={<EventsCat />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/events/:cat/:id" element={<EventsView />} />
+            <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/test" element={<Test />} />
+            {curruser != null ? (
+              <>
+                <Route
+                  path="/eventAdmin/:tab?"
+                  element={<DashboardEventAdmin />}
+                />
+                <Route path="/superAdmin/" element={<DashboardSuperAdmin />} />
+                <Route
+                  path="/superAdmin/pass/:id/:tab?"
+                  element={<PassDetail />}
+                ></Route>
+                <Route
+                  path="/eventDetails/event/:id/:tab?"
+                  element={<EventDetails />}
+                ></Route>
+                <Route
+                  path="/superAdmin/createPass"
+                  element={<CreatePass />}
+                ></Route>
+              </>
+            ) : (
+              <></>
+            )}
+          </Routes>
+        </BrowserRouter>
+        {/* <Footer /> */}
+      </div>
+    </ParallaxProvider>
   );
 }
 

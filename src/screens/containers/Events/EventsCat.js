@@ -20,6 +20,7 @@ function EventsCat() {
   ]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     let category = categories.get(params.cat);
     console.log(category);
     if (category === undefined) {
@@ -36,41 +37,9 @@ function EventsCat() {
       });
   }, []);
 
-  const [currTab, setCurrTab] = useState("Events");
-  const Tabs = ["Home", "About", "Contact"];
-  // const Ecat = [
-  //   {
-  //     title: "ROBO WAR",
-  //     img: eventsImg,
-  //     price: "2000",
-  //     date: "22-07-23",
-  //     venue: "VLTC",
-  //     col: "#FF4B4B",
-  //     qr: "",
-  //     time: "12:30",
-  //     date: "29-03-10",
-  //   },
-  //   {
-  //     title: "ROBO WAR",
-  //     img: eventsImg,
-  //     price: "2000",
-  //     date: "22-07-23",
-  //     venue: "VLTC",
-  //     col: "#FF4B4B",
-  //     qr: "",
-  //     date: "29-03-10",
-  //   },
-  //   {
-  //     title: "ROBO WAR",
-  //     img: eventsImg,
-  //     price: "2000",
-  //     date: "22-07-23",
-  //     venue: "VLTC",
-  //     col: "#FF4B4B",
-  //     qr: "",
-  //     date: "29-03-10",
-  //   },
-  // ];
+  const [currTab, setCurrTab] = useState("EventsCat");
+  const Tabs = ["Home", "Events", "Contact"];
+
   return (
     <div className="eventM-main">
       <div class="circle circle-hide"></div>
