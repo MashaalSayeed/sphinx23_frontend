@@ -9,20 +9,13 @@ function Test() {
       <BarcodeScannerComponent
         width={500}
         height={500}
-        delay={1000}
         onUpdate={(err, result) => {
-          if (result) {
-            setData(result.text);
-            console.log(result.text);
-          } else {
-            setData("Not Found");
-            console.log(err);
-          }
+          if (result) setData(result.text);
+          else setData("Not Found");
         }}
       />
       <p>{data}</p>
     </>
   );
 }
-
 export default Test;

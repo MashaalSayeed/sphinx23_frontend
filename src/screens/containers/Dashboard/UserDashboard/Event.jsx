@@ -25,20 +25,23 @@ const Event = ({ data }) => {
         alt="event thumbnail"
       />
       <div className="ud__event__details">
-        <p className="ud__event__badge">{data.category}</p>
         <div className="ud__event__title-subtitle">
+          <p className="ud__event__badge">{data.category}</p>
           <h3 className="ud__event__title">{data.name}</h3>
           {/* <h4 className="ud__event__subtitle">By ZINE</h4> */}
         </div>
-        <p className="ud_event_date">
+        <div>
           {" "}
-          {date.getDate() +
-            " " +
-            monthNames[date.getUTCMonth()] +
-            "," +
-            date.getFullYear()}
-        </p>
-        <p className="ud_event_date"> {data.time}</p>
+          <p className="ud_event_date">
+            {" "}
+            {date.getDate() +
+              " " +
+              monthNames[date.getUTCMonth()] +
+              "," +
+              date.getFullYear()}
+          </p>
+          <p className="ud_event_date"> {data.time}</p>
+        </div>
       </div>
       <button className="ud__event__team-details-button">Team Details</button>
     </div>

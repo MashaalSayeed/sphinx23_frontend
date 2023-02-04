@@ -5,6 +5,8 @@
 html,body{margin:0;padding:0;}
 body{
     min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
     /* overflow: hidden; */
   
     animation: hideScroll 2500ms;

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
-const useIntersection = (element, rootMargin) => {
+const useIntersection = (element, rootMargin, currTab) => {
   const [isVisible, setState] = useState(false);
-
   useEffect(() => {
+    console.log(currTab);
     try {
+      console.log(element.current);
       if (element.current != null) {
         const observer = new IntersectionObserver(
           ([entry]) => {
@@ -15,13 +16,11 @@ const useIntersection = (element, rootMargin) => {
 
         element.current && observer.observe(element.current);
 
-        try {
-          return () => observer.unobserve(element.current);
-        } catch (err) {
-          console.log(err);
-        }
+        if (element.current) return () => observer.unobserve(element.current);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   return isVisible;

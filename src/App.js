@@ -46,6 +46,8 @@ import Ambassador from "./screens/containers/Home/Ambassadors";
 import { ParallaxProvider } from "react-scroll-parallax";
 import UserDashboard from "./screens/containers/Dashboard/UserDashboard";
 import Test from "../src/screens/containers/Test";
+import { useRef } from "react";
+
 function App() {
   // const token1 =
   //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IjYzYjMwM2EyZGJhMGJlNWZlMDE1YTVmOSIsImlhdCI6MTY3MjY3NzI3Nn0.B6QG9trZX_tXQ_Bx3-hBMVn96Xz2I4vqzeeVSOT_VRc";
@@ -84,6 +86,11 @@ function App() {
     fetchCompleted(dispatch);
     // fetchUpdates(dispatch);
   }, []);
+  // const [scrollEl, setScrollElement] = useState < HTMLDivElement > null;
+  // const ref = useRef < HTMLDivElement > null;
+  // useEffect(() => {
+  //   setScrollElement(ref.current);
+  // }, []);
 
   const curruser = useSelector((state) => state.auth.curruser);
   // createEvent(dispatch, {}, {});
