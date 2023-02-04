@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 :root {
 	--padding-size: 24px;
 	--gap-size: 24px;
@@ -51,31 +51,31 @@
 	gap: 16px;
 	overflow-y: scroll;
 	max-height: 100%;
-	background: #FFFFFF;
-border-radius: 8px;
+	background: #ffffff;
+	border-radius: 8px;
 }
 
 .ud__queries__title {
 	text-transform: uppercase;
 
-	font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 24px;
-line-height: 29px;
-/* identical to box height */
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 24px;
+	line-height: 29px;
+	/* identical to box height */
 
-letter-spacing: 0.12em;
+	letter-spacing: 0.12em;
 
-color: #000000;
+	color: #000000;
 }
 
 .ud__query {
-	background: linear-gradient(91.88deg, #FFFFFF -19.51%, #FFFFFF 106.75%);
-border: 1px solid rgba(0, 0, 0, 0.2);
-box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.21);
-border-radius: 5px;
-	
+	background: linear-gradient(91.88deg, #ffffff -19.51%, #ffffff 106.75%);
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.21);
+	border-radius: 5px;
+
 	/* border: 2px solid red; */
 	display: flex;
 	flex-direction: column;
@@ -83,8 +83,8 @@ border-radius: 5px;
 	padding: 18px;
 	gap: 4px;
 }
-.ud_query_subject{
-	font-family: 'Inter';
+.ud_query_subject {
+	font-family: "Inter";
 	font-style: normal;
 	font-weight: 600;
 
@@ -93,18 +93,18 @@ border-radius: 5px;
 	padding-bottom: 0.5%;
 	letter-spacing: 0.08em;
 }
-.ud_query_desc{
-	font-family: 'Inter';
+.ud_query_desc {
+	font-family: "Inter";
 	font-style: normal;
 	font-weight: 600;
 	font-size: 12px;
 	line-height: 15px;
 	/* identical to box height */
-	
+
 	letter-spacing: 0.08em;
 }
-.ud_query_reply{
-	font-family: 'Inter';
+.ud_query_reply {
+	font-family: "Inter";
 	font-style: normal;
 	font-weight: 600;
 	font-size: 12px;
@@ -116,17 +116,17 @@ border-radius: 5px;
 .ud__query__badges {
 	display: flex;
 	justify-content: space-between;
-	
-	font-family: 'Inter';
-font-style: normal;
-font-weight: 600;
-font-size: 12px;
-line-height: 15px;
-/* identical to box height */
 
-letter-spacing: 0.08em;
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 15px;
+	/* identical to box height */
 
-color: #000000;
+	letter-spacing: 0.08em;
+
+	color: #000000;
 }
 
 .ud__query__show-reply-button {
@@ -134,29 +134,28 @@ color: #000000;
 	margin-left: auto;
 	padding: 4px 8px;
 
-	background: #0A0A0A;
-border-radius: 5px;
-font-family: 'Inter';
-font-style: normal;
-font-weight: 600;
-font-size: 12px;
-line-height: 15px;
-/* identical to box height */
+	background: #0a0a0a;
+	border-radius: 5px;
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 15px;
+	/* identical to box height */
 
-letter-spacing: 0.12em;
+	letter-spacing: 0.12em;
 
-color: #D68934;
+	color: #d68934;
 }
 
 .ud__query__show-reply-button:hover {
-	
-	background: #0A0A0A;/* wheat but darker */
+	background: #0a0a0a; /* wheat but darker */
 }
 
 .ud__events {
 	grid-area: 2 / 1 / 3 / 3;
 	padding: var(--padding-size);
-	
+
 	height: fit-content;
 	display: flex;
 	flex-direction: column;
@@ -165,19 +164,19 @@ color: #D68934;
 
 .ud__events__title {
 	text-transform: uppercase;
-	
+
 	margin-bottom: -20px;
 	color: white;
-	font-family: 'Inter';
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-line-height: 22px;
-/* identical to box height */
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 22px;
+	/* identical to box height */
 
-letter-spacing: 0.12em;
+	letter-spacing: 0.12em;
 
-color: #F8F8F8;
+	color: #f8f8f8;
 }
 
 .ud__event {
@@ -209,85 +208,96 @@ color: #F8F8F8;
 
 .ud__event__badge {
 	text-transform: uppercase;
-	font-family: 'Inter';
-font-style: normal;
-font-weight: 600;
-font-size: 10px;
-line-height: 12px;
-letter-spacing: 0.12em;
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 10px;
+	line-height: 12px;
+	letter-spacing: 0.12em;
 
-color: rgba(0, 0, 0, 0.3);
+	color: rgba(0, 0, 0, 0.3);
 }
 
 .ud__event__title {
-	
 	text-transform: uppercase;
-	
-	font-family: 'Inter';
-font-style: normal;
-font-weight: 900;
-font-size: 18px;
-line-height: 22px;
-/* identical to box height */
 
-letter-spacing: 0.08em;
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 900;
+	font-size: 18px;
+	line-height: 22px;
+	/* identical to box height */
 
-color: #212121;
+	letter-spacing: 0.08em;
+
+	color: #212121;
 }
 
 .ud__event__subtitle {
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 10px;
+	line-height: 12px;
+	letter-spacing: 0.12em;
 
-	
-	font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 10px;
-line-height: 12px;
-letter-spacing: 0.12em;
-
-color: rgba(0, 0, 0, 0.5);
-
+	color: rgba(0, 0, 0, 0.5);
 }
-.ud_event_date{
-	font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 12px;
-line-height: 15px;
-/* identical to box height */
+.ud_event_date {
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 15px;
+	/* identical to box height */
 
-letter-spacing: 0.08em;
+	letter-spacing: 0.08em;
 
-color: rgba(0, 0, 0, 0.72);
+	color: rgba(0, 0, 0, 0.72);
 }
 
 .ud__event__team-details-button {
 	height: fit-content;
 	margin-top: auto;
 	margin-bottom: auto;
-	
+
 	border: none;
 	padding: 8px 16px;
 	border-radius: var(--border-radius-size);
 	background-color: hsl(0, 0%, 10%);
 
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 15px;
+	/* identical to box height */
 
+	letter-spacing: 0.12em;
 
-	
-font-family: 'Inter';
-font-style: normal;
-font-weight: 600;
-font-size: 12px;
-line-height: 15px;
-/* identical to box height */
-
-letter-spacing: 0.12em;
-
-color: #D68934;
+	color: #d68934;
 }
 
 .ud__event__team-details-button:hover {
 	background-color: hsl(0, 0%, 0%);
+}
+
+.ud__event__team-details-content {
+	padding: var(--padding-size);
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-size);
+}
+
+.ud__event__team-details-title {
+	font-size: xx-large;
+	font-family: "Inter";
+	border-bottom: 2px solid black;
+}
+
+.ud__event__team-details-list {
+	list-style-type: none;
+	font-size: large;
 }
 
 .ud__profile__image {
@@ -299,26 +309,23 @@ color: #D68934;
 .ud__profile__name {
 	display: flex;
 	flex-direction: column;
-
 }
-.ud__profile__name_h1 {
-	font-family: 'Inter';
-font-style: normal;
-font-weight: 900;
-font-size: 20px;
-line-height: 24px;
-letter-spacing: 0.21em;
 
+.ud__profile__name_h1 {
+	font-family: "Inter";
+	font-style: normal;
+	font-weight: 900;
+	font-size: 20px;
+	line-height: 24px;
+	letter-spacing: 0.21em;
 }
 .ud__profile__name_h3 {
-	font-family: 'Inter';
+	font-family: "Inter";
 	font-style: normal;
 	font-weight: 600;
 	font-size: 16px;
 	line-height: 19px;
 	letter-spacing: 0.12em;
-	
-	color: rgba(255, 255, 255, 0.66);
-	
 
+	color: rgba(255, 255, 255, 0.66);
 }
