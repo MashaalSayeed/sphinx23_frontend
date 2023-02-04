@@ -10,6 +10,7 @@
 
 .scrolling {
     height: 528px;
+    position: relative;
 
     overflow: hidden;
     text-overflow: clip;
@@ -24,9 +25,23 @@
     line-height: 29px;
 
     letter-spacing: 0.04em;
+    overflow: hidden;
 
     color: #FBF340;
+  
+  
 }
+.scrolling>p{
+    -webkit-animation: scrollText 4s infinite ease-in-out;
+}
+@keyframes scrollText {
+    0%{
+        transform: translateY(-100%);
+    }
+    100%{transform: translateY(60%)}
+    
+}
+
 
 .scrolling p {
     writing-mode: vertical-lr;

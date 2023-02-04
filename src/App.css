@@ -12,6 +12,9 @@
   height: max(10vh,90px);
   background-color: white;
 }
+.App{
+  /* overflow-x: hidden; */
+}
 .super-main
 {
  background-color: white;

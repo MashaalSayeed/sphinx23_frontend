@@ -29,7 +29,7 @@ function TimeMachine({ notAnim, landing }) {
   }, []);
 
   return (
-    <div>
+    <div style={{ overflowX: "hidden" }}>
       {/* {!animNotOver && (
         <ParallaxBanner
           layers={[
