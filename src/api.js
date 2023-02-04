@@ -477,7 +477,7 @@ export const sendVerificationMail = async () => {
 export const loginRegister = async (dispatch, creds) => {
   console.log("Login Called");
   console.log(creds);
-  await fetch(`${url}/users`, {
+  return fetch(`${url}/users`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -493,7 +493,7 @@ export const loginRegister = async (dispatch, creds) => {
         const profile = { token: data.token, profile: data.profile };
         console.log(data.success);
         dispatch(loginReg(profile));
-        return data.success;
+        return data;
       }
       throw data;
     })

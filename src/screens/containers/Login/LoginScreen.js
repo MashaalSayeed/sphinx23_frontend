@@ -36,7 +36,7 @@ import { useRef } from "react";
 
 const toastStyle = {
   position: "top-right",
-  autoClose: 3000,
+  autoClose: 2000,
   hideProgressBar: true,
   closeOnClick: true,
   pauseOnHover: true,
@@ -116,7 +116,15 @@ function Login(props) {
       .then((data) => {
         console.log(data);
         // alert("Success");
-        toast.info("Success", toastStyle);
+        if (!data.profile.isEmailVerified) {
+          toast.error("Please Complete Your Profile", toastStyle);
+          props.toreg(false);
+        } else if (!data.profile.isMobileNumberVerified) {
+          toast.error("Please Complete Your Profile", toastStyle);
+          props.toreg(false);
+        } else {
+          toast.info("Success", toastStyle);
+        }
       })
       .catch((err) => {
         // toast.error(err, toastStyle);
@@ -139,25 +147,27 @@ function Login(props) {
       });
     }
     gapi.load("client:auth2", start);
-  });
-  // const profile = useSelector((state) => state.auth.curruser.profile);
-  // useEffect(() => {
-  //   // if (profile && !profile.isEmailVerified) {
-  //   //   props.setter(2);
-  //   //   props.setBg((present) => !present);
-  //   // }
-  //   // if (profile && profile.isEmailVerified && !profile.isMobileNumberVerified) {
-  //   //   props.setter(3);
-  //   //   props.setBg((present) => !present);
-  //   // }
-  //   // if (profile && profile.isEmailVerified && profile.isMobileNumberVerified) {
-  //   //   navigate("/home");
-  //   // }
-  //   // //
-  //   // chandra();
-  //   // loginRegister(dispatch, creds);
-  //   // fetchUpdates(dispatch);
-  // }, []);
+  }, []);
+  let profile = useSelector((state) => state.auth.curruser);
+  useEffect(() => {
+    if (!profile) return;
+    profile = profile.profile;
+    if (profile && !profile.isEmailVerified) {
+      props.toreg(false);
+      props.setBg((present) => !present);
+    }
+    if (profile && profile.isEmailVerified && !profile.isMobileNumberVerified) {
+      props.toreg(false);
+      props.setBg((present) => !present);
+    }
+    if (profile && profile.isEmailVerified && profile.isMobileNumberVerified) {
+      navigate("/home");
+    }
+    //
+    // chandra();
+    // loginRegister(dispatch, creds);
+    // fetchUpdates(dispatch);
+  }, []);
   function handleSubmit(event) {
     props.setBg((present) => !present);
     formData.isRegistration = false;
@@ -165,9 +175,17 @@ function Login(props) {
     event.preventDefault();
     loginRegister(dispatch, formData)
       .then((data) => {
-        console.log(data);
+        console.log(data.profile);
+        if (!data.profile.isEmailVerified) {
+          toast.error("Please Complete Your Profile", toastStyle);
+          props.toreg(false);
+        } else if (!data.profile.isMobileNumberVerified) {
+          // toast.error("Please Complete Your Profile", toastStyle);
+          props.toreg(false);
+        } else {
+          toast.info("Success", toastStyle);
+        }
         // alert("Success");
-        toast.info("Success", toastStyle);
       })
       .catch((err) => {
         toast.error(err, toastStyle);
