@@ -10,8 +10,6 @@ function Theme(props) {
   const [view, setView] = useState(false);
 
   const [progress, setProgress] = useState(false);
-
-  console.log(progress);
   return (
     <div
       className="activity-back"

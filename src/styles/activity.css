@@ -144,3 +144,27 @@ padding:1px 8px;
 color: rgba(255, 255, 255, 0.7);
 
 }
+
+@media screen and (max-width: 700px) {
+   .activity-sec3
+   {
+    width: 100%;
+    background:  linear-gradient(180deg, #000000 40.63%, #0F0900 71.35%, #FF9B02 99.99%, #FFE194 100%);
+    
+   }
+   .activity-sec1
+   {
+    position: absolute;
+    width: 100%;
+    z-index: 5;
+    opacity: 1;
+   justify-content: flex-start;
+ 
+
+   }
+   .about-info
+   {
+    margin-left: 0;
+    margin: 5vh auto;
+   }
+  }
