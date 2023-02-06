@@ -3,8 +3,8 @@ import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 import HomeNav from "./homeNav";
 import back from "../../../images/about/PyramidBack.png";
 import aboutMob from "../../../images/aboutMob.png";
-import Front from "../../../images/about/PyramidFront.png";
-import useIntersection from "./interSection";
+// import aboutMob from "../../../images/about/PyramidFront.png";
+// import useIntersection from "./interSection";
 import { useEffect } from "react";
 export default function About() {
   const [currTab, setCurrTab] = useState("About");
@@ -46,40 +46,45 @@ export default function About() {
         Tabs={Tabs}
         notanimation={true}
       /> */}
-      <ParallaxProvider>
-        <Parallax
-          translateY={progress < 0.5 ? [50, -50] : [0, 0]}
-          scale={progress < 0.5 ? [1.3, 0.7] : [1]}
-          opacity={[0.7, 1]}
-          onProgressChange={(progress) => {
-            setProgress(progress);
-          }}
-          speed={60}
-          className="about-page-background-img"
-          style={{ opacity: 1 }}
-          shouldAlwaysCompleteAnimation={true}
-        >
-          <img
-            src={back}
-            style={{ width: "100%", height: "100vh", objectFit: "cover" }}
-          ></img>
-          {/* <img
+
+      <Parallax
+        translateY={progress < 0.5 ? [50, -50] : [0, 0]}
+        scale={progress < 0.5 ? [1.3, 0.7] : [1]}
+        opacity={[0.7, 1]}
+        onProgressChange={(progress) => {
+          setProgress(progress);
+        }}
+        speed={60}
+        style={{ opacity: 1 }}
+        className={
+          width
+            ? "about-page-para about-page-background-img"
+            : " about-page-background-img"
+        }
+        shouldAlwaysCompleteAnimation={true}
+      >
+        <img
+          src={width ? aboutMob : back}
+          style={
+            width ? {} : { width: "100%", height: "100vh", objectFit: "cover" }
+          }
+        ></img>
+        {/* <img
           src={Front}
           style={{ width: "100%", height: "100vh", objectFit: "cover" }}
         ></img> */}
-          {/* <div className="about-page-background-img"> */}
-          {/* <div className="about-page-side-rectangle"></div>
+        {/* <div className="about-page-background-img"> */}
+        {/* <div className="about-page-side-rectangle"></div>
         <div className="about-page-center-rectangle"></div> */}
-          {/* </div> */}
-          {/* <div></div> */}
-        </Parallax>
-      </ParallaxProvider>
+        {/* </div> */}
+        {/* <div></div> */}
+      </Parallax>
 
       {/* <div className="about-page-background-img">
         <div className="about-page-side-rectangle"></div>
         <div className="about-page-center-rectangle"></div>
       </div> */}
-      <div className="about-page-bg-overlay"></div>
+      {!width && <div className="about-page-bg-overlay"></div>}
       <div className="about-page-content">
         <div className="about-page-content-text">
           <div className="about-page--text-head">ABOUT US</div>

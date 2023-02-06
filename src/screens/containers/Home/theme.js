@@ -29,90 +29,80 @@ function Theme(props) {
               opacity: 1,
             }}
           >
-            <ParallaxProvider>
-              {" "}
-              <Parallax
-                translateY={[0, 0]}
-                translateX={progress < 0.5 ? [-60, 60, "easeInOut"] : []}
-                opacity={[0.7, 1]}
-                speedx={20}
-                // translateY={0}
-                className={"activity-sec3-img"}
-                style={{ opacity: 1 }}
-              >
-                <img
-                  src={theme}
-                  style={{ height: "100%", objectFit: "cover" }}
-                ></img>
-              </Parallax>
-            </ParallaxProvider>
+            <Parallax
+              translateY={[0, 0]}
+              translateX={progress < 0.5 ? [-60, 60, "easeInOut"] : []}
+              opacity={[0.7, 1]}
+              speedx={20}
+              // translateY={0}
+              className={"activity-sec3-img"}
+              style={{ opacity: 1 }}
+            >
+              <img
+                src={theme}
+                style={{ height: "100%", objectFit: "cover" }}
+              ></img>
+            </Parallax>
           </div>
         )}
         <div className="activity-sec1 mobileResp-Amb1">
-          <ParallaxProvider>
-            {" "}
-            <Parallax
-              translateY={
-                width
-                  ? progress < 0.5
-                    ? [80, -80, "easeInOut"]
-                    : [0, 0]
+          <Parallax
+            translateY={
+              width
+                ? progress < 0.5
+                  ? [80, -80, "easeInOut"]
                   : [0, 0]
-              }
-              translateX={
-                !width ? (progress < 0.5 ? [60, -60, "easeInOut"] : [0, 0]) : []
-              }
-              opacity={
-                progress < (width ? 0.3 : 0.4) ? [0.6, 1, "easeInOut"] : [1, 1]
-              }
-              // shouldAlwaysCompleteAnimation={true}
-              speedx={-30}
-              // className={"theme-para"}
-              style={{ height: "100%" }}
-              onProgressChange={(progress) => setProgress(progress)}
-            >
-              <div className="campInfo">
-                <div className="activity-info-sub">SPHINX ‘23</div>
-                <div className="home-about-title">THEME</div>
-                <div
-                  className="about-Maincontent"
-                  style={{ marginTop: "20px", marginBottom: "10px" }}
-                >
-                  Sphinx is the largest technology fest in Rajasthan, held
-                  annually at the MNIT Jaipur campus. The fest attracts
-                  thousands of students from all over the country, who come to
-                  participate in a wide range of technical and non-technical
-                  events. The event includes workshops, competitions, guest
-                  lectures and exhibitions on the latest technology and
-                  innovations.
-                </div>
-                <button
-                  className="home-about-btn"
-                  style={{
-                    background: "#FFA20F",
-                    color: "white",
-                    padding: "10px 25px",
-                  }}
-                >
-                  Learn More
-                </button>
+                : [0, 0]
+            }
+            translateX={
+              !width ? (progress < 0.5 ? [60, -60, "easeInOut"] : [0, 0]) : []
+            }
+            opacity={
+              progress < (width ? 0.3 : 0.4) ? [0.6, 1, "easeInOut"] : [1, 1]
+            }
+            // shouldAlwaysCompleteAnimation={true}
+            speedx={-30}
+            // className={"theme-para"}
+            style={{ height: "100%" }}
+            onProgressChange={(progress) => setProgress(progress)}
+          >
+            <div className="campInfo">
+              <div className="activity-info-sub">SPHINX ‘23</div>
+              <div className="home-about-title">THEME</div>
+              <div
+                className="about-Maincontent"
+                style={{ marginTop: "20px", marginBottom: "10px" }}
+              >
+                Sphinx is the largest technology fest in Rajasthan, held
+                annually at the MNIT Jaipur campus. The fest attracts thousands
+                of students from all over the country, who come to participate
+                in a wide range of technical and non-technical events. The event
+                includes workshops, competitions, guest lectures and exhibitions
+                on the latest technology and innovations.
               </div>
-            </Parallax>
-          </ParallaxProvider>
+              <button
+                className="home-about-btn"
+                style={{
+                  background: "#FFA20F",
+                  color: "white",
+                  padding: "10px 25px",
+                }}
+              >
+                Learn More
+              </button>
+            </div>
+          </Parallax>
         </div>
         {width && (
-          <ParallaxProvider>
-            {" "}
-            <Parallax
-              translateY={[0, 0]}
-              translateX={[0, 0]}
-              opacity={[0.1, 1]}
-              speedx={20}
-              className={"activity-sec3-img mobileResp-Amb2"}
-            >
-              <img src={themeBack}></img>
-            </Parallax>
-          </ParallaxProvider>
+          <Parallax
+            translateY={[0, 0]}
+            translateX={[0, 0]}
+            opacity={[0.1, 1]}
+            speedx={20}
+            className={"activity-sec3-img mobileResp-Amb2"}
+          >
+            <img src={themeBack}></img>
+          </Parallax>
         )}
         {width && (
           <>

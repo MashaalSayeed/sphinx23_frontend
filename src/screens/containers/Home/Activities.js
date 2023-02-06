@@ -14,14 +14,14 @@ function Activities(props) {
 
   const [scrollPos, setScrollPos] = useState(0);
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
-  const handleScroll = () => {
-    setScrollPos(window.pageYOffset);
-  };
+  // const handleScroll = () => {
+  //   setScrollPos(window.pageYOffset);
+  // };
 
   const MobileViewAnim = {
     translateY: [0, 0],

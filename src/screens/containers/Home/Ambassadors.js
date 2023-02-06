@@ -16,7 +16,6 @@ function Ambassador(props) {
   const [progress, setProgress] = useState(0);
   const [view, setView] = useState(false);
   // const [width, setWidth] = useState(false);
-  const [scrollPos, setScrollPos] = useState(0);
   const { width } = props;
 
   const MobileViewAnimImg = {
@@ -60,96 +59,86 @@ function Ambassador(props) {
             }}
           >
             (
-            <ParallaxProvider>
-              {" "}
-              <Parallax
-                translateY={width ? MobileViewAnimText.translateY : [0, 0]}
-                translateX={
-                  width
-                    ? MobileViewAnimText.translateX
-                    : progress < 0.5
-                    ? [-60, 60, "easeInOut"]
-                    : []
-                }
-                opacity={[0.7, 1]}
-                speedx={20}
-                // translateY={0}
-                className={"activity-sec3-img mobileResp-Amb2"}
-                style={{ opacity: 1 }}
-              >
-                <img
-                  src={ambassador}
-                  style={{ height: "100%", objectFit: "cover" }}
-                ></img>
-              </Parallax>
-            </ParallaxProvider>
+            <Parallax
+              translateY={width ? MobileViewAnimText.translateY : [0, 0]}
+              translateX={
+                width
+                  ? MobileViewAnimText.translateX
+                  : progress < 0.5
+                  ? [-60, 60, "easeInOut"]
+                  : []
+              }
+              opacity={[0.7, 1]}
+              speedx={20}
+              // translateY={0}
+              className={"activity-sec3-img mobileResp-Amb2"}
+              style={{ opacity: 1 }}
+            >
+              <img
+                src={ambassador}
+                style={{ height: "100%", objectFit: "cover" }}
+              ></img>
+            </Parallax>
             )
           </div>
         )}
         {width && (
-          <ParallaxProvider>
-            {" "}
-            <Parallax
-              translateY={[0, 0]}
-              translateX={[0, 0]}
-              opacity={[0.1, 1]}
-              speedx={20}
-              className={"activity-sec3-img mobileResp-Amb2"}
-            >
-              <img src={ambMobile}></img>
-            </Parallax>
-          </ParallaxProvider>
+          <Parallax
+            translateY={[0, 0]}
+            translateX={[0, 0]}
+            opacity={[0.1, 1]}
+            speedx={20}
+            className={"activity-sec3-img mobileResp-Amb2"}
+          >
+            <img src={ambMobile}></img>
+          </Parallax>
         )}
         <div className="activity-sec1 mobileResp-Amb1">
           {" "}
-          <ParallaxProvider>
-            {" "}
-            <Parallax
-              translateY={width ? MobileViewAnimText.translateY : [0, 0]}
-              translateX={
-                !width
-                  ? progress < 0.5
-                    ? [60, -60, "easeInOut"]
-                    : [0, 0]
+          <Parallax
+            translateY={width ? MobileViewAnimText.translateY : [0, 0]}
+            translateX={
+              !width
+                ? progress < 0.5
+                  ? [60, -60, "easeInOut"]
                   : [0, 0]
-              }
-              opacity={progress < 0.495 ? [0.6, 1, "easeInOut"] : [1, 1]}
-              // shouldAlwaysCompleteAnimation={true}
-              speedx={-30}
-              // className={width ? "theme-para" : ""}
-              style={{ height: "100%" }}
-              onProgressChange={(progress) => setProgress(progress)}
-            >
-              <div className="campInfo">
-                <div className="activity-info-sub">SPHINX ‘23</div>
-                <div className=" amb-title">
-                  CAMPUS
-                  <br></br>
-                  <span style={{ color: "#FFA20F" }}>AMBASSADOR</span>
-                </div>
-
-                <div className="about-Maincontent amb-Maincontent">
-                  Sphinx is the largest technology fest in Rajasthan, held
-                  annually at the MNIT Jaipur campus. The fest attracts
-                  thousands of students from all over the country, who come to
-                  participate in a wide range of technical and non-technical
-                  events. The event includes workshops, competitions, guest
-                  lectures and exhibitions on the latest technology and
-                  innovations.
-                </div>
-                <button
-                  className="home-about-btn"
-                  style={{
-                    background: "#FFA20F",
-                    color: "white",
-                    padding: "10px 25px",
-                  }}
-                >
-                  Learn More
-                </button>
+                : [0, 0]
+            }
+            opacity={progress < 0.495 ? [0.6, 1, "easeInOut"] : [1, 1]}
+            // shouldAlwaysCompleteAnimation={true}
+            speedx={-30}
+            // className={width ? "theme-para" : ""}
+            style={{ height: "100%" }}
+            onProgressChange={(progress) => setProgress(progress)}
+          >
+            <div className="campInfo">
+              <div className="activity-info-sub">SPHINX ‘23</div>
+              <div className=" amb-title">
+                CAMPUS
+                <br></br>
+                <span style={{ color: "#FFA20F" }}>AMBASSADOR</span>
               </div>
-            </Parallax>
-          </ParallaxProvider>
+
+              <div className="about-Maincontent amb-Maincontent">
+                Sphinx is the largest technology fest in Rajasthan, held
+                annually at the MNIT Jaipur campus. The fest attracts thousands
+                of students from all over the country, who come to participate
+                in a wide range of technical and non-technical events. The event
+                includes workshops, competitions, guest lectures and exhibitions
+                on the latest technology and innovations.
+              </div>
+              <button
+                className="home-about-btn"
+                style={{
+                  background: "#FFA20F",
+                  color: "white",
+                  padding: "10px 25px",
+                }}
+              >
+                Learn More
+              </button>
+            </div>
+          </Parallax>
           <img className="amb-conL" src={ConR}></img>
           <img className="amb-con" src={ConR}></img>
         </div>

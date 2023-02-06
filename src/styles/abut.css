@@ -180,11 +180,36 @@
     opacity: 1;
 }
 
+
 @media (max-width: 1200px) {
 	.about-page-foreground-img {
 		z-index: 2;
 	}
 	.about-page-content {
 		z-index: 3;
+	}
+	.about-page-para
+    {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .about-page-para>img{
+		width: 100%;
+		height: 60%;
+		object-fit: cover;
+        margin-top: auto;
+    }
+	.about-page
+	{
+		background:  linear-gradient(180deg, #000000 34.48%, #0F0900 49.24%, #653D00 72.92%, #FFE194 100%);
+	}
+	.about-page-content-text
+	{
+		width: 80%;
+		margin: auto;
+		justify-content: flex-start;
+		margin-top: 10vh;
 	}
 }
