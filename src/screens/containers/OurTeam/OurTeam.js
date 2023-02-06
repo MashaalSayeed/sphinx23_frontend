@@ -12,7 +12,7 @@ function OurTeam() {
   const [event, setEvent] = useState();
 
   const [currTab, setCurrTab] = useState("aaaa");
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "About us", "Contact us"];
 
   const data = {
     name: "Subhranshu Shekhar",

@@ -770,3 +770,26 @@ position: relative;
     }
     
 }
+
+@media screen and (max-width: 700px) {
+     .amb-con
+    {
+        width: 40%;
+        z-index: 80;
+    }
+    .amb-conL
+    {
+        width: 40%;
+        z-index: 80;
+    }
+    .landing-scroll-line
+    {
+        height: 30px;
+    }
+    .landing-scroll-text
+    {
+        font-size: 0.6rem;
+    }
+    
+    
+}

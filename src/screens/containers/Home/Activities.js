@@ -6,11 +6,12 @@ import { Parallax, ParallaxBanner } from "react-scroll-parallax";
 import pyramid from "../../../images/activityPyramid.png";
 import useIntersection from "./interSection";
 
-function Activities() {
+function Activities(props) {
+  const { width } = props;
   const ref = useRef();
   const [view, setView] = useState(false);
   const [progress, setProgress] = useState(false);
-  const [width, setWidth] = useState(false);
+
   const [scrollPos, setScrollPos] = useState(0);
 
   useEffect(() => {
@@ -21,13 +22,6 @@ function Activities() {
   const handleScroll = () => {
     setScrollPos(window.pageYOffset);
   };
-
-  useEffect(() => {
-    const handleWindowResize = () =>
-      setWidth(window.innerWidth < 900 ? true : false);
-    window.addEventListener("resize", handleWindowResize);
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, []);
 
   const MobileViewAnim = {
     translateY: [0, 0],

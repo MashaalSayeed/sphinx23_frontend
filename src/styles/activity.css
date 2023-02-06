@@ -39,8 +39,8 @@
     height: 100%;
     background: linear-gradient(180deg, #FF9900 0%, #FFDD86 56.25%, #FFFFFF 100%);;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    /* flex-direction: column;
+    justify-content: flex-end; */
     opacity: 0;
     
 
@@ -144,6 +144,39 @@ padding:1px 8px;
 color: rgba(255, 255, 255, 0.7);
 
 }
+.mobileResp-Amb1
+{
+ background: rgb(30, 30, 30);
+}
+.campInfo
+{
+  
+    width: 80%;
+    margin-left: 8%;
+    opacity: 1;
+    display: flex;
+    height: 90%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    opacity: 1;
+    transform: translateX(0);
+}
+.amb-title
+{
+    font-size: 3rem;
+    line-height:3.2rem;
+
+    font-weight: 600;
+    font-size: 2.4rem;
+    letter-spacing: 0.02em;
+    line-height: 2.8rem;
+    color: #FFFFFF;
+    padding: 4px;
+    margin-bottom: 15px;
+
+    letter-spacing: 0.4rem;
+}
 
 @media screen and (max-width: 700px) {
    .activity-sec3
@@ -156,7 +189,7 @@ color: rgba(255, 255, 255, 0.7);
    {
     position: absolute;
     width: 100%;
-    z-index: 5;
+    z-index: 40;
     opacity: 1;
    justify-content: flex-start;
  
@@ -167,4 +200,80 @@ color: rgba(255, 255, 255, 0.7);
     margin-left: 0;
     margin: 5vh auto;
    }
+   .mobileResp-Amb1
+   {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    /* justify-content: flex-end; */
+
+    }
+    .about-info
+    {
+        height: unset;
+    }
+    .campInfo
+    {
+        
+        margin-left: 0;
+        width: 80%;
+        position: absolute;
+        /* bottom: 12vh; */
+        margin: auto;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        justify-content: flex-end;
+        bottom: 5vh;
+    }
+    .amb-title
+    {
+        font-size: 2rem;
+    }
+    .mobileResp-ambImg
+    {
+        width: 60%;
+        height: 60vh;
+        position: relative;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        z-index: 2;
+    }
+    .mobileResp-ambImg>img{
+       width: 100%; 
+       object-fit: contain;
+    }
+    .mobileResp-Amb2
+    {
+        width: 70%;
+        height: 60%;
+        z-index: 20;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 2vh;
+       margin: auto;
+    
+    }
+    .mobileResp-Amb2>img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain
+    }
+    .amb-back
+    {
+        background-color: #000000;
+    }
+    .theme-para
+    {
+     position: absolute;
+     bottom: 7vh;
+    }
+
+    
+ 
   }

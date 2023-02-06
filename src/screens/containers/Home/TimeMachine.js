@@ -14,7 +14,7 @@ function TimeMachine({ notAnim, landing }) {
   const [currTab, setCurrTab] = useState("Home");
   const [animNotOver, setNotOver] = useState(true);
   const [title, setTitle] = useState(false);
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "About us", "Contact us"];
   const handelOver = () => {
     console.log("set anim over");
     setNotOver(false);
@@ -26,6 +26,24 @@ function TimeMachine({ notAnim, landing }) {
   }, [animNotOver]);
   useEffect(() => {
     if (!landing) setTitle(true);
+  }, []);
+  const [width, setWidth] = useState(false);
+  const [scrollPos, setScrollPos] = useState(0);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleScroll = () => {
+    setScrollPos(window.pageYOffset);
+  };
+
+  useEffect(() => {
+    const handleWindowResize = () =>
+      setWidth(window.innerWidth < 900 ? true : false);
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
 
   return (
@@ -101,9 +119,9 @@ function TimeMachine({ notAnim, landing }) {
           <About />
           {/* <Ambassador />
           <Activities /> <Theme /> */}
-          <Ambassador />
-          <Activities />
-          <Theme />
+          <Ambassador width={width} />
+          <Activities width={width} />
+          <Theme width={width} />
         </>
       ) : (
         <></>

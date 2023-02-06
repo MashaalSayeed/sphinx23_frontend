@@ -2,13 +2,41 @@ import React, { useRef, useState } from "react";
 import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 import HomeNav from "./homeNav";
 import back from "../../../images/about/PyramidBack.png";
+import aboutMob from "../../../images/aboutMob.png";
 import Front from "../../../images/about/PyramidFront.png";
 import useIntersection from "./interSection";
+import { useEffect } from "react";
 export default function About() {
   const [currTab, setCurrTab] = useState("About");
   // const ref = useRef(null);
   const Tabs = ["Home", "About", "Contact"];
   const [progress, setProgress] = useState(0);
+  const [scrollPos, setScrollPos] = useState(0);
+  const [width, setWidth] = useState(false);
+  const MobileViewAnimText = {
+    translateY: progress < 0.5 ? [100, -100, "easeInOut"] : [0, 0],
+    translateX: [-100, 100],
+    opacity: progress < 0.5 ? [0.0, 1, "easeInOut"] : [1, 1],
+    // shouldAlwaysCompleteAnimation={true}
+    speedx: 30,
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleScroll = () => {
+    setScrollPos(window.pageYOffset);
+  };
+
+  useEffect(() => {
+    const handleWindowResize = () =>
+      setWidth(window.innerWidth < 900 ? true : false);
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
   // useIntersection(ref, "-100px");
   return (
     <div className="about-page">

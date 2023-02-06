@@ -4,23 +4,38 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 import ambassador from "../../../images/ambassador.png";
+import ambMobile from "../../../images/ambMobile.png";
 import ConR from "../../../images/ambCon.png";
 import HomeNav from "./homeNav";
 import useIntersection from "./interSection";
 
-function Ambassador() {
+function Ambassador(props) {
   const [currTab, setCurrTab] = useState("ambassador");
   const Tabs = ["Home", "About", "Contact"];
   const ref = useRef();
   const [progress, setProgress] = useState(0);
   const [view, setView] = useState(false);
+  // const [width, setWidth] = useState(false);
+  const [scrollPos, setScrollPos] = useState(0);
+  const { width } = props;
+
+  const MobileViewAnimImg = {
+    translateY: [0, 0],
+    translateX: [0, 0],
+    opacity: progress < 0.5 ? [0.0, 1, "easeInOut"] : [1, 1],
+    // shouldAlwaysCompleteAnimation={true}
+    speedx: 2,
+  };
+  const MobileViewAnimText = {
+    translateY: progress < 0.5 ? [100, -100, "easeInOut"] : [0, 0],
+    translateX: [0, 0],
+    opacity: progress < 0.5 ? [0.0, 1, "easeInOut"] : [1, 1],
+    // shouldAlwaysCompleteAnimation={true}
+    speedx: 30,
+  };
 
   return (
-    <div
-      className="activity-back"
-      style={{ backgroundColor: "#1e1e1e" }}
-      ref={ref}
-    >
+    <div className="activity-back amb-back" ref={ref}>
       {/* <HomeNav
         setCurrTab={setCurrTab}
         currTab={currTab}
@@ -33,74 +48,87 @@ function Ambassador() {
         <div className="landing-scroll-line"></div>
       </div>
       <div className="activity-sections">
-        <div
-          className={
-            !view ? "activity-sec2 activity-sec2-anim" : "activity-sec2"
-          }
-          style={{
-            background:
-              "radial-gradient(62.62% 62.62% at 43.33% 37.38%, rgba(92, 49, 0, 0) 0%, rgba(0, 0, 0, 0.7) 69.27%)",
-            ...(view && { opacity: 1 }),
-          }}
-        >
+        {!width && (
+          <div
+            className={
+              !view ? "activity-sec2 activity-sec2-anim" : "activity-sec2"
+            }
+            style={{
+              background:
+                "radial-gradient(62.62% 62.62% at 43.33% 37.38%, rgba(92, 49, 0, 0) 0%, rgba(0, 0, 0, 0.7) 69.27%)",
+              ...(view && { opacity: 1 }),
+            }}
+          >
+            (
+            <ParallaxProvider>
+              {" "}
+              <Parallax
+                translateY={width ? MobileViewAnimText.translateY : [0, 0]}
+                translateX={
+                  width
+                    ? MobileViewAnimText.translateX
+                    : progress < 0.5
+                    ? [-60, 60, "easeInOut"]
+                    : []
+                }
+                opacity={[0.7, 1]}
+                speedx={20}
+                // translateY={0}
+                className={"activity-sec3-img mobileResp-Amb2"}
+                style={{ opacity: 1 }}
+              >
+                <img
+                  src={ambassador}
+                  style={{ height: "100%", objectFit: "cover" }}
+                ></img>
+              </Parallax>
+            </ParallaxProvider>
+            )
+          </div>
+        )}
+        {width && (
           <ParallaxProvider>
             {" "}
             <Parallax
               translateY={[0, 0]}
-              translateX={progress < 0.5 ? [-60, 60, "easeInOut"] : []}
-              opacity={[0.7, 1]}
+              translateX={[0, 0]}
+              opacity={[0.1, 1]}
               speedx={20}
-              // translateY={0}
-              className={"activity-sec3-img"}
-              style={{ opacity: 1 }}
+              className={"activity-sec3-img mobileResp-Amb2"}
             >
-              <img
-                src={ambassador}
-                style={{ height: "100%", objectFit: "cover" }}
-              ></img>
+              <img src={ambMobile}></img>
             </Parallax>
           </ParallaxProvider>
-        </div>
-        <div
-          className="activity-sec1"
-          style={{ background: "rgb(30, 30, 30)" }}
-        >
+        )}
+        <div className="activity-sec1 mobileResp-Amb1">
           {" "}
           <ParallaxProvider>
             {" "}
             <Parallax
-              translateY={[0, 0]}
-              translateX={progress < 0.5 ? [70, -70, "easeInOut"] : []}
+              translateY={width ? MobileViewAnimText.translateY : [0, 0]}
+              translateX={
+                !width
+                  ? progress < 0.5
+                    ? [60, -60, "easeInOut"]
+                    : [0, 0]
+                  : [0, 0]
+              }
               opacity={progress < 0.495 ? [0.6, 1, "easeInOut"] : [1, 1]}
               // shouldAlwaysCompleteAnimation={true}
               speedx={-30}
+              // className={width ? "theme-para" : ""}
+              style={{ height: "100%" }}
               onProgressChange={(progress) => setProgress(progress)}
             >
-              <div
-                style={{
-                  width: "80%",
-                  marginLeft: "8%",
-                  ...(view ? { opacity: 1 } : {}),
-                }}
-                className={
-                  !view ? "about-info activity-info-anim2" : "about-info"
-                }
-              >
+              <div className="campInfo">
                 <div className="activity-info-sub">SPHINX ‘23</div>
-                <div
-                  className="home-about-title"
-                  style={{
-                    fontSize: "3rem",
-                    lineHeight: "3.2rem",
-                    letterSpacing: "0.4rem",
-                  }}
-                >
+                <div className=" amb-title">
                   CAMPUS
                   <br></br>
                   <span style={{ color: "#FFA20F" }}>AMBASSADOR</span>
                 </div>
 
-                <div className="about-Maincontent">
+                <div className="about-Maincontent amb-Maincontent">
                   Sphinx is the largest technology fest in Rajasthan, held
                   annually at the MNIT Jaipur campus. The fest attracts
                   thousands of students from all over the country, who come to
