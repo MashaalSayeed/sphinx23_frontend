@@ -37,6 +37,7 @@ function Theme(props) {
               // translateY={0}
               className={"activity-sec3-img"}
               style={{ opacity: 1 }}
+              onProgressChange={(progress) => setProgress(progress)}
             >
               <img
                 src={theme}
@@ -47,13 +48,7 @@ function Theme(props) {
         )}
         <div className="activity-sec1 mobileResp-Amb1">
           <Parallax
-            translateY={
-              width
-                ? progress < 0.5
-                  ? [80, -80, "easeInOut"]
-                  : [0, 0]
-                : [0, 0]
-            }
+            translateY={width ? (progress < 0.5 ? [40, -40] : [0, 0]) : [0, 0]}
             translateX={
               !width ? (progress < 0.5 ? [60, -60, "easeInOut"] : [0, 0]) : []
             }
@@ -100,6 +95,7 @@ function Theme(props) {
             opacity={[0.1, 1]}
             speedx={20}
             className={"activity-sec3-img mobileResp-Amb2"}
+            onProgressChange={(progress) => setProgress(progress)}
           >
             <img src={themeBack}></img>
           </Parallax>

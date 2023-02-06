@@ -45,17 +45,17 @@ function Activities(props) {
               width
                 ? MobileViewAnim.translateX
                 : progress < 0.5
-                ? [-50, 50, "easeInOut"]
+                ? [-50, 50]
                 : []
             }
             opacity={
               width
                 ? MobileViewAnim.opacity
                 : progress < 0.5
-                ? [0.6, 1, "easeInOut"]
+                ? [0.6, 1]
                 : [1, 1]
             }
-            // shouldAlwaysCompleteAnimation={true}
+            shouldAlwaysCompleteAnimation={true}
             speedx={-30}
             onProgressChange={(progress) => setProgress(progress)}
           >
@@ -124,7 +124,7 @@ function Activities(props) {
           /> */}
           <Parallax
             // translateY={[0, 0]}
-            translateY={progress < 0.497 ? [100, -100, "easeInOut"] : [0, 0]}
+            translateY={progress < 0.497 ? [100, -100] : [0, 0]}
             // opacity={progress < 0.5 ? [0.9, 1, "easeInOut"] : [1, 1]}
             speed={10}
             // translateY={0}

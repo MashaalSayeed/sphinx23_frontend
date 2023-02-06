@@ -26,7 +26,7 @@ function Ambassador(props) {
     speedx: 2,
   };
   const MobileViewAnimText = {
-    translateY: progress < 0.5 ? [100, -100, "easeInOut"] : [0, 0],
+    translateY: progress < 0.5 ? [100, -100] : [0, 0],
     translateX: [0, 0],
     opacity: progress < 0.5 ? [0.0, 1, "easeInOut"] : [1, 1],
     // shouldAlwaysCompleteAnimation={true}
@@ -71,6 +71,8 @@ function Ambassador(props) {
               opacity={[0.7, 1]}
               speedx={20}
               // translateY={0}
+              onProgressChange={(progress) => setProgress(progress)}
+              shouldAlwaysCompleteAnimation={true}
               className={"activity-sec3-img mobileResp-Amb2"}
               style={{ opacity: 1 }}
             >
@@ -89,6 +91,9 @@ function Ambassador(props) {
             opacity={[0.1, 1]}
             speedx={20}
             className={"activity-sec3-img mobileResp-Amb2"}
+            onProgressChange={(progress) => {
+              setProgress(progress);
+            }}
           >
             <img src={ambMobile}></img>
           </Parallax>
@@ -105,7 +110,7 @@ function Ambassador(props) {
                 : [0, 0]
             }
             opacity={progress < 0.495 ? [0.6, 1, "easeInOut"] : [1, 1]}
-            // shouldAlwaysCompleteAnimation={true}
+            shouldAlwaysCompleteAnimation={true}
             speedx={-30}
             // className={width ? "theme-para" : ""}
             style={{ height: "100%" }}
