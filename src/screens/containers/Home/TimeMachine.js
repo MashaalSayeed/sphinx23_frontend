@@ -82,6 +82,13 @@ function TimeMachine({ notAnim, landing }) {
           style={{ opacity: 1, height: "100vh" }}
         ></ParallaxBanner>
       )} */}
+      <HomeNav
+        setCurrTab={setCurrTab}
+        currTab={currTab}
+        Tabs={Tabs}
+        notanimation={!landing}
+        landing={landing && animNotOver}
+      />
 
       <div className={notAnim ? "time-main" : "parallax-container"} id="home">
         <img
@@ -92,13 +99,7 @@ function TimeMachine({ notAnim, landing }) {
             notAnim ? { animation: "none", filter: "brightness(0.4)" } : {}
           }
         ></img>
-        <HomeNav
-          setCurrTab={setCurrTab}
-          currTab={currTab}
-          Tabs={Tabs}
-          notanimation={notAnim}
-          landing={landing && animNotOver}
-        />
+
         {title ? <div className="home-title"> SPHINX </div> : <></>}
         <div
           className="machine-text"
@@ -116,7 +117,7 @@ function TimeMachine({ notAnim, landing }) {
 
       {!landing || !animNotOver ? (
         <>
-          <About />
+          <About width={width} />
           {/* <Ambassador />
           <Activities /> <Theme /> */}
           <Ambassador width={width} />

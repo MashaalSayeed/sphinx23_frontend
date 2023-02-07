@@ -14,6 +14,7 @@ function Ambassador(props) {
   const Tabs = ["Home", "About", "Contact"];
   const ref = useRef();
   const [progress, setProgress] = useState(0);
+  const [progress2, setProgress2] = useState(0);
   const [view, setView] = useState(false);
   // const [width, setWidth] = useState(false);
   const { width } = props;
@@ -26,9 +27,9 @@ function Ambassador(props) {
     speedx: 2,
   };
   const MobileViewAnimText = {
-    translateY: progress < 0.5 ? [100, -100] : [0, 0],
+    translateY: progress2 < 0.5 ? [60, -60] : [0, 0],
     translateX: [0, 0],
-    opacity: progress < 0.5 ? [0.0, 1, "easeInOut"] : [1, 1],
+    opacity: progress2 < 0.5 ? [0.0, 1, "easeInOut"] : [1, 1],
     // shouldAlwaysCompleteAnimation={true}
     speedx: 30,
   };
@@ -104,17 +105,17 @@ function Ambassador(props) {
             translateY={width ? MobileViewAnimText.translateY : [0, 0]}
             translateX={
               !width
-                ? progress < 0.5
+                ? progress2 < 0.5
                   ? [60, -60, "easeInOut"]
                   : [0, 0]
                 : [0, 0]
             }
-            opacity={progress < 0.495 ? [0.6, 1, "easeInOut"] : [1, 1]}
+            opacity={progress2 < 0.495 ? [0.6, 1, "easeInOut"] : [1, 1]}
             shouldAlwaysCompleteAnimation={true}
-            speedx={-30}
+            speedx={-20}
             // className={width ? "theme-para" : ""}
             style={{ height: "100%" }}
-            onProgressChange={(progress) => setProgress(progress)}
+            onProgressChange={(progress2) => setProgress2(progress2)}
           >
             <div className="campInfo">
               <div className="activity-info-sub">SPHINX ‘23</div>

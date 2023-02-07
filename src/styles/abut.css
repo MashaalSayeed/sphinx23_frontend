@@ -24,6 +24,12 @@
 	/* -webkit-animation: abtImg 1.6s ease-in-out;
 	-webkit-animation-fill-mode: forwards; */
 }
+.about-page-background-img-anim
+{
+	opacity: 0; 
+	-webkit-animation: abtImg 1.6s ease-in-out;
+	-webkit-animation-fill-mode: forwards; 
+}
 .about-page-background-img>img {
 	position: relative;
 	

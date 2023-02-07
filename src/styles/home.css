@@ -193,7 +193,7 @@ padding-bottom: 20px;
     width: 100vw;
     align-items: center;
     justify-content: space-between;
-  
+    position: fixed;
    opacity: 0;
     animation: navbar 1200ms ease-in-out;
     animation-delay: 1s;
@@ -204,14 +204,22 @@ padding-bottom: 20px;
 {
     padding-top: 20px;
     z-index: 10;
-    height: 60px;
+    height: 65px;
     position: fixed;
+    background: rgba(255, 255, 255, 0.05);
+backdrop-filter: blur(12px);
+padding-bottom: 20px;
+
+    /**/
+    
     
     /* margin: auto; */
     display: flex;
-    width: 98%;
+    width: 100vw;
     align-items: center;
     justify-content: space-between;
+    position: fixed;
+   opacity: 1;
 }
 .parallax-container>.landing-navbar
 {

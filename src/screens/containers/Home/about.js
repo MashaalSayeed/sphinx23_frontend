@@ -6,13 +6,14 @@ import aboutMob from "../../../images/aboutMob.png";
 // import aboutMob from "../../../images/about/PyramidFront.png";
 // import useIntersection from "./interSection";
 import { useEffect } from "react";
-export default function About() {
+import useIntersection from "./interSection";
+export default function About(props) {
+  const { width } = props;
   const [currTab, setCurrTab] = useState("About");
   // const ref = useRef(null);
   const Tabs = ["Home", "About", "Contact"];
   const [progress, setProgress] = useState(0);
-  const [scrollPos, setScrollPos] = useState(0);
-  const [width, setWidth] = useState(false);
+
   const MobileViewAnimText = {
     translateY: progress < 0.5 ? [100, -100, "easeInOut"] : [0, 0],
     translateX: [-100, 100],
@@ -21,32 +22,8 @@ export default function About() {
     speedx: 30,
   };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleScroll = () => {
-    setScrollPos(window.pageYOffset);
-  };
-
-  useEffect(() => {
-    const handleWindowResize = () =>
-      setWidth(window.innerWidth < 900 ? true : false);
-    window.addEventListener("resize", handleWindowResize);
-    return () => window.removeEventListener("resize", handleWindowResize);
-  }, []);
-
-  // useIntersection(ref, "-100px");
   return (
     <div className="about-page">
-      {/* <HomeNav
-        setCurrTab={setCurrTab}
-        currTab={currTab}
-        Tabs={Tabs}
-        notanimation={true}
-      /> */}
-
       <Parallax
         translateY={progress < 0.5 ? [50, -50] : [0, 0]}
         scale={progress < 0.5 ? [1.3, 0.7] : [1]}
@@ -63,10 +40,26 @@ export default function About() {
         }
         shouldAlwaysCompleteAnimation={true}
       >
+        {/* <div
+        className={
+          width
+            ? !view
+              ? "about-page-para about-page-background-img"
+              : " about-page-para about-page-background-img  about-page-background-img-anim"
+            : " about-page-background-img"
+        }
+        ref={imageRef}
+      > */}
         <img
           src={width ? aboutMob : back}
           style={
-            width ? {} : { width: "100%", height: "100vh", objectFit: "cover" }
+            width
+              ? {}
+              : {
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }
           }
         ></img>
         {/* <img
@@ -85,7 +78,14 @@ export default function About() {
         <div className="about-page-center-rectangle"></div>
       </div> */}
       {!width && <div className="about-page-bg-overlay"></div>}
-      <div className="about-page-content">
+
+      <Parallax
+        opacity={progress < 0.48 ? [0.6, 1, "easeInOut"] : [1, 1]}
+        translateY={[0, 0]}
+        speed={60}
+        shouldAlwaysCompleteAnimation={true}
+        className="about-page-content"
+      >
         <div className="about-page-content-text">
           <div className="about-page--text-head">ABOUT US</div>
           <div className="about-page--text-body">
@@ -98,8 +98,7 @@ export default function About() {
           </div>
           <div className="about-page--text-button">Learn More</div>
         </div>
-      </div>
-
+      </Parallax>
       {/* <div className="scroll-down-prompt"></div> */}
     </div>
   );

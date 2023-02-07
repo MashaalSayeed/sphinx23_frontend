@@ -10,7 +10,8 @@ function Activities(props) {
   const { width } = props;
   const ref = useRef();
   const [view, setView] = useState(false);
-  const [progress, setProgress] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [progress2, setProgress2] = useState(0);
 
   const [scrollPos, setScrollPos] = useState(0);
 
@@ -124,12 +125,13 @@ function Activities(props) {
           /> */}
           <Parallax
             // translateY={[0, 0]}
-            translateY={progress < 0.497 ? [100, -100] : [0, 0]}
+            translateY={progress2 < 0.497 ? [100, -100] : [0, 0]}
             // opacity={progress < 0.5 ? [0.9, 1, "easeInOut"] : [1, 1]}
             speed={10}
             // translateY={0}
+            shouldAlwaysCompleteAnimation={true}
             onProgressChange={(progress) => {
-              setProgress(progress);
+              setProgress2(progress);
             }}
             className={"activity-sec3-img"}
             style={{ opacity: 1 }}
