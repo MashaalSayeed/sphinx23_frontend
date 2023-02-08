@@ -8,6 +8,7 @@ import HomeNav from "./homeNav";
 import Theme from "./theme";
 import About from "./about";
 import { Parallax, ParallaxBanner } from "react-scroll-parallax";
+import { countdownTimer, useCountdown } from "./coundown";
 // import Ambassador from "./Amb
 
 function TimeMachine({ notAnim, landing }) {
@@ -45,6 +46,25 @@ function TimeMachine({ notAnim, landing }) {
     window.addEventListener("resize", handleWindowResize);
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
+  const [expiryTime, setExpiryTime] = useState("17 mar 2023 20:08:00");
+  const [countdownTime, setCountdownTime] = useState({
+    Days: "",
+    Hours: "",
+    Minutes: "",
+    Seconds: "",
+  });
+  useEffect(() => {
+    countdownTimer({
+      setCountdownTime: setCountdownTime,
+      expiryTime: expiryTime,
+      setExpiryTime: setExpiryTime,
+    });
+  }, []);
+
+  const AddZero = (val) => {
+    if (val < 10) return `0${val}`;
+    else return val;
+  };
 
   return (
     <div style={{ overflowX: "hidden" }}>
@@ -106,19 +126,19 @@ function TimeMachine({ notAnim, landing }) {
           <div className={!landing ? "timer" : "timer timerAnim"}>
             <div className="timer-ele">
               <span>Days</span>
-              <p>16</p>
+              <p>{AddZero(countdownTime.Days)}</p>
             </div>
             <div className="timer-ele">
               <span>Hours</span>
-              <p>11</p>
+              <p>{AddZero(countdownTime.Hours)}</p>
             </div>
             <div className="timer-ele">
               <span>Minutes</span>
-              <p>20</p>
+              <p>{AddZero(countdownTime.Minutes)}</p>
             </div>
             <div className="timer-ele">
               <span>Seconds</span>
-              <p>60</p>
+              <p>{AddZero(countdownTime.Seconds)}</p>
             </div>
           </div>
         }
