@@ -9,6 +9,7 @@ import Theme from "./theme";
 import About from "./about";
 import { Parallax, ParallaxBanner } from "react-scroll-parallax";
 import { countdownTimer, useCountdown } from "./coundown";
+import Footer from "../../components/Footer/footer";
 // import Ambassador from "./Amb
 
 function TimeMachine({ notAnim, landing }) {
@@ -169,6 +170,8 @@ function TimeMachine({ notAnim, landing }) {
       ) : (
         <></>
       )}
+
+      <Footer />
     </div>
   );
 }

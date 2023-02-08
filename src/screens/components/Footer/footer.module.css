@@ -1,0 +1,150 @@
+.container {
+    background: linear-gradient(66.04deg, #000000 0%, #FF0000 895.33%);
+}
+
+.contents {
+    display: flex;
+    flex-direction: row;
+    height: 500px;
+
+    font-family: 'Space Grotesk';
+    color: white;
+}
+
+.contents>div {
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-width: 2px;
+}
+
+.contents h1 {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 36px;
+    /* identical to box height */
+
+    letter-spacing: 0.1em;
+
+    color: #FFFFFF;
+}
+
+.col1 {
+    flex: 2;
+}
+
+.logo {
+    height: 56px;
+    width: 145px;
+}
+
+.mysterybox {
+    object-fit: contain;
+    width: 50%;
+}
+
+
+.col2 {
+    flex: 3;
+}
+
+.col2 img {
+    width: 100%;
+}
+
+.col2 div {
+    padding: 15px 50px;
+}
+
+.col2 ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    padding: 5px;
+    margin-top: 20px;
+}
+
+.col2 ul li {
+    flex: 1 0 50%;
+
+    margin-bottom: 15px;
+
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height */
+
+    letter-spacing: 0.1em;
+
+    background: linear-gradient(92.32deg, #FFFFFF -5.28%, #616161 142%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.col3 {
+    flex: 4;
+    display: flex;
+    flex-direction: column;
+}
+
+.col3>div {
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-width: 2px;
+}
+
+.getintouch {
+    flex: 3;
+    padding: 0px 30px;
+}
+
+.getintouch h1 {
+    margin-top: 80px;
+    margin-bottom: 5px;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.1em;
+
+    color: #FFFFFF;
+}
+
+.getintouch p {
+    font-size: 36px;
+    line-height: 46px;
+    /* identical to box height */
+
+    letter-spacing: 0.1em;
+    text-decoration-line: underline;
+
+    color: #EEEEEE;
+}
+
+.scanit {
+    flex: 2;
+}
+
+.credits {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(7px);
+
+    padding: 15px 0px;
+}
+
+.credits p {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.1em;
+
+    text-align: center;
+
+    color: #FFFFFF;
+}
