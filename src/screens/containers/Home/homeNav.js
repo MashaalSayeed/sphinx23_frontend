@@ -13,7 +13,10 @@ function HomeNav({ setCurrTab, currTab, Tabs, notanimation, landing }) {
     }
   }, [currTab]);
   return (
-    <div className={notanimation ? "landing-navbar-notAnim" : "landing-navbar"}>
+    <div
+      className={notanimation ? "landing-navbar-notAnim" : "landing-navbar"}
+      style={landing ? { WebkitAnimationDelay: "2.4s" } : {}}
+    >
       <div className="landing-logo">
         <img src={logo}></img>
       </div>

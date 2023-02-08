@@ -3,6 +3,7 @@ import "../../../styles/home.css";
 import grad from "../../../images/home/homeBack.png";
 import stars from "../../../images/home/starsBright.png";
 import pyraminds from "../../../images/home/pyramids.svg";
+import logo from "../../../images/landingLogo.svg";
 import pyramindLine from "../../../images/home/pyramidLine.png";
 
 import HomeNav from "./homeNav";
@@ -76,7 +77,7 @@ function Landing(props) {
             />
           </div>
 
-          <div
+          <img
             className={
               Loading || !Scroll ? "landing-title" : "landing-titleanim"
             }
@@ -88,9 +89,8 @@ function Landing(props) {
                     animationFillMode: "forwards",
                   }
             }
-          >
-            SPHINX
-          </div>
+            src={logo}
+          ></img>
           <div className="landing-pyramids">
             {" "}
             {Loading || !Scroll ? (

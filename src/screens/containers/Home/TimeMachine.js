@@ -27,7 +27,7 @@ function TimeMachine({ notAnim, landing }) {
   useEffect(() => {
     if (!landing) setTitle(true);
   }, []);
-  const [width, setWidth] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth < 900 ? true : false);
   const [scrollPos, setScrollPos] = useState(0);
 
   useEffect(() => {
@@ -99,8 +99,30 @@ function TimeMachine({ notAnim, landing }) {
             notAnim ? { animation: "none", filter: "brightness(0.4)" } : {}
           }
         ></img>
+        {/* 
+        {title ? <div className="home-title"> SPHINX </div> : <></>} */}
 
-        {title ? <div className="home-title"> SPHINX </div> : <></>}
+        {
+          <div className={!landing ? "timer" : "timer timerAnim"}>
+            <div className="timer-ele">
+              <span>Days</span>
+              <p>16</p>
+            </div>
+            <div className="timer-ele">
+              <span>Hours</span>
+              <p>11</p>
+            </div>
+            <div className="timer-ele">
+              <span>Minutes</span>
+              <p>20</p>
+            </div>
+            <div className="timer-ele">
+              <span>Seconds</span>
+              <p>60</p>
+            </div>
+          </div>
+        }
+
         <div
           className="machine-text"
           style={notAnim ? { animation: "none", opacity: "1" } : {}}

@@ -1,15 +1,17 @@
 
 
 
-
-html,body{margin:0;padding:0;}
+body{margin:0;padding:0;}
 body{
     min-height: 100vh;
     width: 100vw;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; /* Lets it scroll lazy */
+    overflow-y: auto;
+
     /* overflow: hidden; */
   
-    animation: hideScroll 2500ms;
+    /* animation: hideScroll 2500ms; */
     background: black;
 }
 body::-webkit-scrollbar{
@@ -255,8 +257,8 @@ cursor: pointer;
 
     margin: 60px auto;
     font-weight: 300;
-    font-size: 10rem;
-    /* line-height: 2rem; */
+    margin-top: 15vh;
+   width: 90vw;
     left: 0; 
     right: 0; 
     margin-left: auto; 
@@ -285,6 +287,8 @@ cursor: pointer;
     /* width: fit-content; */
     width: 30%;
     margin: 60px auto;
+    margin-top: 15vh;
+    width: 90vw;
     
     font-weight: 300;
     font-size: 10rem;
@@ -322,23 +326,21 @@ cursor: pointer;
 @keyframes titleAnim {
     0% 
     {
+        position: absolute;
         z-index: 1;
-      
-       
-     
-     
-      font-size: 10rem;
-    }
+        opacity: 1;
+        transform: translateY(0);
     
+        
+    }
    
 
     100% 
     {
-
         z-index: 20;
-        font-size: 10rem;
-        transform: translateY(min(100%,220px));
-       
+        /* width: 70%; */
+        transform:  translateY(100%);  
+        opacity: 0;
     }
 
 }
@@ -704,15 +706,12 @@ margin-bottom: 15px;
     font-weight: 300;
     font-size: 3rem;
     left: 0; 
-    transform: translateY(43%);
+  height: fit-content;
     top: 0 ;
     bottom: 0;
     /* height: 200px; */
     right: 0; 
-    margin-left: auto; 
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto;
+   margin: auto;
     width: fit-content;
     letter-spacing: 0.10em;
     color: #FFFFFF;
@@ -782,6 +781,61 @@ position: relative;
     
 }
 
+.timer
+{
+    position: absolute;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: fit-content;
+    height: fit-content;
+    margin:auto;
+    display: flex;
+    gap: min(16px,7vw);
+    color: #FFFFFF;
+    font-family:  'Noto Sans Adlam Unjoined', sans-serif;
+    
+    font-style: normal;
+    
+
+}
+.timer-ele
+{
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    flex-direction: column;
+}
+.timer-ele>span
+{
+    font-size: min(0.8rem,2vw);
+    
+}
+.timer-ele>p
+{
+    margin-top: 3px;
+
+    font-size: min(2rem, 8vw);
+
+}
+.timerAnim
+{
+    opacity: 0;
+    -webkit-animation: appear 1s ease-in-out;
+    -webkit-animation-delay: 2.4s;
+    -webkit-animation-fill-mode: forwards;
+}
+@keyframes appear {
+    0%{
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+
 @media screen and (max-width: 700px) {
      .amb-con
     {
@@ -803,8 +857,108 @@ position: relative;
     }
     .landing-tabs
     {
-        opacity: 0;
+        display: none;
+    }
+    .landing-title
+    {
+        font-size: 16vw;
+        margin-top: 30vh;
+    }
+    .landing-pyramids-img
+    {
+        height: 60vh;
+        object-fit: cover;
+    }
+    .landing-titleanim
+    {
+        font-size: 16vw;
+        margin-top: 20vh;
+        animation: none;
+    }
+    .machine-text
+    {
+        width: 90%;
+       
+    }
+    .machine-text-header
+    {
+        font-size: 7vw;
+        width: 90%;
+        line-height: normal;
+        word-spacing: 10px;
+    }
+    .machine-text-sub
+    {
+        font-size: 4vw;
     }
     
+   
+    .landing-titleanim
+    {
+        display: none;
+
+    }
+   .exit-anim
+   {
+    animation: exitAnimMob 2000ms ease-in-out;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+   }
+   .landing-title
+   {
+    opacity: 0;
+    width: 95vw;
+    margin-top: 33vh;
+    animation: titleMob 1.2s ease-in-out;
+    animation-delay: 1.1s;
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+   }
+
     
 }
+
+@keyframes exitAnimMob {
+    0% {
+      
+        transform: scaleX(1) scaleY(1) translateY(0);
+
+        /* filter: brightness(1); */
+      
+        border-radius: 0;
+        z-index: 100;
+    }
+    
+    30%
+    {
+        z-index: -2;
+    }
+
+    100% 
+    {
+        /* transform: scaleX(0.26); */
+        transform: scaleX(0.7) scaleY(0.6) ;
+        z-index: -100;
+      
+    }
+
+}
+
+@keyframes titleMob {
+
+    0% {
+        opacity: 0.8; 
+         transform: translateY(1200%);
+      
+    }
+  
+    
+
+ 
+    100% {
+        opacity: 1; 
+         transform: translateY(0%);
+         
+    }
+}
+
