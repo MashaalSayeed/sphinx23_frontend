@@ -10,7 +10,7 @@ import eventsImg from "../../../images/events/roboWars.png";
 
 function Events() {
   const [currTab, setCurrTab] = useState("About us");
-  const Tabs = ["Home", "About us", "Contact us"];
+  const Tabs = ["Home", "Events", "Contact us"];
   const Cat = [
     { title: "Tech", icon: proCat, col: "#9672FF", back: catCardImg },
     { title: "Cultural", icon: proCat, col: "#9672FF", back: catCardImg },

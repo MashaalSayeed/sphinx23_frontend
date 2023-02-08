@@ -12,7 +12,7 @@ import TimeMachine from "./TimeMachine";
 function Landing(props) {
   const { parallax } = props;
   const [currTab, setCurrTab] = useState("Home");
-  const Tabs = ["Home", "About us", "Contact us"];
+  const Tabs = ["Home", "Events", "Contact us"];
   const [Loading, setLoading] = useState(true);
   const [Scroll, setScroll] = useState(false);
 
