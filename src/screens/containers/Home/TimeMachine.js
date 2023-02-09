@@ -213,7 +213,7 @@ function TimeMachine({ notAnim, landing, setLand }) {
         <></>
       )}
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

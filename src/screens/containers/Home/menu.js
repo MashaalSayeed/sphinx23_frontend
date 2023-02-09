@@ -121,7 +121,7 @@ function Menu(props) {
                     onMouseEnter={() => setHover(value)}
                     onMouseLeave={() => setHover("")}
                   >
-                    {hover == value || anim ? (
+                    {hover.toLowerCase() == value.toLowerCase() || anim ? (
                       <>
                         <span style={{ opacity: 0 }}>{value}</span>
                         <div

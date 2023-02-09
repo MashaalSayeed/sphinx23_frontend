@@ -135,14 +135,14 @@ function App() {
             {/* <Route index element={<Landing />} />
             <Route path="/" element={<TimeMachine notAnim={true} />} /> */}
             <Route path="/login" element={<LoginScreen />} />
-            <Route path="/ourteam" element={<OurTeam />} />
+            {/* <Route path="/ourteam" element={<OurTeam />} /> */}
             {/* <Route path="/home" element={<TimeMachine notAnim={true} />} /> */}
-            <Route path="/about" element={<About />} />
-            <Route path="/events/:cat" element={<EventsCat />} />
+            {/* <Route path="/about" element={<About />} /> */}
+            {/* <Route path="/events/:cat" element={<EventsCat />} /> */}
             <Route path="/events" element={<Events />} />
-            <Route path="/events/:cat/:id" element={<EventsView />} />
-            <Route path="/dashboard" element={<UserDashboard />} />
-            <Route path="/test" element={<Test />} />
+            {/* <Route path="/events/:cat/:id" element={<EventsView />} /> */}
+
+            {/* <Route path="/test" element={<Test />} /> */}
             {land ? (
               <Route exact path="/" element={<Landing setLand={setLand} />} />
             ) : (
@@ -150,6 +150,7 @@ function App() {
             )}
             {curruser != null ? (
               <>
+                <Route path="/dashboard" element={<UserDashboard />} />
                 <Route
                   path="/eventAdmin/:tab?"
                   element={<DashboardEventAdmin />}
