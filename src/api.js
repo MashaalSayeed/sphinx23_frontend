@@ -15,7 +15,7 @@ import {
   loading,
 } from "./store/modules/auth/auth.action";
 import { queries } from "@testing-library/react";
-const url = "http://localhost:8000";
+const url = process.env.REACT_APP_SERVER_URL;
 
 export const fetchEvents = async (dispatch) => {
   console.log("Events Fetched");
@@ -365,13 +365,13 @@ export const sendMobileOTP = async (data) => {
 };
 
 export const sendForgotOTP = async (body) => {
-  console.log(Session.getObject("profile").token);
-
+  // console.log(Session.getObject("profile").token);
+  console.log(body);
   return fetch(`${url}/verification/sendForgotOTP`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
-      Authorization: "Bearer " + Session.getObject("profile").token,
+      // Authorization: "Bearer " + Session.getObject("profile").token,
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",

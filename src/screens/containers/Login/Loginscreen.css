@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
 
+input[type="password"]::-ms-reveal
 .login-container {
 	background-image: url("./bg0.png");
 	background-position: center;
