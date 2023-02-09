@@ -259,3 +259,22 @@ margin-bottom: 25px;
   
     
   }
+
+  @media screen and (max-width: 700px) {
+    .container
+    {
+        width: 98vw;
+    }
+    .sec1
+    {
+        width: 83%;
+    }
+    .sec2
+    {
+       width: 17%;
+    }
+    .menuRoutes
+    {
+        font-size: 1.5rem;
+    }
+  }

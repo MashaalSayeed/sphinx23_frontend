@@ -26,7 +26,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import bg1 from "./bg1.png";
-import bg2 from "./bg2.png";
 import bg3 from "./bg3.png";
 import bg4 from "./bg4.png";
 import bg0 from "./bg0.png";
@@ -1092,6 +1091,7 @@ function ForgotPass() {
         ConRef.current.style.background = disabledCol;
         setId(res);
         let body = { id: res };
+        console.log("Body", body);
         sendForgotOTP(body)
           .then((resp) => {
             console.log(resp);
@@ -1420,13 +1420,13 @@ function Registration(props) {
 export default function LoginScreen() {
   const [bgchange, setBg] = useState(true);
   const [registered, setRegistered] = useState(true);
-  const arr = [bg0, bg1, bg2, bg3, bg4];
+  const arr = [bg0, bg1, bg3, bg4];
 
   return (
     <div
       className="login-container"
       id="bgChange"
-      style={{ backgroundImage: `url(${arr[parseInt(Math.random() * 5)]})` }}
+      style={{ backgroundImage: `url(${arr[parseInt(Math.random() * 4)]})` }}
     >
       <div className="login-image-darken">
         <div className="login-logo-container">

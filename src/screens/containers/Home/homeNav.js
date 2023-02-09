@@ -18,7 +18,7 @@ function HomeNav({
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
   useEffect(() => {
-    if (currTab == "About us") navigate("/events");
+    if (currTab == "Events") navigate("/events");
     if (currTab == "Profile") navigate("/dashboard");
     if (currTab == "Logout") {
       //callLogout

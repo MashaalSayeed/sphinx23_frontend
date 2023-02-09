@@ -26,7 +26,7 @@ function TimeMachine({ notAnim, landing, setLand }) {
     }, 6000);
   }, [textIndex]);
 
-  const Tabs = ["Home", "About us", "Contact us"];
+  const Tabs = ["Home", "Events", "Contact"];
   // console.log(curruser);
   // if (curruser != null) {
   //   Tabs.push("Profile");

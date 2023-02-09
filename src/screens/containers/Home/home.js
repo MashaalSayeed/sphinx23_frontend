@@ -13,7 +13,7 @@ function Landing(props) {
   const { parallax, setLand } = props;
   const curruser = useSelector((state) => state.auth.curruser);
   const [currTab, setCurrTab] = useState("Home");
-  const Tabs = ["Home", "About us", "Contact us"];
+  const Tabs = ["Home", "Events", "Contact"];
   console.log(curruser);
   // if (curruser != null) {
   //   Tabs.push("Profile");
@@ -44,6 +44,11 @@ function Landing(props) {
       <div>
         <div
           className={Loading || !Scroll ? "landing-main" : "exit-anim"}
+          onScroll={() => {
+            if (!Loading && !parallax) {
+              setScroll(true);
+            }
+          }}
           onWheel={() => {
             if (!Loading && !parallax) {
               setScroll(true);
