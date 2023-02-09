@@ -1092,6 +1092,7 @@ function ForgotPass() {
         ConRef.current.style.background = disabledCol;
         setId(res);
         let body = { id: res };
+        console.log("Body", body);
         sendForgotOTP(body)
           .then((resp) => {
             console.log(resp);

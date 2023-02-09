@@ -42,7 +42,7 @@ function Menu(props) {
       console.log("logout");
       Session.remove("profile");
       logout();
-      navigate("/");
+      window.location.href = "/";
       setLog("LOGIN/REGISTER");
     } else {
       navigate("/login");
