@@ -7,10 +7,20 @@ import CatCard from "./catCard";
 import catCardImg from "../../../images/events/catCard.png";
 import EventCard from "./EventCard";
 import eventsImg from "../../../images/events/roboWars.png";
+import { useSelector } from "react-redux";
 
 function Events() {
   const [currTab, setCurrTab] = useState("About us");
-  const Tabs = ["Home", "Events", "Contact us"];
+  const curruser = useSelector((state) => state.auth.curruser);
+
+  const Tabs = ["Home", "About us", "Contact us"];
+  console.log(curruser);
+  // if (curruser != null) {
+  //   Tabs.push("Profile");
+  //   Tabs.push("Logout");
+  // } else {
+  //   Tabs.push("Login/Register");
+  // }
   const Cat = [
     { title: "Tech", icon: proCat, col: "#9672FF", back: catCardImg },
     { title: "Cultural", icon: proCat, col: "#9672FF", back: catCardImg },
@@ -59,7 +69,14 @@ function Events() {
         <img src={back}></img>
       </div>
       <div className="eventsM-back-overlay"></div>
-      <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
+      <HomeNav
+        setCurrTab={setCurrTab}
+        currTab={currTab}
+        Tabs={Tabs}
+        notanimation={false}
+        landing={false}
+        setLand={() => {}}
+      />
       <div className={"eventsM-title"}>EVENTS</div>
       <div className="eventsM-category-sec">
         {Cat.map((item, i) => {

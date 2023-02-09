@@ -80,7 +80,10 @@ export default function About(props) {
       {!width && <div className="about-page-bg-overlay"></div>}
 
       <Parallax
-        opacity={progress < 0.48 ? [0.6, 1, "easeInOut"] : [1, 1]}
+        opacity={progress < 0.48 ? [0.2, 1, "easeInOut"] : [1, 1]}
+        translateX={
+          !width ? (progress < 0.5 ? [-60, 60, "easeInOut"] : []) : [0, 0]
+        }
         translateY={[0, 0]}
         speed={60}
         shouldAlwaysCompleteAnimation={true}

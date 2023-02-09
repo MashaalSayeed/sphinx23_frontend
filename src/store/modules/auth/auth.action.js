@@ -21,6 +21,12 @@ export const events = (payload) => ({
   type: "FETCH_EVENTS",
   payload: payload,
 });
+
+export const logout = () => ({
+  type: "LOGOUT",
+  payload: null,
+});
+
 export const adminEvents = (payload) => ({
   type: "FETCH_ADMIN_EVENTS",
   payload: payload,

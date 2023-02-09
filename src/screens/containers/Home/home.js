@@ -3,22 +3,32 @@ import "../../../styles/home.css";
 import grad from "../../../images/home/homeBack.png";
 import stars from "../../../images/home/starsBright.png";
 import pyraminds from "../../../images/home/pyramids.svg";
-import logo from "../../../images/landingLogo.svg";
-import pyramindLine from "../../../images/home/pyramidLine.png";
+import logo from "../../../images/landingLogo.png";
 
 import HomeNav from "./homeNav";
 import TimeMachine from "./TimeMachine";
+import { useSelector } from "react-redux";
 
 function Landing(props) {
-  const { parallax } = props;
+  const { parallax, setLand } = props;
+  const curruser = useSelector((state) => state.auth.curruser);
   const [currTab, setCurrTab] = useState("Home");
-  const Tabs = ["Home", "Events", "Contact us"];
+  const Tabs = ["Home", "About us", "Contact us"];
+  console.log(curruser);
+  // if (curruser != null) {
+  //   Tabs.push("Profile");
+  //   Tabs.push("Logout");
+  // } else {
+  //   Tabs.push("Login/Register");
+  // }
+
   const [Loading, setLoading] = useState(true);
   const [Scroll, setScroll] = useState(false);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
+      // setLand(false);
     }, 4000);
 
     return () => clearTimeout(timeout);
@@ -77,7 +87,7 @@ function Landing(props) {
             />
           </div>
 
-          <img
+          <div
             className={
               Loading || !Scroll ? "landing-title" : "landing-titleanim"
             }
@@ -89,8 +99,15 @@ function Landing(props) {
                     animationFillMode: "forwards",
                   }
             }
-            src={logo}
-          ></img>
+            // src={logo}
+          >
+            <span>S</span>
+            <span>P</span>
+            <span>H</span>
+            <span>I</span>
+            <span>N</span>
+            <span>X</span>
+          </div>
           <div className="landing-pyramids">
             {" "}
             {Loading || !Scroll ? (
@@ -148,7 +165,7 @@ function Landing(props) {
         <></>
       ) : (
         <>
-          <TimeMachine landing={true} />
+          <TimeMachine landing={true} setLand={setLand} />
         </>
       )}
     </div>

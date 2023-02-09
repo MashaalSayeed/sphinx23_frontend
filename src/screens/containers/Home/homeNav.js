@@ -2,14 +2,40 @@ import React, { useEffect } from "react";
 import logo from "../../../images/home/homeLogo.png";
 import burger from "../../../images/home/burger.png";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../../store/modules/auth/auth.action";
+import Session from "../../../Session";
+import { useState } from "react";
+import Menu from "./menu";
 
-function HomeNav({ setCurrTab, currTab, Tabs, notanimation, landing }) {
+function HomeNav({
+  setCurrTab,
+  currTab,
+  Tabs,
+  notanimation,
+  landing,
+  setLand,
+}) {
   const navigate = useNavigate();
+  const [menu, setMenu] = useState(false);
   useEffect(() => {
-    if (currTab == "Events") navigate("/events");
+    if (currTab == "About us") navigate("/events");
+    if (currTab == "Profile") navigate("/dashboard");
+    if (currTab == "Logout") {
+      //callLogout
+      Session.remove("profile");
+      logout();
+      navigate("/");
+    }
+    if (currTab != "Home") {
+      try {
+        setLand(false);
+      } catch {
+        console.log("not function");
+      }
+    }
     if (!landing) {
       console.log(currTab);
-      if (currTab == "Home") navigate("/home");
+      if (currTab == "Home") navigate("/");
     }
   }, [currTab]);
   return (
@@ -17,6 +43,14 @@ function HomeNav({ setCurrTab, currTab, Tabs, notanimation, landing }) {
       className={notanimation ? "landing-navbar-notAnim" : "landing-navbar"}
       style={landing ? { WebkitAnimationDelay: "2.4s" } : {}}
     >
+      {menu && (
+        <Menu
+          menu={menu}
+          setMenu={setMenu}
+          currTab={currTab}
+          setCurrTab={setCurrTab}
+        />
+      )}
       <div className="landing-logo">
         <img src={logo}></img>
       </div>
@@ -31,7 +65,9 @@ function HomeNav({ setCurrTab, currTab, Tabs, notanimation, landing }) {
                 setCurrTab(value);
               }}
               style={
-                currTab == value ? { textShadow: "0px 1px 3px #FFFFFF " } : {}
+                currTab == value
+                  ? { textShadow: "0px 0px 0px #FFFFFF ", color: "#c9c9c9" }
+                  : {}
               }
             >
               {value}
@@ -39,7 +75,12 @@ function HomeNav({ setCurrTab, currTab, Tabs, notanimation, landing }) {
           );
         })}
       </div>
-      <div className="landing-ham">
+      <div
+        className="landing-ham"
+        onClick={() => {
+          setMenu(true);
+        }}
+      >
         <img src={burger}></img>
       </div>
     </div>

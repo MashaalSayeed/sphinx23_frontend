@@ -9,13 +9,30 @@ import Theme from "./theme";
 import About from "./about";
 import { Parallax, ParallaxBanner } from "react-scroll-parallax";
 import { countdownTimer, useCountdown } from "./coundown";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { useSelector } from "react-redux";
 // import Ambassador from "./Amb
 
-function TimeMachine({ notAnim, landing }) {
+function TimeMachine({ notAnim, landing, setLand }) {
   const [currTab, setCurrTab] = useState("Home");
   const [animNotOver, setNotOver] = useState(true);
   const [title, setTitle] = useState(false);
-  const Tabs = ["Home", "Events", "Contact us"];
+  const curruser = useSelector((state) => state.auth.curruser);
+  const [textIndex, setTextIndex] = useState(0);
+  useEffect(() => {
+    setTimeout(() => {
+      setTextIndex((textIndex + 1) % 2);
+    }, 6000);
+  }, [textIndex]);
+
+  const Tabs = ["Home", "About us", "Contact us"];
+  // console.log(curruser);
+  // if (curruser != null) {
+  //   Tabs.push("Profile");
+  //   Tabs.push("Logout");
+  // } else {
+  //   Tabs.push("Login/Register");
+  // }
   const handelOver = () => {
     console.log("set anim over");
     setNotOver(false);
@@ -39,7 +56,10 @@ function TimeMachine({ notAnim, landing }) {
   const handleScroll = () => {
     setScrollPos(window.pageYOffset);
   };
-
+  const [parent] = useAutoAnimate({
+    duration: 300,
+    disrespectUserMotionPreference: true,
+  });
   useEffect(() => {
     const handleWindowResize = () =>
       setWidth(window.innerWidth < 900 ? true : false);
@@ -108,6 +128,7 @@ function TimeMachine({ notAnim, landing }) {
         Tabs={Tabs}
         notanimation={!landing}
         landing={landing && animNotOver}
+        setLand={setLand}
       />
 
       <div className={notAnim ? "time-main" : "parallax-container"} id="home">
@@ -122,26 +143,47 @@ function TimeMachine({ notAnim, landing }) {
         {/* 
         {title ? <div className="home-title"> SPHINX </div> : <></>} */}
 
-        {
-          <div className={!landing ? "timer" : "timer timerAnim"}>
-            <div className="timer-ele">
-              <span>Days</span>
-              <p>{AddZero(countdownTime.Days)}</p>
+        <div className={`cardComp `} ref={parent}>
+          {textIndex == 1 && (
+            <div className="timer">
+              <div className={!landing ? "timer" : "timer timerAnim"}>
+                <div className="timer-ele">
+                  <span>Days</span>
+                  <p>{AddZero(countdownTime.Days)}</p>
+                </div>
+                <div className="timer-ele">
+                  <span>Hours</span>
+                  <p>{AddZero(countdownTime.Hours)}</p>
+                </div>
+                <div className="timer-ele">
+                  <span>Minutes</span>
+                  <p>{AddZero(countdownTime.Minutes)}</p>
+                </div>
+                <div className="timer-ele">
+                  <span>Seconds</span>
+                  <p>{AddZero(countdownTime.Seconds)}</p>
+                </div>
+              </div>
             </div>
-            <div className="timer-ele">
-              <span>Hours</span>
-              <p>{AddZero(countdownTime.Hours)}</p>
+          )}
+
+          {textIndex == 0 && (
+            <div className="TitleSp ">
+              {" "}
+              <span>S</span>
+              <span>P</span>
+              <span>H</span>
+              <span>I</span>
+              <span>N</span>
+              <span>X</span>{" "}
             </div>
-            <div className="timer-ele">
-              <span>Minutes</span>
-              <p>{AddZero(countdownTime.Minutes)}</p>
-            </div>
-            <div className="timer-ele">
-              <span>Seconds</span>
-              <p>{AddZero(countdownTime.Seconds)}</p>
-            </div>
-          </div>
-        }
+          )}
+
+          {/* */}
+        </div>
+
+        {/* <div className="new-animTitle"> SPHINX </div> */}
+        {/* </div> */}
 
         <div
           className="machine-text"

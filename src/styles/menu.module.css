@@ -1,0 +1,261 @@
+
+
+@font-face {
+    font-family: 'wity2';
+    src: url('../images/wity2.ttf');
+  }
+  @font-face {
+    font-family: 'wity';
+    src: url('../images/wity.ttf');
+  }
+  
+.container
+{
+    width: 50vw;
+    height: 98vh;
+    background: linear-gradient(154.74deg, #FF0000 -154.97%, #000000 36.33%);
+    border: 1px solid #9C9C9C;
+    border-radius: 15px;
+    position: absolute;
+    top: 1vh;
+    bottom: 1vh;
+    right: 0.5vw;
+    display: flex;
+    z-index: 300;
+}
+.sec1
+{
+    width: 96%;
+    display: flex;
+    flex-direction: column;
+    
+
+}
+.secUp
+{
+    display: flex;
+    margin-bottom: 6%;
+    height: 70%;
+}
+.lineV
+{
+    height: 100%;
+    width: 0.3px;
+    border: 1px solid #9C9C9C;
+}
+.sec2
+{
+    width: 19%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.closebtn
+{
+   
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.closebtn>img{
+    width: min(20px,30%);
+}
+.lineH2
+{ width: 100%;
+    height: 0.3px;
+    border: 1px solid #9C9C9C;
+
+}
+.navLogo
+{
+    margin: auto;
+}
+.sideInfo
+{
+    width: 25%;
+    color: white;
+    font-size: 0.6rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+   margin-left: -10px;
+    align-items: flex-start;
+
+}
+.whiteBox
+{
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    margin-right: 10px;
+}
+.menuRoutes
+{
+    margin-left: 10px;
+    margin-top: 40px;
+    width: 80%;
+    height: 95%;
+    margin-bottom: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-family: 'wity2';
+   font-style: normal;
+   font-weight: 900;
+   font-size: 2.6rem;
+  
+   /* identical to box height */
+   
+   text-align: left;
+   
+   color: #FFFFFF;
+
+}
+.links
+{
+  
+    padding: 10px 60px 10px 8px; 
+    min-width: 130px;
+    position: relative;
+  
+    width: fit-content;
+}
+.linkActive
+{
+    display: block;
+    position: relative;
+    min-width: 140px;
+    padding: 10px 60px 10px 8px; 
+    width: "fit-content";
+    background: #C1FF5C;
+    clip-path: polygon(0% 0%, 100% 0, 100% 70%, 90% 100%, 0% 100%);
+    color: black;
+}
+.linkActive2
+{
+    position: relative;
+    content: "AMBASSADOR";
+    min-width: 150px;;
+    padding: 10px 60px 10px 8px; 
+    width: inherit;
+    background: #ffffff;
+    clip-path: polygon(0% 0%, 100% 0, 100% 70%, 90% 100%, 0% 100%);
+    color: black;
+}
+.secSocial
+{
+    display: flex;
+}
+.linksSocial
+{
+    font-family: 'wity';
+    margin-left: 10px;
+    margin-top: 20px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+}
+.linksSocial>a{
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+.login
+{
+    background: #C1FF5C;
+    padding: 13px 20px;
+    margin-top: auto;
+    margin-left: auto;
+    font-family: 'wity2';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+font-style: normal;
+font-weight: 700;
+font-size: 1.1rem;
+clip-path: polygon(0% 0%, 100% 0, 100% 70%, 90% 100%, 0% 100%);
+ 
+/* identical to box height */
+
+text-align: center;
+
+color: #152F00;
+margin-right: 25px;
+margin-bottom: 25px;
+}
+.ele
+{
+    display:flex
+}
+.page
+{
+    font-family: 'wity';
+    font-size: 0.55rem;
+    margin-left: 5px;
+
+}
+.logActive
+{
+    background: #ffffff;
+    padding: 13px 20px;
+    margin-top: auto;
+    margin-left: auto;
+    font-family: 'wity2';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+font-style: normal;
+font-weight: 700;
+font-size: 1.1rem;
+clip-path: polygon(0% 0%, 100% 0, 100% 70%, 90% 100%, 0% 100%);
+ 
+/* identical to box height */
+
+text-align: center;
+
+color: #000000;
+margin-right: 25px;
+margin-bottom: 25px;
+}
+
+.slideOut
+{
+    -webkit-animation: slideOut 2s ease-in-out;
+    -webkit-animation-fill-mode: forwards;
+}
+.slideIn
+{
+    -webkit-animation:slideIn 2s ease-in-out;
+    -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes slideOut {
+    0%{
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100%
+    {
+      transform: translateX(-300%);
+      opacity: 0;
+      width: 0;
+    }
+  }
+
+  @keyframes slideInNav {
+    0%{
+      transform: translateX(+120%);
+      opacity: 0;
+    }
+    100%
+    {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  
+    
+  }

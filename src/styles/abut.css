@@ -7,8 +7,11 @@
 	overflow: hidden;
 	background: linear-gradient(114.65deg, #532800 9.51%, #e1b981 83.88%);
 	position: relative;
+	/* scroll-snap-align: start;
+	scroll-snap-type: y mandatory; */
 }
 .about-page-background-img {
+
 	position: relative;
 	top: 0px;
 	left: 0px;
@@ -81,7 +84,7 @@
 }
 .about-page-content {
 	position: absolute;
-	z-index: 2;
+	z-index: 10;
 	top: 0px;
 	left: 0px;
 	height: 100vh;

@@ -161,7 +161,7 @@ function Login(props) {
       props.setBg((present) => !present);
     }
     if (profile && profile.isEmailVerified && profile.isMobileNumberVerified) {
-      navigate("/home");
+      navigate("/");
     }
     //
     // chandra();
@@ -184,6 +184,7 @@ function Login(props) {
           props.toreg(false);
         } else {
           toast.info("Success", toastStyle);
+          navigate("/");
         }
         // alert("Success");
       })
@@ -422,7 +423,7 @@ function RegScreen1(props) {
       console.log("Called");
       toast.info("Already Logged In", toastStyle);
       // alert("Already Logged In");
-      navigate("/home");
+      navigate("/");
     }
     function start() {
       gapi.client.init({
@@ -815,7 +816,7 @@ function RegScreen3(props) {
               .then((res) => {
                 toast.info("Registration Completed", toastStyle);
                 // alert("Registration Completed");
-                navigate("/home");
+                navigate("/");
               })
               .catch((err) => {
                 toast.error(err, toastStyle);
@@ -831,7 +832,7 @@ function RegScreen3(props) {
           .then((res) => {
             toast.info("Registration Completed", toastStyle);
             // alert("Registration Completed");
-            navigate("/home");
+            navigate("/");
           })
           .catch((err) => {
             toast.error(err, toastStyle);

@@ -1,10 +1,8 @@
 import Session from "../../../Session";
-let profile = Session.getObject("profile") || undefined;
+let profile = Session.getObject("profile") || null;
 console.log(profile);
 const initialState = {
-  curruser: Session.getObject("profile")
-    ? Session.getObject("profile")
-    : undefined,
+  curruser: Session.getObject("profile") ? Session.getObject("profile") : null,
   events: [],
   adminevents: [],
   upcoming: [],

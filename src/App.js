@@ -26,7 +26,7 @@ import {
   getUsers,
 } from "./api";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Footer from "./screens/components/Footer";
 import PassDetail from "./screens/containers/Dashboard/SuperAdmin/Pass/PassDetail";
 import CreatePass from "./screens/containers/Dashboard/SuperAdmin/Pass/createPass";
@@ -38,7 +38,7 @@ import TimeMachine from "./screens/containers/Home/TimeMachine";
 import About from "./screens/containers/Home/about";
 import Activities from "./screens/containers/Home/Activities";
 import Theme from "./screens/containers/Home/theme";
-import { Home } from "@mui/icons-material";
+import { Home, RouteTwoTone } from "@mui/icons-material";
 import Events from "./screens/containers/Events/events";
 import EventsView from "./screens/containers/EventsView/EventsView";
 import EventsCat from "./screens/containers/Events/EventsCat";
@@ -92,13 +92,16 @@ function App() {
   // useEffect(() => {
   //   setScrollElement(ref.current);
   // }, []);
+  const [land, setLand] = useState(true);
 
   const curruser = useSelector((state) => state.auth.curruser);
+  useEffect(() => {
+    console.log(land);
+  }, [land]);
   // createEvent(dispatch, {}, {});
   // createPass(dispatch, {}, {});
   // console.log(getUsersByPass({}, {}));
   // console.log(getUsers("", token1));
-
   return (
     // <div className="App">
     //   <Navbar />
@@ -107,37 +110,44 @@ function App() {
     //   {/* <Footer /> */}
 
     // </div>
-    <ParallaxProvider>
-      {" "}
-      <div className="App">
-        {/* <TimeMachine /> */}
+    <BrowserRouter>
+      <ParallaxProvider>
+        {" "}
+        <div className="App">
+          {/* <TimeMachine /> */}
 
-        {/* <Navbar /> */}
-        {/* <Landing /> */}
-        <ToastContainer
-          position="top-right"
-          autoClose={2000}
-          hideProgressBar
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        />
-        <BrowserRouter>
+          {/* <Navbar /> */}
+          {/* <Landing /> */}
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
+
           <Routes>
-            <Route exact path="/" element={<LoginScreen />} />
+            {/* <Route index element={<Landing />} />
+            <Route path="/" element={<TimeMachine notAnim={true} />} /> */}
+            <Route path="/login" element={<LoginScreen />} />
             <Route path="/ourteam" element={<OurTeam />} />
-            <Route path="/landing" element={<Landing />} />
-            <Route path="/home" element={<TimeMachine notAnim={true} />} />
+            {/* <Route path="/home" element={<TimeMachine notAnim={true} />} /> */}
             <Route path="/about" element={<About />} />
             <Route path="/events/:cat" element={<EventsCat />} />
             <Route path="/events" element={<Events />} />
             <Route path="/events/:cat/:id" element={<EventsView />} />
             <Route path="/dashboard" element={<UserDashboard />} />
             <Route path="/test" element={<Test />} />
+            {land ? (
+              <Route exact path="/" element={<Landing setLand={setLand} />} />
+            ) : (
+              <Route exact path="/" element={<TimeMachine notAnim={true} />} />
+            )}
             {curruser != null ? (
               <>
                 <Route
@@ -162,10 +172,11 @@ function App() {
               <></>
             )}
           </Routes>
-        </BrowserRouter>
-        {/* <Footer /> */}
-      </div>
-    </ParallaxProvider>
+
+          {/* <Footer /> */}
+        </div>
+      </ParallaxProvider>
+    </BrowserRouter>
   );
 }
 
