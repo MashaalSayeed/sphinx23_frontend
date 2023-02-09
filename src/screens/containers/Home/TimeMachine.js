@@ -11,6 +11,7 @@ import { Parallax, ParallaxBanner } from "react-scroll-parallax";
 import { countdownTimer, useCountdown } from "./coundown";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useSelector } from "react-redux";
+import Footer from "../../components/Footer/footer";
 // import Ambassador from "./Amb
 
 function TimeMachine({ notAnim, landing, setLand }) {
@@ -211,6 +212,8 @@ function TimeMachine({ notAnim, landing, setLand }) {
       ) : (
         <></>
       )}
+
+      <Footer />
     </div>
   );
 }
