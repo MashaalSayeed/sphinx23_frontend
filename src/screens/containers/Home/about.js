@@ -92,14 +92,22 @@ export default function About(props) {
         <div className="about-page-content-text">
           <div className="about-page--text-head">ABOUT US</div>
           <div className="about-page--text-body">
-            Sphinx is the largest technology fest in Rajasthan, held annually at
-            the MNIT Jaipur campus. The fest attracts thousands of students from
-            all over the country, who come to participate in a wide range of
-            technical and non-technical events. The event includes workshops,
-            competitions, guest lectures and exhibitions on the latest
-            technology and innovations.{" "}
+            Malaviya National Institute of Technology Jaipur, an institute of
+            national importance, is a place for nurturing academic excellence,
+            personal and professional pursuits of an individual. Established in
+            1963, the institute is known for its ability to provide an all-round
+            growth and development space to the students.<br></br>
+            <br></br> Sphinx, the annual techno-management fest of MNIT Jaipur,
+            is one of the most awaited events of the country. With the view of
+            achieving the purpose of the institute, the event provides an
+            unparalleled platform to learn, grow, excel, ideate and innovate.
+            The three-day long event consists of brain racking competitions,
+            insightful talk shows, workshops, training sessions and magnificent
+            pronites. Over the past years, Sphinx has been the driving force to
+            bring out that hidden ‘Tech-Beast’ inside the enthusiasts and we aim
+            to continue to do so.
           </div>
-          <div className="about-page--text-button">Learn More</div>
+          {/* <div className="about-page--text-button">Learn More</div> */}
         </div>
       </Parallax>
       {/* <div className="scroll-down-prompt"></div> */}

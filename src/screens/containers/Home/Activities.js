@@ -69,7 +69,7 @@ function Activities(props) {
               // style={}
             >
               <div className="activity-info-sub">SPHINX ‘23</div>
-              <div className="home-about-title">ACTIVITIES</div>
+              <div className="home-about-title">EVENTS</div>
               <div className="about-Maincontent">
                 Sphinx is the largest technology fest in Rajasthan, held
                 annually at the MNIT Jaipur campus. The fest attracts thousands

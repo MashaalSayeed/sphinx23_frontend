@@ -72,6 +72,7 @@ function Menu(props) {
     curruser == null ? "LOGIN/REGISTER" : "LOGOUT"
   );
 
+  console.log(currTab.toUpperCase());
   return (
     <div
       className={style.container}
@@ -111,17 +112,17 @@ function Menu(props) {
                     className={
                       hover == value
                         ? style.linkActive2
-                        : currTab === value
+                        : currTab == value
                         ? style.linkActive
                         : style.links
                     }
                     onClick={() => {
-                      setCurrTab(value);
+                      setCurrTab(value.toUpperCase());
                     }}
                     onMouseEnter={() => setHover(value)}
                     onMouseLeave={() => setHover("")}
                   >
-                    {hover.toLowerCase() == value.toLowerCase() || anim ? (
+                    {hover == value || anim ? (
                       <>
                         <span style={{ opacity: 0 }}>{value}</span>
                         <div
