@@ -73,6 +73,7 @@ function Sec1() {
           <button className={style.introExp}>EXPLORE</button>
         </div>
       </div>
+
       <div className={style.cardsCon}>
         <div className={style.introHead}>What should you do</div>
         <div className={style.cardsSec}>

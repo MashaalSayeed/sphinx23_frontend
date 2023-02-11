@@ -12,6 +12,7 @@ import { countdownTimer, useCountdown } from "./coundown";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useSelector } from "react-redux";
 import Footer from "../../components/Footer/footer";
+import ScrollIntoView from "react-scroll-into-view";
 // import Ambassador from "./Amb
 
 function TimeMachine({ notAnim, landing, setLand }) {
@@ -25,6 +26,14 @@ function TimeMachine({ notAnim, landing, setLand }) {
       setTextIndex((textIndex + 1) % 2);
     }, 6000);
   }, [textIndex]);
+
+  const [activeSection, setActiveSection] = useState(0);
+
+  const handleSectionClick = (sectionNumber) => {
+    setActiveSection(sectionNumber);
+    const section = document.getElementById(`section-${sectionNumber}`);
+    section.scrollIntoView({ behavior: "auto" });
+  };
 
   const Tabs = ["Home", "Events", "Contact"];
   // console.log(curruser);
@@ -88,7 +97,7 @@ function TimeMachine({ notAnim, landing, setLand }) {
   };
 
   return (
-    <div style={{ overflowX: "hidden" }}>
+    <div style={{ overflowX: "hidden" }} className="scrollCon">
       {/* {!animNotOver && (
         <ParallaxBanner
           layers={[
@@ -202,7 +211,12 @@ function TimeMachine({ notAnim, landing, setLand }) {
 
       {!landing || !animNotOver ? (
         <>
-          <About width={width} />
+          <About
+            width={width}
+            activeSection={activeSection}
+            handleSectionClick={handleSectionClick}
+          />
+
           {/* <Ambassador />
           <Activities /> <Theme /> */}
           <Ambassador width={width} />

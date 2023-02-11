@@ -8,8 +8,9 @@ import { RandomReveal } from "react-random-reveal";
 // import useIntersection from "./interSection";
 import { useEffect } from "react";
 import useIntersection from "./interSection";
+import useScrollSnap from "react-use-scroll-snap";
 export default function About(props) {
-  const { width } = props;
+  const { width, activeSection, handleSectionClick } = props;
   const [currTab, setCurrTab] = useState("About");
   // const ref = useRef(null);
   const [progress, setProgress] = useState(0);
@@ -41,8 +42,22 @@ export default function About(props) {
     );
   };
 
+  // useEffect(() => {
+  //   if (progress >= 0.05)
+  //     window.scroll({
+  //       top: "150vh",
+  //       left: 0,
+  //       behavior: "smooth",
+  //     });
+  // }, [progress]);
+
+  // const scrollRef = useRef(null);
+  // useScrollSnap({ ref: scrollRef, duration: 1000, delay: 0 });
+  // useEffect(() => {
+  //   if (progress > 0.05) handleSectionClick(1);
+  // }, [progress]);
   return (
-    <div className="about-page">
+    <div className="about-page" id="section-1">
       <Parallax
         translateY={progress < 0.5 ? [0, 0] : [0, 0]}
         scale={progress < 0.5 ? [1.3, 0.7] : [1]}
