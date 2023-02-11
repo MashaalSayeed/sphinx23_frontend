@@ -3,6 +3,7 @@ import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 import HomeNav from "./homeNav";
 import back from "../../../images/about/PyramidBack.png";
 import aboutMob from "../../../images/aboutMob.png";
+import { RandomReveal } from "react-random-reveal";
 // import aboutMob from "../../../images/about/PyramidFront.png";
 // import useIntersection from "./interSection";
 import { useEffect } from "react";
@@ -13,7 +14,8 @@ export default function About(props) {
   // const ref = useRef(null);
   const Tabs = ["Home", "About", "Contact"];
   const [progress, setProgress] = useState(0);
-
+  const alpha = Array.from(Array(26)).map((e, i) => i + 65);
+  const alphabet = alpha.map((x) => String.fromCharCode(x));
   const MobileViewAnimText = {
     translateY: progress < 0.5 ? [100, -100, "easeInOut"] : [0, 0],
     translateX: [-100, 100],
@@ -22,10 +24,27 @@ export default function About(props) {
     speedx: 30,
   };
 
+  const random = (value, interval) => {
+    return (
+      <RandomReveal
+        isPlaying
+        duration={1}
+        revealDuration={1}
+        revealEasing="linear"
+        updateInterval={interval}
+        characterSet={alphabet}
+        characters={value}
+        // onComplete={() => {
+        //   setHover("");
+        // }}
+      />
+    );
+  };
+
   return (
     <div className="about-page">
       <Parallax
-        translateY={progress < 0.5 ? [50, -50] : [0, 0]}
+        translateY={progress < 0.5 ? [0, 0] : [0, 0]}
         scale={progress < 0.5 ? [1.3, 0.7] : [1]}
         opacity={[0.7, 1]}
         onProgressChange={(progress) => {
@@ -90,7 +109,14 @@ export default function About(props) {
         className="about-page-content"
       >
         <div className="about-page-content-text">
-          <div className="about-page--text-head">ABOUT US</div>
+          <div className="about-page--text-head">
+            {" "}
+            {progress > (width ? 0.1 : 0.4) ? (
+              random("ABOUT US")
+            ) : (
+              <> ABOUT US</>
+            )}{" "}
+          </div>
           <div className="about-page--text-body">
             Malaviya National Institute of Technology Jaipur, an institute of
             national importance, is a place for nurturing academic excellence,

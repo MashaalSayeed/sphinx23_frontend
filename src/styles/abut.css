@@ -195,7 +195,7 @@
 }
 
 
-@media (max-width: 1200px) {
+@media (max-width: 700px) {
 	.about-page-foreground-img {
 		z-index: 2;
 	}
@@ -225,5 +225,9 @@
 		margin: auto;
 		justify-content: flex-start;
 		margin-top: 10vh;
+	}
+	.about-page--text-head
+	{
+		font-size: 14vw;
 	}
 }

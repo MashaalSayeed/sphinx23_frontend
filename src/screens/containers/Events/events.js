@@ -5,6 +5,8 @@ import back from "../../../images/events/back.png";
 import proCat from "../../../images/events/proCat.png";
 import CatCard from "./catCard";
 import catCardImg from "../../../images/events/catCard.png";
+import tech from "../../../images/events/techC.png";
+import edm from "../../../images/events/edmC.png";
 import EventCard from "./EventCard";
 import eventsImg from "../../../images/events/roboWars.png";
 import { useSelector } from "react-redux";
@@ -22,9 +24,9 @@ function Events() {
   //   Tabs.push("Login/Register");
   // }
   const Cat = [
-    { title: "Tech", icon: proCat, col: "#9672FF", back: catCardImg },
+    { title: "Tech", icon: proCat, col: "#9672FF", back: tech },
     { title: "Cultural", icon: proCat, col: "#9672FF", back: catCardImg },
-    { title: "EDM", icon: proCat, col: "#9672FF", back: catCardImg },
+    { title: "EDM", icon: proCat, col: "#9672FF", back: edm },
   ];
   useEffect(() => {
     window.scrollTo(0, 0);

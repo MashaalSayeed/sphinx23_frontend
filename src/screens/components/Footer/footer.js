@@ -42,7 +42,7 @@ function QuickLinks() {
     Schedule: "#",
     FAQs: "#",
     "Our Team": "#",
-    "Campus ambassador": "#",
+    "Campus Ambassador": "#",
     Sponsors: "#",
     "About us": "#",
   };
@@ -59,7 +59,7 @@ function QuickLinks() {
           marginTop: "-3px",
         }}
       ></div>
-      <div style={{ marginTop: "7vh" }}>
+      <div>
         <h1>Quick Links</h1>
         <ul>
           {Object.keys(links).map((link, i) => (
