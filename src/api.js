@@ -33,7 +33,25 @@ export const fetchEvents = async (dispatch) => {
       throw err;
     });
 };
-
+export const logout = async () => {
+  console.log("Events Fetched");
+  let token = Session.get("profile").token;
+  return fetch(`${url}/users/logout`, {
+    headers: {
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " + token,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) return data.success;
+      throw data;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
 export const fetchEventsByCategory = async (category) => {
   console.log("Events Fetched");
   return fetch(`${url}/events/category/${category}`, {

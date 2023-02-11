@@ -156,12 +156,17 @@ function Ambassador(props) {
               </div>
 
               <div className="about-Maincontent amb-Maincontent">
-                Sphinx is the largest technology fest in Rajasthan, held
-                annually at the MNIT Jaipur campus. The fest attracts thousands
-                of students from all over the country, who come to participate
-                in a wide range of technical and non-technical events. The event
-                includes workshops, competitions, guest lectures and exhibitions
-                on the latest technology and innovations.
+                <span style={{ fontWeight: "600", fontSize: "1rem" }}>
+                  {" "}
+                  "Be the face of your college, Be one of us."
+                </span>
+
+                <div>
+                  <br></br>
+                  We are selecting students from each college for the role of
+                  Campus Ambassador, who’d be the connecting link between their
+                  college and our team.
+                </div>
               </div>
               <button
                 className="home-about-btn"

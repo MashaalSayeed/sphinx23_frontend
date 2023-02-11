@@ -27,6 +27,7 @@ function Theme(props) {
         updateInterval={interval}
         characterSet={alphabet}
         characters={value}
+        ignoreCharacterSet={[" "]}
         // onComplete={() => {
         //   setHover("");
         // }}
@@ -84,28 +85,43 @@ function Theme(props) {
             <div className="campInfo">
               <div className="activity-info-sub">
                 {" "}
-                {progress > (width ? 0.1 : 0.4) ? (
-                  random("SPHINX ‘23")
-                ) : (
-                  <> SPHINX ‘23</>
-                )}
+                {progress > (width ? 0.1 : 0.4) ? random("THEME") : <> THEME</>}
               </div>
               <div className="home-about-title">
                 {" "}
-                {progress > (width ? 0.3 : 0.2) ? random("THEME") : <> THEME</>}
+                {progress > (width ? 0.3 : 0.2) ? (
+                  random("ARE WE ACTUALLY EVOLVING?")
+                ) : (
+                  <> ARE WE ACTUALLY EVOLVING?</>
+                )}
               </div>
               <div
                 className="about-Maincontent"
                 style={{ marginTop: "20px", marginBottom: "10px" }}
               >
-                Sphinx is the largest technology fest in Rajasthan, held
-                annually at the MNIT Jaipur campus. The fest attracts thousands
-                of students from all over the country, who come to participate
-                in a wide range of technical and non-technical events. The event
-                includes workshops, competitions, guest lectures and exhibitions
-                on the latest technology and innovations.
+                Sphinx is the largest techno-management fest of Rajasthan and it
+                has been the face of technical prowess of Malaviya National
+                Institute of Technology, Jaipur. Technological advancements have
+                always boiled down to that one 'right question' asked at the
+                'right time'. As mankind stands on the brink of tapping into the
+                world of AI, ready to take its next giant leap, this SPHINX
+                2023, we compel you to question 'the reality of technological
+                evolution'. <br></br>
+                <br></br>With the ever changing needs of mankind, we developed
+                our technology accordingly. Ancient civilizations have always
+                held a special fascination for people, with their rich history
+                and enthralling mysteries that transport us back in time, and
+                they've all had their contribution at shaping the world as we
+                know it today. Ancient Egyptians were great mathematicians,
+                knowing how to perform calculations and there's evidence proving
+                they were the first to come up with the concept of basic
+                fractions. They had knowledge in geometry and they made use of
+                these skills to help them take accurate measurements and build
+                their impressive monuments. Just think about the Great Pyramids
+                and the mathematical and geometrical knowledge this civilization
+                had to possess in order to build such massive structures.
               </div>
-              <button
+              {/* <button
                 className="home-about-btn"
                 style={{
                   background: "#FFA20F",
@@ -114,7 +130,7 @@ function Theme(props) {
                 }}
               >
                 Learn More
-              </button>
+              </button> */}
             </div>
           </Parallax>
         </div>
