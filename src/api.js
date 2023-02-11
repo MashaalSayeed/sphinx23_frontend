@@ -19,7 +19,7 @@ const url = process.env.REACT_APP_SERVER_URL;
 
 export const fetchEvents = async (dispatch) => {
   console.log("Events Fetched");
-  await fetch(`${url}/events`, {
+  await fetch(`/events`, {
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
@@ -40,7 +40,7 @@ export const editUser = async (body) => {
   console.log(token);
   let id = Session.getObject("profile").profile._id;
   console.log(id);
-  return fetch(`${url}/users/${id}`, {
+  return fetch(`/users/${id}`, {
     method: "PUT",
     headers: {
       mode: "cors",
@@ -68,7 +68,7 @@ export const editUser = async (body) => {
 export const logout = async () => {
   console.log("Events Fetched");
   let token = Session.get("profile").token;
-  return fetch(`${url}/users/logout`, {
+  return fetch(`/users/logout`, {
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
@@ -86,7 +86,7 @@ export const logout = async () => {
 };
 export const fetchEventsByCategory = async (category) => {
   console.log("Events Fetched");
-  return fetch(`${url}/events/category/${category}`, {
+  return fetch(`/events/category/${category}`, {
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
@@ -103,7 +103,7 @@ export const fetchEventsByCategory = async (category) => {
 };
 export const fetchAdminEvents = async (token, dispatch) => {
   console.log("AdminEvents Fetched");
-  return fetch(`${url}/events/eventadmin`, {
+  return fetch(`/events/eventadmin`, {
     headers: {
       mode: "cors",
       Authorization: "Bearer " + token,
@@ -123,7 +123,7 @@ export const fetchAdminEvents = async (token, dispatch) => {
 };
 export const fetchRegisteredEvents = async (token) => {
   console.log("AdminEvents Fetched", Session.get("profile").token);
-  return fetch(`${url}/events/registeredEvents`, {
+  return fetch(`/events/registeredEvents`, {
     headers: {
       mode: "cors",
       Authorization: "Bearer " + token,
@@ -142,7 +142,7 @@ export const fetchRegisteredEvents = async (token) => {
 };
 export const fetchUserQueries = async (token) => {
   console.log("AdminEvents Fetched", Session.get("profile").token);
-  return fetch(`${url}/queries/uid`, {
+  return fetch(`/queries/uid`, {
     headers: {
       mode: "cors",
       Authorization: "Bearer " + token,
@@ -162,7 +162,7 @@ export const fetchUserQueries = async (token) => {
 
 export const fetchUpcoming = async (dispatch) => {
   console.log("upcoming Fetched");
-  await fetch(`${url}/events/upcoming`, {
+  await fetch(`/events/upcoming`, {
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
@@ -179,7 +179,7 @@ export const fetchUpcoming = async (dispatch) => {
 
 export const fetchCompleted = async (dispatch) => {
   console.log("Completed Fetched");
-  await fetch(`${url}/events/completed`, {
+  await fetch(`/events/completed`, {
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
@@ -196,7 +196,7 @@ export const fetchCompleted = async (dispatch) => {
 
 export const fetchUpdates = async (dispatch) => {
   console.log("Updates Fetched");
-  await fetch(`${url}/events/updates`, {
+  await fetch(`/events/updates`, {
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
@@ -213,7 +213,7 @@ export const fetchUpdates = async (dispatch) => {
 
 export const fetchPasses = async (dispatch) => {
   console.log("Passes Fetched");
-  await fetch(`${url}/passes`, {
+  await fetch(`/passes`, {
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
@@ -229,7 +229,7 @@ export const fetchPasses = async (dispatch) => {
 };
 export const createEventPaymentRequest = async (body) => {
   console.log("Event Fetched", body.userList);
-  return fetch(`${url}/payment/event`, {
+  return fetch(`/payment/event`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -254,7 +254,7 @@ export const createEventPaymentRequest = async (body) => {
 };
 export const registerForEvent = async (signature, body) => {
   console.log("Event Fetched");
-  return fetch(`${url}/events/register`, {
+  return fetch(`/events/register`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -280,7 +280,7 @@ export const registerForEvent = async (signature, body) => {
 };
 export const fetchOneEvent = async (setEvent, eventId) => {
   console.log("Event Fetched");
-  return fetch(`${url}/events/${eventId}`, {
+  return fetch(`/events/${eventId}`, {
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
@@ -301,7 +301,7 @@ export const fetchOneEvent = async (setEvent, eventId) => {
 };
 export const fetchOnePass = async (setPass, passId) => {
   console.log("Pass Fetched", passId);
-  await fetch(`${url}/passes/${passId}`, {
+  await fetch(`/passes/${passId}`, {
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
@@ -319,7 +319,7 @@ export const fetchOnePass = async (setPass, passId) => {
 export const verifyMailOTP = async (body) => {
   console.log(Session.getObject("profile").token);
   console.log(body);
-  await fetch(`${url}/verification/verifyEmailOTP`, {
+  await fetch(`/verification/verifyEmailOTP`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -353,7 +353,7 @@ export const verifyMailOTP = async (body) => {
 export const verifyMobileOTP = async (body) => {
   console.log(Session.getObject("profile").token);
   console.log(body);
-  await fetch(`${url}/verification/verifyMobileOTP`, {
+  await fetch(`/verification/verifyMobileOTP`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -388,7 +388,7 @@ export const verifyMobileOTP = async (body) => {
 export const sendMobileOTP = async (data) => {
   console.log(Session.getObject("profile").token);
 
-  await fetch(`${url}/verification/sendMobileOTP`, {
+  await fetch(`/verification/sendMobileOTP`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -417,7 +417,7 @@ export const sendMobileOTP = async (data) => {
 export const sendForgotOTP = async (body) => {
   // console.log(Session.getObject("profile").token);
   console.log(body);
-  return fetch(`${url}/verification/sendForgotOTP`, {
+  return fetch(`/verification/sendForgotOTP`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -446,7 +446,7 @@ export const sendForgotOTP = async (body) => {
 export const resetPassword = async (body) => {
   console.log(Session.getObject("profile").token);
 
-  return fetch(`${url}/verification/resetPassword`, {
+  return fetch(`/verification/resetPassword`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -473,7 +473,7 @@ export const resetPassword = async (body) => {
 export const verifyForgotOTP = async (body) => {
   console.log(Session.getObject("profile").token);
 
-  return fetch(`${url}/verification/verifyForgotOTP`, {
+  return fetch(`/verification/verifyForgotOTP`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -500,7 +500,7 @@ export const verifyForgotOTP = async (body) => {
 export const sendVerificationMail = async () => {
   console.log(Session.getObject("profile").token);
 
-  return fetch(`${url}/verification/sendEmailOTP`, {
+  return fetch(`/verification/sendEmailOTP`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -527,7 +527,7 @@ export const sendVerificationMail = async () => {
 export const loginRegister = async (dispatch, creds) => {
   console.log("Login Called");
   console.log(creds);
-  return fetch(`${url}/users`, {
+  return fetch(`/users`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -556,7 +556,7 @@ export const loginRegister = async (dispatch, creds) => {
 
 export const createEvent = async (dispatch, eventData, token) => {
   console.log("Create Event Called", token);
-  await fetch(`${url}/events/create`, {
+  await fetch(`/events/create`, {
     headers: {
       mode: "cors",
       Authorization: "Bearer " + token,
@@ -586,7 +586,7 @@ export const createEvent = async (dispatch, eventData, token) => {
 export const addTeamsToRound = async (token, body) => {
   console.log("Create PASS Called");
   // console.log(data.event);
-  await fetch(`${url}/events/edit_result`, {
+  await fetch(`/events/edit_result`, {
     headers: {
       mode: "cors",
       "Content-Type": "application/json",
@@ -610,7 +610,7 @@ export const addTeamsToRound = async (token, body) => {
 };
 export const addResults = async (token, body) => {
   console.log("Add Results Called");
-  await fetch(`${url}/events/add_result`, {
+  await fetch(`/events/add_result`, {
     headers: {
       mode: "cors",
       "Content-Type": "application/json",
@@ -639,7 +639,7 @@ export const createPass = async (
   setCreateStatus
 ) => {
   console.log("Create PASS Called");
-  await fetch(`${url}/passes`, {
+  await fetch(`/passes`, {
     headers: {
       mode: "cors",
       Authorization: "Bearer " + token,
@@ -666,7 +666,7 @@ export const createPass = async (
 
 export const submitQuery = async (token, body) => {
   console.log("getUsersByPass");
-  return fetch(`${url}/queries/create`, {
+  return fetch(`/queries/create`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -691,7 +691,7 @@ export const submitQuery = async (token, body) => {
 };
 export const submitQueryResponse = async (token, body) => {
   console.log("getUsersByPass");
-  await fetch(`${url}/queries/update`, {
+  await fetch(`/queries/update`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -722,7 +722,7 @@ export const getUsersByPass = async (
   setNpage
 ) => {
   console.log("getUsersByPass");
-  await fetch(`${url}/passes/users/${passID}/${currentPage}`, {
+  await fetch(`/passes/users/${passID}/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -744,7 +744,7 @@ export const getUsersByPass = async (
 };
 export const getAllResults = (eventId) => {
   console.log("getUsersbyPage");
-  return fetch(`${url}/participant/resultsAll/${eventId}`, {
+  return fetch(`/participant/resultsAll/${eventId}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -767,7 +767,7 @@ export const getAllResults = (eventId) => {
 };
 export const getUpdatesForEvent = (eventId) => {
   console.log("getUsersbyPage");
-  return fetch(`${url}/events/updatesEvent/${eventId}`, {
+  return fetch(`/events/updatesEvent/${eventId}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -797,17 +797,14 @@ export const getResults = ({
   setNpage,
 }) => {
   console.log("getUsersbyPage");
-  return fetch(
-    `${url}/participant/results/${eventId}/${round}/${currentPage}`,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        mode: "cors",
-        Authorization: "Bearer " + token,
-        "Access-Control-Allow-Origin": "*",
-      },
-    }
-  )
+  return fetch(`/participant/results/${eventId}/${round}/${currentPage}`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
@@ -841,7 +838,7 @@ export const getQueriesByEvent = ({
     status = 2;
   }
   console.log("getUsersbyPage", token);
-  fetch(`${url}/queries/eid/${currentPage}/${status}`, {
+  fetch(`/queries/eid/${currentPage}/${status}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -872,7 +869,7 @@ export const getUsers = ({
   setNpage,
 }) => {
   console.log("getUsersbyPage");
-  fetch(`${url}/users/${currentPage}`, {
+  fetch(`/users/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -904,7 +901,7 @@ export const getAmbassadors = ({
   setNpage,
 }) => {
   console.log("get ambassadors");
-  fetch(`${url}/ambassadors/${currentPage}`, {
+  fetch(`/ambassadors/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -930,7 +927,7 @@ export const getAmbassadors = ({
 
 export const getPayments = (token, setPayments) => {
   console.log("getUsers");
-  fetch(`${url}/payment/userby`, {
+  fetch(`/payment/userby`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -953,7 +950,7 @@ export const getPayments = (token, setPayments) => {
 
 export const getUsersId = async (token, email, setIds) => {
   let userData = [];
-  return fetch(`${url}/users/validatemail/${email}`, {
+  return fetch(`/users/validatemail/${email}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -987,7 +984,7 @@ export const updateEvent = async (
 ) => {
   console.log("Update Event Called");
   console.log(eventData);
-  await fetch(`${url}/events/update/${eventId}`, {
+  await fetch(`/events/update/${eventId}`, {
     headers: {
       mode: "cors",
       "Content-Type": "application/json",
@@ -1014,7 +1011,7 @@ export const updateEvent = async (
 
 export const updatePass = async (passId, passData, token) => {
   console.log("Update PASS Called");
-  await fetch(`${url}/passes/${passId}`, {
+  await fetch(`/passes/${passId}`, {
     headers: {
       mode: "cors",
       "Content-Type": "application/json",
@@ -1046,7 +1043,7 @@ export const getTeamsByEvent = async (
 ) => {
   let profile = Session.getObject("profile");
   console.log(eventId, profile.profile.token);
-  await fetch(`${url}/participant/teams/${eventId}/${currentPage}`, {
+  await fetch(`/participant/teams/${eventId}/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
