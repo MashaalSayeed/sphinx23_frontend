@@ -138,9 +138,9 @@ function App() {
             {/* <Route path="/ourteam" element={<OurTeam />} /> */}
             {/* <Route path="/home" element={<TimeMachine notAnim={true} />} /> */}
             {/* <Route path="/about" element={<About />} /> */}
-            {/* <Route path="/events/:cat" element={<EventsCat />} /> */}
+            <Route path="/events/:cat" element={<EventsCat />} />
             <Route path="/events" element={<Events />} />
-            {/* <Route path="/events/:cat/:id" element={<EventsView />} /> */}
+            <Route path="/events/:cat/:id" element={<EventsView />} />
 
             {/* <Route path="/test" element={<Test />} /> */}
             {land ? (

@@ -17,6 +17,35 @@
   src: url('./images/wity2.ttf');
 }
 
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+body{margin:0;padding:0;}
+body{
+  overflow-x: hidden;
+    width: 100%;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    /* overflow-x: hidden; */
+    /* -webkit-overflow-scrolling: touch;  */
+    overflow-y: auto;
+    /* overflow-y: hidden; */
+    /* overflow: hidden; */
+    animation: hideScroll 2500ms;
+    background: black;
+}
+body::-webkit-scrollbar{
+    display: none;
+    width: 0;
+}
+
+
 .space-top
 {
   height: max(10vh,90px);

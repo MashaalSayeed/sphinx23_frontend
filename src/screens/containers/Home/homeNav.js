@@ -52,7 +52,7 @@ function HomeNav({
         />
       )}
       <div className="landing-logo">
-        <img src={logo}></img>
+        <img src={logo} style={{ width: "80%" }}></img>
       </div>
       <div className="landing-tabs">
         {Tabs.map((value, i) => {

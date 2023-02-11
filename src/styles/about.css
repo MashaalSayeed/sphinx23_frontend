@@ -67,7 +67,7 @@
     font-family: 'wity';
     font-style: normal;
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 0.9rem;
     letter-spacing: 0.04em;
     color: #FFFFFF;
 }
@@ -96,5 +96,6 @@ color: #423300;
      margin:5vh auto ;
      
     }
+    
 
 }

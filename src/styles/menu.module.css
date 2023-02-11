@@ -78,9 +78,11 @@
     width: 25%;
     color: white;
     font-size: 0.6rem;
+    font-family: 'wity';
     display: flex;
+    height: fit-content;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 43px;
    margin-left: -10px;
     align-items: flex-start;
 
@@ -91,6 +93,7 @@
     height: 8px;
     background-color: white;
     margin-right: 10px;
+    margin:auto 5px;
 }
 .menuRoutes
 {
@@ -268,6 +271,7 @@ margin-bottom: 25px;
     .sec1
     {
         width: 83%;
+        
     }
     .sec2
     {
@@ -277,4 +281,15 @@ margin-bottom: 25px;
     {
         font-size: 1.5rem;
     }
+    .sideInfo
+    {
+        font-size: 0.6rem;
+        width: 25%;
+        margin: 20px auto;
+    }
+    .linksSocial
+    {
+        width: 83%;
+    }
+
   }

@@ -354,3 +354,37 @@ input[type="password"]::-ms-reveal
 	font-weight: 500;
 	font-size: 0.8rem;
 }
+
+
+@media screen and (max-width: 700px) {
+ 
+	.login-image-darken
+	{
+		display: flex;
+		flex-direction: column;
+	}
+	.login-logo-container
+	{
+		height: 15%;
+		border-radius: 21px;
+	}
+	.login-logo-container>img{
+		width: 40%;
+	}
+	.login-logo-text
+	{
+	 display: none;
+		}
+		.login-form-body
+		{
+			width: 100%;
+			border-radius: 21px;
+			min-height: 75%;
+			max-height: 80%;
+		}
+		.login-form-container
+		{
+			width: 93%;
+			border-radius: 21px;
+		}
+}

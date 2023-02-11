@@ -6,13 +6,33 @@ import themeBack from "../../../images/themeMob.png";
 import ConR from "../../../images/ambCon.png";
 import HomeNav from "./homeNav";
 import useIntersection from "./interSection";
+import { RandomReveal } from "react-random-reveal";
 
 function Theme(props) {
   const { width } = props;
   const ref = useRef();
   const [view, setView] = useState(false);
   const [progress, setProgress] = useState(false);
+  const alpha = Array.from(Array(26)).map((e, i) => i + 65);
+  const alphabet = alpha.map((x) => String.fromCharCode(x));
 
+  const random = (value, interval) => {
+    // return <>{value}</>;
+    return (
+      <RandomReveal
+        isPlaying
+        duration={1}
+        revealDuration={1}
+        revealEasing="linear"
+        updateInterval={interval}
+        characterSet={alphabet}
+        characters={value}
+        // onComplete={() => {
+        //   setHover("");
+        // }}
+      />
+    );
+  };
   return (
     <div className="activity-back amb-back" ref={ref}>
       <div className="simple-scroll">
@@ -62,8 +82,18 @@ function Theme(props) {
             onProgressChange={(progress) => setProgress(progress)}
           >
             <div className="campInfo">
-              <div className="activity-info-sub">SPHINX ‘23</div>
-              <div className="home-about-title">THEME</div>
+              <div className="activity-info-sub">
+                {" "}
+                {progress > (width ? 0.1 : 0.4) ? (
+                  random("SPHINX ‘23")
+                ) : (
+                  <> SPHINX ‘23</>
+                )}
+              </div>
+              <div className="home-about-title">
+                {" "}
+                {progress > (width ? 0.3 : 0.2) ? random("THEME") : <> THEME</>}
+              </div>
               <div
                 className="about-Maincontent"
                 style={{ marginTop: "20px", marginBottom: "10px" }}

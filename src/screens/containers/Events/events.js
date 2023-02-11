@@ -5,15 +5,17 @@ import back from "../../../images/events/back.png";
 import proCat from "../../../images/events/proCat.png";
 import CatCard from "./catCard";
 import catCardImg from "../../../images/events/catCard.png";
+import tech from "../../../images/events/techC.png";
+import edm from "../../../images/events/edmC.png";
 import EventCard from "./EventCard";
 import eventsImg from "../../../images/events/roboWars.png";
 import { useSelector } from "react-redux";
 
 function Events() {
-  const [currTab, setCurrTab] = useState("About us");
+  const [currTab, setCurrTab] = useState("Events");
   const curruser = useSelector((state) => state.auth.curruser);
 
-  const Tabs = ["Home", "About us", "Contact us"];
+  const Tabs = ["Home", "Events", "Contact"];
   console.log(curruser);
   // if (curruser != null) {
   //   Tabs.push("Profile");
@@ -22,9 +24,9 @@ function Events() {
   //   Tabs.push("Login/Register");
   // }
   const Cat = [
-    { title: "Tech", icon: proCat, col: "#9672FF", back: catCardImg },
+    { title: "Tech", icon: proCat, col: "#9672FF", back: tech },
     { title: "Cultural", icon: proCat, col: "#9672FF", back: catCardImg },
-    { title: "EDM", icon: proCat, col: "#9672FF", back: catCardImg },
+    { title: "EDM", icon: proCat, col: "#9672FF", back: edm },
   ];
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -66,7 +68,7 @@ function Events() {
     <div className="eventM-main">
       <div class="circle circle-hide"></div>
       <div className="eventsM-back">
-        <img src={back}></img>
+        <img src={back} alt=""></img>
       </div>
       <div className="eventsM-back-overlay"></div>
       <HomeNav
@@ -77,7 +79,7 @@ function Events() {
         landing={false}
         setLand={() => {}}
       />
-      <div className={"eventsM-title"}>EVENTS</div>
+      <div className={"eventsM-title"}>CATEGORY</div>
       <div className="eventsM-category-sec">
         {Cat.map((item, i) => {
           console.log();

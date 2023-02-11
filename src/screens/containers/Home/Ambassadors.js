@@ -8,6 +8,7 @@ import ambMobile from "../../../images/ambMobile.png";
 import ConR from "../../../images/ambCon.png";
 import HomeNav from "./homeNav";
 import useIntersection from "./interSection";
+import { RandomReveal } from "react-random-reveal";
 
 function Ambassador(props) {
   const [currTab, setCurrTab] = useState("ambassador");
@@ -26,12 +27,31 @@ function Ambassador(props) {
     // shouldAlwaysCompleteAnimation={true}
     speedx: 2,
   };
+  const alpha = Array.from(Array(26)).map((e, i) => i + 65);
+  const alphabet = alpha.map((x) => String.fromCharCode(x));
   const MobileViewAnimText = {
     translateY: progress2 < 0.5 ? [60, -60] : [0, 0],
     translateX: [0, 0],
     opacity: progress2 < 0.5 ? [0.0, 1, "easeInOut"] : [1, 1],
     // shouldAlwaysCompleteAnimation={true}
     speedx: 30,
+  };
+  const random = (value, interval) => {
+    // return <>{value}</>;
+    return (
+      <RandomReveal
+        isPlaying
+        duration={1}
+        revealDuration={1}
+        revealEasing="linear"
+        updateInterval={interval}
+        characterSet={alphabet}
+        characters={value}
+        // onComplete={() => {
+        //   setHover("");
+        // }}
+      />
+    );
   };
 
   return (
@@ -120,9 +140,19 @@ function Ambassador(props) {
             <div className="campInfo">
               <div className="activity-info-sub">SPHINX ‘23</div>
               <div className=" amb-title">
-                CAMPUS
+                {progress > (width ? 0.1 : 0.2) ? (
+                  random("CAMPUS")
+                ) : (
+                  <> CAMPUS</>
+                )}
                 <br></br>
-                <span style={{ color: "#FFA20F" }}>AMBASSADOR</span>
+                <span style={{ color: "#FFA20F" }}>
+                  {progress > (width ? 0.1 : 0.2) ? (
+                    random("AMBASSADOR")
+                  ) : (
+                    <> AMBASSADOR</>
+                  )}
+                </span>
               </div>
 
               <div className="about-Maincontent amb-Maincontent">
