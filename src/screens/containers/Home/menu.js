@@ -6,8 +6,21 @@ import { RandomReveal } from "react-random-reveal";
 import { useNavigate } from "react-router-dom";
 import Session from "../../../Session";
 import { logout } from "../../../store/modules/auth/auth.action";
+import { logout as Logout } from "../../../api";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Menu(props) {
+  const toastStyle = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  };
   const { menu, setMenu, currTab, setCurrTab } = props;
   const [anim, setAnim] = useState(true);
   const [close, setClose] = useState(false);
@@ -26,10 +39,10 @@ function Menu(props) {
     "CONTACT",
     "AMBASSADOR",
     "EVENTS",
-    "SCHEDULE",
-    "TEAM",
+    // "SCHEDULE",
+    // "TEAM",
     "THEME",
-    "SPONSORS",
+    // "SPONSORS",
   ];
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
   const alphabet = alpha.map((x) => String.fromCharCode(x));
@@ -39,10 +52,17 @@ function Menu(props) {
     console.log("log");
     if (log == "LOGOUT") {
       console.log("logout");
-      Session.remove("profile");
-      logout();
-      window.location.href = "/";
-      setLog("LOGIN/REGISTER");
+      Logout()
+        .then((res) => {
+          toast.info(res, toastStyle);
+          Session.remove("profile");
+          logout();
+          window.location.href = "/";
+          setLog("LOGIN/REGISTER");
+        })
+        .catch((err) => {
+          toast.error(err, toastStyle);
+        });
     } else {
       navigate("/login");
     }
@@ -72,11 +92,11 @@ function Menu(props) {
   );
   const activeTab = useEffect(() => {}, []);
 
-  console.log(
-    tabs.findIndex((val, i) => {
-      if (val == currTab.toUpperCase()) return currTab.toUpperCase();
-    })
-  );
+  // console.log(
+  //   tabs.findIndex((val, i) => {
+  //     if (val == currTab.toUpperCase()) return currTab.toUpperCase();
+  //   })
+  // );
   return (
     <div
       className={style.container}

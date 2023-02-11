@@ -21,6 +21,9 @@ function HomeNav({
     if (currTab == "Events") navigate("/events");
     if (currTab == "Profile") navigate("/dashboard");
     if (currTab == "AMBASSADOR") navigate("/ambassador");
+    if (currTab == "Contact") {
+      window.location.href = "#contact";
+    }
     if (currTab == "Logout") {
       //callLogout
       Session.remove("profile");
@@ -81,6 +84,7 @@ function HomeNav({
         onClick={() => {
           setMenu(true);
         }}
+        style={{ cursor: "pointer" }}
       >
         <img src={burger}></img>
       </div>

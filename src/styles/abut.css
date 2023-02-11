@@ -3,7 +3,10 @@
 	font-family: 'wity';
 	src: url('../images/wity.ttf');
   }
-
+  @font-face {
+	font-family: 'wity2';
+	src: url('../images/wity2.ttf');
+  }
 .about-page {
 	display: flex;
 	height: 100vh;
@@ -128,7 +131,7 @@
 
 }
 .about-page--text-head {
-	font-family: 'Noto Sans Adlam Unjoined', sans-serif;
+	font-family: 'wity2';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 4.5rem;

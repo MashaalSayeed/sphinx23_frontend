@@ -183,7 +183,7 @@ function Login(props) {
           props.toreg(false);
         } else {
           toast.info("Success", toastStyle);
-          navigate("/");
+          navigate("/dashboard");
         }
         // alert("Success");
       })
@@ -815,7 +815,7 @@ function RegScreen3(props) {
               .then((res) => {
                 toast.info("Registration Completed", toastStyle);
                 // alert("Registration Completed");
-                navigate("/");
+                navigate("/dashboard");
               })
               .catch((err) => {
                 toast.error(err, toastStyle);
@@ -831,7 +831,7 @@ function RegScreen3(props) {
           .then((res) => {
             toast.info("Registration Completed", toastStyle);
             // alert("Registration Completed");
-            navigate("/");
+            navigate("/dashboard");
           })
           .catch((err) => {
             toast.error(err, toastStyle);
