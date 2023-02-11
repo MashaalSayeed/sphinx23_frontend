@@ -20,6 +20,7 @@ function HomeNav({
   useEffect(() => {
     if (currTab == "Events") navigate("/events");
     if (currTab == "Profile") navigate("/dashboard");
+    if (currTab == "AMBASSADOR") navigate("/ambassador");
     if (currTab == "Logout") {
       //callLogout
       Session.remove("profile");
@@ -35,7 +36,7 @@ function HomeNav({
     }
     if (!landing) {
       console.log(currTab);
-      if (currTab == "Home") navigate("/");
+      if (currTab == "Home" || currTab == "HOME") navigate("/");
     }
   }, [currTab]);
   return (

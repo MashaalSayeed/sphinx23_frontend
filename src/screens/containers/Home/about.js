@@ -12,7 +12,6 @@ export default function About(props) {
   const { width } = props;
   const [currTab, setCurrTab] = useState("About");
   // const ref = useRef(null);
-  const Tabs = ["Home", "About", "Contact"];
   const [progress, setProgress] = useState(0);
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
   const alphabet = alpha.map((x) => String.fromCharCode(x));
