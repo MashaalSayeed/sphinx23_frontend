@@ -49,6 +49,11 @@ function Landing(props) {
               setScroll(true);
             }
           }}
+          onTouchMove={() => {
+            if (!Loading && !parallax) {
+              setScroll(true);
+            }
+          }}
           onWheel={() => {
             if (!Loading && !parallax) {
               setScroll(true);

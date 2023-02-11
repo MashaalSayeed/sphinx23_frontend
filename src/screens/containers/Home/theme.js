@@ -17,6 +17,7 @@ function Theme(props) {
   const alphabet = alpha.map((x) => String.fromCharCode(x));
 
   const random = (value, interval) => {
+    // return <>{value}</>;
     return (
       <RandomReveal
         isPlaying
@@ -91,7 +92,7 @@ function Theme(props) {
               </div>
               <div className="home-about-title">
                 {" "}
-                {progress > (width ? 0.1 : 0.2) ? random("THEME") : <> THEME</>}
+                {progress > (width ? 0.3 : 0.2) ? random("THEME") : <> THEME</>}
               </div>
               <div
                 className="about-Maincontent"

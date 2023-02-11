@@ -13,7 +13,6 @@ function Menu(props) {
   const [close, setClose] = useState(false);
   const navigate = useNavigate();
   const curruser = useSelector((state) => state.auth.curruser);
-  console.log(curruser);
   useEffect(() => {
     if (curruser == null) {
       setLog("LOGIN/REGISTER");
@@ -57,9 +56,9 @@ function Menu(props) {
         updateInterval={interval}
         characterSet={alphabet}
         characters={value}
-        onComplete={() => {
-          setHover("");
-        }}
+        // onComplete={() => {
+        //   setHover("");
+        // }}
       />
     );
   };
@@ -71,8 +70,13 @@ function Menu(props) {
   const [log, setLog] = useState(
     curruser == null ? "LOGIN/REGISTER" : "LOGOUT"
   );
+  const activeTab = useEffect(() => {}, []);
 
-  console.log(currTab.toUpperCase());
+  console.log(
+    tabs.findIndex((val, i) => {
+      if (val == currTab.toUpperCase()) return currTab.toUpperCase();
+    })
+  );
   return (
     <div
       className={style.container}
@@ -112,12 +116,12 @@ function Menu(props) {
                     className={
                       hover == value
                         ? style.linkActive2
-                        : currTab == value
+                        : currTab.toUpperCase() == value.toUpperCase()
                         ? style.linkActive
                         : style.links
                     }
                     onClick={() => {
-                      setCurrTab(value.toUpperCase());
+                      setCurrTab(value);
                     }}
                     onMouseEnter={() => setHover(value)}
                     onMouseLeave={() => setHover("")}
@@ -152,12 +156,14 @@ function Menu(props) {
                       <>{value}</>
                     )}
                   </div>
-                  {(currTab == value || hover == value) && (
+                  {(currTab.toUpperCase() == value || hover == value) && (
                     <div
                       className={style.page}
                       style={hover == value ? {} : { color: "#C1FF5C" }}
                     >
-                      PAGE <br></br> 0{i}
+                      {random(`PAGE`)}
+                      <br></br>
+                      {random(`0${i}`)}
                     </div>
                   )}
                 </div>

@@ -2,6 +2,7 @@ import { color } from "@mui/system";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { RandomReveal } from "react-random-reveal";
 import { Parallax, ParallaxBanner } from "react-scroll-parallax";
 import pyramid from "../../../images/activityPyramid.png";
 import useIntersection from "./interSection";
@@ -22,7 +23,26 @@ function Activities(props) {
 
   // const handleScroll = () => {
   //   setScrollPos(window.pageYOffset);
-  // };
+  const alpha = Array.from(Array(26)).map((e, i) => i + 65);
+  const alphabet = alpha.map((x) => String.fromCharCode(x));
+
+  const random = (value, interval) => {
+    // return <>{value}</>;
+    return (
+      <RandomReveal
+        isPlaying
+        duration={1}
+        revealDuration={1}
+        revealEasing="linear"
+        updateInterval={interval}
+        characterSet={alphabet}
+        characters={value}
+        // onComplete={() => {
+        //   setHover("");
+        // }}
+      />
+    );
+  };
 
   const MobileViewAnim = {
     translateY: [0, 0],
@@ -68,8 +88,22 @@ function Activities(props) {
               className={"about-info"}
               // style={}
             >
-              <div className="activity-info-sub">SPHINX ‘23</div>
-              <div className="home-about-title">EVENTS</div>
+              <div className="activity-info-sub">
+                {" "}
+                {progress > (width ? 0.1 : 0.4) ? (
+                  random("SPHINX ‘23")
+                ) : (
+                  <> SPHINX ‘23</>
+                )}
+              </div>
+              <div className="home-about-title">
+                {" "}
+                {progress > (width ? 0.1 : 0.2) ? (
+                  random("EVENTS")
+                ) : (
+                  <> EVENTS</>
+                )}
+              </div>
               <div className="about-Maincontent">
                 Sphinx is the largest technology fest in Rajasthan, held
                 annually at the MNIT Jaipur campus. The fest attracts thousands

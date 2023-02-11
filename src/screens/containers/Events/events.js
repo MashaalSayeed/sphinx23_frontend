@@ -12,10 +12,10 @@ import eventsImg from "../../../images/events/roboWars.png";
 import { useSelector } from "react-redux";
 
 function Events() {
-  const [currTab, setCurrTab] = useState("About us");
+  const [currTab, setCurrTab] = useState("Events");
   const curruser = useSelector((state) => state.auth.curruser);
 
-  const Tabs = ["Home", "About us", "Contact us"];
+  const Tabs = ["Home", "Events", "Contact"];
   console.log(curruser);
   // if (curruser != null) {
   //   Tabs.push("Profile");
@@ -68,7 +68,7 @@ function Events() {
     <div className="eventM-main">
       <div class="circle circle-hide"></div>
       <div className="eventsM-back">
-        <img src={back}></img>
+        <img src={back} alt=""></img>
       </div>
       <div className="eventsM-back-overlay"></div>
       <HomeNav
@@ -79,7 +79,7 @@ function Events() {
         landing={false}
         setLand={() => {}}
       />
-      <div className={"eventsM-title"}>EVENTS</div>
+      <div className={"eventsM-title"}>CATEGORY</div>
       <div className="eventsM-category-sec">
         {Cat.map((item, i) => {
           console.log();

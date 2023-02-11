@@ -37,6 +37,7 @@ function Ambassador(props) {
     speedx: 30,
   };
   const random = (value, interval) => {
+    // return <>{value}</>;
     return (
       <RandomReveal
         isPlaying

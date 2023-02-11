@@ -185,6 +185,11 @@ color: rgba(255, 255, 255, 0.7);
     background:  linear-gradient(180deg, #000000 40.63%, #0F0900 71.35%, #FF9B02 99.99%, #FFE194 100%);
     
    }
+  
+   .activity-scroll-line{
+    height: 30px;
+   }
+   
    .activity-sec1
    {
     position: absolute;
@@ -251,7 +256,7 @@ color: rgba(255, 255, 255, 0.7);
     {
         width: 70%;
         height: 60%;
-        z-index: 20;
+        z-index: 5;
         position: absolute;
         left: 0;
         right: 0;

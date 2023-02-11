@@ -121,10 +121,10 @@
 	justify-content: center;
 	margin-left: 4%;
 	gap: 20px;
-	opacity: 0;
-	-webkit-animation: abtText 1.6s ease-in-out;
+	opacity: 1;
+	/* -webkit-animation: abtText 1.6s ease-in-out;
 	-webkit-animation-delay: 700ms;
-	-webkit-animation-fill-mode: forwards;
+	-webkit-animation-fill-mode: forwards; */
 
 }
 .about-page--text-head {
