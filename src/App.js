@@ -48,6 +48,7 @@ import UserDashboard from "./screens/containers/Dashboard/UserDashboard";
 import Test from "../src/screens/containers/Test";
 import { useRef } from "react";
 import OurTeam from "./screens/containers/OurTeam/OurTeam";
+import AmbassadorM from "./screens/containers/Home/AmbassadorM";
 
 function App() {
   // const token1 =
@@ -135,6 +136,7 @@ function App() {
             {/* <Route index element={<Landing />} />
             <Route path="/" element={<TimeMachine notAnim={true} />} /> */}
             <Route path="/login" element={<LoginScreen />} />
+            <Route path="/ambassador" element={<AmbassadorM />} />
             {/* <Route path="/ourteam" element={<OurTeam />} /> */}
             {/* <Route path="/home" element={<TimeMachine notAnim={true} />} /> */}
             {/* <Route path="/about" element={<About />} /> */}
