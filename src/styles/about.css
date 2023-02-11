@@ -2,7 +2,10 @@
 	font-family: 'wity2';
 	src: url('../images/wity2.ttf');
   }
-
+  @font-face {
+	font-family: 'wity';
+	src: url('../images/wity.ttf');
+  }
 .about-main
 {
    width: 100%;
@@ -84,11 +87,11 @@
     border: none;
     padding: 10px 20px;
   
-font-family: 'Inter';
+font-family: 'wity';
 font-style: normal;
 font-weight: 500;
 font-size: 1rem;
-
+cursor: pointer;
 letter-spacing: 0.04em;
 
 color: #423300;

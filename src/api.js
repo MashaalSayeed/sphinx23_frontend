@@ -33,6 +33,38 @@ export const fetchEvents = async (dispatch) => {
       throw err;
     });
 };
+export const editUser = async (body) => {
+  console.log("Edit Called");
+
+  let token = Session.getObject("profile").token;
+  console.log(token);
+  let id = Session.getObject("profile").profile._id;
+  console.log(id);
+  return fetch(`${url}/users/${id}`, {
+    method: "PUT",
+    headers: {
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " + token,
+
+      body: JSON.stringify(body),
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        let profile = Session.getObject("profile");
+        profile.profile.isAmbassador = true;
+        Session.setObject("profile", profile);
+        console.log(profile);
+        return data.success;
+      }
+      throw data;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
 export const logout = async () => {
   console.log("Events Fetched");
   let token = Session.get("profile").token;

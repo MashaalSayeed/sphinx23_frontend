@@ -90,9 +90,9 @@ function Theme(props) {
               <div className="home-about-title">
                 {" "}
                 {progress > (width ? 0.3 : 0.2) ? (
-                  random("ARE WE ACTUALLY EVOLVING?")
+                  random("EVOLVE?")
                 ) : (
-                  <> ARE WE ACTUALLY EVOLVING?</>
+                  <> EVOLVE?</>
                 )}
               </div>
               <div

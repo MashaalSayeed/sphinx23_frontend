@@ -9,6 +9,7 @@ import ConR from "../../../images/ambCon.png";
 import HomeNav from "./homeNav";
 import useIntersection from "./interSection";
 import { RandomReveal } from "react-random-reveal";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Ambassador(props) {
   const [currTab, setCurrTab] = useState("ambassador");
@@ -36,6 +37,7 @@ function Ambassador(props) {
     // shouldAlwaysCompleteAnimation={true}
     speedx: 30,
   };
+  const navigate = useNavigate();
   const random = (value, interval) => {
     // return <>{value}</>;
     return (
@@ -174,6 +176,9 @@ function Ambassador(props) {
                   background: "#FFA20F",
                   color: "white",
                   padding: "10px 25px",
+                }}
+                onClick={() => {
+                  navigate("/ambassador");
                 }}
               >
                 Learn More

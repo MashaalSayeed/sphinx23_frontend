@@ -7,7 +7,10 @@ import share from "../../../images/ambShare.png";
 import grp from "../../../images/ambGrp.png";
 import reg from "../../../images/ambReg.png";
 import Footer from "../../components/Footer/footer";
-
+import { useSelector } from "react-redux";
+import { editUser } from "../../../api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const CardsData = [
   {
     name: "Promotion",
@@ -54,6 +57,46 @@ const Points = [
 ];
 
 function Sec1() {
+  const toastStyle = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  };
+  const user = useSelector((state) => state.auth.curruser);
+  const handleSubmit = () => {
+    console.log("Called");
+    if (!user) {
+      toast.error("Please Login First", toastStyle);
+      window.location.href = "/login";
+      return;
+    }
+    if (user.profile.isMnit) {
+      toast.error("This is not for MNIT Students", toastStyle);
+
+      return;
+    }
+    if (user.profile.isAmbassador) {
+      toast.error("You are already a Ambassador", toastStyle);
+
+      return;
+    }
+    let body = { isAmbassador: true };
+    console.log(body);
+    editUser(body)
+      .then((res) => {
+        console.log(res);
+        toast.info(res, toastStyle);
+        window.location.href = "/ambassador";
+      })
+      .catch((err) => {
+        toast.error(err, toastStyle);
+      });
+  };
   return (
     <div className={style.sec1}>
       <div className={style.bottomGrad}></div>
@@ -69,8 +112,14 @@ function Sec1() {
           who will be in charge of the entire contingent from that college.
         </div>
         <div className={style.introBtn}>
-          <button className={style.introLog}>Sign Up</button>
-          <button className={style.introExp}>EXPLORE</button>
+          <button
+            className={style.introLog}
+            disabled={user.profile.isAmbassador}
+            onClick={handleSubmit}
+          >
+            {user.profile.isAmbassador ? "Already a ambassador" : "Sign Up"}
+          </button>
+          {/* <button className={style.introExp}>EXPLORE</button> */}
         </div>
       </div>
       <div className={style.cardsCon}>
