@@ -25,8 +25,8 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const userType =
     useSelector((state) => state.auth.curruser.profile.type) === "superAdmin";
   const disabled = editSuperAdmin ? !userType : false;
-  console.log(userType);
-  console.log(currEvent);
+  //console.log(userType);
+  //console.log(currEvent);
 
   const navigate = useNavigate();
   const [submitV, setSubmit] = useState(false);
@@ -51,7 +51,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const [createStatus, setCreateStatus] = useState(null);
   const [eventImage, setImage] = useState(null);
   const token = useSelector((state) => state.auth.curruser.token);
-  console.log(token);
+  //console.log(token);
   const dispatch = useDispatch();
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -103,13 +103,13 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
           //   return { message: message };
           // });
           setUpdateList(res.updates);
-          console.log(updateList);
+          //console.log(updateList);
         })
         .catch((err) => {
-          console.log(err);
+          //console.log(err);
         });
-      // console.log(currEvent.from.split("T")[0]);
-      // console.log(currEvent.description);
+      // //console.log(currEvent.from.split("T")[0]);
+      // //console.log(currEvent.description);
     }
   }, []);
   useEffect(() => {
@@ -204,21 +204,21 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   };
 
   const submit_Event = async () => {
-    console.log(setEventCoorId);
+    //console.log(setEventCoorId);
     setEventCoorId([]);
     let a = [];
-    console.log(eventCoor, "kunal");
+    //console.log(eventCoor, "kunal");
     for (let i in eventCoor) {
       try {
         let mail = eventCoor[i];
-        console.log("mail", mail);
+        //console.log("mail", mail);
         const id = await getUsersId(token, mail);
         a.push(id);
       } catch (err) {
         toast.error(err, toastStyle);
       }
     }
-    console.log(admin, "ip");
+    //console.log(admin, "ip");
     setEventCoorId(a);
     if (!admin) {
       toast.error("Admin is Required.", toastStyle);
@@ -239,15 +239,15 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   };
   const toastId = useRef(null);
   const post_Create = () => {
-    console.log(eventCoorIds);
-    console.log(adminId, "POST CALLED");
+    //console.log(eventCoorIds);
+    //console.log(adminId, "POST CALLED");
     const CoorsIds = Array.from(new Set(eventCoorIds));
-    console.log(CoorsIds);
+    //console.log(CoorsIds);
     if (adminId.length == 0) {
       toast.info("No admin ids found", toastStyle);
       return;
     }
-    console.log(adminId[0]);
+    //console.log(adminId[0]);
     const event_Data = {
       name: eventName,
       description: details,
@@ -266,17 +266,17 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       maxTeamSize: maxTeamSize,
       // imageUrl: "", //
     };
-    console.log(event_Data);
+    //console.log(event_Data);
     let formData = new FormData();
     formData.append("file", eventImage);
     formData.append("body", JSON.stringify(event_Data));
-    console.log(formData);
+    //console.log(formData);
 
     toastId.current = toast.loading("Creating Event");
     submitRef.current.setAttribute("disabled", true);
     createEvent(dispatch, formData, token)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         toast.update(toastId.current, {
           render: "Created Event",
           type: "success",
@@ -290,7 +290,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
         // window.location.href = "/superAdmin";
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
         toast.update(toastId.current, {
           render: err,
           type: "error",
@@ -341,7 +341,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
     submitRef.current.setAttribute("disabled", true);
     updateEvent(currEvent._id, event_Data, token, setCreateStatus)
       .then((res) => {
-        console.log("Event Updated");
+        //console.log("Event Updated");
         toast.update(toastId.current, {
           render: "Event Updated",
           type: "success",
@@ -351,7 +351,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
         });
         submitRef.current.removeAttribute("disabled");
         // navigate(`/eventDetails/event/${currEvent._id}`);
-        console.log(`/eventDetails/event/${currEvent._id}`);
+        //console.log(`/eventDetails/event/${currEvent._id}`);
         setCreate(false);
         // window.location.href = `/eventDetails/event/${currEvent._id}`;
       })
@@ -365,7 +365,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
         });
         // toast.error(err, toastStyle);
       });
-    console.log(event_Data);
+    //console.log(event_Data);
   };
   const edit = () => {
     return (
@@ -391,8 +391,8 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response, "manvir");
-        console.log(response.id);
+        //console.log(response, "manvir");
+        //console.log(response.id);
         return response.id;
       })
       .catch((err) => {
@@ -402,20 +402,20 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
     //
     // .then((data) => {
     //   if (data.success) {
-    //     console.log(data.id);
-    //     console.log(prevState);
+    //     //console.log(data.id);
+    //     //console.log(prevState);
     //     setIds([...prevState, data.id]);
     //   }
     // })
     // .catch((error) => {
     //   alert(error);
-    //   // console.log(error);
+    //   // //console.log(error);
     // });
     // return userData;
   };
-  // console.log(eventCoorIds);
+  // //console.log(eventCoorIds);
   const submitRef = useRef(null);
-  console.log(eventCoor);
+  //console.log(eventCoor);
   return (
     <div className="createEvent-back">
       {/* <ToastContainer

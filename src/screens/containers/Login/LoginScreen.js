@@ -47,9 +47,9 @@ const disabledCol = "#6e9efa";
 const btnCol = "#1968ff";
 
 function handleChange(event, setter) {
-  // console.log("Handle Called");
+  // //console.log("Handle Called");
   const { name, value, type, checked } = event.target;
-  console.log(name, value);
+  //console.log(name, value);
   setter((prevformData) => ({
     ...prevformData,
     [name]: type === "checkbox" ? checked : value,
@@ -102,18 +102,18 @@ function Login(props) {
   });
 
   const handleSuccess = (response) => {
-    console.log(response);
+    //console.log(response);
     let body = {
       email: response.profileObj.email,
       password: response.googleId,
       isRegistration: false,
     };
-    console.log(body);
+    //console.log(body);
     props.setBg((present) => !present);
 
     loginRegister(dispatch, body)
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         // alert("Success");
         if (!data.profile.isEmailVerified) {
           toast.error("Please Complete Your Profile", toastStyle);
@@ -170,11 +170,11 @@ function Login(props) {
   function handleSubmit(event) {
     props.setBg((present) => !present);
     formData.isRegistration = false;
-    console.log(formData);
+    //console.log(formData);
     event.preventDefault();
     loginRegister(dispatch, formData)
       .then((data) => {
-        console.log(data.profile);
+        //console.log(data.profile);
         if (!data.profile.isEmailVerified) {
           toast.error("Please Complete Your Profile", toastStyle);
           props.toreg(false);
@@ -224,7 +224,7 @@ function Login(props) {
                 name="email"
                 type="email"
                 onKeyDown={(e) => {
-                  console.log(e);
+                  //console.log(e);
                   if (e.key === "Enter") PassRef.current.focus();
                 }}
                 value={formData.email}
@@ -247,7 +247,7 @@ function Login(props) {
                   handleChange(e, setFormData);
                 }}
                 onKeyDown={(e) => {
-                  console.log(e);
+                  //console.log(e);
                   if (e.key === "Enter") LoginRef.current.focus();
                 }}
               />
@@ -277,7 +277,7 @@ function Login(props) {
             ref={LoginRef}
             onClick={handleSubmit}
             onKeyDown={(e) => {
-              console.log(e);
+              //console.log(e);
               if (e.key === "Enter") handleSubmit();
             }}
           >
@@ -301,19 +301,19 @@ function RegScreen1(props) {
 
   const user = useSelector((state) => state.auth.curruser);
   const handleSuccess = (response) => {
-    console.log(response);
+    //console.log(response);
     let body = {
       email: response.profileObj.email,
       password: response.googleId,
       isRegistration: true,
     };
-    console.log(body);
+    //console.log(body);
     props.setBg((present) => !present);
 
     loginRegister(dispatch, body)
       .then((res) => {
-        console.log(res);
-        console.log("mail");
+        //console.log(res);
+        //console.log("mail");
         // toast.info("Sending Mail", toastStyle);
         toastId.current = toast.loading("Sending Mail");
         ConRef.current.setAttribute("disabled", true);
@@ -370,9 +370,9 @@ function RegScreen1(props) {
     "253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com";
 
   useEffect(() => {
-    console.log("Use Effect Called", user);
+    //console.log("Use Effect Called", user);
     if (user && !user.profile.isEmailVerified) {
-      console.log("mail");
+      //console.log("mail");
       // toast.info("Sending Mail", toastStyle);
       toastId.current = toast.loading("Sending Mail");
       ConRef.current.setAttribute("disabled", true);
@@ -408,7 +408,7 @@ function RegScreen1(props) {
       user.profile.isEmailVerified &&
       !user.profile.isMobileNumberVerified
     ) {
-      console.log("Called");
+      //console.log("Called");
       toast.info("Profile is not complete.", toastStyle);
       // alert("Profile is not complete.");
       props.setter(3);
@@ -419,7 +419,7 @@ function RegScreen1(props) {
       user.profile.isEmailVerified &&
       user.profile.isMobileNumberVerified
     ) {
-      console.log("Called");
+      //console.log("Called");
       toast.info("Already Logged In", toastStyle);
       // alert("Already Logged In");
       navigate("/");
@@ -438,12 +438,12 @@ function RegScreen1(props) {
   const toastId = useRef(null);
 
   const handleSubmit = async () => {
-    console.log("Called", props.formData);
+    //console.log("Called", props.formData);
     props.formData.isRegistration = true;
 
     loginRegister(dispatch, props.formData)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         // toast.info("Sending Mail", toastStyle);
         toastId.current = toast.loading("Sending Mail");
         ConRef.current.setAttribute("disabled", true);
@@ -528,7 +528,7 @@ function RegScreen1(props) {
             type="email"
             value={props.formData.email}
             onKeyDown={(e) => {
-              console.log(e);
+              //console.log(e);
               if (e.key === "Enter") PassRef.current.focus();
             }}
             onChange={(e) => {
@@ -550,7 +550,7 @@ function RegScreen1(props) {
               handleChange(e, props.setFormData);
             }}
             onKeyDown={(e) => {
-              console.log(e);
+              //console.log(e);
               if (e.key === "Enter") ConRef.current.focus();
             }}
           />
@@ -572,7 +572,7 @@ function RegScreen2(props) {
   const profile = useSelector((state) => state.auth.curruser.profile);
 
   useEffect(() => {
-    console.log("Use Effect Called", token);
+    //console.log("Use Effect Called", token);
     if (profile && profile.isEmailVerified) {
       props.setter(3);
       props.setBg((present) => !present);
@@ -599,16 +599,16 @@ function RegScreen2(props) {
   const handleBackChange = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? "" : d))]);
-    console.log(element.previousSibling);
-    console.log("delete");
+    //console.log(element.previousSibling);
+    //console.log("delete");
     if (element.previousSibling) {
-      console.log("delete");
+      //console.log("delete");
       element.previousSibling.focus();
     }
   };
   const conRef = useRef(null);
   function handleSubmit() {
-    console.log(otp.join(""));
+    //console.log(otp.join(""));
     let otp_string = otp.join("");
     if (otp_string == "") toast.info("OTP is Required", toastStyle);
     else {
@@ -628,7 +628,7 @@ function RegScreen2(props) {
     }
   }
   function ResetOtp() {
-    console.log("called");
+    //console.log("called");
     sendVerificationMail()
       .then((res) => {
         // alert("Mail Sent");
@@ -747,10 +747,10 @@ function RegScreen3(props) {
   const handleBackChange = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? "" : d))]);
-    console.log(element.previousSibling);
-    console.log("delete");
+    //console.log(element.previousSibling);
+    //console.log("delete");
     if (element.previousSibling) {
-      console.log("delete");
+      //console.log("delete");
       element.previousSibling.focus();
     }
   };
@@ -797,20 +797,20 @@ function RegScreen3(props) {
       toast.info("Mobile Must be Verified", toastStyle);
       // alert("Mobile Must be Verified");
     } else {
-      console.log("Called", otp.join(""));
-      console.log(ambassadorId);
+      //console.log("Called", otp.join(""));
+      //console.log(ambassadorId);
       let body = {
         name: props.formData.name,
         collegeName: props.formData.college,
         otp: otp.join(""),
       };
-      console.log(body);
+      //console.log(body);
       if (props.formData.campusAmbassador) {
         getUsersId(token, props.formData.campusAmbassador, setambassadorId)
           .then((res) => {
-            console.log("Ambassador Correct", ambassadorId);
+            //console.log("Ambassador Correct", ambassadorId);
             body.refererId = props.formData.campusAmbassador;
-            console.log(body);
+            //console.log(body);
             verifyMobileOTP(body)
               .then((res) => {
                 toast.info("Registration Completed", toastStyle);
@@ -838,13 +838,13 @@ function RegScreen3(props) {
           });
       }
 
-      console.log(body);
+      //console.log(body);
       props.setBg((present) => !present);
     }
   };
   const toastId = useRef(null);
   const sendOTP = () => {
-    console.log(props.formData.mobile);
+    //console.log(props.formData.mobile);
     toastId.current = toast.loading("Sending OTP");
     let body = { phoneNumber: props.formData.mobile };
     sendMobileOTP(body)
@@ -909,7 +909,7 @@ function RegScreen3(props) {
           className="login-form-text-inputs"
           name="name"
           onKeyDown={(e) => {
-            console.log(e);
+            //console.log(e);
             if (e.key === "Enter") clgRef.current.focus();
           }}
           autoFocus
@@ -935,7 +935,7 @@ function RegScreen3(props) {
             handleChange(e, props.setFormData);
           }}
           onKeyDown={(e) => {
-            console.log(e);
+            //console.log(e);
             if (e.key === "Enter") ambRef.current.focus();
           }}
         />
@@ -954,7 +954,7 @@ function RegScreen3(props) {
             handleChange(e, props.setFormData);
           }}
           onKeyDown={(e) => {
-            console.log(e);
+            //console.log(e);
             if (e.key === "Enter") mobRef.current.focus();
           }}
         />
@@ -974,7 +974,7 @@ function RegScreen3(props) {
             handleChange(e, props.setFormData);
           }}
           onKeyDown={(e) => {
-            console.log(e);
+            //console.log(e);
             if (e.key === "Enter") verifyRef.current.click();
           }}
         />
@@ -1091,10 +1091,10 @@ function ForgotPass() {
         ConRef.current.style.background = disabledCol;
         setId(res);
         let body = { id: res };
-        console.log("Body", body);
+        //console.log("Body", body);
         sendForgotOTP(body)
           .then((resp) => {
-            console.log(resp);
+            //console.log(resp);
             toast.update(toastId.current, {
               render: "Mail Sent",
               type: "success",
@@ -1133,7 +1133,7 @@ function ForgotPass() {
     setOtp(new Array(6).fill(""));
     sendForgotOTP(body)
       .then((resp) => {
-        console.log(resp);
+        //console.log(resp);
         toast.update(toastId.current, {
           render: "Mail Sent",
           type: "success",
@@ -1169,7 +1169,7 @@ function ForgotPass() {
   };
   const handleOTPVerify = () => {
     let body = { id: id, otp: otp.join("") };
-    console.log(body);
+    //console.log(body);
     verifyForgotOTP(body)
       .then((res) => {
         toast.info("Verified", toastStyle);
@@ -1177,16 +1177,16 @@ function ForgotPass() {
         setVerify(true);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
         toast.error(err, toastStyle);
       });
   };
   const handleResetPassword = () => {
-    console.log(secret, password);
+    //console.log(secret, password);
     let body = { secret: secret, password: password, id: id };
     resetPassword(body)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         toast.info(res, toastStyle);
         window.location.href = "/";
       })
@@ -1197,10 +1197,10 @@ function ForgotPass() {
   const handleBackChange = (element, index) => {
     if (isNaN(element.value)) return false;
     setOtp([...otp.map((d, idx) => (idx === index ? "" : d))]);
-    console.log(element.previousSibling);
-    console.log("delete");
+    //console.log(element.previousSibling);
+    //console.log("delete");
     if (element.previousSibling) {
-      console.log("delete");
+      //console.log("delete");
       element.previousSibling.focus();
     }
   };
@@ -1339,7 +1339,7 @@ function ForgotPass() {
               setPassword(e.target.value);
             }}
             onKeyDown={(e) => {
-              console.log(e);
+              //console.log(e);
               if (e.key === "Enter") conRef.current.focus();
             }}
           />

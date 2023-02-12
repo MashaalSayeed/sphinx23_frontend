@@ -2,10 +2,10 @@ import React from "react";
 import { Button, Stack, TextField } from "@mui/material";
 
 const ReadOnlyRow = ({ data, value }) => {
-  console.log("Read CAlled");
-  // console.log(data);
-  // console.log(value);
-  // console.log(data[value[0]]);
+  //console.log("Read CAlled");
+  // //console.log(data);
+  // //console.log(value);
+  // //console.log(data[value[0]]);
 
   const attendace = () => {
     return (

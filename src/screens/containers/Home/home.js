@@ -14,7 +14,7 @@ function Landing(props) {
   const curruser = useSelector((state) => state.auth.curruser);
   const [currTab, setCurrTab] = useState("Home");
   const Tabs = ["Home", "Events", "Contact"];
-  console.log(curruser);
+  //console.log(curruser);
   // if (curruser != null) {
   //   Tabs.push("Profile");
   //   Tabs.push("Logout");

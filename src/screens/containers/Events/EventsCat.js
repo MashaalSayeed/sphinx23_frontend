@@ -22,7 +22,7 @@ function EventsCat() {
   useEffect(() => {
     window.scrollTo(0, 0);
     let category = categories.get(params.cat);
-    console.log(category);
+    //console.log(category);
     if (category === undefined) {
       alert("Category Invalid");
       return;
@@ -30,10 +30,10 @@ function EventsCat() {
     fetchEventsByCategory(category)
       .then((res) => {
         setECat(res);
-        console.log(res);
+        //console.log(res);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   }, []);
 
@@ -51,7 +51,7 @@ function EventsCat() {
       <div className={"eventsM-title"}>EVENTS</div>
       <div className="eventsM-category-sec">
         {Ecat.map((item, i) => {
-          console.log(item);
+          //console.log(item);
           return <EventCard card={item} key={i} index={i} />;
         })}
       </div>

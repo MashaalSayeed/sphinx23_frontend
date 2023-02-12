@@ -18,7 +18,7 @@ function EventCard(props) {
     "Friday",
     "Saturday",
   ];
-  console.log("/events/" + card.category + "/" + card._id);
+  //console.log("/events/" + card.category + "/" + card._id);
   const monthNames = [
     "January",
     "February",

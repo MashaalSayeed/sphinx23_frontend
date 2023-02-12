@@ -38,7 +38,7 @@ function Menu(props) {
 
   const navigate = useNavigate();
   const curruser = useSelector((state) => state.auth.curruser);
-  // console.log(curruser);
+  // //console.log(curruser);
   useEffect(() => {
     if (curruser != null) {
       setTab([...tabs, "PROFILE"]);
@@ -64,9 +64,9 @@ function Menu(props) {
   const [hover, setHover] = useState("");
   const TimeInterval = 0.02;
   const ChkLog = () => {
-    console.log("log");
+    //console.log("log");
     if (log == "LOGOUT") {
-      console.log("logout");
+      //console.log("logout");
       Logout()
         .then((res) => {
           toast.info(res, toastStyle);
@@ -107,7 +107,7 @@ function Menu(props) {
   );
   const activeTab = useEffect(() => {}, []);
 
-  // console.log(
+  // //console.log(
   //   tabs.findIndex((val, i) => {
   //     if (val == currTab.toUpperCase()) return currTab.toUpperCase();
   //   })
