@@ -155,7 +155,11 @@ function TimeMachine({ notAnim, landing, setLand }) {
           {/* 
         {title ? <div className="home-title"> SPHINX </div> : <></>} */}
 
-          <div className={`cardComp `} ref={parent}>
+          <div
+            className={`cardComp `}
+            ref={parent}
+            style={!landing || !animNotOver ? { animationDelay: 0 } : {}}
+          >
             {textIndex == 1 && (
               <div className="timer">
                 <div className={!landing ? "timer" : "timer timerAnim"}>
