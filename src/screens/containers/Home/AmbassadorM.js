@@ -116,12 +116,10 @@ function Sec1() {
         <div className={style.introBtn}>
           <button
             className={style.introLog}
-            disabled={user && user.profile.isAmbassador}
+            // disabled={user && user.profile.isAmbassador}
             onClick={handleSubmit}
           >
-            {user && user.profile.isAmbassador
-              ? "Already a ambassador"
-              : "Sign Up"}
+            Sign Up
           </button>
           {/* <button className={style.introExp}>EXPLORE</button> */}
         </div>
