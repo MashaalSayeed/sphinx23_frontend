@@ -39,11 +39,11 @@ function HomeNav({
       try {
         setLand(false);
       } catch {
-        console.log("not function");
+        //console.log("not function");
       }
     }
     if (!landing) {
-      console.log(currTab);
+      //console.log(currTab);
       if (currTab == "Home" || currTab == "HOME") navigate("/");
     }
   }, [currTab]);
@@ -70,7 +70,7 @@ function HomeNav({
               className="landing-tab-link"
               key={i}
               onClick={() => {
-                console.log(value);
+                //console.log(value);
                 setCurrTab(value);
               }}
               style={

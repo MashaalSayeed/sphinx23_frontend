@@ -13,10 +13,10 @@ function Test() {
         onUpdate={(err, result) => {
           if (result) {
             setData(result.text);
-            console.log(result.text);
+            //console.log(result.text);
           } else {
             setData("Not Found");
-            console.log(err);
+            //console.log(err);
           }
         }}
       />

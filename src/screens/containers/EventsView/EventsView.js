@@ -28,18 +28,18 @@ function EventsView() {
     progress: undefined,
     theme: "dark",
   };
-  console.log(params.id);
+  //console.log(params.id);
   const currUser = useSelector((state) => state.auth.curruser);
   useEffect(() => {
-    console.log("USef Eeevt");
+    //console.log("USef Eeevt");
     fetchOneEvent(setEvent, params.id)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         setEvent(res);
-        // console.log(event);
+        // //console.log(event);
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
   }, []);
 
@@ -53,13 +53,13 @@ function EventsView() {
     submitQuery(currUser.token, query)
       .then((res) => {
         toast.info(res, toastStyle);
-        console.log(res);
+        //console.log(res);
       })
       .catch((err) => {
         toast.error(err, toastStyle);
-        console.log(err);
+        //console.log(err);
       });
-    console.log(query);
+    //console.log(query);
   };
 
   const tabs = {

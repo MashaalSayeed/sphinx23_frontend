@@ -69,7 +69,7 @@ function Sec1() {
   };
   const user = useSelector((state) => state.auth.curruser);
   const handleSubmit = () => {
-    console.log("Called");
+    //console.log("Called");
     if (user == null) {
       toast.error("Please Login First", toastStyle);
       window.location.href = "/login";
@@ -88,10 +88,10 @@ function Sec1() {
     }
 
     let body = { isAmbassador: true };
-    console.log(body);
+    //console.log(body);
     editUser(body)
       .then((res) => {
-        console.log(res);
+        //console.log(res);
         toast.info(res, toastStyle);
         window.location.href = "/ambassador";
       })
@@ -185,7 +185,7 @@ function Cards(props) {
 function AmbassadorM() {
   const Tabs = ["Home", "Events", "Contact"];
   const [currTab, setCurrTab] = useState("AMBASSADOR");
-  // console.log(currTab);
+  // //console.log(currTab);
   return (
     <div className={style.main}>
       <HomeNav

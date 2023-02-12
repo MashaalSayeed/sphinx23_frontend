@@ -18,7 +18,7 @@ import { queries } from "@testing-library/react";
 const url = process.env.REACT_APP_SERVER_URL;
 
 export const fetchEvents = async (dispatch) => {
-  console.log("Events Fetched");
+  //console.log("Events Fetched");
   await fetch(`${url}/events`, {
     headers: {
       mode: "cors",
@@ -34,12 +34,12 @@ export const fetchEvents = async (dispatch) => {
     });
 };
 export const editUser = async (body) => {
-  console.log("Edit Called");
+  //console.log("Edit Called");
 
   let token = Session.getObject("profile").token;
-  console.log(token);
+  //console.log(token);
   let id = Session.getObject("profile").profile._id;
-  console.log(id);
+  //console.log(id);
   return fetch(`${url}/users/${id}`, {
     method: "PUT",
     headers: {
@@ -56,7 +56,7 @@ export const editUser = async (body) => {
         let profile = Session.getObject("profile");
         profile.profile.isAmbassador = true;
         Session.setObject("profile", profile);
-        console.log(profile);
+        //console.log(profile);
         return data.success;
       }
       throw data;
@@ -66,7 +66,7 @@ export const editUser = async (body) => {
     });
 };
 export const logout = async () => {
-  console.log("Events Fetched");
+  //console.log("Events Fetched");
   let token = Session.get("profile").token;
   return fetch(`${url}/users/logout`, {
     headers: {
@@ -85,7 +85,7 @@ export const logout = async () => {
     });
 };
 export const fetchEventsByCategory = async (category) => {
-  console.log("Events Fetched");
+  //console.log("Events Fetched");
   return fetch(`${url}/events/category/${category}`, {
     headers: {
       mode: "cors",
@@ -102,7 +102,7 @@ export const fetchEventsByCategory = async (category) => {
     });
 };
 export const fetchAdminEvents = async (token, dispatch) => {
-  console.log("AdminEvents Fetched");
+  //console.log("AdminEvents Fetched");
   return fetch(`${url}/events/eventadmin`, {
     headers: {
       mode: "cors",
@@ -112,7 +112,7 @@ export const fetchAdminEvents = async (token, dispatch) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
 
       dispatch(adminEvents(data.events));
       return data.events;
@@ -122,7 +122,7 @@ export const fetchAdminEvents = async (token, dispatch) => {
     });
 };
 export const fetchRegisteredEvents = async (token) => {
-  console.log("AdminEvents Fetched", Session.get("profile").token);
+  //console.log("AdminEvents Fetched", Session.get("profile").token);
   return fetch(`${url}/events/registeredEvents`, {
     headers: {
       mode: "cors",
@@ -132,7 +132,7 @@ export const fetchRegisteredEvents = async (token) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.events);
+      //console.log(data.events);
 
       return data.events;
     })
@@ -141,7 +141,7 @@ export const fetchRegisteredEvents = async (token) => {
     });
 };
 export const fetchUserQueries = async (token) => {
-  console.log("AdminEvents Fetched", Session.get("profile").token);
+  //console.log("AdminEvents Fetched", Session.get("profile").token);
   return fetch(`${url}/queries/uid`, {
     headers: {
       mode: "cors",
@@ -151,7 +151,7 @@ export const fetchUserQueries = async (token) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.queries);
+      //console.log(data.queries);
 
       return data.queries;
     })
@@ -161,7 +161,7 @@ export const fetchUserQueries = async (token) => {
 };
 
 export const fetchUpcoming = async (dispatch) => {
-  console.log("upcoming Fetched");
+  //console.log("upcoming Fetched");
   await fetch(`${url}/events/upcoming`, {
     headers: {
       mode: "cors",
@@ -178,7 +178,7 @@ export const fetchUpcoming = async (dispatch) => {
 };
 
 export const fetchCompleted = async (dispatch) => {
-  console.log("Completed Fetched");
+  //console.log("Completed Fetched");
   await fetch(`${url}/events/completed`, {
     headers: {
       mode: "cors",
@@ -195,7 +195,7 @@ export const fetchCompleted = async (dispatch) => {
 };
 
 export const fetchUpdates = async (dispatch) => {
-  console.log("Updates Fetched");
+  //console.log("Updates Fetched");
   await fetch(`${url}/events/updates`, {
     headers: {
       mode: "cors",
@@ -212,7 +212,7 @@ export const fetchUpdates = async (dispatch) => {
 };
 
 export const fetchPasses = async (dispatch) => {
-  console.log("Passes Fetched");
+  //console.log("Passes Fetched");
   await fetch(`${url}/passes`, {
     headers: {
       mode: "cors",
@@ -228,7 +228,7 @@ export const fetchPasses = async (dispatch) => {
     });
 };
 export const createEventPaymentRequest = async (body) => {
-  console.log("Event Fetched", body.userList);
+  //console.log("Event Fetched", body.userList);
   return fetch(`${url}/payment/event`, {
     headers: {
       "Content-Type": "application/json",
@@ -243,7 +243,7 @@ export const createEventPaymentRequest = async (body) => {
     .then((data) => {
       if (data.success) {
         // setEvent(data.event);
-        console.log(data);
+        //console.log(data);
         return data;
       }
       throw data;
@@ -253,7 +253,7 @@ export const createEventPaymentRequest = async (body) => {
     });
 };
 export const registerForEvent = async (signature, body) => {
-  console.log("Event Fetched");
+  //console.log("Event Fetched");
   return fetch(`${url}/events/register`, {
     headers: {
       "Content-Type": "application/json",
@@ -269,7 +269,7 @@ export const registerForEvent = async (signature, body) => {
     .then((data) => {
       if (data.success) {
         // setEvent(data.event);
-        console.log(data);
+        //console.log(data);
         return data.success;
       }
       throw data;
@@ -279,7 +279,7 @@ export const registerForEvent = async (signature, body) => {
     });
 };
 export const fetchOneEvent = async (setEvent, eventId) => {
-  console.log("Event Fetched");
+  //console.log("Event Fetched");
   return fetch(`${url}/events/${eventId}`, {
     headers: {
       mode: "cors",
@@ -290,7 +290,7 @@ export const fetchOneEvent = async (setEvent, eventId) => {
     .then((data) => {
       if (data.success) {
         setEvent(data.event);
-        console.log(data);
+        //console.log(data);
         return data.event;
       }
       throw data;
@@ -300,7 +300,7 @@ export const fetchOneEvent = async (setEvent, eventId) => {
     });
 };
 export const fetchOnePass = async (setPass, passId) => {
-  console.log("Pass Fetched", passId);
+  //console.log("Pass Fetched", passId);
   await fetch(`${url}/passes/${passId}`, {
     headers: {
       mode: "cors",
@@ -309,7 +309,7 @@ export const fetchOnePass = async (setPass, passId) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.pass);
+      //console.log(data.pass);
       setPass(data.pass);
     })
     .catch((err) => {
@@ -317,8 +317,8 @@ export const fetchOnePass = async (setPass, passId) => {
     });
 };
 export const verifyMailOTP = async (body) => {
-  console.log(Session.getObject("profile").token);
-  console.log(body);
+  //console.log(Session.getObject("profile").token);
+  //console.log(body);
   await fetch(`${url}/verification/verifyEmailOTP`, {
     headers: {
       "Content-Type": "application/json",
@@ -331,12 +331,12 @@ export const verifyMailOTP = async (body) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       if (data.success) {
-        console.log(data);
+        //console.log(data);
         let profile = Session.getObject("profile");
         profile.profile = data.profile;
-        console.log(profile);
+        //console.log(profile);
         Session.setObject("profile", profile);
         Session.remove("time");
         return data.success;
@@ -346,13 +346,13 @@ export const verifyMailOTP = async (body) => {
     .catch((error) => {
       throw error;
       // window.location.href = "/";
-      // console.log(error);
+      // //console.log(error);
     });
 };
 
 export const verifyMobileOTP = async (body) => {
-  console.log(Session.getObject("profile").token);
-  console.log(body);
+  //console.log(Session.getObject("profile").token);
+  //console.log(body);
   await fetch(`${url}/verification/verifyMobileOTP`, {
     headers: {
       "Content-Type": "application/json",
@@ -365,12 +365,12 @@ export const verifyMobileOTP = async (body) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       if (data.success) {
-        console.log(data);
+        //console.log(data);
         let profile = Session.getObject("profile");
         profile.profile = data.profile;
-        console.log(profile);
+        //console.log(profile);
         Session.setObject("profile", profile);
         Session.remove("time");
         return data.success;
@@ -379,14 +379,14 @@ export const verifyMobileOTP = async (body) => {
       }
     })
     .catch((error) => {
-      console.log("ERROR");
+      //console.log("ERROR");
       throw error;
       // window.location.href = "/";
-      // console.log(error);
+      // //console.log(error);
     });
 };
 export const sendMobileOTP = async (data) => {
-  console.log(Session.getObject("profile").token);
+  //console.log(Session.getObject("profile").token);
 
   await fetch(`${url}/verification/sendMobileOTP`, {
     headers: {
@@ -400,7 +400,7 @@ export const sendMobileOTP = async (data) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       if (data.success) {
         Session.set("time", data.time);
         return data.time;
@@ -410,13 +410,13 @@ export const sendMobileOTP = async (data) => {
     .catch((error) => {
       throw error;
       // window.location.href = "/";
-      // console.log(error);
+      // //console.log(error);
     });
 };
 
 export const sendForgotOTP = async (body) => {
-  // console.log(Session.getObject("profile").token);
-  console.log(body);
+  // //console.log(Session.getObject("profile").token);
+  //console.log(body);
   return fetch(`${url}/verification/sendForgotOTP`, {
     headers: {
       "Content-Type": "application/json",
@@ -429,7 +429,7 @@ export const sendForgotOTP = async (body) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       if (data.success) {
         // Session.set("time", data.time);
         return data.time;
@@ -439,12 +439,12 @@ export const sendForgotOTP = async (body) => {
     .catch((error) => {
       throw error;
       // window.location.href = "/";
-      // console.log(error);
+      // //console.log(error);
     });
 };
 
 export const resetPassword = async (body) => {
-  console.log(Session.getObject("profile").token);
+  //console.log(Session.getObject("profile").token);
 
   return fetch(`${url}/verification/resetPassword`, {
     headers: {
@@ -458,7 +458,7 @@ export const resetPassword = async (body) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       if (data.success) {
         return data.success;
       }
@@ -467,11 +467,11 @@ export const resetPassword = async (body) => {
     .catch((error) => {
       throw error;
       // window.location.href = "/";
-      // console.log(error);
+      // //console.log(error);
     });
 };
 export const verifyForgotOTP = async (body) => {
-  console.log(Session.getObject("profile").token);
+  //console.log(Session.getObject("profile").token);
 
   return fetch(`${url}/verification/verifyForgotOTP`, {
     headers: {
@@ -485,7 +485,7 @@ export const verifyForgotOTP = async (body) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       if (data.success) {
         return data.token;
       }
@@ -494,11 +494,11 @@ export const verifyForgotOTP = async (body) => {
     .catch((error) => {
       throw error;
       // window.location.href = "/";
-      // console.log(error);
+      // //console.log(error);
     });
 };
 export const sendVerificationMail = async () => {
-  console.log(Session.getObject("profile").token);
+  //console.log(Session.getObject("profile").token);
 
   return fetch(`${url}/verification/sendEmailOTP`, {
     headers: {
@@ -510,7 +510,7 @@ export const sendVerificationMail = async () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       if (data.success) {
         Session.set("time", data.time);
         return data.time;
@@ -520,13 +520,13 @@ export const sendVerificationMail = async () => {
     .catch((error) => {
       throw error;
       // window.location.href = "/";
-      // console.log(error);
+      // //console.log(error);
     });
 };
 
 export const loginRegister = async (dispatch, creds) => {
-  console.log("Login Called");
-  console.log(creds);
+  //console.log("Login Called");
+  //console.log(creds);
   return fetch(`${url}/users`, {
     headers: {
       "Content-Type": "application/json",
@@ -538,10 +538,10 @@ export const loginRegister = async (dispatch, creds) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       if (data.success) {
         const profile = { token: data.token, profile: data.profile };
-        console.log(data.success);
+        //console.log(data.success);
         dispatch(loginReg(profile));
         return data;
       }
@@ -550,12 +550,12 @@ export const loginRegister = async (dispatch, creds) => {
     .catch((error) => {
       throw error;
       // window.location.href = "/";
-      // console.log(error);
+      // //console.log(error);
     });
 };
 
 export const createEvent = async (dispatch, eventData, token) => {
-  console.log("Create Event Called", token);
+  //console.log("Create Event Called", token);
   await fetch(`${url}/events/create`, {
     headers: {
       mode: "cors",
@@ -568,7 +568,7 @@ export const createEvent = async (dispatch, eventData, token) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data.event);
+        //console.log(data.event);
         dispatch(newEvent(data.event));
         return data;
       } else {
@@ -584,8 +584,8 @@ export const createEvent = async (dispatch, eventData, token) => {
 };
 
 export const addTeamsToRound = async (token, body) => {
-  console.log("Create PASS Called");
-  // console.log(data.event);
+  //console.log("Create PASS Called");
+  // //console.log(data.event);
   await fetch(`${url}/events/edit_result`, {
     headers: {
       mode: "cors",
@@ -599,7 +599,7 @@ export const addTeamsToRound = async (token, body) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data);
+        //console.log(data);
         // alert(data.success);
         window.location.href = "/eventDetails/event/" + body.event + "/2";
       }
@@ -609,7 +609,7 @@ export const addTeamsToRound = async (token, body) => {
     });
 };
 export const addResults = async (token, body) => {
-  console.log("Add Results Called");
+  //console.log("Add Results Called");
   await fetch(`${url}/events/add_result`, {
     headers: {
       mode: "cors",
@@ -623,7 +623,7 @@ export const addResults = async (token, body) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data);
+        //console.log(data);
         // alert(data.success);
         window.location.href = "/eventDetails/event/" + body.event + "/2";
       }
@@ -638,7 +638,7 @@ export const createPass = async (
   token,
   setCreateStatus
 ) => {
-  console.log("Create PASS Called");
+  //console.log("Create PASS Called");
   await fetch(`${url}/passes`, {
     headers: {
       mode: "cors",
@@ -650,7 +650,7 @@ export const createPass = async (
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       if (data.success) {
         // alert(data.success);
         return data.success;
@@ -659,13 +659,13 @@ export const createPass = async (
       }
     })
     .catch((error) => {
-      console.log("PAss", error);
+      //console.log("PAss", error);
       throw error;
     });
 };
 
 export const submitQuery = async (token, body) => {
-  console.log("getUsersByPass");
+  //console.log("getUsersByPass");
   return fetch(`${url}/queries/create`, {
     headers: {
       "Content-Type": "application/json",
@@ -690,7 +690,7 @@ export const submitQuery = async (token, body) => {
     });
 };
 export const submitQueryResponse = async (token, body) => {
-  console.log("getUsersByPass");
+  //console.log("getUsersByPass");
   await fetch(`${url}/queries/update`, {
     headers: {
       "Content-Type": "application/json",
@@ -721,7 +721,7 @@ export const getUsersByPass = async (
   setCurrentRecords,
   setNpage
 ) => {
-  console.log("getUsersByPass");
+  //console.log("getUsersByPass");
   await fetch(`${url}/passes/users/${passID}/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",
@@ -733,7 +733,7 @@ export const getUsersByPass = async (
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data.users);
+        //console.log(data.users);
         setCurrentRecords(data.users);
         setNpage(data.totalPages);
       }
@@ -743,7 +743,7 @@ export const getUsersByPass = async (
     });
 };
 export const getAllResults = (eventId) => {
-  console.log("getUsersbyPage");
+  //console.log("getUsersbyPage");
   return fetch(`${url}/participant/resultsAll/${eventId}`, {
     headers: {
       "Content-Type": "application/json",
@@ -755,7 +755,7 @@ export const getAllResults = (eventId) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data);
+        //console.log(data);
         if (data.team) {
           return data.team;
         }
@@ -766,7 +766,7 @@ export const getAllResults = (eventId) => {
     });
 };
 export const getUpdatesForEvent = (eventId) => {
-  console.log("getUsersbyPage");
+  //console.log("getUsersbyPage");
   return fetch(`${url}/events/updatesEvent/${eventId}`, {
     headers: {
       "Content-Type": "application/json",
@@ -778,7 +778,7 @@ export const getUpdatesForEvent = (eventId) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data);
+        //console.log(data);
 
         return data.updates;
       }
@@ -796,7 +796,7 @@ export const getResults = ({
   currentPage,
   setNpage,
 }) => {
-  console.log("getUsersbyPage");
+  //console.log("getUsersbyPage");
   return fetch(
     `${url}/participant/results/${eventId}/${round}/${currentPage}`,
     {
@@ -811,10 +811,10 @@ export const getResults = ({
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data);
+        //console.log(data);
         if (data.team) {
           setCurrentRecords(data.team);
-          console.log(data.totalPages);
+          //console.log(data.totalPages);
           setNpage(data.totalPages);
           return data.team;
         }
@@ -840,7 +840,7 @@ export const getQueriesByEvent = ({
   } else {
     status = 2;
   }
-  console.log("getUsersbyPage", token);
+  //console.log("getUsersbyPage", token);
   fetch(`${url}/queries/eid/${currentPage}/${status}`, {
     headers: {
       "Content-Type": "application/json",
@@ -851,11 +851,11 @@ export const getQueriesByEvent = ({
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       if (data.queries) {
         dispatch(loading(true));
         setCurrentRecords(data.queries);
-        console.log(status, currentPage, data.queries);
+        //console.log(status, currentPage, data.queries);
         setNpage(data.totalPages);
         dispatch(loading(false));
         return data.totalPages;
@@ -871,7 +871,7 @@ export const getUsers = ({
   currentPage,
   setNpage,
 }) => {
-  console.log("getUsersbyPage");
+  //console.log("getUsersbyPage");
   fetch(`${url}/users/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",
@@ -883,10 +883,10 @@ export const getUsers = ({
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data);
+        //console.log(data);
         if (data.users) {
           setCurrentRecords(data.users);
-          console.log(data.totalPages);
+          //console.log(data.totalPages);
           setNpage(data.totalPages);
           return data.totalPages;
         }
@@ -903,7 +903,7 @@ export const getAmbassadors = ({
   currentPage,
   setNpage,
 }) => {
-  console.log("get ambassadors");
+  //console.log("get ambassadors");
   fetch(`${url}/ambassadors/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",
@@ -915,8 +915,8 @@ export const getAmbassadors = ({
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data.success);
-        console.log(data);
+        //console.log(data.success);
+        //console.log(data);
 
         setCurrentRecords(data.ambassador);
         setNpage(data.totalPages);
@@ -929,7 +929,7 @@ export const getAmbassadors = ({
 };
 
 export const getPayments = (token, setPayments) => {
-  console.log("getUsers");
+  //console.log("getUsers");
   fetch(`${url}/payment/userby`, {
     headers: {
       "Content-Type": "application/json",
@@ -941,7 +941,7 @@ export const getPayments = (token, setPayments) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data.message);
+        //console.log(data.message);
         setPayments(data.payments);
       }
     })
@@ -964,9 +964,9 @@ export const getUsersId = async (token, email, setIds) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data.id);
-        // console.log(setIds);
-        // console.log(setIds);
+        //console.log(data.id);
+        // //console.log(setIds);
+        // //console.log(setIds);
         setIds((prevState) => [...prevState, data.id]);
         return data.id;
       }
@@ -974,7 +974,7 @@ export const getUsersId = async (token, email, setIds) => {
     })
     .catch((error) => {
       throw error;
-      // console.log(error);
+      // //console.log(error);
     });
   // return userData;
 };
@@ -985,8 +985,8 @@ export const updateEvent = async (
   token,
   setCreateStatus
 ) => {
-  console.log("Update Event Called");
-  console.log(eventData);
+  //console.log("Update Event Called");
+  //console.log(eventData);
   await fetch(`${url}/events/update/${eventId}`, {
     headers: {
       mode: "cors",
@@ -1013,7 +1013,7 @@ export const updateEvent = async (
 };
 
 export const updatePass = async (passId, passData, token) => {
-  console.log("Update PASS Called");
+  //console.log("Update PASS Called");
   await fetch(`${url}/passes/${passId}`, {
     headers: {
       mode: "cors",
@@ -1045,7 +1045,7 @@ export const getTeamsByEvent = async (
   setNpage
 ) => {
   let profile = Session.getObject("profile");
-  console.log(eventId, profile.profile.token);
+  //console.log(eventId, profile.profile.token);
   await fetch(`${url}/participant/teams/${eventId}/${currentPage}`, {
     headers: {
       "Content-Type": "application/json",
@@ -1057,7 +1057,7 @@ export const getTeamsByEvent = async (
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data);
+        //console.log(data);
         setCurrentRecords(data.team);
         setNpage(data.totalPages);
       }

@@ -49,7 +49,7 @@ function PassForm({ setCreate, edit, currpass }) {
   const eventa = useSelector((state) => state.auth.events);
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      console.log(event.target.files[0]);
+      //console.log(event.target.files[0]);
 
       setImage(event.target.files[0]);
     }
@@ -153,20 +153,20 @@ function PassForm({ setCreate, edit, currpass }) {
       amount: amount,
       eventId: newarr,
     };
-    console.log(pass_Data);
+    //console.log(pass_Data);
     // const currentTime = Date.now();
     // passImage.name = currentTime;
     let formData = new FormData();
     formData.append("file", passImage);
     formData.append("body", JSON.stringify(pass_Data));
-    console.log(formData);
+    //console.log(formData);
     toastId.current = toast.loading("Creating Pass");
     createPass(dispatch, formData, token, setCreateStatus)
       .then((res) => {
         toast.info("Pass Added", toastStyle);
         window.location.href = "/superAdmin";
-        console.log("PAss Added");
-        console.log(toastId.current);
+        //console.log("PAss Added");
+        //console.log(toastId.current);
         toast.update(toastId.current, {
           render: "Pass Added",
           type: "success",
@@ -207,7 +207,7 @@ function PassForm({ setCreate, edit, currpass }) {
       amount: amount,
       eventId: newarr,
     };
-    console.log(pass_Data);
+    //console.log(pass_Data);
     toastId.current = toast.loading("Updating Pass");
 
     updatePass(currpass._id, pass_Data, token)

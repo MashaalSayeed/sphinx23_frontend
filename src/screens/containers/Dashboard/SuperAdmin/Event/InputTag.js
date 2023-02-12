@@ -41,7 +41,7 @@ export default function InputTag({ setEventCoor }) {
   };
   const [inputEmail, setEmail] = useState("");
   const handleChange = (e) => {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     if (e.target.value[e.target.value.length - 1] === " ") {
       handleOnSubmit(e);
       setEmail("");
