@@ -136,7 +136,7 @@ function App() {
           <Routes>
             {/* <Route index element={<Landing />} />
             <Route path="/" element={<TimeMachine notAnim={true} />} /> */}
-            <Route path="/login" element={<LoginScreen />} />
+            {/* <Route path="/login" element={<LoginScreen />} /> */}
             <Route path="/ambassador" element={<AmbassadorM />} />
             {/* <Route path="/ourteam" element={<OurTeam />} /> */}
             {/* <Route path="/home" element={<TimeMachine notAnim={true} />} /> */}
