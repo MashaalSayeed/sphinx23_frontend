@@ -36,7 +36,7 @@
 .introHead
 {
     color: #FFFFFF;
-
+    line-height: 2.2rem;
     font-family: 'wity2';
     font-size: 2.3rem;
     margin-bottom: 3vh;
@@ -219,7 +219,7 @@ border: 1px solid #FFFFFF;
     justify-content: center;
 
 }
-@media (max-width: 700px) {
+@media (max-width: 900px) {
     .sec1
     {
         flex-direction: column;
@@ -233,8 +233,9 @@ border: 1px solid #FFFFFF;
         left: 0;
         height: 60vh;
     }
+    .l
     .mainImg>img{
-        width: 100%;
+        width: 100vw;
         height: 100%;
         object-fit: cover;
         margin: auto;
@@ -268,11 +269,21 @@ border: 1px solid #FFFFFF;
     {
         font-size: 2rem;
         word-spacing: 0.6rem;
+        line-height: 2.4rem;
+    }
+    .introHead
+    {
+        line-height: 2.9rem;
     }
     .sec2
     {
         padding: 10px 10px;
         padding-left: 20px;
+    }
+    .Pname
+    {
+        font-size: 10vw;
+        line-height: 2.9rem;
     }
     .pointsCon
     {
@@ -280,7 +291,11 @@ border: 1px solid #FFFFFF;
     }
     .Pinfo
     {
-        width: 100%;
+        width: 70vw;
+    }
+    .Pindex
+    {
+        font-size: 20vw;
     }
     .Pcon
     {
