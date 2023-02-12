@@ -197,7 +197,7 @@ function AmbassadorM() {
       />
       <Sec1 />
       <Sec2 />
-      <Footer setCurrTab={() => {}} />
+      <Footer setCurrTab={setCurrTab} />
     </div>
   );
 }

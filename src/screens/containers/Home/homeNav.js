@@ -18,10 +18,12 @@ function HomeNav({
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
   useEffect(() => {
-    if (currTab == "Events") navigate("/comming");
+    if (currTab == "Events" || currTab == "EVENTS") navigate("/comming");
     if (currTab == "PROFILE") navigate("/dashboard");
     if (currTab == "AMBASSADOR") navigate("/ambassador");
     if (currTab == "Contact") {
+      // navigate("/");
+
       window.location.href = "#contact";
     }
     if (currTab == "SCHEDULE") navigate("/comming");

@@ -153,7 +153,7 @@ function TimeMachine({ notAnim, landing, setLand }) {
             }
           ></img>
           {/* 
-      {title ? <div className="home-title"> SPHINX </div> : <></>} */}
+        {title ? <div className="home-title"> SPHINX </div> : <></>} */}
 
           <div className={`cardComp `} ref={parent}>
             {textIndex == 1 && (
@@ -202,7 +202,7 @@ function TimeMachine({ notAnim, landing, setLand }) {
             style={notAnim ? { animation: "none", opacity: "1" } : {}}
           >
             <div className="machine-text-header">
-              Let’s go on an adventurous time travel{" "}
+              Let’s go on adventurous time travel{" "}
             </div>
             <div className="machine-text-sub">
               "Join us on a journey through time and space - the ultimate Time
@@ -213,9 +213,14 @@ function TimeMachine({ notAnim, landing, setLand }) {
 
         {!landing || !animNotOver ? (
           <>
-            <About width={width} />
+            <About
+              width={width}
+              activeSection={activeSection}
+              handleSectionClick={handleSectionClick}
+            />
+
             {/* <Ambassador />
-        <Activities /> <Theme /> */}
+          <Activities /> <Theme /> */}
             <Ambassador width={width} />
             <Activities width={width} />
             <Theme width={width} />
