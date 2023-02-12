@@ -112,7 +112,7 @@ border-radius: 5px;
 {
     position: relative;
     width: 25%;
-    min-width: 320px;
+    min-width: 250px;
     height: 260px;
 }
 .Mcard
@@ -296,6 +296,10 @@ border: 1px solid #FFFFFF;
     .Pindex
     {
         font-size: 20vw;
+    }
+    .Card
+    {
+        min-width: 320px;
     }
     .Pcon
     {
