@@ -116,10 +116,10 @@ function Sec1() {
         <div className={style.introBtn}>
           <button
             className={style.introLog}
-            disabled={user != null && user.profile.isAmbassador}
+            disabled={user && user.profile.isAmbassador}
             onClick={handleSubmit}
           >
-            {user != null && user.profile.isAmbassador
+            {user && user.profile.isAmbassador
               ? "Already a ambassador"
               : "Sign Up"}
           </button>
@@ -198,7 +198,7 @@ function AmbassadorM() {
       />
       <Sec1 />
       <Sec2 />
-      <Footer setCurrTab={() => {}} />
+      <Footer setCurrTab={setCurrTab} />
     </div>
   );
 }
