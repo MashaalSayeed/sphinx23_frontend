@@ -222,7 +222,7 @@ function TimeMachine({ notAnim, landing, setLand }) {
           <Ambassador width={width} />
           <Activities width={width} />
           <Theme width={width} />
-          <Footer />
+          <Footer setCurrTab={setCurrTab} />
         </>
       ) : (
         <></>
