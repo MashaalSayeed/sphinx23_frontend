@@ -2,6 +2,7 @@ import { color } from "@mui/system";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { RandomReveal } from "react-random-reveal";
 import { Parallax, ParallaxBanner } from "react-scroll-parallax";
 import pyramid from "../../../images/activityPyramid.png";
@@ -13,7 +14,7 @@ function Activities(props) {
   const [view, setView] = useState(false);
   const [progress, setProgress] = useState(0);
   const [progress2, setProgress2] = useState(0);
-
+  const navigate = useNavigate();
   const [scrollPos, setScrollPos] = useState(0);
 
   // useEffect(() => {
@@ -118,6 +119,10 @@ function Activities(props) {
                   background: "#FFA20F",
                   color: "white",
                   padding: "10px 25px",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  navigate("/events");
                 }}
               >
                 Explore

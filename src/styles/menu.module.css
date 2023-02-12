@@ -9,6 +9,7 @@
     src: url('../images/wity.ttf');
   }
   
+
 .container
 {
     width: 50vw;
@@ -50,6 +51,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
+    cursor: pointer;
 }
 .closebtn
 {
@@ -192,7 +194,8 @@ margin-bottom: 25px;
 }
 .ele
 {
-    display:flex
+    display:flex;
+    cursor: pointer;
 }
 .page
 {
@@ -219,7 +222,7 @@ clip-path: polygon(0% 0%, 100% 0, 100% 70%, 90% 100%, 0% 100%);
 /* identical to box height */
 
 text-align: center;
-
+cursor: pointer;
 color: #000000;
 margin-right: 25px;
 margin-bottom: 25px;
@@ -291,5 +294,18 @@ margin-bottom: 25px;
     {
         width: 83%;
     }
+    .linkActive
+    {
+        padding: 15px 20px 10px 7px; 
+    }
+    .linkActive2
+    {
+        padding: 15px 20px 10px 7px; 
+    }
+    .links
+    {
+        padding: 15px 20px 10px 7px; 
+    }
+
 
   }

@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./footer.module.css";
-
+import { useNavigate } from "react-router-dom";
 import pyramid from "../../../images/footer/pyramid.svg";
 import logo from "../../../images/footer/logo.png";
 import mysterybox from "../../../images/footer/mysterybox.png";
@@ -11,10 +11,17 @@ import arrow from "../../../images/arrow.png";
 import arrow2 from "../../../images/arrow2.png";
 import linkedin from "../../../images/linkedin.png";
 import barCode from "../../../images/barCode.png";
+import { Navigate } from "react-router-dom";
 const links = [
-  { icon: insta, link: "" },
-  { icon: facebook, link: "" },
-  { icon: linkedin, link: "" },
+  {
+    icon: insta,
+    link: "https://instagram.com/sphinx_mnit?igshid=YmMyMTA2M2Y=",
+  },
+  { icon: facebook, link: "https://www.facebook.com/sphinxMNIT" },
+  {
+    icon: linkedin,
+    link: "https://www.linkedin.com/company/sphinx-mnit-jaipur/",
+  },
 ];
 
 function StayInLoop() {
@@ -37,14 +44,14 @@ function StayInLoop() {
 
 function QuickLinks() {
   const links = {
-    Events: "#",
-    Dashboard: "#",
-    Schedule: "#",
-    FAQs: "#",
-    "Our Team": "#",
-    "Campus Ambassador": "#",
-    Sponsors: "#",
-    "About us": "#",
+    Events: "events",
+    Dashboard: "dashboard",
+    // Schedule: "#",
+    // FAQs: "#",
+    // "Our Team": "#",
+    "Campus Ambassador": "ambassador",
+    // Sponsors: "#",
+    "About us": "#about",
   };
 
   return (
@@ -73,7 +80,8 @@ function QuickLinks() {
   );
 }
 
-function GetInTouch() {
+function GetInTouch({ setCurrTab }) {
+  const navigate = useNavigate();
   return (
     <div className={styles.col3}>
       <div className={styles.getintouch}>
@@ -88,9 +96,12 @@ function GetInTouch() {
             );
           })}
         </div>
-        <div className={styles.arrow}>
-          <img src={arrow}></img>
-        </div>
+        <a href="#home">
+          {" "}
+          <div onClick={setCurrTab("home")} className={styles.arrow}>
+            <img src={arrow}></img>
+          </div>
+        </a>
       </div>
       {/* <div className={styles.gradLine}></div> */}
       <div className={styles.scanit}>
@@ -101,19 +112,22 @@ function GetInTouch() {
   );
 }
 
-function Footer() {
+function Footer({ setCurrTab }) {
   return (
-    <div className={styles.container}>
-      <div className={styles.gradLine2}></div>
-      <div className={styles.contents}>
-        <StayInLoop />
-        <QuickLinks />
-        <GetInTouch />
+    <a id="contact">
+      {" "}
+      <div className={styles.container}>
+        {/* <div className={styles.gradLine2} style={{ marginTop: "-1px" }}></div> */}
+        <div className={styles.contents}>
+          <StayInLoop />
+          <QuickLinks />
+          <GetInTouch setCurrTab={setCurrTab} />
+        </div>
+        {/* <div className={styles.credits}>
+      <p>Designed by SUBU</p>
+    </div> */}
       </div>
-      <div className={styles.credits}>
-        <p>Designed by SUBU</p>
-      </div>
-    </div>
+    </a>
   );
 }
 

@@ -18,9 +18,15 @@ function HomeNav({
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
   useEffect(() => {
-    if (currTab == "Events") navigate("/events");
-    if (currTab == "Profile") navigate("/dashboard");
+    if (currTab == "Events") navigate("/comming");
+    if (currTab == "PROFILE") navigate("/dashboard");
     if (currTab == "AMBASSADOR") navigate("/ambassador");
+    if (currTab == "Contact") {
+      window.location.href = "#contact";
+    }
+    if (currTab == "SCHEDULE") navigate("/comming");
+    if (currTab == "TEAM") navigate("/comming");
+    if (currTab == "SPONSORS") navigate("/comming");
     if (currTab == "Logout") {
       //callLogout
       Session.remove("profile");
@@ -80,7 +86,9 @@ function HomeNav({
         className="landing-ham"
         onClick={() => {
           setMenu(true);
+          document.body.style.overflowY = "hidden";
         }}
+        style={{ cursor: "pointer" }}
       >
         <img src={burger}></img>
       </div>

@@ -18,6 +18,7 @@ body{
     animation: hideScroll 2500ms;
     background: black;
 }
+
 body::-webkit-scrollbar{
     display: none;
     width: 0;
@@ -212,7 +213,7 @@ padding-right: 20px;
 .landing-navbar-notAnim
 {
     padding-top: 20px;
-    z-index: 10;
+    z-index: 100;
     height: 65px;
     position: fixed;
     background: rgba(255, 255, 255, 0.05);
@@ -429,6 +430,7 @@ position: absolute;
 
     
 }
+
 @keyframes landingLine {
        0% {
       filter: brightness(0.7);
