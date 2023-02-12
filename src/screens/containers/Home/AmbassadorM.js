@@ -113,16 +113,18 @@ function Sec1() {
           There will be one student from each college chosen for this position,
           who will be in charge of the entire contingent from that college.
         </div>
-        <div className={style.introBtn}>
+        {/* <div className={style.introBtn}>
           <button
             className={style.introLog}
-            // disabled={user && user.profile.isAmbassador}
+            disabled={user != null && user.profile.isAmbassador}
             onClick={handleSubmit}
           >
-            Sign Up
-          </button>
-          {/* <button className={style.introExp}>EXPLORE</button> */}
-        </div>
+            {user != null && user.profile.isAmbassador
+              ? "Already a ambassador"
+              : "Sign Up"}
+          </button> */}
+        {/* <button className={style.introExp}>EXPLORE</button> */}
+        {/* </div> */}
       </div>
 
       <div className={style.cardsCon}>
@@ -196,7 +198,7 @@ function AmbassadorM() {
       />
       <Sec1 />
       <Sec2 />
-      <Footer setCurrTab={setCurrTab} />
+      <Footer setCurrTab={() => {}} />
     </div>
   );
 }

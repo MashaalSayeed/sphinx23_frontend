@@ -106,12 +106,20 @@ function Activities(props) {
                 )}
               </div>
               <div className="about-Maincontent">
-                Sphinx is the largest technology fest in Rajasthan, held
-                annually at the MNIT Jaipur campus. The fest attracts thousands
-                of students from all over the country, who come to participate
-                in a wide range of technical and non-technical events. The event
-                includes workshops, competitions, guest lectures and exhibitions
-                on the latest technology and innovations.
+                Sphinx is a platform for students to showcase their technical
+                skills and participate in events related to engineering,
+                computer science, and other technical disciplines. These events
+                typically include competitions in areas such as coding,
+                robotics, and hardware design. Workshops and guest lectures by
+                industry experts provide students with an opportunity to expand
+                their knowledge and network with professionals. Technical
+                festivals also offer students the chance to collaborate with
+                their peers and form inter-college teams to participate in
+                events such as hackathons, where they can work together to
+                develop innovative solutions to real-world problems. These
+                festivals are a great way for students to hone their technical
+                skills, build their portfolios, and get recognized for their
+                achievements.
               </div>
               <button
                 className="home-about-btn"
