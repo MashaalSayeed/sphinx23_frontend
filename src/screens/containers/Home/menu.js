@@ -24,26 +24,40 @@ function Menu(props) {
   const { menu, setMenu, currTab, setCurrTab } = props;
   const [anim, setAnim] = useState(true);
   const [close, setClose] = useState(false);
-  const navigate = useNavigate();
-  const curruser = useSelector((state) => state.auth.curruser);
-  useEffect(() => {
-    if (curruser == null) {
-      setLog("LOGIN/REGISTER");
-    } else {
-      setLog("LOGOUT");
-    }
-  }, [curruser]);
-  const tabs = [
+  const [tabs, setTab] = useState([
     "HOME",
-    "ABOUT",
-    "CONTACT",
+    // "ABOUT",
+    // "CONTACT",
     "AMBASSADOR",
     "EVENTS",
-    // "SCHEDULE",
-    // "TEAM",
-    "THEME",
-    // "SPONSORS",
-  ];
+    "SCHEDULE",
+    "TEAM",
+    // "THEME",
+    "SPONSORS",
+  ]);
+  const navigate = useNavigate();
+  const curruser = useSelector((state) => state.auth.curruser);
+  // console.log(curruser);
+  useEffect(() => {
+    if (curruser != null) {
+      setTab([...tabs, "PROFILE"]);
+      setLog("LOGOUT");
+    } else {
+      setTab([
+        "HOME",
+        // "ABOUT",
+        // "CONTACT",
+        "AMBASSADOR",
+        "EVENTS",
+        "SCHEDULE",
+        "TEAM",
+        // "THEME",
+        "SPONSORS",
+      ]);
+      setLog("LOGIN/REGISTER");
+    }
+  }, []);
+
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
   const alphabet = alpha.map((x) => String.fromCharCode(x));
   const [hover, setHover] = useState("");
@@ -250,6 +264,7 @@ function Menu(props) {
         className={style.sec2}
         onClick={() => {
           setClose(true);
+          document.body.style.overflowY = "scroll";
           setTimeout(() => {
             setMenu(false);
           }, 350);

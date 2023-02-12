@@ -31,9 +31,9 @@ export default function About(props) {
         isPlaying
         duration={1}
         revealDuration={1}
-        revealEasing="linear"
         updateInterval={interval}
         characterSet={alphabet}
+        ignoreCharacterSet={[" "]}
         characters={value}
         // onComplete={() => {
         //   setHover("");
@@ -129,9 +129,9 @@ export default function About(props) {
           <div className="about-page--text-head">
             {" "}
             {progress > (width ? 0.1 : 0.4) ? (
-              random("ABOUT US")
+              random("ABOUT")
             ) : (
-              <> ABOUT US</>
+              <> ABOUT</>
             )}{" "}
           </div>
           <div className="about-page--text-body">

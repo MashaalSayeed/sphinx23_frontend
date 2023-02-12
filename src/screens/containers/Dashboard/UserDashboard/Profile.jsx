@@ -1,13 +1,15 @@
 import "./../../../../styles/userDashboard.css";
+import prof from '../../../../images/user.png'
 import { useSelector } from "react-redux";
 
 const Profile = () => {
 	const currUser = useSelector((state) => state.auth.curruser);
+	console.log(currUser);
 	return (
 		<div className="ud__profile">
 			<img
 				className="ud__profile__image"
-				src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+				src={prof}
 				alt="profile"
 			/>
 			<div className="ud__profile__name">

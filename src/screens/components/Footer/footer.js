@@ -117,7 +117,7 @@ function Footer({ setCurrTab }) {
     <a id="contact">
       {" "}
       <div className={styles.container}>
-        <div className={styles.gradLine2}></div>
+        {/* <div className={styles.gradLine2} style={{ marginTop: "-1px" }}></div> */}
         <div className={styles.contents}>
           <StayInLoop />
           <QuickLinks />

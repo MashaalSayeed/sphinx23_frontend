@@ -70,21 +70,23 @@ function Sec1() {
   const user = useSelector((state) => state.auth.curruser);
   const handleSubmit = () => {
     console.log("Called");
-    if (!user) {
+    if (user == null) {
       toast.error("Please Login First", toastStyle);
       window.location.href = "/login";
       return;
-    }
-    if (user.profile.isMnit) {
-      toast.error("This is not for MNIT Students", toastStyle);
+    } else {
+      if (user.profile.isMnit) {
+        toast.error("This is not for MNIT Students", toastStyle);
 
-      return;
-    }
-    if (user.profile.isAmbassador) {
-      toast.error("You are already a Ambassador", toastStyle);
+        return;
+      }
+      if (user.profile.isAmbassador) {
+        toast.error("You are already a Ambassador", toastStyle);
 
-      return;
+        return;
+      }
     }
+
     let body = { isAmbassador: true };
     console.log(body);
     editUser(body)
@@ -114,10 +116,12 @@ function Sec1() {
         <div className={style.introBtn}>
           <button
             className={style.introLog}
-            disabled={user.profile.isAmbassador}
+            disabled={user != null && user.profile.isAmbassador}
             onClick={handleSubmit}
           >
-            {user.profile.isAmbassador ? "Already a ambassador" : "Sign Up"}
+            {user != null && user.profile.isAmbassador
+              ? "Already a ambassador"
+              : "Sign Up"}
           </button>
           {/* <button className={style.introExp}>EXPLORE</button> */}
         </div>

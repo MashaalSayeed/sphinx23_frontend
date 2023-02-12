@@ -49,6 +49,7 @@ import UserDashboard from "./screens/containers/Dashboard/UserDashboard";
 import { useRef } from "react";
 import OurTeam from "./screens/containers/OurTeam/OurTeam";
 import AmbassadorM from "./screens/containers/Home/AmbassadorM";
+import Coming from "./screens/containers/Home/Coming";
 
 function App() {
   // const token1 =
@@ -141,6 +142,7 @@ function App() {
             {/* <Route path="/home" element={<TimeMachine notAnim={true} />} /> */}
             {/* <Route path="/about" element={<About />} /> */}
             <Route path="/events/:cat" element={<EventsCat />} />
+            <Route path="/comming" element={<Coming />} />
             <Route path="/events" element={<Events />} />
             <Route path="/events/:cat/:id" element={<EventsView />} />
 

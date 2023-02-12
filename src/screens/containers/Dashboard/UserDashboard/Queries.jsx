@@ -23,6 +23,7 @@ const Queries = () => {
 			<h1 className="ud__queries__title">My Queries</h1>
 			{queries &&
 				queries.map((query) => <Query key={query._id} data={query} />)}
+				   {(queries && queries.length==0 )&& <div className="noEvent">No Queries Found</div>}
 		</div>
 	);
 };

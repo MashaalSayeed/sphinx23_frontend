@@ -9,6 +9,7 @@
     src: url('../images/wity.ttf');
   }
   
+
 .container
 {
     width: 50vw;
@@ -293,5 +294,18 @@ margin-bottom: 25px;
     {
         width: 83%;
     }
+    .linkActive
+    {
+        padding: 15px 20px 10px 7px; 
+    }
+    .linkActive2
+    {
+        padding: 15px 20px 10px 7px; 
+    }
+    .links
+    {
+        padding: 15px 20px 10px 7px; 
+    }
+
 
   }

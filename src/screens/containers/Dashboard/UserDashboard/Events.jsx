@@ -19,12 +19,13 @@ const Events = () => {
         console.log(err);
       });
   }, []);
-
+console.log(events.length)
   return (
     <div className="ud__events">
       <h1 className="ud__events__title">My Registered Events</h1>
-      <hr style={{ border: "1px solid #676767" }} />
+      {/* <hr style={{ border: "1px solid #676767" }} /> */}
       {events && events.map((event) => <Event key={event._id} data={event} />)}
+      {(events && events.length==0 )&& <div className="noEvent" >No Registered Events</div>}
     </div>
   );
 };
