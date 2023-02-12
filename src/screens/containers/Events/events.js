@@ -16,7 +16,7 @@ function Events() {
   const curruser = useSelector((state) => state.auth.curruser);
 
   const Tabs = ["Home", "Events", "Contact"];
-  console.log(curruser);
+  //console.log(curruser);
   // if (curruser != null) {
   //   Tabs.push("Profile");
   //   Tabs.push("Logout");
@@ -82,7 +82,7 @@ function Events() {
       <div className={"eventsM-title"}>CATEGORY</div>
       <div className="eventsM-category-sec">
         {Cat.map((item, i) => {
-          console.log();
+          //console.log();
           return <CatCard card={item} key={i} index={i} />;
         })}
       </div>

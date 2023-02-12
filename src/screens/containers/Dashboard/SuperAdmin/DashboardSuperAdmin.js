@@ -36,7 +36,7 @@ export default function DashboardSuperAdmin() {
     // getUsers("", token, setUsers);
     // getAmbassadors(token, setAmbassadors);
     // getPayments(token, setPayments);
-    // console.log("USERS AMBASSADORS PAYMENT SET");
+    // //console.log("USERS AMBASSADORS PAYMENT SET");
   }, []);
   return (
     <div style={{ backgroundColor: "white" }}>

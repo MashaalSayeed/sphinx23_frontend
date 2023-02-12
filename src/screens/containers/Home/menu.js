@@ -38,7 +38,7 @@ function Menu(props) {
 
   const navigate = useNavigate();
   const curruser = useSelector((state) => state.auth.curruser);
-  // console.log(curruser);
+  // //console.log(curruser);
   useEffect(() => {
     if (curruser != null) {
       setTab([...tabs, "PROFILE"]);
@@ -64,9 +64,9 @@ function Menu(props) {
   const [hover, setHover] = useState("");
   const TimeInterval = 0.02;
   const ChkLog = () => {
-    console.log("log");
+    //console.log("log");
     if (log == "LOGOUT") {
-      console.log("logout");
+      //console.log("logout");
       Logout()
         .then((res) => {
           toast.info(res, toastStyle);
@@ -107,7 +107,7 @@ function Menu(props) {
   );
   const activeTab = useEffect(() => {}, []);
 
-  // console.log(
+  // //console.log(
   //   tabs.findIndex((val, i) => {
   //     if (val == currTab.toUpperCase()) return currTab.toUpperCase();
   //   })
@@ -227,6 +227,7 @@ function Menu(props) {
               onMouseEnter={() => {
                 setHover("INSTA");
               }}
+              href="https://instagram.com/sphinx_mnit?igshid=YmMyMTA2M2Y="
             >
               {hover == "INSTA" || anim ? (
                 random("INSTAGRAM", 0.008)
@@ -236,19 +237,20 @@ function Menu(props) {
             </a>
             <a
               onMouseEnter={() => {
-                setHover("DISCORD");
+                setHover("FACEBOOK");
               }}
+              href="https://www.facebook.com/sphinxMNIT"
             >
-              {hover == "DISCORD" || anim ? (
-                random("DISCORD", 0.02)
+              {hover == "FACEBOOK" || anim ? (
+                random("FACEBOOK", 0.02)
               ) : (
-                <span>DISCORD</span>
+                <span>FACEBOOK</span>
               )}
             </a>
           </div>
         </div>
         <div className={style.lineH2}></div>
-        <button
+        {/* <button
           className={hover != "login" ? style.login : style.logActive}
           onClick={() => {
             ChkLog();
@@ -258,7 +260,7 @@ function Menu(props) {
           }}
         >
           {hover == "login" || anim ? random(log, 0.009) : log}
-        </button>
+        </button> */}
       </div>
       <div className={style.lineV}></div>
       <div

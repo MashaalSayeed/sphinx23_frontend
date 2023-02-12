@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 
 const Profile = () => {
 	const currUser = useSelector((state) => state.auth.curruser);
-	console.log(currUser);
+	//console.log(currUser);
+
 	return (
 		<div className="ud__profile">
 			<img

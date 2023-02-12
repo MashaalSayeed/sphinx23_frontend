@@ -48,7 +48,7 @@ function Register(props) {
   //   loadScript("https://checkout.razorpay.com/v1/checkout.js");
   // }, []);
 
-  // console.log(m);
+  // //console.log(m);
 
   const [c, setC] = useState([]);
   const [ids, setIds] = useState([]);
@@ -60,7 +60,7 @@ function Register(props) {
   const toastId = useRef(null);
   const disabledCol = "#6e9efa";
   const btnCol = "#95FF42";
-  console.log(members);
+  //console.log(members);
   let a = Math.floor(maxSize / 3),
     b = maxSize % 3;
   let d = [],
@@ -77,7 +77,7 @@ function Register(props) {
   for (let i = 1; i <= b; i++) {
     f.push(a * 3 + i);
   }
-  console.log(d);
+  //console.log(d);
   useEffect(() => {
     let l = members.filter((x) => x !== "").length;
     if (userList.length != 0 && userList.length == l && submit) {
@@ -88,15 +88,15 @@ function Register(props) {
         receipt: `This is the Receipt for ${event.name}`,
         notes: { description: `Payment Request for ${event.name}` },
       };
-      console.log(body.userList);
+      //console.log(body.userList);
       toastId.current = toast.loading("Processing");
       ConRef.current.setAttribute("disabled", true);
       ConRef.current.style.background = disabledCol;
       createEventPaymentRequest(body)
         .then((res) => {
-          console.log(res);
+          //console.log(res);
           if (!res.status) {
-            console.log(window.env);
+            //console.log(window.env);
             let body = {
               event: event._id,
               tName: tName,
@@ -106,11 +106,11 @@ function Register(props) {
                 payment_id: process.env.REACT_APP_FREE_PAYMENT_ID,
               },
             };
-            console.log(body);
+            //console.log(body);
             let signature = "";
             registerForEvent(signature, body)
               .then((res) => {
-                console.log(res);
+                //console.log(res);
                 toast.update(toastId.current, {
                   render: `You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.`,
                   type: "success",
@@ -133,9 +133,9 @@ function Register(props) {
                 ConRef.current.removeAttribute("disabled");
                 ConRef.current.style.background = btnCol;
               });
-            // console.log(body);
+            // //console.log(body);
           } else {
-            console.log(process.env.REACT_APP_RAZORPAY_ID);
+            //console.log(process.env.REACT_APP_RAZORPAY_ID);
             var options = {
               key: process.env.REACT_APP_RAZORPAY_ID,
               amount: res.order.razorpayInstance.amount,
@@ -144,7 +144,7 @@ function Register(props) {
               description: `Payment Request for ${event.name}`,
               order_id: res.order.razorpayInstance.id,
               handler: function (response) {
-                console.log(response);
+                //console.log(response);
                 let body = {
                   payment: {
                     _id: res.order._id,
@@ -153,10 +153,10 @@ function Register(props) {
                   },
                 };
                 let signature = response.razorpay_signature;
-                console.log(body);
+                //console.log(body);
                 registerForEvent(signature, body)
                   .then((res) => {
-                    console.log(res);
+                    //console.log(res);
                     toast.update(toastId.current, {
                       render: `You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.`,
                       type: "success",
@@ -205,14 +205,14 @@ function Register(props) {
                 },
               },
             };
-            console.log(window.env);
+            //console.log(window.env);
             const razorpayObject = new Razorpay(options);
             // razorpayObject.open();
 
             // var razorpayObject = new Razorpay(options);
-            console.log(razorpayObject);
+            //console.log(razorpayObject);
             razorpayObject.on("payment.failed", function (response) {
-              console.log(response);
+              //console.log(response);
               toast.update(toastId.current, {
                 render: "Payment Failed",
                 type: "error",
@@ -239,7 +239,7 @@ function Register(props) {
   }, [userList]);
   const getUsersId = async (email) => {
     // let userData = [];
-    console.log(process.env);
+    //console.log(process.env);
     return fetch(
       `${process.env.REACT_APP_SERVER_URL}/users/validatemail/${email}`,
       {
@@ -254,35 +254,35 @@ function Register(props) {
       .then((response) => response.json())
       .then((response) => {
         if (response.success) {
-          console.log(response, "manvir");
-          console.log(response.id);
+          //console.log(response, "manvir");
+          //console.log(response.id);
           return response.id;
         }
         throw response;
       })
       .catch((err) => {
         // toast.error(err, toastStyle);
-        console.log(err);
+        //console.log(err);
         throw err;
       });
 
     //
     // .then((data) => {
     //   if (data.success) {
-    //     console.log(data.id);
-    //     console.log(prevState);
+    //     //console.log(data.id);
+    //     //console.log(prevState);
     //     setIds([...prevState, data.id]);
     //   }
     // })
     // .catch((error) => {
     //   alert(error);
-    //   // console.log(error);
+    //   // //console.log(error);
     // });
     // return userData;
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(members);
+    //console.log(members);
     if (tName == "") {
       toast.error("Team Name is Mandatory", toastStyle);
       return;
@@ -293,27 +293,27 @@ function Register(props) {
       return;
     }
     let entered_members = members.filter((x) => x !== "");
-    console.log(entered_members);
+    //console.log(entered_members);
     // let userList = [];
 
     let a = [];
-    // console.log(eventCoor, "kunal");
+    // //console.log(eventCoor, "kunal");
     for (let i in entered_members) {
       try {
         let mail = entered_members[i];
-        console.log("mail", mail);
+        //console.log("mail", mail);
         const id = await getUsersId(mail);
 
         a.push(id);
       } catch (err) {
         // toast.error(err, toastStyle);
         let m = parseInt(i) + 1;
-        console.log(m);
+        //console.log(m);
         toast.error(`Team Member ${m} is not valid.`, toastStyle);
         return;
       }
     }
-    // console.log(admin, "ip");
+    // //console.log(admin, "ip");
     setUserList(a);
     setSubmit(true);
   };
@@ -327,11 +327,11 @@ function Register(props) {
           disabled={props.disabled}
           value={email}
           onChange={(e) => {
-            console.log(e.target.value);
-            console.log(props.value);
+            //console.log(e.target.value);
+            //console.log(props.value);
             let m = members;
             m[parseInt(props.value)] = e.target.value;
-            console.log(m);
+            //console.log(m);
             setMembers(m);
             setEmail(e.target.value);
           }}
