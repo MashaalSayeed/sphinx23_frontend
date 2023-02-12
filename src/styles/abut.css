@@ -8,12 +8,14 @@
 	src: url('../images/wity2.ttf');
   }
 .about-page {
+	/* scroll-snap-align: start; */
 	display: flex;
 	height: 100vh;
 	width: 100vw;
 	overflow: hidden;
 	background: linear-gradient(114.65deg, #532800 9.51%, #e1b981 83.88%);
 	position: relative;
+	
 	/* scroll-snap-align: start;
 	scroll-snap-type: y mandatory; */
 }

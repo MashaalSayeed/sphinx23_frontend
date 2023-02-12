@@ -12,6 +12,7 @@ import { countdownTimer, useCountdown } from "./coundown";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useSelector } from "react-redux";
 import Footer from "../../components/Footer/footer";
+import ScrollIntoView from "react-scroll-into-view";
 // import Ambassador from "./Amb
 
 function TimeMachine({ notAnim, landing, setLand }) {
@@ -25,6 +26,14 @@ function TimeMachine({ notAnim, landing, setLand }) {
       setTextIndex((textIndex + 1) % 2);
     }, 6000);
   }, [textIndex]);
+
+  const [activeSection, setActiveSection] = useState(0);
+
+  const handleSectionClick = (sectionNumber) => {
+    setActiveSection(sectionNumber);
+    const section = document.getElementById(`section-${sectionNumber}`);
+    section.scrollIntoView({ behavior: "auto" });
+  };
 
   const Tabs = ["Home", "Events", "Contact"];
   // console.log(curruser);
@@ -88,135 +97,137 @@ function TimeMachine({ notAnim, landing, setLand }) {
   };
 
   return (
-    <a id="home">
-      {" "}
-      <div style={{ overflowX: "hidden" }}>
-        {/* {!animNotOver && (
-      <ParallaxBanner
-        layers={[
-          {
-            children: <Landing parallax={true} />,
-            // translateY: [0, 0],
-            // translateX: [0, 0],
-            scale: [2, 0],
-            speedx: 40,
-            // shouldAlwaysCompleteAnimation: true,
-          },
-          {
-            children: (
-              <img
-                className="machine-img"
-                id="machine"
-                src={machine}
-                style={
-                  notAnim
-                    ? { animation: "none", filter: "brightness(0.4)" }
-                    : {}
-                }
-              ></img>
-            ),
-            scale: [9, 1],
-            speedx: -40,
-            // shouldAlwaysCompleteAnimation: true,
-          },
-        ]}
-        // translateY={0}
-        // className={"activity-sec3-img"}
-        style={{ opacity: 1, height: "100vh" }}
-      ></ParallaxBanner>
-    )} */}
-        <HomeNav
-          setCurrTab={setCurrTab}
-          currTab={currTab}
-          Tabs={Tabs}
-          notanimation={!landing}
-          landing={landing && animNotOver}
-          setLand={setLand}
-        />
+    <div style={{ overflowX: "hidden" }} className="scrollCon">
+      {/* {!animNotOver && (
+        <ParallaxBanner
+          layers={[
+            {
+              children: <Landing parallax={true} />,
+              // translateY: [0, 0],
+              // translateX: [0, 0],
+              scale: [2, 0],
+              speedx: 40,
+              // shouldAlwaysCompleteAnimation: true,
+            },
+            {
+              children: (
+                <img
+                  className="machine-img"
+                  id="machine"
+                  src={machine}
+                  style={
+                    notAnim
+                      ? { animation: "none", filter: "brightness(0.4)" }
+                      : {}
+                  }
+                ></img>
+              ),
+              scale: [9, 1],
+              speedx: -40,
+              // shouldAlwaysCompleteAnimation: true,
+            },
+          ]}
+          // translateY={0}
+          // className={"activity-sec3-img"}
+          style={{ opacity: 1, height: "100vh" }}
+        ></ParallaxBanner>
+      )} */}
+      <HomeNav
+        setCurrTab={setCurrTab}
+        currTab={currTab}
+        Tabs={Tabs}
+        notanimation={!landing}
+        landing={landing && animNotOver}
+        setLand={setLand}
+      />
 
-        <div className={notAnim ? "time-main" : "parallax-container"} id="home">
-          <img
-            className="machine-img"
-            id="machine"
-            src={machine}
-            style={
-              notAnim ? { animation: "none", filter: "brightness(0.4)" } : {}
-            }
-          ></img>
-          {/* 
-      {title ? <div className="home-title"> SPHINX </div> : <></>} */}
+      <div className={notAnim ? "time-main" : "parallax-container"} id="home">
+        <img
+          className="machine-img"
+          id="machine"
+          src={machine}
+          style={
+            notAnim ? { animation: "none", filter: "brightness(0.4)" } : {}
+          }
+        ></img>
+        {/* 
+        {title ? <div className="home-title"> SPHINX </div> : <></>} */}
 
-          <div className={`cardComp `} ref={parent}>
-            {textIndex == 1 && (
-              <div className="timer">
-                <div className={!landing ? "timer" : "timer timerAnim"}>
-                  <div className="timer-ele">
-                    <span>Days</span>
-                    <p>{AddZero(countdownTime.Days)}</p>
-                  </div>
-                  <div className="timer-ele">
-                    <span>Hours</span>
-                    <p>{AddZero(countdownTime.Hours)}</p>
-                  </div>
-                  <div className="timer-ele">
-                    <span>Minutes</span>
-                    <p>{AddZero(countdownTime.Minutes)}</p>
-                  </div>
-                  <div className="timer-ele">
-                    <span>Seconds</span>
-                    <p>{AddZero(countdownTime.Seconds)}</p>
-                  </div>
+        <div className={`cardComp `} ref={parent}>
+          {textIndex == 1 && (
+            <div className="timer">
+              <div className={!landing ? "timer" : "timer timerAnim"}>
+                <div className="timer-ele">
+                  <span>Days</span>
+                  <p>{AddZero(countdownTime.Days)}</p>
+                </div>
+                <div className="timer-ele">
+                  <span>Hours</span>
+                  <p>{AddZero(countdownTime.Hours)}</p>
+                </div>
+                <div className="timer-ele">
+                  <span>Minutes</span>
+                  <p>{AddZero(countdownTime.Minutes)}</p>
+                </div>
+                <div className="timer-ele">
+                  <span>Seconds</span>
+                  <p>{AddZero(countdownTime.Seconds)}</p>
                 </div>
               </div>
-            )}
-
-            {textIndex == 0 && (
-              <div className="TitleSp ">
-                {" "}
-                <span>S</span>
-                <span>P</span>
-                <span>H</span>
-                <span>I</span>
-                <span>N</span>
-                <span>X</span>{" "}
-              </div>
-            )}
-
-            {/* */}
-          </div>
-
-          {/* <div className="new-animTitle"> SPHINX </div> */}
-          {/* </div> */}
-
-          <div
-            className="machine-text"
-            style={notAnim ? { animation: "none", opacity: "1" } : {}}
-          >
-            <div className="machine-text-header">
-              Let’s go on an adventurous time travel{" "}
             </div>
-            <div className="machine-text-sub">
-              "Join us on a journey through time and space - the ultimate Time
-              Travel Adventure awaits"
+          )}
+
+          {textIndex == 0 && (
+            <div className="TitleSp ">
+              {" "}
+              <span>S</span>
+              <span>P</span>
+              <span>H</span>
+              <span>I</span>
+              <span>N</span>
+              <span>X</span>{" "}
             </div>
-          </div>
+          )}
+
+          {/* */}
         </div>
 
-        {!landing || !animNotOver ? (
-          <>
-            <About width={width} />
-            {/* <Ambassador />
-        <Activities /> <Theme /> */}
-            <Ambassador width={width} />
-            <Activities width={width} />
-            <Theme width={width} />
-            <Footer setCurrTab={setCurrTab} />
-          </>
-        ) : (
-          <></>
-        )}
+        {/* <div className="new-animTitle"> SPHINX </div> */}
+        {/* </div> */}
+
+        <div
+          className="machine-text"
+          style={notAnim ? { animation: "none", opacity: "1" } : {}}
+        >
+          <div className="machine-text-header">
+            Let’s go on adventurous time travel{" "}
+          </div>
+          <div className="machine-text-sub">
+            "Join us on a journey through time and space - the ultimate Time
+            Travel Adventure awaits"
+          </div>
+        </div>
       </div>
-    </a>
+
+      {!landing || !animNotOver ? (
+        <>
+          <About
+            width={width}
+            activeSection={activeSection}
+            handleSectionClick={handleSectionClick}
+          />
+
+          {/* <Ambassador />
+          <Activities /> <Theme /> */}
+          <Ambassador width={width} />
+          <Activities width={width} />
+          <Theme width={width} />
+          <Footer />
+        </>
+      ) : (
+        <></>
+      )}
+    </div>
   );
 }
 

@@ -8,10 +8,11 @@
 body{margin:0;padding:0;}
 body{
    
+    
     width: 100%;
     /* overflow-x: hidden; */
     /* -webkit-overflow-scrolling: touch;  */
-    overflow-y: auto;
+    
     /* overflow-y: hidden; */
     /* overflow: hidden; */
     animation: hideScroll 2500ms;
@@ -1023,6 +1024,12 @@ height: fit-content;
 }
 
 @media screen and (max-width: 700px) {
+    .landing-stars
+    {
+       
+        height: 40vh;
+        object-fit: cover;
+    }
     .amb-con
    {
        width: 40%;
@@ -1105,3 +1112,34 @@ height: fit-content;
   }
    
 }
+.time-main
+{
+    /* scroll-snap-align: start; */
+}
+
+.scrollCon
+{
+
+   /* scroll-snap-type: y mandatory;
+   overflow-y: scroll;
+   max-height: 100vh; */
+   /* scroll-behavior: smooth;
+   max-height: 100vh; */
+   /* overflow: auto; */
+    
+   
+}
+ /* .about-page
+{
+    scroll-snap-align: center;
+   
+}
+
+.amb-back
+{
+    scroll-snap-align: center;
+}
+.activity-back
+{
+    scroll-snap-align: center;
+}  */
