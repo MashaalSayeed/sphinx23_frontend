@@ -546,3 +546,9 @@ color: #027500;
      
     
    }
+   @media screen and (max-width: 700px) {
+    .eventsM-title
+    {
+        font-size: 10vw;
+    }
+}

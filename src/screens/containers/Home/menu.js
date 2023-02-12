@@ -35,6 +35,7 @@ function Menu(props) {
     // "THEME",
     "SPONSORS",
   ]);
+
   const navigate = useNavigate();
   const curruser = useSelector((state) => state.auth.curruser);
   // console.log(curruser);

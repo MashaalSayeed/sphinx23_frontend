@@ -184,7 +184,8 @@ function Cards(props) {
 
 function AmbassadorM() {
   const Tabs = ["Home", "Events", "Contact"];
-  const [currTab, setCurrTab] = useState("ambassador");
+  const [currTab, setCurrTab] = useState("");
+  // console.log(currTab);
   return (
     <div className={style.main}>
       <HomeNav
@@ -192,7 +193,7 @@ function AmbassadorM() {
         currTab={currTab}
         Tabs={Tabs}
         notanimation={true}
-        landing={false}
+        landing={true}
         setLand={() => {}}
       />
       <Sec1 />
