@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../../styles/home.css";
-import grad from "../../../images/home/homeBack.png";
+import grad from "../../../images/home/homeBack.webp";
 import stars from "../../../images/home/starsBright.png";
 import pyraminds from "../../../images/home/pyramids.svg";
 import logo from "../../../images/landingLogo.png";

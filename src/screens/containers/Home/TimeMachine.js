@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import machine from "./../../../images/home/timeMach1.png";
+import machine from "./../../../images/home/timeMach1.webp";
 import Activities from "./Activities";
 import { ErrorBoundary } from "react-error-boundary";
 import Landing from "./home";
