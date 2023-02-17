@@ -450,7 +450,7 @@ export const resetPassword = async (body) => {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
-      Authorization: "Bearer " + Session.getObject("profile").token,
+      // Authorization: "Bearer " + Session.getObject("profile").token,
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",
@@ -472,12 +472,12 @@ export const resetPassword = async (body) => {
 };
 export const verifyForgotOTP = async (body) => {
   //console.log(Session.getObject("profile").token);
-
+  // console.log("FOrhot");
   return fetch(`${url}/verification/verifyForgotOTP`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
-      Authorization: "Bearer " + Session.getObject("profile").token,
+      // Authorization: "Bearer " + Session.getObject("profile").token,
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",
