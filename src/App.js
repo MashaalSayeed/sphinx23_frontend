@@ -45,7 +45,7 @@ import EventsCat from "./screens/containers/Events/EventsCat";
 import Ambassador from "./screens/containers/Home/Ambassadors";
 import { ParallaxProvider } from "react-scroll-parallax";
 import UserDashboard from "./screens/containers/Dashboard/UserDashboard";
-import Test from "../src/screens/containers/Test";
+//import Test from "../src/screens/containers/Test";
 import { useRef } from "react";
 import OurTeam from "./screens/containers/OurTeam/OurTeam";
 import AmbassadorM from "./screens/containers/Home/AmbassadorM";
