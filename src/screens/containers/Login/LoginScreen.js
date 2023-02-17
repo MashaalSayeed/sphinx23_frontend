@@ -1169,10 +1169,10 @@ function ForgotPass() {
   };
   const handleOTPVerify = () => {
     let body = { id: id, otp: otp.join("") };
-    console.log(body);
+    // console.log(body);
     verifyForgotOTP(body)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         toast.info("Verified", toastStyle);
         setSecret(res);
         setVerify(true);
