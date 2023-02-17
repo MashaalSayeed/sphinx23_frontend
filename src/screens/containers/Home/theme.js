@@ -1,8 +1,8 @@
 import { color } from "@mui/system";
 import React, { useState, useEffect, useRef } from "react";
 import { Parallax, ParallaxProvider } from "react-scroll-parallax";
-import theme from "../../../images/theme.png";
-import themeBack from "../../../images/themeMob.png";
+import theme from "../../../images/theme.webp";
+import themeBack from "../../../images/themeMob.webp";
 import ConR from "../../../images/ambCon.png";
 import HomeNav from "./homeNav";
 import useIntersection from "./interSection";
@@ -112,14 +112,16 @@ function Theme(props) {
                 held a special fascination for people, with their rich history
                 and enthralling mysteries that transport us back in time, and
                 they've all had their contribution at shaping the world as we
-                know it today. Ancient Egyptians were great mathematicians,
+                know it today.
+                {/* Ancient Egyptians were great mathematicians,
                 knowing how to perform calculations and there's evidence proving
                 they were the first to come up with the concept of basic
                 fractions. They had knowledge in geometry and they made use of
                 these skills to help them take accurate measurements and build
-                their impressive monuments. Just think about the Great Pyramids
-                and the mathematical and geometrical knowledge this civilization
-                had to possess in order to build such massive structures.
+                their impressive monuments. */}
+                Just think about the Great Pyramids and the mathematical and
+                geometrical knowledge this civilization had to possess in order
+                to build such massive structures.
               </div>
               {/* <button
                 className="home-about-btn"
