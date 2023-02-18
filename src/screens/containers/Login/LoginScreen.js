@@ -284,11 +284,11 @@ function Login(props) {
             Login
           </button>
           <Seprator />
-          <SocialIcons
+          {/* <SocialIcons
             handleSuccess={handleSuccess}
             handleFailure={handleFailure}
             isRegistration={false}
-          />
+          /> */}
         </>
       )}
       {forgot && <ForgotPass />}
@@ -498,11 +498,11 @@ function RegScreen1(props) {
   return (
     <>
       <div className="login-form-title">Create an Account</div>
-      <SocialIcons
+      {/* <SocialIcons
         handleSuccess={handleSuccess}
         handleFailure={handleFailure}
         isRegistration={true}
-      />
+      /> */}
       <Seprator />
       <div className="login-form-sub-title">Sign-up with email</div>
       <div className="login-form-signup">
