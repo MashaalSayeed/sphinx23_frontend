@@ -297,7 +297,16 @@ function Description({ card }) {
               {card.time}
             </span>
           </div>
-          {card.amount != 0 && (
+          <div className="eventD-sub1">
+            <span style={{ fontSize: "0.8rem" }}>Rulebook</span>
+            <br></br>
+            <span style={{ fontSize: "1.4rem", fontWeight: "800" }}>
+              <a style={{ color: "#ffc700" }} href={card.rulebook}>
+                View Rulebook
+              </a>
+            </span>
+          </div>
+          {card.amount && card.amount > 0 && (
             <div className="eventD-sub1">
               <span style={{ fontSize: "0.8rem" }}>Price</span>
               <br></br>

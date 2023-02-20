@@ -14,15 +14,16 @@ function EventsCat() {
   const [Ecat, setECat] = useState([]);
   const params = useParams();
   const categories = new Map([
-    ["Tech", 0],
-    ["Cultural", 1],
-    ["EDM", 2],
+    ["Flagship", 0],
+    ["Club", 1],
+    ["Branch", 2],
   ]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     let category = categories.get(params.cat);
-    //console.log(category);
+    // console.log(params.cat);
+    // console.log(category);
     if (category === undefined) {
       alert("Category Invalid");
       return;
@@ -30,7 +31,7 @@ function EventsCat() {
     fetchEventsByCategory(category)
       .then((res) => {
         setECat(res);
-        //console.log(res);
+        console.log(res);
       })
       .catch((err) => {
         //console.log(err);

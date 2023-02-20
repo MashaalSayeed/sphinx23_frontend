@@ -1,12 +1,25 @@
 import React from "react";
 import { Button, Stack, TextField } from "@mui/material";
+import TeamCard from "../../containers/OurTeam/TeamCard";
 
-const ReadOnlyRow = ({ data, value }) => {
+const ReadOnlyRow = ({
+  data,
+  value,
+  openDialog,
+  setteamName,
+  setteamId,
+  setMembers,
+}) => {
   //console.log("Read CAlled");
-  // //console.log(data);
+  console.log(data);
   // //console.log(value);
-  // //console.log(data[value[0]]);
-
+  // //setconsole.log(data[value[0]]);
+  const handleClick = () => {
+    setteamName(data["teamName"]);
+    setteamId(data["teamId"]);
+    setMembers(data["userList"]);
+    openDialog();
+  };
   const attendace = () => {
     return (
       <td>
@@ -29,6 +42,12 @@ const ReadOnlyRow = ({ data, value }) => {
     <tr>
       {value.map((ele, i) => {
         if (ele == "attendance") return attendace();
+        if (ele == "team details")
+          return (
+            <td style={{ cursor: "pointer" }} onClick={handleClick}>
+              View Details
+            </td>
+          );
         else return <td>{data[ele]}</td>;
       })}
     </tr>

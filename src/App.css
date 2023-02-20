@@ -49,7 +49,7 @@ body::-webkit-scrollbar{
 .space-top
 {
   height: max(10vh,90px);
-  background-color: white;
+  background: linear-gradient(176.59deg, #282828 26.04%, #393939 100%);
 }
 .App{
   /* overflow-x: hidden; */
@@ -276,6 +276,7 @@ border-radius: 9px;
   margin-left: auto;
   margin-top: 20px;
   padding: 5px 15px;
+  
 }
 
 .super-title
@@ -860,6 +861,7 @@ tr{
 .super-mainCon
 {
   display: flex;
+  
 }
 
 .closed-sidebar

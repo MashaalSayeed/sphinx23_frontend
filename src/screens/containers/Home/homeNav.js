@@ -18,7 +18,7 @@ function HomeNav({
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
   useEffect(() => {
-    if (currTab == "Events" || currTab == "EVENTS") navigate("/comming");
+    if (currTab == "Events" || currTab == "EVENTS") navigate("/events");
     if (currTab == "PROFILE") navigate("/dashboard");
     if (currTab == "AMBASSADOR") navigate("/ambassador");
     if (currTab == "Contact") {

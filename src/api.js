@@ -85,7 +85,7 @@ export const logout = async () => {
     });
 };
 export const fetchEventsByCategory = async (category) => {
-  //console.log("Events Fetched");
+  console.log(category);
   return fetch(`${url}/events/category/${category}`, {
     headers: {
       mode: "cors",

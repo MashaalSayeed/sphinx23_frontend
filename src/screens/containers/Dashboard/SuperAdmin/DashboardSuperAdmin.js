@@ -12,6 +12,7 @@ import UserProfile from "./Profile/UserProfile";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import { useNavigate, Navigate } from "react-router-dom";
+import HomeNav from "../../Home/homeNav";
 
 export default function DashboardSuperAdmin() {
   const [isSidebar, SetSidebar] = useState(true);
@@ -38,9 +39,15 @@ export default function DashboardSuperAdmin() {
     // getPayments(token, setPayments);
     // //console.log("USERS AMBASSADORS PAYMENT SET");
   }, []);
+  const Tabs = ["Home", "Events", "Contact"];
+  const [currTab, setCurrTab] = useState("");
   return (
     <div style={{ backgroundColor: "white" }}>
-      <Navbar />
+      {" "}
+      <div style={{ background: "black" }}>
+        {" "}
+        <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
+      </div>
       <div className="space-top"></div>
       <div className="super-mainCon">
         <SidebarAdmin

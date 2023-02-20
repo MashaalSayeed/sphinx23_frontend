@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 function CatCard(props) {
   const { card, index } = props;
-
+  // console.log("Clic", card.title);
   const animDelay = (index * 6).toString() + "0ms";
 
   return (

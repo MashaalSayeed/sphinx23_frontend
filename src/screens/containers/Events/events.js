@@ -24,9 +24,9 @@ function Events() {
   //   Tabs.push("Login/Register");
   // }
   const Cat = [
-    { title: "Tech", icon: proCat, col: "#9672FF", back: tech },
-    { title: "Cultural", icon: proCat, col: "#9672FF", back: catCardImg },
-    { title: "EDM", icon: proCat, col: "#9672FF", back: edm },
+    { title: "Flagship", icon: proCat, col: "#9672FF", back: tech },
+    { title: "Club", icon: proCat, col: "#9672FF", back: catCardImg },
+    { title: "Branch", icon: proCat, col: "#9672FF", back: edm },
   ];
   useEffect(() => {
     window.scrollTo(0, 0);
