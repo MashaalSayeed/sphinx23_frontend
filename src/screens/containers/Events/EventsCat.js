@@ -8,7 +8,7 @@ import catCardImg from "../../../images/events/catCard.png";
 import EventCard from "./EventCard";
 import eventsImg from "../../../images/events/roboWars.png";
 import { fetchEventsByCategory } from "../../../api";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 function EventsCat() {
   const [Ecat, setECat] = useState([]);
@@ -18,7 +18,7 @@ function EventsCat() {
     ["Club", 1],
     ["Branch", 2],
   ]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
     let category = categories.get(params.cat);
@@ -31,7 +31,9 @@ function EventsCat() {
     fetchEventsByCategory(category)
       .then((res) => {
         setECat(res);
-        console.log(res);
+        if (res.length == 0) {
+          navigate("/comming");
+        }
       })
       .catch((err) => {
         //console.log(err);

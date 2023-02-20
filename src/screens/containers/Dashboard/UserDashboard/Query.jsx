@@ -16,8 +16,12 @@ const Query = ({ data }) => {
         <span>#{data.queryId}</span>
         <span>{data.isApproved ? "✅" : "⏳"}</span>
       </div>
-      <h2 className="ud_query_subject">{data.subject}</h2>
-      <p className="ud_query_desc">{data.queryDesc}</p>
+      <h2 style={{ color: "black" }} className="ud_query_subject">
+        {data.subject}
+      </h2>
+      <p style={{ color: "black" }} className="ud_query_desc">
+        {data.queryDesc}
+      </p>
       {showReply ? (
         <p className="ud_query_reply">
           Reply:<br></br>
