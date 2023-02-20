@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 const Ambassador = (props) => {
   const [tabActive, setTab] = useState("");
   const { ambassadors } = props;
+
   // const [currentPage, setCurrentPage] = useState(1);
 
   // const [recordsPerPage] = useState(1);
@@ -80,19 +81,20 @@ const Ambassador = (props) => {
             </thead>
 
             <tbody>
-              {currentRecords.map((ambassador, i) => (
-                <Fragment>
-                  {/* {editContactId === contact.id ? (
+              {currentRecords &&
+                currentRecords.map((ambassador, i) => (
+                  <Fragment>
+                    {/* {editContactId === contact.id ? (
                     <EditableRow
                       editFormData={editFormData}
                       handleEditFormChange={handleEditFormChange}
                       handleCancelClick={handleCancelClick}
                     />
                   ) : ( */}
-                  <ReadOnlyRow ambassador={{ ...ambassador, index: i }} />
-                  {/* )} */}
-                </Fragment>
-              ))}
+                    <ReadOnlyRow ambassador={{ ...ambassador, index: i }} />
+                    {/* )} */}
+                  </Fragment>
+                ))}
             </tbody>
           </table>
           {currentRecords.length != 0 ? (

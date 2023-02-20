@@ -40,7 +40,7 @@ const Points = [
   },
   {
     name: "Certification",
-    data: "Have the opportunity to converse with prominent people from various fields and celebrities.",
+    data: "Receive a certificate from the Sphinx Team recognising your accomplishments.",
   },
   {
     name: "Goods & Merchandise",
@@ -91,7 +91,7 @@ function Sec1() {
     //console.log(body);
     editUser(body)
       .then((res) => {
-        //console.log(res);
+        console.log(res);
         toast.info(res, toastStyle);
         window.location.href = "/ambassador";
       })
@@ -113,7 +113,7 @@ function Sec1() {
           There will be one student from each college chosen for this position,
           who will be in charge of the entire contingent from that college.
         </div>
-        {/* <div className={style.introBtn}>
+        <div className={style.introBtn}>
           <button
             className={style.introLog}
             // disabled={user && user.profile.isAmbassador}
@@ -122,9 +122,9 @@ function Sec1() {
             {user != null && user.profile.isAmbassador
               ? "Already a ambassador"
               : "Sign Up"}
-          </button> */}
-        {/* <button className={style.introExp}>EXPLORE</button> */}
-        {/* </div> */}
+          </button>
+          {/* <button className={style.introExp}>EXPLORE</button> */}
+        </div>
       </div>
 
       <div className={style.cardsCon}>

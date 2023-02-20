@@ -39,16 +39,16 @@ export const editUser = async (body) => {
   let token = Session.getObject("profile").token;
   //console.log(token);
   let id = Session.getObject("profile").profile._id;
-  //console.log(id);
+  console.log(body);
   return fetch(`${url}/users/${id}`, {
     method: "PUT",
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
       Authorization: "Bearer " + token,
-
-      body: JSON.stringify(body),
     },
+    method: "POST",
+    body: JSON.stringify(body),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -917,7 +917,7 @@ export const getAmbassadors = ({
       if (data.success) {
         //console.log(data.success);
         //console.log(data);
-
+        console.log(data);
         setCurrentRecords(data.ambassador);
         setNpage(data.totalPages);
         return data.success;

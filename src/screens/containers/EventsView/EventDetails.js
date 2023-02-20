@@ -86,7 +86,7 @@ function Description({ card }) {
   const handleRegister = () => {
     if (!currUser) {
       toast.error("You need to Login First", toastStyle);
-      window.location.href = "/";
+      window.location.href = "/login";
       return;
     }
     if (card.maxTeamSize == 1) {
