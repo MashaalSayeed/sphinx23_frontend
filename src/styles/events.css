@@ -551,4 +551,34 @@ color: #027500;
     {
         font-size: 10vw;
     }
+    .eventD-con{
+        flex-direction: column-reverse;
+        width: 98%;
+    }
+    .eventD-sec1
+    {
+        margin: auto;
+        margin-top: 6vh;
+        width: 90%;
+        align-items: center;
+    }
+    .eventD-sec2
+    {
+        width: 95%;
+
+    }
+    .eventD-sub1
+    {
+        margin-right: 5vh;
+    }
+    .eventD-sub
+    {
+        margin-top: 3vh;
+        flex-direction: column;
+        margin-right: auto;
+    }
+    .eventD-reg
+    {
+        width: 70%;
+    }
 }
