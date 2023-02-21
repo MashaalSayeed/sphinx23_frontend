@@ -11,7 +11,7 @@ import Results from "./Results";
 import { fetchOneEvent } from "../../../api";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
-
+import HomeNav from "../../containers/Home/homeNav";
 export default function EventDetails() {
   const [tabActive, setTab] = useState("About");
   //console.log("Event Called");
@@ -122,11 +122,16 @@ export default function EventDetails() {
     // if (tabActive == "Registered Students") return EventStudnetsPaginate();
     // if (tabActive == "Results") return EventResultPaginate();
   };
+  const Tabs = ["Home", "Events", "Contact"];
+  const [currTab, setCurrTab] = useState("");
   //console.log("cuurent tab");
   //console.log(tabActive);
   return (
     <div style={{ background: "white" }}>
-      <Navbar />
+      <div style={{ background: "black" }}>
+        {" "}
+        <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
+      </div>
       <div className="space-top"></div>
       {currevent && (
         <Dashboard_Header

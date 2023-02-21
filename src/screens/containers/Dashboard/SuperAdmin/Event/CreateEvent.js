@@ -21,7 +21,7 @@ const toastStyle = {
 };
 
 function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
-  const url = "http://localhost:8000";
+  const url = process.env.REACT_APP_SERVER_URL;
   const userType =
     useSelector((state) => state.auth.curruser.profile.type) === "superAdmin";
   const disabled = editSuperAdmin ? !userType : false;
@@ -31,7 +31,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const navigate = useNavigate();
   const [submitV, setSubmit] = useState(false);
   const [eventName, setEventName] = useState(null);
-  const [category, setCategory] = useState("Tech");
+  const [category, setCategory] = useState("Flagship");
   const [details, setDetails] = useState(null);
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
@@ -43,6 +43,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const [event, setEvent] = useState();
   const [status, setStatus] = useState();
   const [amount, setAmount] = useState(null);
+  const [rulebook, setRulebook] = useState("");
   const [location, setLocation] = useState(null);
   const [admin, setAdmin] = useState(null);
   const [adminId, setAdminId] = useState([]);
@@ -99,6 +100,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
           setTime(res.time);
           setfreeforMNIT(res.freeForMNIT);
           setStatus(res.status);
+          setRulebook(res.rulebook);
           // const arr = currEvent.updates.map(({ message }) => {
           //   return { message: message };
           // });
@@ -115,7 +117,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   useEffect(() => {
     if (submitV) post_Create();
   }, [adminId]);
-  const categories = ["Tech", "Cultural", "EDM"];
+  const categories = ["Flagship", "Club", "Branch"];
   // useEffect(() => {
   //   post_Create();
   // }, [eventCoorIds]);
@@ -264,9 +266,10 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       freeForMNIT: freeForMNIT,
       minTeamSize: minTeamSize,
       maxTeamSize: maxTeamSize,
+      rulebook: rulebook,
       // imageUrl: "", //
     };
-    //console.log(event_Data);
+    console.log(event_Data);
     let formData = new FormData();
     formData.append("file", eventImage);
     formData.append("body", JSON.stringify(event_Data));
@@ -334,6 +337,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       amount: amount,
       freeForMNIT: freeForMNIT,
       minTeamSize: minTeamSize,
+      rulebook: rulebook,
       maxTeamSize: maxTeamSize,
       // imageUrl: "", //
     };
@@ -501,6 +505,12 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
               setField: setMaxTeam,
               type: "Number",
               value: maxTeamSize,
+              disabled: disabled,
+            })}
+            {CreateInput({
+              label: "Rulebook URL",
+              setField: setRulebook,
+              value: rulebook,
               disabled: disabled,
             })}
             {CreateInput({

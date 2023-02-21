@@ -55,6 +55,17 @@ export default function AboutSection(props) {
             </div>
           </button>
         )}
+        <button
+          className="desktop14-edit-btn"
+          style={{ padding: "4px" }}
+          onClick={() => {
+            window.location.href = event.rulebook;
+          }}
+        >
+          <div className="desktop14-btn-inner">
+            <p>View Rulebook</p>
+          </div>
+        </button>
       </div>
 
       <p className="aboutSec-p">{event.description}</p>

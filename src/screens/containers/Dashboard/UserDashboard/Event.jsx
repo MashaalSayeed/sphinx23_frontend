@@ -11,7 +11,7 @@ const Event = ({ data }) => {
   let team = data.teamId;
   data = data.event;
 
-  let date = new Date(data.from);
+  let date = data ? new Date(data.from) : null;
   const monthNames = [
     "January",
     "February",

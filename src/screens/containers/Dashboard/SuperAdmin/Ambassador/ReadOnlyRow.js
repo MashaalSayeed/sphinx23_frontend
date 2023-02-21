@@ -3,15 +3,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ReadOnlyRow = ({ ambassador, handleEditClick, handleDeleteClick }) => {
-  //console.log("A", ambassador.user);
+  console.log("A", ambassador);
   return (
     <tr>
-      <td>{ambassador.index + 1}</td>
-      <td>{ambassador.user.name}</td>
-      <td>{ambassador.user.phoneNumber}</td>
-      <td>{ambassador.user.email}</td>
-      <td>{ambassador.user.collegeName}</td>
-      <td>{ambassador.profit}</td>
+      <td>{ambassador && ambassador.index + 1}</td>
+      <td>{ambassador.user && ambassador.user.name}</td>
+      <td>{ambassador.user && ambassador.user.phoneNumber}</td>
+      <td>{ambassador.user && ambassador.user.email}</td>
+      <td>{ambassador.user && ambassador.user.collegeName}</td>
+      <td>{ambassador && ambassador.profit}</td>
 
       <td></td>
       {/* <td></td>

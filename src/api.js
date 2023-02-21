@@ -39,16 +39,16 @@ export const editUser = async (body) => {
   let token = Session.getObject("profile").token;
   //console.log(token);
   let id = Session.getObject("profile").profile._id;
-  //console.log(id);
+  console.log(body);
   return fetch(`${url}/users/${id}`, {
     method: "PUT",
     headers: {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
       Authorization: "Bearer " + token,
-
-      body: JSON.stringify(body),
     },
+    method: "POST",
+    body: JSON.stringify(body),
   })
     .then((response) => response.json())
     .then((data) => {
@@ -85,7 +85,7 @@ export const logout = async () => {
     });
 };
 export const fetchEventsByCategory = async (category) => {
-  //console.log("Events Fetched");
+  console.log(category);
   return fetch(`${url}/events/category/${category}`, {
     headers: {
       mode: "cors",
@@ -450,7 +450,7 @@ export const resetPassword = async (body) => {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
-      Authorization: "Bearer " + Session.getObject("profile").token,
+      // Authorization: "Bearer " + Session.getObject("profile").token,
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",
@@ -472,12 +472,12 @@ export const resetPassword = async (body) => {
 };
 export const verifyForgotOTP = async (body) => {
   //console.log(Session.getObject("profile").token);
-
+  // console.log("FOrhot");
   return fetch(`${url}/verification/verifyForgotOTP`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
-      Authorization: "Bearer " + Session.getObject("profile").token,
+      // Authorization: "Bearer " + Session.getObject("profile").token,
       "Access-Control-Allow-Origin": "*",
     },
     method: "POST",
@@ -917,7 +917,7 @@ export const getAmbassadors = ({
       if (data.success) {
         //console.log(data.success);
         //console.log(data);
-
+        console.log(data);
         setCurrentRecords(data.ambassador);
         setNpage(data.totalPages);
         return data.success;
