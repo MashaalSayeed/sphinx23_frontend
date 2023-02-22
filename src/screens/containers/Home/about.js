@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Parallax, ParallaxProvider } from "react-scroll-parallax";
 import HomeNav from "./homeNav";
-import back from "../../../images/about/PyramidBack.png";
+import back from "../../../images/about/PyramidBack.webp";
 import aboutMob from "../../../images/aboutMob.png";
 import { RandomReveal } from "react-random-reveal";
 // import aboutMob from "../../../images/about/PyramidFront.png";

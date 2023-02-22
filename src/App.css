@@ -1046,3 +1046,63 @@ color: #FF8762;
     opacity: 1;
   }
 }
+
+
+
+
+/* LOADER */
+.loader
+{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  background: black;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader-back
+{
+  width: 25%;
+  min-width: 300px;
+  aspect-ratio: 2.043;
+  transform: rotate(90deg);
+  
+ 
+}
+body
+{
+  margin:0;
+}
+.back{
+  height: 100vh;
+  width: 100%;
+  background: black;
+}
+
+@keyframes fade_in_page {
+  0% {
+       opacity: 0;
+       /* transform: scale(0);
+       transform: translateY(80%); */
+  }
+  30%
+  {
+    opacity: 0.1;
+  }
+
+  100% {
+       opacity: 1;
+       /* transform: scale(1);
+       transform: translateY(250%); */
+       
+  }
+}
+
+.loader-trans
+{
+  animation: fade_in_show 100ms;
+}

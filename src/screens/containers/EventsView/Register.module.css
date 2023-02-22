@@ -122,3 +122,45 @@ align-items: flex-start;
     color: #FFC700;
     
 }
+
+@media screen and (max-width: 700px) {
+.con
+{
+    top: 9vh;
+}
+.close
+{
+    position: unset;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+}
+.form
+{
+    width: 90%;
+    position: relative;
+    max-height: unset;
+}
+.formCon
+{
+    flex-direction: column;
+}
+.filedsCon
+{
+    margin-bottom: 2vh;
+    flex-direction: column;
+}
+.inputCon
+{
+    flex-direction: column;
+    margin-bottom: 5vh;
+    width: 100%;
+}
+.inputCon>label
+{
+    color: #95FF42;
+}
+.formCon>p{
+   
+    margin-bottom: 4vh
+};
+}

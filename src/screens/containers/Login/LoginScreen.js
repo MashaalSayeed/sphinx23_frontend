@@ -32,6 +32,7 @@ import bg0 from "./bg0.png";
 import Session from "../../../Session";
 import { LeakRemoveTwoTone } from "@mui/icons-material";
 import { useRef } from "react";
+import HomeNav from "../Home/homeNav";
 
 const toastStyle = {
   position: "top-right",
@@ -43,8 +44,10 @@ const toastStyle = {
   progress: undefined,
   theme: "dark",
 };
-const disabledCol = "#6e9efa";
-const btnCol = "#1968ff";
+// const disabledCol = "#6e9efa";
+const disabledCol = "#6ea613;";
+// const btnCol = "#1968ff";
+const btnCol = "#C1FF5C";
 
 function handleChange(event, setter) {
   // //console.log("Handle Called");
@@ -83,12 +86,12 @@ function SocialIcons({ handleSuccess, handleFailure, isRegistration }) {
         <img className="login-social-icons" src={fb} />
       </div> */}
 
-      <GoogleLogin
+      {/* <GoogleLogin
         clientId="253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com"
         buttonText={isRegistration ? "Signup with Google" : "Login with Google"}
         onSuccess={handleSuccess}
         onFailure={handleFailure}
-      />
+      /> */}
     </div>
   );
 }
@@ -425,10 +428,10 @@ function RegScreen1(props) {
       navigate("/");
     }
     function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
+      // gapi.client.init({
+      //   clientId: clientId,
+      //   scope: "",
+      // });
     }
     gapi.load("client:auth2", start);
     // chandra();
@@ -1422,6 +1425,9 @@ export default function LoginScreen() {
   const [bgchange, setBg] = useState(true);
   const [registered, setRegistered] = useState(true);
   const arr = [bg0, bg1, bg3, bg4];
+  const [currentTab, setCurrentTab] = useState("Description");
+  const [currTab, setCurrTab] = useState("");
+  const Tabs = ["Home", "Events", "Contact"];
 
   return (
     <div
@@ -1429,6 +1435,14 @@ export default function LoginScreen() {
       id="bgChange"
       style={{ backgroundImage: `url(${arr[parseInt(Math.random() * 4)]})` }}
     >
+      <HomeNav
+        setCurrTab={setCurrTab}
+        currTab={currTab}
+        Tabs={Tabs}
+        notanimation={true}
+        landing={false}
+        setLand={() => {}}
+      />
       <div className="login-image-darken">
         <div className="login-logo-container">
           <img className="login-logo-img" src={sphinxLogo} />

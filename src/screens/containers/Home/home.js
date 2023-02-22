@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../../../styles/home.css";
-import grad from "../../../images/home/homeBack.png";
+import grad from "../../../images/home/homeBack.webp";
 import stars from "../../../images/home/starsBright.png";
 import pyraminds from "../../../images/home/pyramids.svg";
 import logo from "../../../images/landingLogo.png";
@@ -8,12 +8,21 @@ import logo from "../../../images/landingLogo.png";
 import HomeNav from "./homeNav";
 import TimeMachine from "./TimeMachine";
 import { useSelector } from "react-redux";
+import Loader from "./Loader";
 
 function Landing(props) {
   const { parallax, setLand } = props;
+  const [SLoading, setSLoading] = useState(true);
   const curruser = useSelector((state) => state.auth.curruser);
   const [currTab, setCurrTab] = useState("Home");
   const Tabs = ["Home", "Events", "Contact"];
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timeout);
+  }, []);
   //console.log(curruser);
   // if (curruser != null) {
   //   Tabs.push("Profile");
@@ -41,9 +50,19 @@ function Landing(props) {
 
   return (
     <div className="home-con">
-      <div>
+      {SLoading ? <Loader /> : <></>}
+      <div
+        style={
+          SLoading
+            ? { display: "none" }
+            : { animation: "fade_in_page 500ms ease-out" }
+        }
+        className={SLoading ? "loader-trans" : ""}
+      >
         <div
-          className={Loading || !Scroll ? "landing-main" : "exit-anim"}
+          className={
+            SLoading ? "" : Loading || !Scroll ? "landing-main" : "exit-anim"
+          }
           onScroll={() => {
             if (!Loading && !parallax) {
               setScroll(true);

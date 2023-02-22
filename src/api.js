@@ -14,8 +14,9 @@ import {
   adminEvents,
   loading,
 } from "./store/modules/auth/auth.action";
-import { queries } from "@testing-library/react";
-const url = process.env.REACT_APP_SERVER_URL;
+
+// const url = process.env.REACT_APP_SERVER_URL;
+const url = " http://192.168.56.1:8000";
 
 export const fetchEvents = async (dispatch) => {
   //console.log("Events Fetched");

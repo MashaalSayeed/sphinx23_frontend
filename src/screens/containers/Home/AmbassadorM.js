@@ -110,13 +110,13 @@ function Sec1() {
           Campus<br></br>Ambassadors
         </div>
         <div className={style.introSub}>
-          There will be one student from each college chosen for this position,
+          There will be multiple students from each college chosen for this position,
           who will be in charge of the entire contingent from that college.
         </div>
         <div className={style.introBtn}>
           <button
             className={style.introLog}
-            // disabled={user && user.profile.isAmbassador}
+            disabled={user != null && user.profile.isAmbassador}
             onClick={handleSubmit}
           >
             {user != null && user.profile.isAmbassador
@@ -198,7 +198,7 @@ function AmbassadorM() {
       />
       <Sec1 />
       <Sec2 />
-      <Footer setCurrTab={setCurrTab} />
+      <Footer setCurrTab={() => {}} />
     </div>
   );
 }
