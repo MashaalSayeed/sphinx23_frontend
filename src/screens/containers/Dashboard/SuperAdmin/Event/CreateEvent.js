@@ -536,7 +536,11 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
                 <label className="createEvent-label">
                   {"Event Coordinators"}
                 </label>
-                <InputTag setEventCoor={setEventCoor} useData={eventCoor} />
+                <InputTag
+                  disabled={disabled}
+                  setEventCoor={setEventCoor}
+                  useData={eventCoor}
+                />
               </div>
             ) : (
               <></>

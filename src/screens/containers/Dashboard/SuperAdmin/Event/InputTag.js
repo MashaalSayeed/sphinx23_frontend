@@ -1,10 +1,10 @@
 import { Cancel, Tag } from "@mui/icons-material";
 import { FormControl, Stack, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { getUsersId } from "../../../../../api";
 
-const Tags = ({ data, handleDelete }) => {
+const Tags = ({ disabled, data, handleDelete }) => {
   return (
     <Box
       sx={{
@@ -20,22 +20,31 @@ const Tags = ({ data, handleDelete }) => {
     >
       <Stack direction="row" gap={1}>
         <Typography>{data}</Typography>
-        <Cancel
-          sx={{ cursor: "pointer" }}
-          onClick={() => {
-            handleDelete(data);
-          }}
-        />
+        {!disabled && (
+          <Cancel
+            sx={{ cursor: "pointer" }}
+            onClick={() => {
+              handleDelete(data);
+            }}
+          />
+        )}
       </Stack>
     </Box>
   );
 };
 
-export default function InputTag({ setEventCoor }) {
-  const [tags, SetTags] = useState([]);
+export default function InputTag({ disabled, useData, setEventCoor }) {
+  // console.log(useData);
+  const [tags, SetTags] = useState(useData);
+  // useEffect(() => {
+  //   SetTags(useData);
+  //   // if (submitV) post_Create();
+  // }, []);
+  console.log(tags);
   const tagRef = useRef();
   const handleDelete = (value) => {
     const newtags = tags.filter((val) => val !== value);
+    // useData = useData.filter((val) => val !== value);
     SetTags(newtags);
     setEventCoor(newtags);
   };
@@ -67,6 +76,7 @@ export default function InputTag({ setEventCoor }) {
         size="small"
         onChange={handleChange}
         value={inputEmail}
+        disabled={disabled}
         onBlur={(event) => handleOnSubmit(event)}
         sx={{ margin: "1rem 0" }}
         margin="none"
@@ -78,11 +88,22 @@ export default function InputTag({ setEventCoor }) {
                 display: "flex",
               }}
             >
-              {tags.map((data, index) => {
+              {useData.map((data, index) => {
                 return (
-                  <Tags data={data} handleDelete={handleDelete} key={index} />
+                  <Tags
+                    disabled={disabled}
+                    data={data}
+                    handleDelete={handleDelete}
+                    key={index}
+                  />
                 );
               })}
+              {/* {useData &&
+                useData.map((data, index) => {
+                  return (
+                    <Tags data={data} handleDelete={handleDelete} key={index} />
+                  );
+                })} */}
             </Box>
           ),
         }}
