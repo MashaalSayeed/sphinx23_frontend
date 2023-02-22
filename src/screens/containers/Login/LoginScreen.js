@@ -428,10 +428,10 @@ function RegScreen1(props) {
       navigate("/");
     }
     function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
+      // gapi.client.init({
+      //   clientId: clientId,
+      //   scope: "",
+      // });
     }
     gapi.load("client:auth2", start);
     // chandra();
@@ -1435,7 +1435,14 @@ export default function LoginScreen() {
       id="bgChange"
       style={{ backgroundImage: `url(${arr[parseInt(Math.random() * 4)]})` }}
     >
-      <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
+      <HomeNav
+        setCurrTab={setCurrTab}
+        currTab={currTab}
+        Tabs={Tabs}
+        notanimation={true}
+        landing={false}
+        setLand={() => {}}
+      />
       <div className="login-image-darken">
         <div className="login-logo-container">
           <img className="login-logo-img" src={sphinxLogo} />

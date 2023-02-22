@@ -15,8 +15,8 @@ import {
   loading,
 } from "./store/modules/auth/auth.action";
 
-const url = process.env.REACT_APP_SERVER_URL;
-// const url = " http://192.168.56.1:8000";
+// const url = process.env.REACT_APP_SERVER_URL;
+const url = " http://192.168.56.1:8000";
 
 export const fetchEvents = async (dispatch) => {
   //console.log("Events Fetched");

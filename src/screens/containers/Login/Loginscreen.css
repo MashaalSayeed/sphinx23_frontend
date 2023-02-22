@@ -349,6 +349,7 @@ input[type="password"]::-ms-reveal
 	font-size: 0.75rem;
 	line-height: 0.8rem;
 	color: #1968ff;
+		color: #9ce624;
 }
 .login-form-bio {
 	display: flex;
@@ -388,11 +389,11 @@ input[type="password"]::-ms-reveal
 		}
 		.login-form-body
 		{
-			margin-top: 3vh;
+			margin-top: 5vh;
 			width: 100%;
 			border-radius: 21px;
 			min-height: 75%;
-			max-height: 80%;
+			/* max-height: 80%; */
 		}
 		.login-form-container
 		{
