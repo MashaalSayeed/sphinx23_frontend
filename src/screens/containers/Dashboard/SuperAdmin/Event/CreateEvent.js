@@ -101,6 +101,21 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
           setfreeforMNIT(res.freeForMNIT);
           setStatus(res.status);
           setRulebook(res.rulebook);
+          let a = [];
+          for (let i in res.coordinators) {
+            try {
+              let mail = res.coordinators[i].email;
+              //console.log("mail", mail);
+              //const id = await getUsersId(token, mail);
+              a.push(mail);
+            } catch (err) {
+              toast.error(err, toastStyle);
+              return;
+            }
+          }
+          console.log(a);
+          setEventCoor(a);
+
           // const arr = currEvent.updates.map(({ message }) => {
           //   return { message: message };
           // });
@@ -117,6 +132,9 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   useEffect(() => {
     if (submitV) post_Create();
   }, [adminId]);
+  useEffect(() => {
+    // if (submitV) post_Create();
+  }, [eventCoor]);
   const categories = ["Flagship", "Club", "Branch"];
   // useEffect(() => {
   //   post_Create();
@@ -318,7 +336,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
     );
   };
 
-  const handleEdit = () => {
+  const handleEdit = async () => {
     const event_Data = {
       name: eventName,
       description: details,
@@ -326,8 +344,8 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       from: date,
       time: time,
       location: location,
-      // coordinators: CoorsId,
-      // admin: adminId[0],
+      coordinators: [],
+      admin: "",
       updates:
         update.length != 0
           ? [...updateList, { message: update, timestamp: Date.now() }]
@@ -341,34 +359,69 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       maxTeamSize: maxTeamSize,
       // imageUrl: "", //
     };
-    toastId.current = toast.loading("Updating Event");
-    submitRef.current.setAttribute("disabled", true);
-    updateEvent(currEvent._id, event_Data, token, setCreateStatus)
-      .then((res) => {
-        //console.log("Event Updated");
-        toast.update(toastId.current, {
-          render: "Event Updated",
-          type: "success",
-          isLoading: false,
-          autoClose: 2000,
-          ...toastStyle,
+    if (!admin) {
+      toast.error("Admin is Required.", toastStyle);
+      return;
+    }
+    try {
+      const id = await getUsersId(token, admin);
+      if (!id) {
+        toast.error("Admin Invalid", toastStyle);
+        return;
+      }
+      console.log(id);
+      event_Data.admin = id;
+      let a = [];
+      //console.log(eventCoor, "kunal");
+      for (let i in eventCoor) {
+        try {
+          let mail = eventCoor[i];
+          //console.log("mail", mail);
+          const id = await getUsersId(token, mail);
+          a.push(id);
+        } catch (err) {
+          toast.error(err, toastStyle);
+          return;
+        }
+      }
+      event_Data.coordinators = a;
+      toastId.current = toast.loading("Updating Event");
+      submitRef.current.setAttribute("disabled", true);
+      updateEvent(currEvent._id, event_Data, token, setCreateStatus)
+        .then((res) => {
+          //console.log("Event Updated");
+          toast.update(toastId.current, {
+            render: "Event Updated",
+            type: "success",
+            isLoading: false,
+            autoClose: 2000,
+            ...toastStyle,
+          });
+          submitRef.current.removeAttribute("disabled");
+          // navigate(`/eventDetails/event/${currEvent._id}`);
+          //console.log(`/eventDetails/event/${currEvent._id}`);
+          setCreate(false);
+          window.location.href = `/eventDetails/event/${currEvent._id}`;
+        })
+        .catch((err) => {
+          toast.update(toastId.current, {
+            render: err,
+            type: "error",
+            isLoading: false,
+            autoClose: 2000,
+            ...toastStyle,
+          });
+          // toast.error(err, toastStyle);
         });
-        submitRef.current.removeAttribute("disabled");
-        // navigate(`/eventDetails/event/${currEvent._id}`);
-        //console.log(`/eventDetails/event/${currEvent._id}`);
-        setCreate(false);
-        // window.location.href = `/eventDetails/event/${currEvent._id}`;
-      })
-      .catch((err) => {
-        toast.update(toastId.current, {
-          render: err,
-          type: "error",
-          isLoading: false,
-          autoClose: 2000,
-          ...toastStyle,
-        });
-        // toast.error(err, toastStyle);
-      });
+      // setAdminId([id]);
+      // setSubmit(true);
+      // post_Create();
+    } catch (err) {
+      toast.error("Admin not Valid", toastStyle);
+    }
+
+    console.log(event_Data);
+
     //console.log(event_Data);
   };
   const edit = () => {
@@ -477,7 +530,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
               value: time,
             })}
 
-            {!editSuperAdmin ? (
+            {editSuperAdmin ? (
               <div className="createEvent-Taglist">
                 {" "}
                 <label className="createEvent-label">

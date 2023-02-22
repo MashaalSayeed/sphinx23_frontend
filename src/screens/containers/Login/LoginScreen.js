@@ -503,7 +503,7 @@ function RegScreen1(props) {
         handleFailure={handleFailure}
         isRegistration={true}
       /> */}
-      <Seprator />
+      {/* <Seprator /> */}
       <div className="login-form-sub-title">Sign-up with email</div>
       <div className="login-form-signup">
         <div className="login-form-signup-que">Already have an account?</div>
