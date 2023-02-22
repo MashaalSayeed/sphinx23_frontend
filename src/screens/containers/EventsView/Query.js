@@ -63,18 +63,19 @@ function Query({ onSubmit }) {
               />
             </span>
             <span>
-              <input
+              <textarea
                 id="query"
                 type="textarea"
                 value={description}
                 placeholder="Description"
-                rows="3"
+                rows="5"
                 onChange={(e) => setDescription(e.target.value)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") handleSubmit();
                 }}
                 style={{
                   marginTop: "1vw",
+                  minHeight: "100px",
                 }}
               />
               <img src={sendIcon} onClick={handleSubmit} />
