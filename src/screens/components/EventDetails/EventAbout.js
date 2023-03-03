@@ -26,7 +26,11 @@ export default function AboutSection(props) {
           <></>
         )}
         <div className="about-content">
-          <img src={event.imageUrl} className="aboutSec-img" />
+          <img
+            src={event.imageUrl}
+            className="aboutSec-img"
+            style={{ height: "50%", width: "50%" }}
+          />
           <div className="event-mainDetials">
             <h3>Category: {event.category}</h3>
             <h3>From: {event.from.split("T")[0]}</h3>
