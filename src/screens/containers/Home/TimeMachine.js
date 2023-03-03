@@ -161,26 +161,35 @@ function TimeMachine({ notAnim, landing, setLand }) {
             style={!landing || !animNotOver ? { animationDelay: 0 } : {}}
           >
             {textIndex == 1 && (
-              <div className="timer">
-                <div className={!landing ? "timer" : "timer timerAnim"}>
-                  <div className="timer-ele">
-                    <span>Days</span>
-                    <p>{AddZero(countdownTime.Days)}</p>
-                  </div>
-                  <div className="timer-ele">
-                    <span>Hours</span>
-                    <p>{AddZero(countdownTime.Hours)}</p>
-                  </div>
-                  <div className="timer-ele">
-                    <span>Minutes</span>
-                    <p>{AddZero(countdownTime.Minutes)}</p>
-                  </div>
-                  <div className="timer-ele">
-                    <span>Seconds</span>
-                    <p>{AddZero(countdownTime.Seconds)}</p>
-                  </div>
-                </div>
+              <div className="TitleSp ">
+                {" "}
+                <span>S</span>
+                <span>P</span>
+                <span>H</span>
+                <span>I</span>
+                <span>N</span>
+                <span>X</span>{" "}
               </div>
+              // <div className="timer">
+              //   <div className={!landing ? "timer" : "timer timerAnim"}>
+              //     <div className="timer-ele">
+              //       <span>Days</span>
+              //       <p>{AddZero(countdownTime.Days)}</p>
+              //     </div>
+              //     <div className="timer-ele">
+              //       <span>Hours</span>
+              //       <p>{AddZero(countdownTime.Hours)}</p>
+              //     </div>
+              //     <div className="timer-ele">
+              //       <span>Minutes</span>
+              //       <p>{AddZero(countdownTime.Minutes)}</p>
+              //     </div>
+              //     <div className="timer-ele">
+              //       <span>Seconds</span>
+              //       <p>{AddZero(countdownTime.Seconds)}</p>
+              //     </div>
+              //   </div>
+              // </div>
             )}
 
             {textIndex == 0 && (
