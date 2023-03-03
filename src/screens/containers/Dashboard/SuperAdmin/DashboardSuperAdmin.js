@@ -39,7 +39,7 @@ export default function DashboardSuperAdmin() {
     // getPayments(token, setPayments);
     // //console.log("USERS AMBASSADORS PAYMENT SET");
   }, []);
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "Events", "Profile"];
   const [currTab, setCurrTab] = useState("");
   return (
     <div style={{ backgroundColor: "white" }}>

@@ -15,7 +15,7 @@ function Events() {
   const [currTab, setCurrTab] = useState("Events");
   const curruser = useSelector((state) => state.auth.curruser);
 
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "Events", "Profile"];
   //console.log(curruser);
   // if (curruser != null) {
   //   Tabs.push("Profile");

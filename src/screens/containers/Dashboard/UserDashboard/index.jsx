@@ -19,7 +19,7 @@ const UserDashboard = () => {
       navigate("/eventAdmin");
     }
   }, []);
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "Events", "Profile"];
   const [currTab, setCurrTab] = useState("");
   return (
     <div className="dashBack">

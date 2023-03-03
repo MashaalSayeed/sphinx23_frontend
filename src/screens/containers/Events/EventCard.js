@@ -46,13 +46,13 @@ function EventCard(props) {
         <div className="eventE-details" style={{ background: curr.backCol }}>
           <div className="eventE-left" style={{ color: curr.leftCol }}>
             <div className="eventE-title">{card.name}</div>
-            {card.amount != 0 && (
+            {/* {card.amount != 0 && (
               <div className="eventE-price">
                 <span style={{ fontSize: "0.7rem" }}>Price</span>
                 <br></br>
                 Rs.{card.amount}
               </div>
-            )}
+            )} */}
             <button className="eventE-register">Explore</button>
           </div>
           <div className="eventE-right" style={{ color: curr.rightCol }}>
@@ -61,26 +61,28 @@ function EventCard(props) {
                 <span style={{ fontSize: "0.7rem" }}>Date</span>
                 <br></br>
                 <span style={{ fontSize: "1.2rem", fontWeight: "800" }}>
-                  {weekday[date.getDay()]}
+                  Coming Soon !!
+                  {/* {weekday[date.getDay()]}
                   <br></br>
                   {date.getDate() +
                     " " +
                     monthNames[date.getMonth()] +
                     " " +
-                    date.getFullYear()}
+                    date.getFullYear()} */}
                 </span>
               </div>
 
               <div className="eventE-sub2">
                 <span style={{ fontSize: "0.7rem" }}>Event Venue</span>
                 <br></br>
-                <span style={{ fontSize: "1.2rem", fontWeight: "800" }}>
+                Coming Soon !!
+                {/* <span style={{ fontSize: "1.2rem", fontWeight: "800" }}>
                   {card.location}
                 </span>
                 <br></br>
                 <span style={{ fontSize: "1.1rem", fontWeight: "300" }}>
                   {card.time}
-                </span>
+                </span> */}
               </div>
               <div className="eventE-sub1"></div>
             </div>

@@ -110,8 +110,9 @@ function Sec1() {
           Campus<br></br>Ambassadors
         </div>
         <div className={style.introSub}>
-          There will be multiple students from each college chosen for this position,
-          who will be in charge of the entire contingent from that college.
+          There will be multiple students from each college chosen for this
+          position, who will be in charge of the entire contingent from that
+          college.
         </div>
         <div className={style.introBtn}>
           <button
@@ -183,7 +184,7 @@ function Cards(props) {
 }
 
 function AmbassadorM() {
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "Events", "Profile"];
   const [currTab, setCurrTab] = useState("AMBASSADOR");
   // //console.log(currTab);
   return (
