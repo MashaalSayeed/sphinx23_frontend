@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { storage } from "../../../../../firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+// import { storage } from "../../../../../firebase";
+// import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { async } from "@firebase/util";
 import { createPass } from "../../../../../api";
 
@@ -54,20 +54,20 @@ function CreatePass() {
       eventId: new_Arr,
     });
 
-    if (file != null && file.files.length > 0) {
-      const storageRef = ref(storage, `passes/${file.files[0].lastModified}`);
-      const uploadTask = uploadBytesResumable(storageRef, file.files[0]).then(
-        () => {
-          getDownloadURL(storageRef).then(async (downloadURL) => {
-            //console.log(downloadURL);
-            setPassData({ ...PassData, imageUrl: downloadURL });
-            handleSubmit(downloadURL);
-          });
-        }
-      );
-    } else {
-      seterr("Please Select Pass Cover");
-    }
+    // if (file != null && file.files.length > 0) {
+    //   const storageRef = ref(storage, `passes/${file.files[0].lastModified}`);
+    //   const uploadTask = uploadBytesResumable(storageRef, file.files[0]).then(
+    //     () => {
+    //       getDownloadURL(storageRef).then(async (downloadURL) => {
+    //         //console.log(downloadURL);
+    //         setPassData({ ...PassData, imageUrl: downloadURL });
+    //         handleSubmit(downloadURL);
+    //       });
+    //     }
+    //   );
+    // } else {
+    //   seterr("Please Select Pass Cover");
+    // }
   };
 
   const handleSubmit = async (downloadURL) => {

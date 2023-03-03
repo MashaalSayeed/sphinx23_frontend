@@ -145,7 +145,7 @@ function App() {
             <Route path="/comming" element={<Coming />} />
             <Route path="/events" element={<Events />} />
             <Route path="/events/:cat/:id" element={<EventsView />} />
-
+            {/* <Route path="/dashboard" element={<UserDashboard />} /> */}
             {/* <Route path="/test" element={<Test />} /> */}
             {land ? (
               <Route exact path="/" element={<Landing setLand={setLand} />} />

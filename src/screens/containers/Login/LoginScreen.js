@@ -850,6 +850,11 @@ function RegScreen3(props) {
   const toastId = useRef(null);
   const sendOTP = () => {
     //console.log(props.formData.mobile);
+    if (props.formData.mobile.length != 10) {
+      toast.info("Mobile No. must be of length 10.", toastStyle);
+      return;
+    }
+
     toastId.current = toast.loading("Sending OTP");
     let body = { phoneNumber: props.formData.mobile };
     sendMobileOTP(body)

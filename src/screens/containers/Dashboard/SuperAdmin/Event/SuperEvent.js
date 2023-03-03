@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import create from "../../../../../images/create_event.png";
-import { storage } from "../../../../../firebase";
+// import { storage } from "../../../../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { useSelector } from "react-redux";
 import EventTab from "./EventTab";

@@ -9,8 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const UserDashboard = () => {
   const currUser = useSelector((state) => state.auth.curruser);
+
   const navigate = useNavigate();
   useEffect(() => {
+    if (!currUser) {
+      window.location.href = "/login";
+    }
     //console.log("USef Eeevt", currUser.token);
     if (currUser.profile.type === "superAdmin") {
       navigate("/superAdmin");
