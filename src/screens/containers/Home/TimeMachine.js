@@ -76,7 +76,7 @@ function TimeMachine({ notAnim, landing, setLand }) {
     window.addEventListener("resize", handleWindowResize);
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
-  const [expiryTime, setExpiryTime] = useState("17 mar 2023 20:08:00");
+  const [expiryTime, setExpiryTime] = useState("31 mar 2023 20:08:00");
   const [countdownTime, setCountdownTime] = useState({
     Days: "",
     Hours: "",
@@ -161,35 +161,26 @@ function TimeMachine({ notAnim, landing, setLand }) {
             style={!landing || !animNotOver ? { animationDelay: 0 } : {}}
           >
             {textIndex == 1 && (
-              <div className="TitleSp ">
-                {" "}
-                <span>S</span>
-                <span>P</span>
-                <span>H</span>
-                <span>I</span>
-                <span>N</span>
-                <span>X</span>{" "}
+              <div className="timer">
+                <div className={!landing ? "timer" : "timer timerAnim"}>
+                  <div className="timer-ele">
+                    <span>Days</span>
+                    <p>{AddZero(countdownTime.Days)}</p>
+                  </div>
+                  <div className="timer-ele">
+                    <span>Hours</span>
+                    <p>{AddZero(countdownTime.Hours)}</p>
+                  </div>
+                  <div className="timer-ele">
+                    <span>Minutes</span>
+                    <p>{AddZero(countdownTime.Minutes)}</p>
+                  </div>
+                  <div className="timer-ele">
+                    <span>Seconds</span>
+                    <p>{AddZero(countdownTime.Seconds)}</p>
+                  </div>
+                </div>
               </div>
-              // <div className="timer">
-              //   <div className={!landing ? "timer" : "timer timerAnim"}>
-              //     <div className="timer-ele">
-              //       <span>Days</span>
-              //       <p>{AddZero(countdownTime.Days)}</p>
-              //     </div>
-              //     <div className="timer-ele">
-              //       <span>Hours</span>
-              //       <p>{AddZero(countdownTime.Hours)}</p>
-              //     </div>
-              //     <div className="timer-ele">
-              //       <span>Minutes</span>
-              //       <p>{AddZero(countdownTime.Minutes)}</p>
-              //     </div>
-              //     <div className="timer-ele">
-              //       <span>Seconds</span>
-              //       <p>{AddZero(countdownTime.Seconds)}</p>
-              //     </div>
-              //   </div>
-              // </div>
             )}
 
             {textIndex == 0 && (
