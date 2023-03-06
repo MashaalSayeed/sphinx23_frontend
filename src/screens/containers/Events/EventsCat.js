@@ -41,7 +41,7 @@ function EventsCat() {
   }, []);
 
   const [currTab, setCurrTab] = useState("EventsCat");
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "Events", "Profile"];
 
   return (
     <div className="eventM-main">

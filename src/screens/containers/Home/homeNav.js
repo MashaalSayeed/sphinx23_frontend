@@ -6,7 +6,7 @@ import { logout } from "../../../store/modules/auth/auth.action";
 import Session from "../../../Session";
 import { useState } from "react";
 import Menu from "./menu";
-
+import { useSelector } from "react-redux";
 function HomeNav({
   setCurrTab,
   currTab,
@@ -17,9 +17,15 @@ function HomeNav({
 }) {
   const navigate = useNavigate();
   const [menu, setMenu] = useState(false);
+  const currUser = useSelector((state) => state.auth.curruser);
   useEffect(() => {
     if (currTab == "Events" || currTab == "EVENTS") navigate("/events");
-    if (currTab == "PROFILE") navigate("/dashboard");
+    if (currTab == "PROFILE" || currTab == "Profile") {
+      if (currUser) navigate("/dashboard");
+      else {
+        navigate("/login");
+      }
+    }
     if (currTab == "AMBASSADOR") navigate("/ambassador");
     if (currTab == "Contact") {
       // navigate("/");

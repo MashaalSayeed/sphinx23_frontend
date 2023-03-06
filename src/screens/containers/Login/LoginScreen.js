@@ -78,20 +78,20 @@ function SocialIcons({ handleSuccess, handleFailure, isRegistration }) {
           src={google}
           style={{ scale: "1.50" }}
         />
-      </div> */}
-      {/* <div className="login-social-icon-container">
+      </div>
+      <div className="login-social-icon-container">
         <img className="login-social-icons" src={apple} />
       </div>
       <div className="login-social-icon-container">
         <img className="login-social-icons" src={fb} />
       </div> */}
 
-      {/* <GoogleLogin
+      <GoogleLogin
         clientId="253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com"
         buttonText={isRegistration ? "Signup with Google" : "Login with Google"}
         onSuccess={handleSuccess}
         onFailure={handleFailure}
-      /> */}
+      />
     </div>
   );
 }
@@ -209,6 +209,7 @@ function Login(props) {
             <div className="login-form-signup-que">New User?</div>
             <Link
               className="login-form-signup-link"
+              style={{ textDecoration: "underline" }}
               onClick={() => {
                 props.toreg(false);
               }}
@@ -287,11 +288,11 @@ function Login(props) {
             Login
           </button>
           <Seprator />
-          {/* <SocialIcons
+          <SocialIcons
             handleSuccess={handleSuccess}
             handleFailure={handleFailure}
             isRegistration={false}
-          /> */}
+          />
         </>
       )}
       {forgot && <ForgotPass />}
@@ -501,17 +502,18 @@ function RegScreen1(props) {
   return (
     <>
       <div className="login-form-title">Create an Account</div>
-      {/* <SocialIcons
+      <SocialIcons
         handleSuccess={handleSuccess}
         handleFailure={handleFailure}
         isRegistration={true}
-      /> */}
-      {/* <Seprator /> */}
+      />
+      <Seprator />
       <div className="login-form-sub-title">Sign-up with email</div>
       <div className="login-form-signup">
         <div className="login-form-signup-que">Already have an account?</div>
         <Link
           className="login-form-signup-link"
+          style={{ textDecoration: "underline" }}
           onClick={() => {
             props.toreg(true);
           }}
@@ -701,7 +703,7 @@ function RegScreen2(props) {
       >
         Continue
       </button>
-      <div className="login-form-otp-resend">
+      <div className="login-form-otp-resend" style={{ color: "white" }}>
         {seconds > 0 || minutes > 0 ? (
           <p className="login-form-timer">
             Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
@@ -712,7 +714,7 @@ function RegScreen2(props) {
         )}
       </div>
       {!(seconds > 0 || minutes > 0) ? (
-        <div className="login-form-otp-resend">
+        <div className="login-form-otp-resend" style={{ color: "white" }}>
           <div className="login-form-otp-resend-que">Didn't recieve code?</div>
           <Link className="login-form-otp-resend-link" onClick={ResetOtp}>
             Resend
@@ -848,6 +850,11 @@ function RegScreen3(props) {
   const toastId = useRef(null);
   const sendOTP = () => {
     //console.log(props.formData.mobile);
+    if (props.formData.mobile.length != 10) {
+      toast.info("Mobile No. must be of length 10.", toastStyle);
+      return;
+    }
+
     toastId.current = toast.loading("Sending OTP");
     let body = { phoneNumber: props.formData.mobile };
     sendMobileOTP(body)

@@ -122,7 +122,7 @@ export default function EventDetails() {
     // if (tabActive == "Registered Students") return EventStudnetsPaginate();
     // if (tabActive == "Results") return EventResultPaginate();
   };
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "Events", "Profile"];
   const [currTab, setCurrTab] = useState("");
   //console.log("cuurent tab");
   //console.log(tabActive);

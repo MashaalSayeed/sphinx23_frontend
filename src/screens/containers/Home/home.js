@@ -15,7 +15,7 @@ function Landing(props) {
   const [SLoading, setSLoading] = useState(true);
   const curruser = useSelector((state) => state.auth.curruser);
   const [currTab, setCurrTab] = useState("Home");
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "Events", "Profile"];
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSLoading(false);

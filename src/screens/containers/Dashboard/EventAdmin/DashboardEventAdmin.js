@@ -10,6 +10,7 @@ import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import Complaints from "./Complaints/Complaints";
 import { useNavigate } from "react-router-dom";
+import HomeNav from "../../Home/homeNav";
 import { useParams } from "react-router-dom";
 export default function DashboardEventAdmin() {
   const Sdata = {
@@ -53,9 +54,14 @@ export default function DashboardEventAdmin() {
   //   getPayments(token, setPayments);
   //   //console.log("USERS AMBASSADORS PAYMENT SET");
   // }, []);
+  const Tabs = ["Home", "Events", "Profile"];
+  const [currTab, setCurrTab] = useState("");
   return (
     <div style={{ backgroundColor: "white" }}>
-      <Navbar />
+      <div style={{ background: "black" }}>
+        {" "}
+        <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
+      </div>
 
       <div className="space-top"></div>
       <div className="super-mainCon">

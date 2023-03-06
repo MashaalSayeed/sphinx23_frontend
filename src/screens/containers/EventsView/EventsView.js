@@ -69,7 +69,7 @@ function EventsView() {
   };
   const [currentTab, setCurrentTab] = useState("Description");
   const [currTab, setCurrTab] = useState("");
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "Events", "Profile"];
 
   return (
     <div className={styles.container}>

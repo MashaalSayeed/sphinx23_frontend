@@ -12,6 +12,20 @@ import arrow2 from "../../../images/arrow2.png";
 import linkedin from "../../../images/linkedin.png";
 import barCode from "../../../images/barCode.png";
 import { Navigate } from "react-router-dom";
+// import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const toastStyle = {
+  position: "top-right",
+  autoClose: 3000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "dark",
+};
 const links = [
   {
     icon: insta,
@@ -34,7 +48,10 @@ function StayInLoop() {
           className={styles.input}
           placeholder="Enter your Email ID "
         ></input>
-        <img src={arrow2}></img>
+        <img
+          onClick={() => toast.info("Subscribed", toastStyle)}
+          src={arrow2}
+        ></img>
       </div>
 
       <img className={styles.mysterybox} src={mysterybox} />
@@ -104,10 +121,10 @@ function GetInTouch({ setCurrTab }) {
         </a>
       </div>
       {/* <div className={styles.gradLine}></div> */}
-      <div className={styles.scanit}>
+      {/* <div className={styles.scanit}>
         <img src={barCode}></img>
         <span> Scan it To know it</span>
-      </div>
+      </div> */}
     </div>
   );
 }
