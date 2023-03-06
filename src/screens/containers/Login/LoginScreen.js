@@ -126,6 +126,7 @@ function Login(props) {
           props.toreg(false);
         } else {
           toast.info("Success", toastStyle);
+          navigate("/dashboard");
         }
       })
       .catch((err) => {
