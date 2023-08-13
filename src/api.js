@@ -15,7 +15,6 @@ import {
   loading,
 } from "./store/modules/auth/auth.action";
 
-// const url = process.env.REACT_APP_SERVER_URL;
 const url = "https://sphinx-backend.onrender.com/api";
 
 export const fetchEvents = async (dispatch) => {
