@@ -76,7 +76,7 @@ function TimeMachine({ notAnim, landing, setLand }) {
     window.addEventListener("resize", handleWindowResize);
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
-  const [expiryTime, setExpiryTime] = useState("31 mar 2023 20:08:00");
+  const [expiryTime, setExpiryTime] = useState("03 nov 2023 00:00:00");
   const [countdownTime, setCountdownTime] = useState({
     Days: "",
     Hours: "",
