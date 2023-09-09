@@ -1,8 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState,
+} from "react";
 import toggle from "../../images/toggle.png";
 
 function SidebarAdmin(props) {
-  const { data, optactive, setactive, isSidebar, SetSidebar } = props;
+  const {
+    data,
+    optactive,
+    setactive,
+    isSidebar,
+    SetSidebar,
+  } = props;
   const [anim, setAnim] = useState({
     animation: "slideIn 300ms ease-in-out",
     animationDelay: "200ms",
@@ -19,20 +28,26 @@ function SidebarAdmin(props) {
     <>
       <div className={"sidebar"} style={anim}>
         <div className="sidebar-header">
-          <div className="sidebar-title">{data.title}</div>
+          <div className="sidebar-title">
+            {data.title}
+          </div>
           <img
             className={
-              isSidebar ? "sidebar-toggle rotate0" : `sidebar-toggle rotate`
+              isSidebar
+                ? "sidebar-toggle rotate0"
+                : `sidebar-toggle rotate`
             }
             src={toggle}
             onClick={() => {
               SetSidebar(!isSidebar);
               setAnim({
-                animation: "slideOut 300ms ease-in",
+                animation:
+                  "slideOut 300ms ease-in",
                 animationFillMode: "both",
               });
               setBtnAnim({
-                animation: "slideInSidebar 300ms ease-in",
+                animation:
+                  "slideInSidebar 300ms ease-in",
 
                 animationFillMode: "forwards",
               });
@@ -62,12 +77,14 @@ function SidebarAdmin(props) {
         onClick={() => {
           SetSidebar(!isSidebar);
           setAnim({
-            animation: "slideIn 300ms ease-in-out",
+            animation:
+              "slideIn 300ms ease-in-out",
             animationFillMode: "forwards",
           });
           setBtnAnim({
             transform: "rotate(-90deg)",
-            animation: "slideOut 300ms ease-in-out",
+            animation:
+              "slideOut 300ms ease-in-out",
             animationFillMode: "both",
           });
         }}

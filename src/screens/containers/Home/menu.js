@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState,
+} from "react";
 import style from "../../../styles/menu.module.css";
 import colseBtn from "../../../images/navClose.png";
 import navLogo from "../../../images/navLogo.png";
@@ -8,9 +11,20 @@ import Session from "../../../Session";
 import { logout } from "../../../store/modules/auth/auth.action";
 import { logout as Logout } from "../../../api";
 import { useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import beepOpen from "../../../audio/beep_open.mp3";
+import beepClose from "../../../audio/beep_close.mp3";
+import randomAudio from "../../../audio/random_reveal.mp3";
+
+import {
+  ToastContainer,
+  toast,
+} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function Menu(props) {
+  let menuOpen = new Audio(beepOpen);
+  let menuClose = new Audio(beepClose);
+  let randomRev = new Audio(randomAudio);
+
   const toastStyle = {
     position: "top-right",
     autoClose: 2000,
@@ -21,7 +35,8 @@ function Menu(props) {
     progress: undefined,
     theme: "dark",
   };
-  const { menu, setMenu, currTab, setCurrTab } = props;
+  const { menu, setMenu, currTab, setCurrTab } =
+    props;
   const [anim, setAnim] = useState(true);
   const [close, setClose] = useState(false);
   const [tabs, setTab] = useState([
@@ -37,7 +52,9 @@ function Menu(props) {
   ]);
 
   const navigate = useNavigate();
-  const curruser = useSelector((state) => state.auth.curruser);
+  const curruser = useSelector(
+    (state) => state.auth.curruser
+  );
   // //console.log(curruser);
   useEffect(() => {
     if (curruser != null) {
@@ -58,9 +75,16 @@ function Menu(props) {
       setLog("LOGIN/REGISTER");
     }
   }, []);
+  useEffect(() => {
+    close ? menuClose.play() : menuOpen.play();
+  }, [close]);
 
-  const alpha = Array.from(Array(26)).map((e, i) => i + 65);
-  const alphabet = alpha.map((x) => String.fromCharCode(x));
+  const alpha = Array.from(Array(26)).map(
+    (e, i) => i + 65
+  );
+  const alphabet = alpha.map((x) =>
+    String.fromCharCode(x)
+  );
   const [hover, setHover] = useState("");
   const TimeInterval = 0.02;
   const ChkLog = () => {
@@ -82,6 +106,9 @@ function Menu(props) {
       navigate("/login");
     }
   };
+  useEffect(() => {
+    if (hover) randomRev.play();
+  }, [hover]);
   const random = (value, interval) => {
     return (
       <RandomReveal
@@ -118,11 +145,13 @@ function Menu(props) {
       style={
         !close
           ? {
-              WebkitAnimation: "slideInNav 400ms ease-in-out",
+              WebkitAnimation:
+                "slideInNav 400ms ease-in-out",
               WebkitAnimationFillMode: "forwards",
             }
           : {
-              WebkitAnimation: "slideOutNav 400ms ease-in-out",
+              WebkitAnimation:
+                "slideOutNav 400ms ease-in-out",
               WebkitAnimationFillMode: "forwards",
             }
       }
@@ -133,6 +162,7 @@ function Menu(props) {
             className={style.sideInfo}
             onMouseEnter={() => {
               setHover("discover");
+              //menuClose.play();
             }}
           >
             <div className={style.whiteBox}></div>
@@ -151,19 +181,28 @@ function Menu(props) {
                     className={
                       hover == value
                         ? style.linkActive2
-                        : currTab.toUpperCase() == value.toUpperCase()
+                        : currTab.toUpperCase() ==
+                          value.toUpperCase()
                         ? style.linkActive
                         : style.links
                     }
                     onClick={() => {
                       setCurrTab(value);
                     }}
-                    onMouseEnter={() => setHover(value)}
-                    onMouseLeave={() => setHover("")}
+                    onMouseEnter={() =>
+                      setHover(value)
+                    }
+                    onMouseLeave={() =>
+                      setHover("")
+                    }
                   >
                     {hover == value || anim ? (
                       <>
-                        <span style={{ opacity: 0 }}>{value}</span>
+                        <span
+                          style={{ opacity: 0 }}
+                        >
+                          {value}
+                        </span>
                         <div
                           style={{
                             position: "absolute",
@@ -173,16 +212,21 @@ function Menu(props) {
                             margin: "auto",
                             display: "flex",
                             alignItems: "center",
-                            justifyContent: "center",
+                            justifyContent:
+                              "center",
                           }}
                         >
                           <RandomReveal
                             isPlaying
-                            revealEasing={"linear"}
+                            revealEasing={
+                              "linear"
+                            }
                             duration={0.9}
                             revealDuration={0.9}
                             updateInterval={0.003}
-                            characterSet={alphabet}
+                            characterSet={
+                              alphabet
+                            }
                             characters={value}
                           />
                         </div>
@@ -191,10 +235,16 @@ function Menu(props) {
                       <>{value}</>
                     )}
                   </div>
-                  {(currTab.toUpperCase() == value || hover == value) && (
+                  {(currTab.toUpperCase() ==
+                    value ||
+                    hover == value) && (
                     <div
                       className={style.page}
-                      style={hover == value ? {} : { color: "#C1FF5C" }}
+                      style={
+                        hover == value
+                          ? {}
+                          : { color: "#C1FF5C" }
+                      }
                     >
                       {random(`PAGE`)}
                       <br></br>
@@ -251,7 +301,11 @@ function Menu(props) {
         </div>
         <div className={style.lineH2}></div>
         <button
-          className={hover != "login" ? style.login : style.logActive}
+          className={
+            hover != "login"
+              ? style.login
+              : style.logActive
+          }
           onClick={() => {
             ChkLog();
           }}
@@ -259,7 +313,9 @@ function Menu(props) {
             setHover("login");
           }}
         >
-          {hover == "login" || anim ? random(log, 0.009) : log}
+          {hover == "login" || anim
+            ? random(log, 0.009)
+            : log}
         </button>
       </div>
       <div className={style.lineV}></div>
@@ -267,7 +323,7 @@ function Menu(props) {
         className={style.sec2}
         onClick={() => {
           setClose(true);
-          document.body.style.overflowY = "scroll";
+          // document.body.style.overflowY ="scroll";
           setTimeout(() => {
             setMenu(false);
           }, 350);
