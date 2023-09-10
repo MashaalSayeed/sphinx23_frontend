@@ -980,8 +980,8 @@ export const getUsersId = async (token, email, setIds) => {
   // return userData;
 };
 
-export const isValidAmbassador = async (token, email, setIds) => {
-  return fetch(`${url}/users/validateambassador/${email}`, {
+export const isValidAmbassador = async (token, code, setIds) => {
+  return fetch(`${url}/users/validateambassador/${code}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",

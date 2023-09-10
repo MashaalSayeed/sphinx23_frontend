@@ -961,7 +961,7 @@ function RegScreen3(props) {
       </div>
       <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="college">
-          Campus Ambassador
+          Campus Ambassador ID
         </label>
         <input
           className="login-form-text-inputs"
