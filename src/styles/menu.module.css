@@ -130,6 +130,9 @@
   
     width: fit-content;
 }
+.sideInfo{
+    margin-top: 29px;
+}
 .linkActive
 {
     display: block;
@@ -286,15 +289,22 @@ margin-bottom: 25px;
     {
        width: 17%;
     }
+    .secUp {
+        flex-direction: column;
+    }
+    .secSocial {
+        flex-direction: column;
+    }
     .menuRoutes
     {
         font-size: 1.5rem;
+        margin-top: 0px;
     }
     .sideInfo
     {
         font-size: 0.6rem;
         width: 25%;
-        margin: 20px auto;
+        margin: 15px auto;
     }
     .linksSocial
     {
@@ -311,6 +321,13 @@ margin-bottom: 25px;
     .links
     {
         padding: 15px 20px 10px 7px; 
+    }
+    .linksSocial {
+        margin-top: 0px;
+    }
+
+    .login {
+        margin: auto;
     }
 
 
