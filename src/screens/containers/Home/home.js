@@ -9,18 +9,22 @@ import HomeNav from "./homeNav";
 import TimeMachine from "./TimeMachine";
 import { useSelector } from "react-redux";
 import Loader from "./Loader";
+import disableScroll from "disable-scroll";
 
 function Landing(props) {
+  //
+
   const { parallax, setLand } = props;
   const [SLoading, setSLoading] = useState(true);
   const curruser = useSelector((state) => state.auth.curruser);
   const [currTab, setCurrTab] = useState("Home");
+  const [menu, setMenu] = useState(false);
   const Tabs = ["Home", "Events", "Profile"];
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSLoading(false);
     }, 3000);
-
     return () => clearTimeout(timeout);
   }, []);
   //console.log(curruser);
@@ -42,11 +46,15 @@ function Landing(props) {
 
     return () => clearTimeout(timeout);
   }, []);
+  useEffect(() => {
+    console.log("menuStatus:", menu);
+  }, [menu]);
 
   const exitStyle = {
     animation: "exitBright 2000ms ease-in-out",
     animationFillMode: "forwards",
   };
+  menu ? disableScroll.on() && setLand(false) : disableScroll.off();
 
   return (
     <div className="home-con">
@@ -55,7 +63,9 @@ function Landing(props) {
         style={
           SLoading
             ? { display: "none" }
-            : { animation: "fade_in_page 500ms ease-out" }
+            : {
+                animation: "fade_in_page 500ms ease-out",
+              }
         }
         className={SLoading ? "loader-trans" : ""}
       >
@@ -64,17 +74,17 @@ function Landing(props) {
             SLoading ? "" : Loading || !Scroll ? "landing-main" : "exit-anim"
           }
           onScroll={() => {
-            if (!Loading && !parallax) {
+            if (!Loading && !parallax && !menu) {
               setScroll(true);
             }
           }}
           onTouchMove={() => {
-            if (!Loading && !parallax) {
+            if (!Loading && !parallax && !menu) {
               setScroll(true);
             }
           }}
           onWheel={() => {
-            if (!Loading && !parallax) {
+            if (!Loading && !parallax && !menu) {
               setScroll(true);
             }
           }}
@@ -113,6 +123,7 @@ function Landing(props) {
               currTab={currTab}
               Tabs={Tabs}
               landing={true}
+              setStatus={setMenu}
             />
           </div>
 

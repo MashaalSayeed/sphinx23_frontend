@@ -7,7 +7,10 @@ import Session from "../../../Session";
 import { useState } from "react";
 import Menu from "./menu";
 import { useSelector } from "react-redux";
+import disableScroll from "disable-scroll";
+
 function HomeNav({
+  setStatus,
   setCurrTab,
   currTab,
   Tabs,
@@ -16,8 +19,10 @@ function HomeNav({
   setLand,
 }) {
   const navigate = useNavigate();
-  const [menu, setMenu] = useState(false);
+
   const currUser = useSelector((state) => state.auth.curruser);
+  const [menu, setMenu] = useState(false);
+
   useEffect(() => {
     if (currTab == "Events" || currTab == "EVENTS") navigate("/events");
     if (currTab == "PROFILE" || currTab == "Profile") {
@@ -29,9 +34,9 @@ function HomeNav({
     if (currTab == "AMBASSADOR") navigate("/ambassador");
     if (currTab == "Contact") {
       // navigate("/");
-
       window.location.href = "#contact";
     }
+
     if (currTab == "SCHEDULE") navigate("/comming");
     if (currTab == "TEAM") navigate("/comming");
     if (currTab == "SPONSORS") navigate("/comming");
@@ -53,6 +58,15 @@ function HomeNav({
       if (currTab == "Home" || currTab == "HOME") navigate("/");
     }
   }, [currTab]);
+
+  useEffect(() => {
+    try {
+      setStatus(menu);
+    } catch {}
+  }, [menu]);
+
+  menu ? disableScroll.on() && setLand(false) : disableScroll.off();
+
   return (
     <div
       className={notanimation ? "landing-navbar-notAnim" : "landing-navbar"}
@@ -78,10 +92,15 @@ function HomeNav({
               onClick={() => {
                 //console.log(value);
                 setCurrTab(value);
+                setStatus(false);
+                // setMenuStatus(false);
               }}
               style={
                 currTab == value
-                  ? { textShadow: "0px 0px 0px #FFFFFF ", color: "#c9c9c9" }
+                  ? {
+                      textShadow: "0px 0px 0px #FFFFFF ",
+                      color: "#c9c9c9",
+                    }
                   : {}
               }
             >
@@ -94,7 +113,6 @@ function HomeNav({
         className="landing-ham"
         onClick={() => {
           setMenu(true);
-          document.body.style.overflowY = "hidden";
         }}
         style={{ cursor: "pointer" }}
       >
