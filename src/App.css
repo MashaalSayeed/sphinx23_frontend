@@ -593,6 +593,7 @@ margin-right: 25px;
 table {
   border-collapse: collapse;
   width: 100%;
+  color: #000000;
 }
 
 th,
@@ -602,6 +603,7 @@ td {
   border-left: 0;
   border-right: 0;
   border-top: 0;
+  color: black;
   /* text-align: left; */
   text-align: center;
   padding: 8px;
