@@ -96,8 +96,6 @@ const Profile = () => {
 
   return (
     <div className="ud__profile">
-      
-      
       <nav className={styles.eventsnav}>
             <ol>
               {Object.keys(tabs).map((tab) => (
@@ -113,9 +111,8 @@ const Profile = () => {
             <hr/>
           </nav>
       <div className="profile-container">
-        <EventCard />
-
-        <div className="user-details">
+      <EventCard />
+      <div className="user-details">
           <img src={prof} alt="" className="user-img" />
           <h3 className="username">USER NAME</h3>
           <div className="details">
@@ -127,6 +124,7 @@ const Profile = () => {
               <div className="referral-id">Referal id: 1DF34</div>
           </div>
         </div>
+        
       </div>
     </div>
     

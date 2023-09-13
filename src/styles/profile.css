@@ -84,6 +84,7 @@ html {
 /* NAVIGATION BAR */
 
 /* PROFILE CONTAINER */
+
 .profile-container {
   display: flex;
   align-items: center;
@@ -172,6 +173,7 @@ html {
 /* PASS CONTAINER */
 
 /* USER DETAILS */
+
 .user-details {
   background-color: #171717;
   /* height: 20rem; */
@@ -277,16 +279,22 @@ html {
 
 @media only screen and (max-width: 600px) {
   .profile-container {
-    flex-direction: column;
+    display: flex;
+    flex-direction: column-reverse;
     margin-left: 4rem;
+    height: 100rem;
+    overflow: scroll;
+    transform: translateX(-1rem);
   }
   .profile-container > div {
-    flex-basis: 80%;
+    flex-basis: auto;
     transform: translateX(-2rem);
+    transform: translateY(16rem);
   }
   .user-details {
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     flex-basis: 80%;
+    height: fit-content;
     margin-bottom: 5rem;
   }
   .ud__profile > nav {
@@ -294,6 +302,6 @@ html {
     width: 100%;
   }
   .user-details {
-    margin-top: 5rem;
+    margin-top: 1rem;
   }
 }
