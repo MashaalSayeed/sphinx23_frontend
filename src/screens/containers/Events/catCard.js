@@ -3,17 +3,35 @@ import { Link } from "react-router-dom";
 function CatCard(props) {
   const { card, index } = props;
   // console.log("Clic", card.title);
-  const animDelay = (index * 6).toString() + "0ms";
+  const animDelay =
+    (index * 6).toString() + "0ms";
 
   return (
-    <Link to={"/events/" + card.title} style={{ "text-decoration": "none" }}>
-      <div className="eventM-catCard" style={{ animationDelay: animDelay }}>
-        <img className="eventM-catCard-img" src={card.back}></img>
+    <Link
+      to={"/events/" + card.title}
+      style={{ "text-decoration": "none" }}
+    >
+      <div
+        className="eventM-catCard"
+        style={{ animationDelay: animDelay }}
+      >
+        <img
+          className="eventM-catCard-img"
+          src={card.back}
+        ></img>
         <div className="eventM-catCard-overlay">
-          <img className="eventM-catCard-icon" src={card.icon}></img>
+          <img
+            className="eventM-catCard-icon"
+            src={card.icon}
+          ></img>
           <div className="catCard-text">
-            <div className="catCard-category">Category</div>
-            <div className="catCard-title"> {card.title}</div>
+            <div className="catCard-category">
+              Category
+            </div>
+            <div className="catCard-title">
+              {" "}
+              {card.title}
+            </div>
           </div>
         </div>
       </div>

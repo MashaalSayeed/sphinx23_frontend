@@ -31,8 +31,8 @@ const UserDashboard = () => {
       <HomeNav setCurrTab={setCurrTab} currTab={currTab} Tabs={Tabs} />
       <div className="ud__containing-grid">
         <Profile />
-        <Events />
-        <Queries />
+        {/* <Events />
+        <Queries /> */}
       </div>
     </div>
   );

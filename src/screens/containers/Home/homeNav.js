@@ -17,29 +17,43 @@ function HomeNav({
   notanimation,
   landing,
   setLand,
+  setMenuStatus,
 }) {
   const navigate = useNavigate();
 
+
   const currUser = useSelector((state) => state.auth.curruser);
+
   const [menu, setMenu] = useState(false);
 
   useEffect(() => {
-    if (currTab == "Events" || currTab == "EVENTS") navigate("/events");
-    if (currTab == "PROFILE" || currTab == "Profile") {
+    if (
+      currTab == "Events" ||
+      currTab == "EVENTS"
+    )
+      navigate("/events");
+    if (
+      currTab == "PROFILE" ||
+      currTab == "Profile"
+    ) {
       if (currUser) navigate("/dashboard");
       else {
         navigate("/login");
       }
     }
-    if (currTab == "AMBASSADOR") navigate("/ambassador");
+    if (currTab == "AMBASSADOR")
+      navigate("/ambassador");
     if (currTab == "Contact") {
       // navigate("/");
       window.location.href = "#contact";
     }
 
-    if (currTab == "SCHEDULE") navigate("/comming");
+    if (currTab == "SCHEDULE")
+      navigate("/comming");
+
     if (currTab == "TEAM") navigate("/comming");
-    if (currTab == "SPONSORS") navigate("/comming");
+    if (currTab == "SPONSORS")
+      navigate("/comming");
     if (currTab == "Logout") {
       //callLogout
       Session.remove("profile");
@@ -55,9 +69,11 @@ function HomeNav({
     }
     if (!landing) {
       //console.log(currTab);
-      if (currTab == "Home" || currTab == "HOME") navigate("/");
+      if (currTab == "Home" || currTab == "HOME")
+        navigate("/");
     }
   }, [currTab]);
+
 
   useEffect(() => {
     try {
@@ -67,10 +83,19 @@ function HomeNav({
 
   menu ? disableScroll.on() && setLand(false) : disableScroll.off();
 
+
   return (
     <div
-      className={notanimation ? "landing-navbar-notAnim" : "landing-navbar"}
-      style={landing ? { WebkitAnimationDelay: "2.4s" } : {}}
+      className={
+        notanimation
+          ? "landing-navbar-notAnim"
+          : "landing-navbar"
+      }
+      style={
+        landing
+          ? { WebkitAnimationDelay: "2.4s" }
+          : {}
+      }
     >
       {menu && (
         <Menu
@@ -81,7 +106,10 @@ function HomeNav({
         />
       )}
       <div className="landing-logo">
-        <img src={logo} style={{ width: "80%" }}></img>
+        <img
+          src={logo}
+          style={{ width: "80%" }}
+        ></img>
       </div>
       <div className="landing-tabs">
         {Tabs.map((value, i) => {
@@ -98,7 +126,10 @@ function HomeNav({
               style={
                 currTab == value
                   ? {
-                      textShadow: "0px 0px 0px #FFFFFF ",
+
+                      textShadow:
+                        "0px 0px 0px #FFFFFF ",
+
                       color: "#c9c9c9",
                     }
                   : {}
@@ -113,6 +144,7 @@ function HomeNav({
         className="landing-ham"
         onClick={() => {
           setMenu(true);
+
         }}
         style={{ cursor: "pointer" }}
       >

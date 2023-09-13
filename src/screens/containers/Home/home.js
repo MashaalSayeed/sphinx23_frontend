@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState,
+} from "react";
 import "../../../styles/home.css";
 import grad from "../../../images/home/homeBack.webp";
 import stars from "../../../images/home/starsBright.png";
@@ -14,9 +17,18 @@ import disableScroll from "disable-scroll";
 function Landing(props) {
   //
 
+  const [menuStatus, setMenuStatus] =
+    useState("close");
+  useEffect(() => {
+    console.log("menuStatus:", menuStatus);
+  }, [menuStatus]);
+
+
   const { parallax, setLand } = props;
   const [SLoading, setSLoading] = useState(true);
-  const curruser = useSelector((state) => state.auth.curruser);
+  const curruser = useSelector(
+    (state) => state.auth.curruser
+  );
   const [currTab, setCurrTab] = useState("Home");
   const [menu, setMenu] = useState(false);
   const Tabs = ["Home", "Events", "Profile"];
@@ -64,6 +76,7 @@ function Landing(props) {
           SLoading
             ? { display: "none" }
             : {
+
                 animation: "fade_in_page 500ms ease-out",
               }
         }
@@ -71,7 +84,11 @@ function Landing(props) {
       >
         <div
           className={
-            SLoading ? "" : Loading || !Scroll ? "landing-main" : "exit-anim"
+            SLoading
+              ? ""
+              : Loading || !Scroll
+              ? "landing-main"
+              : "exit-anim"
           }
           onScroll={() => {
             if (!Loading && !parallax && !menu) {
@@ -96,23 +113,30 @@ function Landing(props) {
               Loading || !Scroll
                 ? {}
                 : {
-                    animation: "exitBright 2000ms ease-in-out",
+                    animation:
+                      "exitBright 2000ms ease-in-out",
                     animationFillMode: "forwards",
                   }
             }
           ></img>
           <div
             className="stars-con"
-            style={Loading || !Scroll ? {} : exitStyle}
+            style={
+              Loading || !Scroll ? {} : exitStyle
+            }
           >
-            <img className="landing-stars" src={stars}></img>
+            <img
+              className="landing-stars"
+              src={stars}
+            ></img>
           </div>
           <div
             style={
               Loading || !Scroll
                 ? {}
                 : {
-                    animation: "exitHide 1000ms ease-in-out",
+                    animation:
+                      "exitHide 1000ms ease-in-out",
                     animationFillMode: "forwards",
                   }
             }
@@ -129,13 +153,16 @@ function Landing(props) {
 
           <div
             className={
-              Loading || !Scroll ? "landing-title" : "landing-titleanim"
+              Loading || !Scroll
+                ? "landing-title"
+                : "landing-titleanim"
             }
             style={
               Loading || !Scroll
                 ? {}
                 : {
-                    animation: "titleAnim 2000ms ease-in-out",
+                    animation:
+                      "titleAnim 2000ms ease-in-out",
                     animationFillMode: "forwards",
                   }
             }
@@ -157,8 +184,10 @@ function Landing(props) {
                   Loading || !Scroll
                     ? {}
                     : {
-                        animation: "exitBright 2000ms ease-in-out",
-                        animationFillMode: "forwards",
+                        animation:
+                          "exitBright 2000ms ease-in-out",
+                        animationFillMode:
+                          "forwards",
                       }
                 }
               ></div>
@@ -173,8 +202,10 @@ function Landing(props) {
                 Loading || !Scroll
                   ? {}
                   : {
-                      animation: "exitBright 2000ms ease-in-out",
-                      animationFillMode: "forwards",
+                      animation:
+                        "exitBright 2000ms ease-in-out",
+                      animationFillMode:
+                        "forwards",
                     }
               }
             ></img>
@@ -185,12 +216,15 @@ function Landing(props) {
               Loading || !Scroll
                 ? {}
                 : {
-                    animation: "exitHide 2000ms ease-in-out",
+                    animation:
+                      "exitHide 2000ms ease-in-out",
                     animationFillMode: "forwards",
                   }
             }
           >
-            <div className="landing-scroll-text">SCROLL</div>
+            <div className="landing-scroll-text">
+              SCROLL
+            </div>
             <div className="landing-scroll-line"></div>
           </div>
         </div>
@@ -205,7 +239,10 @@ function Landing(props) {
         <></>
       ) : (
         <>
-          <TimeMachine landing={true} setLand={setLand} />
+          <TimeMachine
+            landing={true}
+            setLand={setLand}
+          />
         </>
       )}
     </div>
