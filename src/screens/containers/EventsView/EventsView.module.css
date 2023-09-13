@@ -33,14 +33,16 @@
 
 .eventsnav {
     margin-top: 3vh;
-    position: relative;
+    position: fixed;
+    top: 15%;
+    width: 100%;
 }
 
 .eventsnav ol {
     list-style-type: none;
     display: flex;
     justify-content: center;
-    padding-left: 0;
+    /* padding-left: 0; */
 }
 
 .eventsnav ol li {
