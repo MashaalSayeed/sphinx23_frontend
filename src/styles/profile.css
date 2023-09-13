@@ -17,6 +17,9 @@ html {
 }
 
 /* NAVIGAITON BAR */
+.ud__profile > nav {
+  z-index: 25;
+}
 .nav {
   background-color: #000;
   position: fixed;
@@ -96,6 +99,11 @@ html {
   margin: 25vh 5rem 2rem;
   transform: scale(0.9);
   height: fit-content;
+  margin-left: 8rem;
+}
+.profile-container > div {
+  /* margin-right: 8rem; */
+  margin-right: 5vw;
 }
 /* PASS CONTAINER */
 .pass-container {
@@ -104,7 +112,7 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-right: 8rem;
+  /* margin-right: 8rem; */
 }
 .pass {
   padding: 0.7rem;
@@ -175,7 +183,6 @@ html {
   flex-direction: column;
   align-items: center;
   justify-content: stretch;
-  height: min-content;
 }
 .details {
   display: flex;
@@ -208,7 +215,6 @@ html {
   letter-spacing: 2px;
   box-shadow: 0.3rem 0.3rem 0.8rem rgba(0, 0, 0, 0.5);
   margin-bottom: 1rem;
-  
 }
 .change-no {
   margin-top: -0.2rem;
@@ -231,6 +237,8 @@ html {
   transform: translateY(-6rem);
   font-weight: 500;
   letter-spacing: 2px;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
 }
 .referral-id {
   padding: 1rem;
@@ -258,3 +266,34 @@ html {
 /* USER DETAILS */
 
 /* PROFILE CONTAINER */
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 900px) {
+  .profile-container {
+    top: -0.1rem;
+    margin-left: 4rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .profile-container {
+    flex-direction: column;
+    margin-left: 4rem;
+  }
+  .profile-container > div {
+    flex-basis: 80%;
+    transform: translateX(-2rem);
+  }
+  .user-details {
+    margin-top: 2rem;
+    flex-basis: 80%;
+    margin-bottom: 5rem;
+  }
+  .ud__profile > nav {
+    transform: translateX(-1.8rem);
+    width: 100%;
+  }
+  .user-details {
+    margin-top: 5rem;
+  }
+}
