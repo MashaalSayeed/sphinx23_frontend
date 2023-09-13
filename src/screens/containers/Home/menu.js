@@ -262,7 +262,7 @@ function Menu(props) {
         <div className={style.secSocial}>
           <div
             className={style.sideInfo}
-            style={{ marginTop: "29px" }}
+           
             onMouseEnter={() => {
               setHover("connect");
             }}

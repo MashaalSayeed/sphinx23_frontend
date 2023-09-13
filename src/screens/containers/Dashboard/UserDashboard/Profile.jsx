@@ -4,6 +4,32 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import EventCard from "../../Events/EventCard.js"
 
+const getReferralCode = (x) => {
+  const digs = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const base = digs.length
+  let sign;
+  if (x < 0) {
+      sign = -1;
+  } else if (x === 0) {
+      return digs[0];
+  } else {
+      sign = 1;
+  }
+  
+  x *= sign;
+  const digits = [];
+
+  while (x) {
+      digits.push(digs[x % base]);
+      x = Math.floor(x / base);
+  }
+
+  if (sign < 0) digits.push('-');
+
+  digits.reverse();
+  return digits.join('');
+}
+
 const Profile = () => {
   const currUser = useSelector((state) => state.auth.curruser);
   useEffect(() => {

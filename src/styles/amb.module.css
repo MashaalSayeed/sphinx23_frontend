@@ -168,7 +168,8 @@ border: 1px solid #FFFFFF;
 .sec2Head
 {  
     margin-top: 10vh;
-   word-spacing: 1.3rem ;
+    word-spacing: 1.3rem ;
+    line-height: 2.3rem;
     color: #FFFFFF;
     font-family: 'wity2';
     font-size: 2.3rem;
@@ -188,6 +189,7 @@ border: 1px solid #FFFFFF;
     min-width: 500px;
     color: white;
     display: flex;
+    align-items: center;
     margin-bottom: 14vh;
     gap: 5px;
 
@@ -199,6 +201,7 @@ border: 1px solid #FFFFFF;
     font-family: 'wity2';
     color: #FF6464;
     margin-bottom: 3px;
+    line-height: 2.3rem;
 }
 .Pinfo
 {
@@ -283,7 +286,7 @@ border: 1px solid #FFFFFF;
     .Pname
     {
         font-size: 10vw;
-        line-height: 2.9rem;
+        line-height: 2.5rem;
     }
     .pointsCon
     {
