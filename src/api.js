@@ -15,6 +15,8 @@ import {
   loading,
 } from "./store/modules/auth/auth.action";
 
+
+// const url="http://localhost:8000/api";
 const url = "https://sphinx-backend.onrender.com/api";
 
 export const fetchEvents = async (dispatch) => {
@@ -952,8 +954,34 @@ export const getPayments = (token, setPayments) => {
 };
 
 export const getUsersId = async (token, email, setIds) => {
-  let userData = [];
   return fetch(`${url}/users/validatemail/${email}`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      Authorization: "Bearer " + token,
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        //console.log(data.id);
+        // //console.log(setIds);
+        // //console.log(setIds);
+        setIds((prevState) => [...prevState, data.id]);
+        return data.id;
+      }
+      throw data;
+    })
+    .catch((error) => {
+      throw error;
+      // //console.log(error);
+    });
+  // return userData;
+};
+
+export const isValidAmbassador = async (token, code, setIds) => {
+  return fetch(`${url}/users/validateambassador/${code}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",

@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import disableScroll from "disable-scroll";
 
 function HomeNav({
+  setStatus,
   setCurrTab,
   currTab,
   Tabs,
@@ -20,9 +21,9 @@ function HomeNav({
 }) {
   const navigate = useNavigate();
 
-  const currUser = useSelector(
-    (state) => state.auth.curruser
-  );
+
+  const currUser = useSelector((state) => state.auth.curruser);
+
   const [menu, setMenu] = useState(false);
 
   useEffect(() => {
@@ -44,11 +45,12 @@ function HomeNav({
       navigate("/ambassador");
     if (currTab == "Contact") {
       // navigate("/");
-
       window.location.href = "#contact";
     }
+
     if (currTab == "SCHEDULE")
       navigate("/comming");
+
     if (currTab == "TEAM") navigate("/comming");
     if (currTab == "SPONSORS")
       navigate("/comming");
@@ -71,9 +73,16 @@ function HomeNav({
         navigate("/");
     }
   }, [currTab]);
-  menu
-    ? disableScroll.on() && setLand(false)
-    : disableScroll.off();
+
+
+  useEffect(() => {
+    try {
+      setStatus(menu);
+    } catch {}
+  }, [menu]);
+
+  menu ? disableScroll.on() && setLand(false) : disableScroll.off();
+
 
   return (
     <div
@@ -111,12 +120,16 @@ function HomeNav({
               onClick={() => {
                 //console.log(value);
                 setCurrTab(value);
+                setStatus(false);
+                // setMenuStatus(false);
               }}
               style={
                 currTab == value
                   ? {
+
                       textShadow:
                         "0px 0px 0px #FFFFFF ",
+
                       color: "#c9c9c9",
                     }
                   : {}
@@ -131,7 +144,7 @@ function HomeNav({
         className="landing-ham"
         onClick={() => {
           setMenu(true);
-          setMenuStatus("open");
+
         }}
         style={{ cursor: "pointer" }}
       >

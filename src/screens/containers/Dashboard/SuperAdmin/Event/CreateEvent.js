@@ -21,7 +21,7 @@ const toastStyle = {
 };
 
 function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
-  const url = process.env.REACT_APP_SERVER_URL;
+  const url="http://localhost:8000/api";;
   const userType =
     useSelector((state) => state.auth.curruser.profile.type) === "superAdmin";
   const disabled = editSuperAdmin ? !userType : false;
@@ -232,6 +232,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       try {
         let mail = eventCoor[i];
         //console.log("mail", mail);
+        console.log(mail)
         const id = await getUsersId(token, mail);
         a.push(id);
       } catch (err) {
@@ -435,9 +436,11 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       </button>
     );
   };
+  
 
   const getUsersId = async (token, email) => {
     // let userData = [];
+    console.log("called")
     return fetch(`${url}/users/validatemail/${email}`, {
       headers: {
         "Content-Type": "application/json",
@@ -449,10 +452,11 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       .then((response) => response.json())
       .then((response) => {
         //console.log(response, "manvir");
-        //console.log(response.id);
+        console.log(response.id);
         return response.id;
       })
       .catch((err) => {
+        console.log(err);
         toast.error(err, toastStyle);
       });
 

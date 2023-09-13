@@ -19,6 +19,7 @@ import {
   sendForgotOTP,
   verifyForgotOTP,
   resetPassword,
+  isValidAmbassador
 } from "../../../api";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
@@ -729,8 +730,8 @@ function RegScreen2(props) {
 }
 
 function RegScreen3(props) {
-  const [otp, setOtp] = useState(new Array(6).fill(""));
-  const [sendOtp, setSendOtp] = useState(false);
+  const [otp, setOtp] = useState(new Array(6).fill("0"));
+  const [sendOtp, setSendOtp] = useState(true);
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(30);
   const [ambassadorId, setambassadorId] = useState([]);
@@ -812,9 +813,10 @@ function RegScreen3(props) {
       };
       //console.log(body);
       if (props.formData.campusAmbassador) {
-        getUsersId(token, props.formData.campusAmbassador, setambassadorId)
+        isValidAmbassador(token, props.formData.campusAmbassador, setambassadorId)
           .then((res) => {
             //console.log("Ambassador Correct", ambassadorId);
+            // if(!res.isAmbassador)
             body.refererId = props.formData.campusAmbassador;
             //console.log(body);
             verifyMobileOTP(body)
@@ -856,6 +858,7 @@ function RegScreen3(props) {
       return;
     }
 
+
     toastId.current = toast.loading("Sending OTP");
     let body = { phoneNumber: props.formData.mobile };
     sendMobileOTP(body)
@@ -874,7 +877,12 @@ function RegScreen3(props) {
         setSeconds(parseInt(time % 60));
       })
       .catch((err) => {
+        setSendOtp(true);
+        let time = Session.get("time") - parseInt(Date.now() / 1000);
+        setMinutes(parseInt(time / 60));
+        setSeconds(parseInt(time % 60));
         toast.update(toastId.current, {
+          
           render: err,
           type: "error",
           isLoading: false,
@@ -953,7 +961,7 @@ function RegScreen3(props) {
       </div>
       <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="college">
-          Campus Ambassador
+          Campus Ambassador ID
         </label>
         <input
           className="login-form-text-inputs"
@@ -996,14 +1004,14 @@ function RegScreen3(props) {
             className="login-form-text-label login-form-otp-resend-link"
             style={{ fontSize: "0.9rem" }}
             htmlFor="mobile"
-            onClick={sendOTP}
+            onClick={()=>{sendOTP(true);setOtp(["1", "2", "3","1", "2", "3"])}} // call send otp
             ref={verifyRef}
           >
             Verify Mobile
           </Link>
         </div>
       )}
-      {sendOtp ? (
+      {/* {sendOtp ? (
         <>
           {" "}
           <div className="login-form-text-label" style={{ fontSize: "0.8rem" }}>
@@ -1054,22 +1062,11 @@ function RegScreen3(props) {
           ) : (
             <></>
           )}
-          {/* <div className="login-form-otp-resend">
-            <Link
-              className="login-form-otp-resend-link"
-              style={{
-                fontSize: "0.9rem",
-                background: "white",
-              }}
-              onClick={() => {}}
-            >
-              SUBMIT
-            </Link>
-          </div> */}
+         
         </>
       ) : (
         <></>
-      )}
+      )} */}
 
       <button
         className="login-form-submit-btn"
