@@ -8,6 +8,7 @@ import { useState } from "react";
 import Menu from "./menu";
 import { useSelector } from "react-redux";
 import disableScroll from "disable-scroll";
+
 function HomeNav({
   setCurrTab,
   currTab,
@@ -15,12 +16,15 @@ function HomeNav({
   notanimation,
   landing,
   setLand,
+  setMenuStatus,
 }) {
   const navigate = useNavigate();
-  const [menu, setMenu] = useState(false);
+
   const currUser = useSelector(
     (state) => state.auth.curruser
   );
+  const [menu, setMenu] = useState(false);
+
   useEffect(() => {
     if (
       currTab == "Events" ||
@@ -67,7 +71,9 @@ function HomeNav({
         navigate("/");
     }
   }, [currTab]);
-  menu ? disableScroll.on() : disableScroll.off();
+  menu
+    ? disableScroll.on() && setLand(false)
+    : disableScroll.off();
 
   return (
     <div
@@ -125,6 +131,7 @@ function HomeNav({
         className="landing-ham"
         onClick={() => {
           setMenu(true);
+          setMenuStatus("open");
         }}
         style={{ cursor: "pointer" }}
       >

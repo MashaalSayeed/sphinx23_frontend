@@ -11,32 +11,20 @@ import Session from "../../../Session";
 import { logout } from "../../../store/modules/auth/auth.action";
 import { logout as Logout } from "../../../api";
 import { useSelector } from "react-redux";
-import beepOpen from "../../../audio/beep_open.mp3";
+import beepOpen from "../../../audio/beep_open_s.mp3";
 import beepClose from "../../../audio/beep_close.mp3";
-import randomAudio from "../../../audio/random_reveal.mp3";
-
+import hoverAud from "../../../audio/hover_1.mp3";
 import {
   ToastContainer,
   toast,
 } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 function Menu(props) {
   let menuOpen = new Audio(beepOpen);
   let menuClose = new Audio(beepClose);
-  let randomRev = new Audio(randomAudio);
-
-  const toastStyle = {
-    position: "top-right",
-    autoClose: 2000,
-    hideProgressBar: true,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "dark",
-  };
-  const { menu, setMenu, currTab, setCurrTab } =
-    props;
+  let randomRev = new Audio(hoverAud);
+  const [hover, setHover] = useState("");
   const [anim, setAnim] = useState(true);
   const [close, setClose] = useState(false);
   const [tabs, setTab] = useState([
@@ -50,6 +38,19 @@ function Menu(props) {
     // "THEME",
     "SPONSORS",
   ]);
+
+  const toastStyle = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  };
+  const { menu, setMenu, currTab, setCurrTab } =
+    props;
 
   const navigate = useNavigate();
   const curruser = useSelector(
@@ -77,6 +78,7 @@ function Menu(props) {
   }, []);
   useEffect(() => {
     close ? menuClose.play() : menuOpen.play();
+    //parentCallback(!close);
   }, [close]);
 
   const alpha = Array.from(Array(26)).map(
@@ -85,7 +87,7 @@ function Menu(props) {
   const alphabet = alpha.map((x) =>
     String.fromCharCode(x)
   );
-  const [hover, setHover] = useState("");
+
   const TimeInterval = 0.02;
   const ChkLog = () => {
     //console.log("log");
@@ -323,7 +325,6 @@ function Menu(props) {
         className={style.sec2}
         onClick={() => {
           setClose(true);
-          // document.body.style.overflowY ="scroll";
           setTimeout(() => {
             setMenu(false);
           }, 350);

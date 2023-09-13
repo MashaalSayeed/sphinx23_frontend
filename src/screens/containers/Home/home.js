@@ -14,6 +14,13 @@ import { useSelector } from "react-redux";
 import Loader from "./Loader";
 
 function Landing(props) {
+  //
+  const [menuStatus, setMenuStatus] =
+    useState("close");
+  useEffect(() => {
+    console.log("menuStatus:", menuStatus);
+  }, [menuStatus]);
+
   const { parallax, setLand } = props;
   const [SLoading, setSLoading] = useState(true);
   const curruser = useSelector(
@@ -26,7 +33,6 @@ function Landing(props) {
     const timeout = setTimeout(() => {
       setSLoading(false);
     }, 3000);
-
     return () => clearTimeout(timeout);
   }, []);
   //console.log(curruser);
@@ -133,6 +139,7 @@ function Landing(props) {
               currTab={currTab}
               Tabs={Tabs}
               landing={true}
+              setMenuStatus={setMenuStatus}
             />
           </div>
 
