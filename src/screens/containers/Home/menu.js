@@ -13,7 +13,7 @@ import { logout as Logout } from "../../../api";
 import { useSelector } from "react-redux";
 import beepOpen from "../../../audio/beep_open_s.mp3";
 import beepClose from "../../../audio/beep_close.mp3";
-import hoverAud from "../../../audio/hover_1.mp3";
+import hoverAud from "../../../audio/hover_2.mp3";
 import {
   ToastContainer,
   toast,
@@ -262,7 +262,6 @@ function Menu(props) {
         <div className={style.secSocial}>
           <div
             className={style.sideInfo}
-           
             onMouseEnter={() => {
               setHover("connect");
             }}
