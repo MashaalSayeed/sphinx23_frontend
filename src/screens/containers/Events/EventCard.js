@@ -14,8 +14,8 @@ function EventCard(props) {
     },
     Flagship: {
       backCol: "white",
-      leftCol: "#2D2D2D",
-      rightCol: "#FFC700",
+      leftCol: "black",
+      rightCol: "black",
     },
   };
   const { card, index, category } = props;
@@ -57,7 +57,9 @@ function EventCard(props) {
         </div>
         <div className="eventE-details" style={{ background: curr.backCol }}>
           <div className="eventE-left" style={{ color: curr.leftCol }}>
-            <div className="eventE-title">{card.name}</div>
+            <div className="eventE-title" style={{ fontSize: "1.4rem" }}>
+              {card.name}
+            </div>
             {/* {card.amount != 0 && (
               <div className="eventE-price">
                 <span style={{ fontSize: "0.7rem" }}>Price</span>
@@ -65,7 +67,7 @@ function EventCard(props) {
                 Rs.{card.amount}
               </div>
             )} */}
-            <button className="eventE-register">Explore</button>
+            <button className="eventE-register">EXPLORE</button>
           </div>
           <div className="eventE-right" style={{ color: curr.rightCol }}>
             <div className="eventE-sub">
@@ -74,11 +76,11 @@ function EventCard(props) {
                 <br></br>
                 <span
                   style={{
-                    fontSize: "1.2rem",
+                    fontSize: "0.9rem",
                     fontWeight: "800",
                   }}
                 >
-                  Coming Soon !!
+                  3rd -5th Nov
                   {/* {weekday[date.getDay()]}
                   <br></br>
                   {date.getDate() +
@@ -92,7 +94,9 @@ function EventCard(props) {
               <div className="eventE-sub2">
                 <span style={{ fontSize: "0.7rem" }}>Event Venue</span>
                 <br></br>
-                Coming Soon !!
+                <span style={{ fontSize: "0.9rem", fontWeight: "800" }}>
+                  Stay Tuned
+                </span>
                 {/* <span style={{ fontSize: "1.2rem", fontWeight: "800" }}>
                   {card.location}
                 </span>

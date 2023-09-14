@@ -275,7 +275,7 @@ function Description({ card }) {
           <div className="eventD-sub1">
             <span style={{ fontSize: "0.8rem" }}>Date</span>
             <br></br>
-            Coming Soon !!
+            3rd -5th Nov
             {/* <span style={{ fontSize: "1.4rem", fontWeight: "800" }}>
               {weekday[date.getDay()]}
             </span>
@@ -291,7 +291,7 @@ function Description({ card }) {
           <div className="eventD-sub1">
             <span style={{ fontSize: "0.8rem" }}>Venue</span>
             <br></br>
-            Coming Soon !!
+            Stay Tuned!
             {/* <span style={{ fontSize: "1.4rem", fontWeight: "800" }}>
               {card.location}
             </span>

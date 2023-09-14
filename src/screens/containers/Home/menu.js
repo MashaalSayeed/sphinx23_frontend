@@ -50,7 +50,7 @@ function Menu(props) {
   // //console.log(curruser);
   useEffect(() => {
     if (curruser != null) {
-      setTab([...tabs, "PROFILE"]);
+      // setTab([...tabs, "PROFILE"]);
       setLog("LOGOUT");
     } else {
       setTab([
