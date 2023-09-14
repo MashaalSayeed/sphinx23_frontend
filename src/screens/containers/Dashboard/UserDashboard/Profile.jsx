@@ -2,7 +2,7 @@ import "../../../../styles/profile.css";
 import prof from "../../../../images/user.png";
 import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
-import EventCard from "../../Events/EventCard.js" 
+import Qrcard from "./qrcard";
 import styles from "../../EventsView/EventsView.module.css";
 import Description from "../../EventsView/EventDetails.js";
 import Results from "../../EventsView/Results.js";
@@ -111,8 +111,9 @@ const Profile = () => {
             <hr/>
           </nav>
       <div className="profile-container">
-      <EventCard />
-      <div className="user-details">
+        <Qrcard />
+
+        <div className="user-details">
           <img src={prof} alt="" className="user-img" />
           <h3 className="username">USER NAME</h3>
           <div className="details">

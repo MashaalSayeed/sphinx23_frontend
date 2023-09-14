@@ -21,7 +21,7 @@ const toastStyle = {
 };
 
 function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
-  const url="http://localhost:8000/api";;
+  const url="https://sphinx-backend.onrender.com/api";;
   const userType =
     useSelector((state) => state.auth.curruser.profile.type) === "superAdmin";
   const disabled = editSuperAdmin ? !userType : false;
