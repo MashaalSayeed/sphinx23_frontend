@@ -22,7 +22,7 @@
 	border-radius: var(--border-radius-size);
 	height: fit-content;
 	display: grid;
-	padding: var(--padding-size);
+	/* padding: var(--padding-size); */
 	gap: var(--gap-size);
 	padding-top: 5%;
 	grid-template-columns: repeat(3, 1fr);
@@ -42,7 +42,7 @@
 	grid-area: 1 / 1 / 2 / 3;
 	display: flex;
 	gap: var(--gap-size);
-	padding: var(--padding-size);
+	/* padding: var(--padding-size); */
 	align-items: center;
 	color: white;
 }
@@ -53,7 +53,7 @@
 	display: flex;
 	flex-direction: column;
 	color: white;
-	padding: var(--padding-size);
+	/* padding: var(--padding-size); */
 	gap: 16px;
 	overflow-y: scroll;
 	max-height: 100%;

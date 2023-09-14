@@ -1,25 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 function EventCard(props) {
-  const styles = [
-    {
+  const styles = {
+    Branch: {
       backCol: "#FF4B4B",
       leftCol: "white",
       rightCol: "#FFC700",
     },
-    {
+    Club: {
       backCol: "#2E2D2D",
       leftCol: "white",
       rightCol: "#FFC700",
     },
-    {
+    Flagship: {
       backCol: "white",
       leftCol: "#2D2D2D",
       rightCol: "#FFC700",
     },
-  ];
-  const { card, index } = props;
-  const curr = styles[index % 3];
+  };
+  const { card, index, category } = props;
+  const curr = styles[category];
   const animDelay = (index * 6).toString() + "0ms";
   const weekday = [
     "Sunday",

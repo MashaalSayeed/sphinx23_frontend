@@ -12,6 +12,7 @@ import { fetchOneEvent, submitQuery } from "../../../../api";
 import Query from "../../EventsView/Query.js";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { Margin } from "@mui/icons-material";
 
 const getReferralCode = (x) => {
   const digs = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -42,63 +43,35 @@ const getReferralCode = (x) => {
 const Profile = () => {
   // const params = useParams();
   const currUser = useSelector((state) => state.auth.curruser);
-  const [currentTab, setCurrentTab] = useState("Description");
+
   // useEffect(() => {
   //   console.log("CurrUser", currUser);
   // }, [currUser]);
 
   const tabs = {
-    Description: "Description" ,
-    Results: "Result" ,
+    Profile: "" ,
+    Events: "Events" ,
     Notification: "Notification" 
   };
-  // const [currentTab, setCurrentTab] = useState("Description");
-  //const [event, setEvent] = useState();
-  // const toastStyle = {
-  //   position: "top-right",
-  //   autoClose: 2000,
-  //   hideProgressBar: true,
-  //   closeOnClick: true,
-  //   pauseOnHover: true,
-  //   draggable: true,
-  //   progress: undefined,
-  //   theme: "dark",
-  // };
-  // useEffect(() => {
-  //   //console.log("USef Eeevt");
-  //   fetchOneEvent(setEvent, params.id)
-  //     .then((res) => {
-  //       //console.log(res);
-  //       setEvent(res);
-  //       // //console.log(event);
-  //     })
-  //     .catch((err) => {
-  //       //console.log(err);
-  //     });
-  // }, []);
-  // const handleQuery = (query) => {
-  //   if (!query.subject || !query.queryDesc) {
-  //     alert("All Fields are Mandatory");
-  //     return;
-  //   }
-  //   query.eventId = params.id;
-  //   submitQuery(currUser.token, query)
-  //     .then((res) => {
-  //       toast.info(res, toastStyle);
-  //       //console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       toast.error(err, toastStyle);
-  //       //console.log(err);
-  //     });
-  //   //console.log(query);
-  // };
+  const [currentTab, setCurrentTab] = useState("Profile");
+  const [event, setEvent] = useState();
+  const toastStyle = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+  };
+ 
 
   return (
     <div className="ud__profile">
       
       
-      <nav className={styles.eventsnav}>
+      <nav className={styles.eventsnav} style={{position:"fixed"}}> 
             <ol>
               {Object.keys(tabs).map((tab) => (
                 <li
@@ -110,7 +83,7 @@ const Profile = () => {
                 </li>
               ))}
             </ol>
-            <hr/>
+            <hr style={{marginLeft:"0px"}}/>
           </nav>
       <div className="profile-container">
         <Qrcard />
@@ -122,9 +95,9 @@ const Profile = () => {
               <p>Registered email</p>
               <div className="user-email">{currUser.profile.email}</div>
               <p>Registered Number</p>
-              <div className="user-number">123456789</div>
-              <p className="change-no">Change Number?</p>
-              <div className="referral-id">Referal id: 1DF34</div>
+              <div className="user-number">{currUser.phoneNumber}</div>
+            
+              {/* <div className="referral-id">Referal id: 1DF34</div> */}
           </div>
         </div>
       </div>
