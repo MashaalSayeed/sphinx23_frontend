@@ -86,16 +86,16 @@ const Profile = () => {
             <hr style={{marginLeft:"0px"}}/>
           </nav>
       <div className="profile-container">
-        <Qrcard />
+        {/* <Qrcard /> */}
 
-        <div className="user-details">
+        <div className="user-details" style={{marginTop:"60px"}} >
           <img src={prof} alt="" className="user-img" />
-          <h3 className="username">USER NAME</h3>
+          <p className="username" >{currUser.profile.name}</p>
           <div className="details">
               <p>Registered email</p>
               <div className="user-email">{currUser.profile.email}</div>
               <p>Registered Number</p>
-              <div className="user-number">{currUser.phoneNumber}</div>
+              <div className="user-number">{currUser.profile.phoneNumber}</div>
             
               {/* <div className="referral-id">Referal id: 1DF34</div> */}
           </div>

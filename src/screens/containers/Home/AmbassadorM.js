@@ -87,17 +87,10 @@ function Sec1() {
       }
     }
 
-    let body = { isAmbassador: true };
-    //console.log(body);
-    editUser(body)
-      .then((res) => {
-        console.log(res);
-        toast.info(res, toastStyle);
-        window.location.href = "/ambassador";
-      })
-      .catch((err) => {
-        toast.error(err, toastStyle);
-      });
+    window.open(
+      "https://forms.gle/aJHL6L9CZxY6QD6m6",
+      "_blank" // <- This is what makes it open in a new window.
+    );
   };
   return (
     <div className={style.sec1}>

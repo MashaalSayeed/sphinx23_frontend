@@ -28,7 +28,7 @@ function HomeNav({
   useEffect(() => {
     if (currTab == "Events" || currTab == "EVENTS") navigate("/events");
     if (currTab == "PROFILE" || currTab == "Profile") {
-      if (currUser) navigate("/");
+      if (currUser) navigate("/dashboard");
       else {
         navigate("/login");
       }

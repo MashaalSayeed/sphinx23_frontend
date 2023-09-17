@@ -28,7 +28,7 @@ function Menu(props) {
     "AMBASSADOR",
     "EVENTS",
     "SCHEDULE",
-    "TEAM",
+    // "TEAM",
     // "THEME",
     "SPONSORS",
   ]);
@@ -50,7 +50,7 @@ function Menu(props) {
   // //console.log(curruser);
   useEffect(() => {
     if (curruser != null) {
-      // setTab([...tabs, "PROFILE"]);
+      setTab([...tabs, "PROFILE"]);
       setLog("LOGOUT");
     } else {
       setTab([
@@ -267,7 +267,7 @@ function Menu(props) {
           </div>
         </div>
         <div className={style.lineH2}></div>
-        {/* <button
+        <button
           className={hover != "login" ? style.login : style.logActive}
           onClick={() => {
             ChkLog();
@@ -277,7 +277,7 @@ function Menu(props) {
           }}
         >
           {hover == "login" || anim ? random(log, 0.009) : log}
-        </button> */}
+        </button>
       </div>
       <div className={style.lineV}></div>
       <div

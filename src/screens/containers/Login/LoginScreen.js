@@ -19,7 +19,7 @@ import {
   sendForgotOTP,
   verifyForgotOTP,
   resetPassword,
-  isValidAmbassador
+  isValidAmbassador,
 } from "../../../api";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
@@ -730,8 +730,8 @@ function RegScreen2(props) {
 }
 
 function RegScreen3(props) {
-  const [otp, setOtp] = useState(new Array(6).fill("0"));
-  const [sendOtp, setSendOtp] = useState(true);
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [sendOtp, setSendOtp] = useState(false);
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(30);
   const [ambassadorId, setambassadorId] = useState([]);
@@ -813,7 +813,11 @@ function RegScreen3(props) {
       };
       //console.log(body);
       if (props.formData.campusAmbassador) {
-        isValidAmbassador(token, props.formData.campusAmbassador, setambassadorId)
+        isValidAmbassador(
+          token,
+          props.formData.campusAmbassador,
+          setambassadorId
+        )
           .then((res) => {
             //console.log("Ambassador Correct", ambassadorId);
             // if(!res.isAmbassador)
@@ -858,7 +862,6 @@ function RegScreen3(props) {
       return;
     }
 
-
     toastId.current = toast.loading("Sending OTP");
     let body = { phoneNumber: props.formData.mobile };
     sendMobileOTP(body)
@@ -882,7 +885,6 @@ function RegScreen3(props) {
         setMinutes(parseInt(time / 60));
         setSeconds(parseInt(time % 60));
         toast.update(toastId.current, {
-          
           render: err,
           type: "error",
           isLoading: false,
@@ -1004,14 +1006,16 @@ function RegScreen3(props) {
             className="login-form-text-label login-form-otp-resend-link"
             style={{ fontSize: "0.9rem" }}
             htmlFor="mobile"
-            onClick={()=>{sendOTP(true);setOtp(["1", "2", "3","1", "2", "3"])}} // call send otp
+            onClick={() => {
+              sendOTP();
+            }} // call send otp
             ref={verifyRef}
           >
             Verify Mobile
           </Link>
         </div>
       )}
-      {/* {sendOtp ? (
+      {sendOtp ? (
         <>
           {" "}
           <div className="login-form-text-label" style={{ fontSize: "0.8rem" }}>
@@ -1062,11 +1066,10 @@ function RegScreen3(props) {
           ) : (
             <></>
           )}
-         
         </>
       ) : (
         <></>
-      )} */}
+      )}
 
       <button
         className="login-form-submit-btn"
