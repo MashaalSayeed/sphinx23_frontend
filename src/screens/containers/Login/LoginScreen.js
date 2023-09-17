@@ -961,7 +961,7 @@ function RegScreen3(props) {
           }}
         />
       </div>
-      <div className="login-form-input-grp">
+      {/* <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="college">
           Campus Ambassador ID
         </label>
@@ -979,7 +979,7 @@ function RegScreen3(props) {
             if (e.key === "Enter") mobRef.current.focus();
           }}
         />
-      </div>
+      </div> */}
       <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="mobile">
           Mobile *
@@ -1029,8 +1029,10 @@ function RegScreen3(props) {
                   id="standard-basic"
                   variant="standard"
                   className="login-form-otp-cell"
+                  style={{ width: "1.9rem" }}
+                  inputMode="numeric"
                   name="otp"
-                  type="text"
+                  type="tel"
                   key={index}
                   value={data}
                   maxLength="1"
@@ -1275,10 +1277,12 @@ function ForgotPass() {
                   variant="standard"
                   className="login-form-otp-cell"
                   name="otp"
-                  type="text"
+                  type="tel"
                   key={index}
+                  inputmode="numeric"
                   value={data}
                   maxLength="1"
+                  style={{ width: "2rem" }}
                   onChange={(e) => handleChangeOtp(e.target, index)}
                   onFocus={(e) => e.target.select()}
                   onKeyDown={(e) => {
