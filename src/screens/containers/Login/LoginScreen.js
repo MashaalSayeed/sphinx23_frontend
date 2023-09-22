@@ -34,6 +34,7 @@ import Session from "../../../Session";
 import { LeakRemoveTwoTone } from "@mui/icons-material";
 import { useRef } from "react";
 import HomeNav from "../Home/homeNav";
+import { loginReg } from "../../../store/modules/auth/auth.action";
 
 const toastStyle = {
   position: "top-right",
@@ -504,12 +505,6 @@ function RegScreen1(props) {
   return (
     <>
       <div className="login-form-title">Create an Account</div>
-      <SocialIcons
-        handleSuccess={handleSuccess}
-        handleFailure={handleFailure}
-        isRegistration={true}
-      />
-      <Seprator />
       <div className="login-form-sub-title">Sign-up with email</div>
       <div className="login-form-signup">
         <div className="login-form-signup-que">Already have an account?</div>
@@ -570,6 +565,12 @@ function RegScreen1(props) {
       >
         Continue
       </button>
+      <Seprator />
+      <SocialIcons
+        handleSuccess={handleSuccess}
+        handleFailure={handleFailure}
+        isRegistration={true}
+      />
     </>
   );
 }
@@ -791,7 +792,10 @@ function RegScreen3(props) {
       });
   }
   const submitRef = useRef(null);
+  const user = useSelector((state) => state.auth.curruser);
+  const dispact=useDispatch();
   const handleSubmit = async () => {
+   
     if (props.formData.name == "") toast.info("Name Required", toastStyle);
     else if (props.formData.college == "")
       toast.info("College Required", toastStyle);
@@ -827,6 +831,8 @@ function RegScreen3(props) {
               .then((res) => {
                 toast.info("Registration Completed", toastStyle);
                 // alert("Registration Completed");
+                const profile= { ...user, profile: res.profile }
+                dispact(loginReg(profile))
                 navigate("/dashboard");
               })
               .catch((err) => {
@@ -843,6 +849,8 @@ function RegScreen3(props) {
           .then((res) => {
             toast.info("Registration Completed", toastStyle);
             // alert("Registration Completed");
+            const profile= { ...user, profile: res.profile }
+            dispact(loginReg(profile))
             navigate("/dashboard");
           })
           .catch((err) => {
@@ -896,8 +904,9 @@ function RegScreen3(props) {
     // if (props.formData.mobile.length) setSendOtp(true);
   };
   useEffect(() => {
+    if (!sendOtp) submitRef.current.style.background = "#1a686f";
     if (sendOtp) {
-      submitRef.current.style.background = "#1a686f";
+      submitRef.current.style.background = btnCol;
       const interval = setInterval(() => {
         if (seconds > 0) {
           setSeconds(seconds - 1);
@@ -1029,7 +1038,7 @@ function RegScreen3(props) {
                   id="standard-basic"
                   variant="standard"
                   className="login-form-otp-cell"
-                  style={{ width: "1.9rem" }}
+                  style={{ marginTop: "5px" }}
                   inputMode="numeric"
                   name="otp"
                   type="tel"
