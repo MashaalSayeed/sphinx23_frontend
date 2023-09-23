@@ -65,13 +65,32 @@ const Profile = () => {
     progress: undefined,
     theme: "dark",
   };
- 
+
+  useEffect(() => {
+    if (!currUser.profile.isEmailVerified) {
+      toast.error("Please Complete Your Profile", toastStyle);
+      // props.toreg(false);
+    } else if (!currUser.profile.isMobileNumberVerified) {
+      toast.error("Please Complete Your Profile", toastStyle);
+      // props.toreg(false);
+    } 
+
+  }, [])
+  
 
   return (
     <div className="ud__profile">
       
       
-      <nav className={styles.eventsnav} style={{position:"fixed"}}> 
+      <div className={styles.eventsnav} style={{position:"fixed"}}>
+        {/* <div className="nav-list">
+          {
+            Object.keys(tabs).map((tab) => (
+              <div key={tab} className={`nav-item ${currentTab == tab ? styles.active : ""}`} onClick={() => setCurrentTab(tab)}>{tab}</div>
+            ))
+          }
+        </div> */}
+                  <nav className={styles.eventsnav}>
             <ol>
               {Object.keys(tabs).map((tab) => (
                 <li
@@ -83,8 +102,9 @@ const Profile = () => {
                 </li>
               ))}
             </ol>
-            <hr style={{marginLeft:"0px"}}/>
           </nav>
+            <hr style={{marginLeft:"0px"}}/>
+        </div>
       <div className="profile-container">
         {/* <Qrcard /> */}
 
