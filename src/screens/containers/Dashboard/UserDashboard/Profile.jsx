@@ -96,6 +96,7 @@ const Profile = () => {
               <div className="referral-id">Referal id: 1DF34</div>
           </div>
         </div>
+        
       </div>
     </div>
     
