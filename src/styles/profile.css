@@ -90,8 +90,8 @@ html {
   display: flex;
   position: absolute;
   width: 100vw;
-  top: 200px;
-  overflow-y: auto;
+ height: 100vh;
+  /* overflow-y: auto; */
   margin: 0;
   padding: 0;
   padding-bottom: 40px;
@@ -99,7 +99,7 @@ align-items: center;
 justify-content: center;
   margin: auto;
   align-items: center;
-  margin-top: 5%;
+  /* margin-top: 5%; */
 }
 .profile-container > div {
   /* margin-right: 8rem; */
@@ -265,19 +265,16 @@ justify-content: center;
 
 /* USER DETAILS */
 
-/* PROFILE CONTAINER */
+/* PROFILE CONTAINER *
 
 /* MEDIA QUERIES */
+
+
+
 @media only screen and (max-width: 900px) {
   .profile-container {
-  
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .profile-container {
     flex-direction: column-reverse;
-  
+   top: 260px;
 
   }
   .profile-container > div {
@@ -286,19 +283,17 @@ justify-content: center;
     margin-left: 0;
   }
   .user-details {
-    margin-top: 2rem;
+ 
     flex-basis: 80%;
-    margin-bottom: 5rem;
+    margin-bottom: 60px;
   }
   .ud__profile > nav {
    
     width: 100vw;
   }
-  .user-details {
-    margin-top: 5rem;
-  }
+
   .ud__profile> nav{
-    top: 30px;
+   
     background: rgba(255, 255, 255, 0.05);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
