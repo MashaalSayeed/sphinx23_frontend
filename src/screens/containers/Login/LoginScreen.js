@@ -26,7 +26,6 @@ import {
   verifyForgotOTP,
   resetPassword,
   isValidAmbassador,
-  isValidAmbassador,
 } from "../../../api";
 import { GoogleLogin } from "react-google-login";
 import {
