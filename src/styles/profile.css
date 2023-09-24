@@ -86,6 +86,7 @@ html {
 /* NAVIGATION BAR */
 
 /* PROFILE CONTAINER */
+
 .profile-container {
   display: flex;
   position: absolute;
@@ -172,6 +173,7 @@ justify-content: center;
 /* PASS CONTAINER */
 
 /* USER DETAILS */
+
 .user-details {
   background-color: #171717;
   /* height: 20rem; */
