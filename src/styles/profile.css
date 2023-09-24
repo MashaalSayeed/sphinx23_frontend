@@ -18,13 +18,15 @@ html {
 
 /* NAVIGAITON BAR */
 .ud__profile > nav {
+  top: 70px;
   z-index: 25;
 }
 .nav {
   background-color: #000;
   position: fixed;
   width: 100%;
-  top: 15%;
+  top: 50px;
+
   /* z-index: 100; */
 }
 .nav::before {
@@ -87,20 +89,18 @@ html {
 
 .profile-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  /* flex-wrap: wrap; */
-  /* padding: 1rem; */
-  /* background-color: lightblue; */
   position: absolute;
-  width: 75%;
-  left: 8%;
-  right: auto;
-  /* margin-top: 25vh; */
-  margin: 25vh 5rem 2rem;
-  transform: scale(0.9);
-  height: fit-content;
-  margin-left: 8rem;
+  width: 100vw;
+ height: 100vh;
+  /* overflow-y: auto; */
+  margin: 0;
+  padding: 0;
+  padding-bottom: 40px;
+align-items: center;
+justify-content: center;
+  margin: auto;
+  align-items: center;
+  /* margin-top: 5%; */
 }
 .profile-container > div {
   /* margin-right: 8rem; */
@@ -267,41 +267,38 @@ html {
 
 /* USER DETAILS */
 
-/* PROFILE CONTAINER */
+/* PROFILE CONTAINER *
 
 /* MEDIA QUERIES */
+
+
+
 @media only screen and (max-width: 900px) {
   .profile-container {
-    top: -0.1rem;
-    margin-left: 4rem;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .profile-container {
-    display: flex;
     flex-direction: column-reverse;
-    margin-left: 4rem;
-    height: 100rem;
-    overflow: scroll;
-    transform: translateX(-1rem);
+   top: 260px;
+
   }
   .profile-container > div {
-    flex-basis: auto;
-    transform: translateX(-2rem);
-    transform: translateY(16rem);
+    flex-basis: 80%;
+    margin-right: 0;
+    margin-left: 0;
   }
   .user-details {
-    /* margin-top: 2rem; */
+ 
     flex-basis: 80%;
-    height: fit-content;
-    margin-bottom: 5rem;
+    margin-bottom: 60px;
   }
   .ud__profile > nav {
-    transform: translateX(-1.8rem);
-    width: 100%;
+   
+    width: 100vw;
   }
-  .user-details {
-    margin-top: 1rem;
+
+  .ud__profile> nav{
+   
+    background: rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    padding-top: 30px;
   }
 }

@@ -19,7 +19,7 @@ import {
   sendForgotOTP,
   verifyForgotOTP,
   resetPassword,
-  isValidAmbassador
+  isValidAmbassador,
 } from "../../../api";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,6 +34,7 @@ import Session from "../../../Session";
 import { LeakRemoveTwoTone } from "@mui/icons-material";
 import { useRef } from "react";
 import HomeNav from "../Home/homeNav";
+import { loginReg } from "../../../store/modules/auth/auth.action";
 
 const toastStyle = {
   position: "top-right",
@@ -504,12 +505,6 @@ function RegScreen1(props) {
   return (
     <>
       <div className="login-form-title">Create an Account</div>
-      <SocialIcons
-        handleSuccess={handleSuccess}
-        handleFailure={handleFailure}
-        isRegistration={true}
-      />
-      <Seprator />
       <div className="login-form-sub-title">Sign-up with email</div>
       <div className="login-form-signup">
         <div className="login-form-signup-que">Already have an account?</div>
@@ -570,6 +565,12 @@ function RegScreen1(props) {
       >
         Continue
       </button>
+      <Seprator />
+      <SocialIcons
+        handleSuccess={handleSuccess}
+        handleFailure={handleFailure}
+        isRegistration={true}
+      />
     </>
   );
 }
@@ -730,8 +731,8 @@ function RegScreen2(props) {
 }
 
 function RegScreen3(props) {
-  const [otp, setOtp] = useState(new Array(6).fill("0"));
-  const [sendOtp, setSendOtp] = useState(true);
+  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [sendOtp, setSendOtp] = useState(false);
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(30);
   const [ambassadorId, setambassadorId] = useState([]);
@@ -791,7 +792,10 @@ function RegScreen3(props) {
       });
   }
   const submitRef = useRef(null);
+  const user = useSelector((state) => state.auth.curruser);
+  const dispact=useDispatch();
   const handleSubmit = async () => {
+   
     if (props.formData.name == "") toast.info("Name Required", toastStyle);
     else if (props.formData.college == "")
       toast.info("College Required", toastStyle);
@@ -813,7 +817,11 @@ function RegScreen3(props) {
       };
       //console.log(body);
       if (props.formData.campusAmbassador) {
-        isValidAmbassador(token, props.formData.campusAmbassador, setambassadorId)
+        isValidAmbassador(
+          token,
+          props.formData.campusAmbassador,
+          setambassadorId
+        )
           .then((res) => {
             //console.log("Ambassador Correct", ambassadorId);
             // if(!res.isAmbassador)
@@ -823,6 +831,8 @@ function RegScreen3(props) {
               .then((res) => {
                 toast.info("Registration Completed", toastStyle);
                 // alert("Registration Completed");
+                const profile= { ...user, profile: res.profile }
+                dispact(loginReg(profile))
                 navigate("/dashboard");
               })
               .catch((err) => {
@@ -839,6 +849,8 @@ function RegScreen3(props) {
           .then((res) => {
             toast.info("Registration Completed", toastStyle);
             // alert("Registration Completed");
+            const profile= { ...user, profile: res.profile }
+            dispact(loginReg(profile))
             navigate("/dashboard");
           })
           .catch((err) => {
@@ -857,7 +869,6 @@ function RegScreen3(props) {
       toast.info("Mobile No. must be of length 10.", toastStyle);
       return;
     }
-
 
     toastId.current = toast.loading("Sending OTP");
     let body = { phoneNumber: props.formData.mobile };
@@ -882,7 +893,6 @@ function RegScreen3(props) {
         setMinutes(parseInt(time / 60));
         setSeconds(parseInt(time % 60));
         toast.update(toastId.current, {
-          
           render: err,
           type: "error",
           isLoading: false,
@@ -894,8 +904,9 @@ function RegScreen3(props) {
     // if (props.formData.mobile.length) setSendOtp(true);
   };
   useEffect(() => {
+    if (!sendOtp) submitRef.current.style.background = "#1a686f";
     if (sendOtp) {
-      submitRef.current.style.background = "#1a686f";
+      submitRef.current.style.background = btnCol;
       const interval = setInterval(() => {
         if (seconds > 0) {
           setSeconds(seconds - 1);
@@ -959,7 +970,7 @@ function RegScreen3(props) {
           }}
         />
       </div>
-      <div className="login-form-input-grp">
+      {/* <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="college">
           Campus Ambassador ID
         </label>
@@ -977,7 +988,7 @@ function RegScreen3(props) {
             if (e.key === "Enter") mobRef.current.focus();
           }}
         />
-      </div>
+      </div> */}
       <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="mobile">
           Mobile *
@@ -1004,14 +1015,16 @@ function RegScreen3(props) {
             className="login-form-text-label login-form-otp-resend-link"
             style={{ fontSize: "0.9rem" }}
             htmlFor="mobile"
-            onClick={()=>{sendOTP(true);setOtp(["1", "2", "3","1", "2", "3"])}} // call send otp
+            onClick={() => {
+              sendOTP();
+            }} // call send otp
             ref={verifyRef}
           >
             Verify Mobile
           </Link>
         </div>
       )}
-      {/* {sendOtp ? (
+      {sendOtp ? (
         <>
           {" "}
           <div className="login-form-text-label" style={{ fontSize: "0.8rem" }}>
@@ -1025,8 +1038,10 @@ function RegScreen3(props) {
                   id="standard-basic"
                   variant="standard"
                   className="login-form-otp-cell"
+                  style={{ marginTop: "5px" }}
+                  inputMode="numeric"
                   name="otp"
-                  type="text"
+                  type="tel"
                   key={index}
                   value={data}
                   maxLength="1"
@@ -1062,11 +1077,10 @@ function RegScreen3(props) {
           ) : (
             <></>
           )}
-         
         </>
       ) : (
         <></>
-      )} */}
+      )}
 
       <button
         className="login-form-submit-btn"
@@ -1272,10 +1286,12 @@ function ForgotPass() {
                   variant="standard"
                   className="login-form-otp-cell"
                   name="otp"
-                  type="text"
+                  type="tel"
                   key={index}
+                  inputmode="numeric"
                   value={data}
                   maxLength="1"
+                  style={{ width: "2rem" }}
                   onChange={(e) => handleChangeOtp(e.target, index)}
                   onFocus={(e) => e.target.select()}
                   onKeyDown={(e) => {

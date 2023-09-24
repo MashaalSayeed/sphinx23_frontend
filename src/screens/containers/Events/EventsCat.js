@@ -55,7 +55,9 @@ function EventsCat() {
       <div className="eventsM-category-sec">
         {Ecat.map((item, i) => {
           //console.log(item);
-          return <EventCard card={item} key={i} index={i} />;
+          return (
+            <EventCard card={item} key={i} index={i} category={item.category} />
+          );
         })}
       </div>
     </div>

@@ -21,7 +21,7 @@ const toastStyle = {
 };
 
 function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
-  const url="https://sphinx-backend.onrender.com/api";;
+  const url = "https://sphinx-372511.de.r.appspot.com/api";
   const userType =
     useSelector((state) => state.auth.curruser.profile.type) === "superAdmin";
   const disabled = editSuperAdmin ? !userType : false;
@@ -232,7 +232,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       try {
         let mail = eventCoor[i];
         //console.log("mail", mail);
-        console.log(mail)
+        console.log(mail);
         const id = await getUsersId(token, mail);
         a.push(id);
       } catch (err) {
@@ -436,11 +436,10 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       </button>
     );
   };
-  
 
   const getUsersId = async (token, email) => {
     // let userData = [];
-    console.log("called")
+    console.log("called");
     return fetch(`${url}/users/validatemail/${email}`, {
       headers: {
         "Content-Type": "application/json",

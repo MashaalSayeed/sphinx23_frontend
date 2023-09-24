@@ -15,9 +15,9 @@ import {
   loading,
 } from "./store/modules/auth/auth.action";
 
-
 // const url="http://localhost:8000/api";
-const url = "https://sphinx-backend.onrender.com/api";
+// const url = "https://sphinx-backend.onrender.com/api";
+const url = "https://sphinx-372511.de.r.appspot.com/api";
 
 export const fetchEvents = async (dispatch) => {
   //console.log("Events Fetched");
@@ -1093,4 +1093,30 @@ export const getTeamsByEvent = async (
     .catch((error) => {
       throw error;
     });
+};
+
+export const getUniqueId = (x) => {
+  const digs = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const base = digs.length;
+  let sign;
+  if (x < 0) {
+    sign = -1;
+  } else if (x === 0) {
+    return digs[0];
+  } else {
+    sign = 1;
+  }
+
+  x *= sign;
+  const digits = [];
+
+  while (x) {
+    digits.push(digs[x % base]);
+    x = Math.floor(x / base);
+  }
+
+  if (sign < 0) digits.push("-");
+
+  digits.reverse();
+  return digits.join("");
 };
