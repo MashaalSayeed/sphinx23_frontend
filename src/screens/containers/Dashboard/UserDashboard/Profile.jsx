@@ -8,20 +8,23 @@ import Description from "../../EventsView/EventDetails.js";
 import Results from "../../EventsView/Results.js";
 import Notification from "../../EventsView/Notification.js";
 import { useParams } from "react-router-dom";
-import { getUniqueId } from "../../../../api";
+import { getUniqueId, loginRegister, logout } from "../../../../api";
+import { useNavigate, Link } from "react-router-dom";
 import Query from "../../EventsView/Query.js";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { Margin } from "@mui/icons-material";
+import Session from "../../../../Session";
 
 
 const Profile = () => {
   // const params = useParams();
-  const currUser = useSelector((state) => state.auth.curruser);
+  const currUser = Session.getObject("profile");
+  const navigate=useNavigate()
 
   useEffect(() => {
     console.log("CurrUser", currUser);
-  }, [currUser]);
+  }, []);
 
   const tabs = {
     Profile: "Profile" ,
@@ -43,11 +46,15 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (!currUser.profile.isEmailVerified) {
-      toast.error("Please Complete Your Profile", toastStyle);
+    if (currUser && !currUser.profile.isEmailVerified) {
+      // toast.error("Please Complete Your Profile", toastStyle);
+      navigate('/login')
+     
       // props.toreg(false);
-    } else if (!currUser.profile.isMobileNumberVerified) {
-      toast.error("Please Complete Your Profile", toastStyle);
+    } else if ( currUser&& !currUser.profile.isMobileNumberVerified) 
+    {
+      // toast.error("Please Complete Your Profile", toastStyle); 
+      navigate('/login')
       // props.toreg(false);
     } 
 
@@ -92,8 +99,8 @@ const Profile = () => {
               <div className="user-email">{currUser.profile.email}</div>
               <p>Registered Number</p>
               <div className="user-number">{currUser.profile.phoneNumber}</div>
-            
-              <div className="referral-id">Referal id: 1DF34</div>
+               {currUser.profile.isAmbassador&&<div className="referral-id">Referral ID: {uniqueCode}</div>}
+              
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { getUniqueId } from "../../../../../api";
 
 const ReadOnlyRow = ({ ambassador, handleEditClick, handleDeleteClick }) => {
   console.log("A", ambassador);
@@ -11,6 +12,7 @@ const ReadOnlyRow = ({ ambassador, handleEditClick, handleDeleteClick }) => {
       <td>{ambassador.user && ambassador.user.phoneNumber}</td>
       <td>{ambassador.user && ambassador.user.email}</td>
       <td>{ambassador.user && ambassador.user.collegeName}</td>
+      <td>{ambassador.user && (ambassador.user.uniqueID || getUniqueId(ambassador.user.phoneNumber)) } </td>
       <td>{ambassador && ambassador.profit}</td>
 
       <td></td>

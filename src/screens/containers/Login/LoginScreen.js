@@ -793,6 +793,8 @@ function RegScreen3(props) {
   }
   const submitRef = useRef(null);
   const user = useSelector((state) => state.auth.curruser);
+  // console.log(user)
+
   const dispact=useDispatch();
   const handleSubmit = async () => {
    
@@ -829,11 +831,18 @@ function RegScreen3(props) {
             //console.log(body);
             verifyMobileOTP(body)
               .then((res) => {
-                toast.info("Registration Completed", toastStyle);
+               
                 // alert("Registration Completed");
-                const profile= { ...user, profile: res.profile }
-                dispact(loginReg(profile))
-                navigate("/dashboard");
+               
+                // const profile= { ...user, profile: res.profile }
+                // Session.setObject("profile", profile);
+                // console.log(profile)
+              
+                // dispact(loginReg(profile))
+                toast.info("Registration Completed", toastStyle);
+                navigate("/");
+              
+                
               })
               .catch((err) => {
                 toast.error(err, toastStyle);
@@ -847,11 +856,22 @@ function RegScreen3(props) {
       } else {
         verifyMobileOTP(body)
           .then((res) => {
-            toast.info("Registration Completed", toastStyle);
+          
+           
             // alert("Registration Completed");
-            const profile= { ...user, profile: res.profile }
-            dispact(loginReg(profile))
-            navigate("/dashboard");
+            console.log("complete")
+            // const profile= { ...user, profile: res.profile }
+            // Session.setObject("profile", profile);
+          
+            // console.log(profile)
+            // dispact(loginReg(profile))
+            toast.info("Registration Completed", toastStyle);
+            console.log("calledNavigate")
+            navigate('/')
+           
+            // console.log(profile)
+           
+            // navigate("/dashboard");
           })
           .catch((err) => {
             toast.error(err, toastStyle);
@@ -970,9 +990,9 @@ function RegScreen3(props) {
           }}
         />
       </div>
-      {/* <div className="login-form-input-grp">
+      <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="college">
-          Campus Ambassador ID
+        Referrer ID
         </label>
         <input
           className="login-form-text-inputs"
@@ -988,7 +1008,7 @@ function RegScreen3(props) {
             if (e.key === "Enter") mobRef.current.focus();
           }}
         />
-      </div> */}
+      </div>
       <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="mobile">
           Mobile *
@@ -1009,11 +1029,11 @@ function RegScreen3(props) {
           }}
         />
       </div>
-      {!sendOtp && (
+      {/* {!sendOtp && (
         <div className="login-form-input-grp">
           <Link
             className="login-form-text-label login-form-otp-resend-link"
-            style={{ fontSize: "0.9rem" }}
+            style={{ fontSize: "0.9rem" ,backgroundColor:"#C1FF5C",padding:"10px",color:"black",boxShadow:"white",borderRadius:"5px" }}
             htmlFor="mobile"
             onClick={() => {
               sendOTP();
@@ -1023,7 +1043,7 @@ function RegScreen3(props) {
             Verify Mobile
           </Link>
         </div>
-      )}
+      )} */}
       {sendOtp ? (
         <>
           {" "}
@@ -1081,14 +1101,30 @@ function RegScreen3(props) {
       ) : (
         <></>
       )}
+        {!sendOtp&& <Link
+        className="login-form-submit-btn"
+        disabled={!sendOtp}
+        style={!sendOtp ? { 'background': btnCol,textDecoration:"none",textAlign:"center" } : { 'background': btnCol }}
+       
+       
+        onClick={ 
+          sendOTP
+        } // call send otp
+        ref ={verifyRef}
+      >
+       
+        Verify Mobile
+      </Link>}
 
+      
       <button
         className="login-form-submit-btn"
         disabled={!sendOtp}
-        style={!sendOtp ? { background: disabledCol } : { background: btnCol }}
+        style={!sendOtp ? { 'background': disabledCol,display:"none" } : { 'background': btnCol }}
         ref={submitRef}
         onClick={handleSubmit}
       >
+       
         Submit
       </button>
     </>

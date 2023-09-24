@@ -94,7 +94,7 @@ function EventsView() {
                 </li>
               ))}
             </ol>
-            <Query onSubmit={handleQuery} />
+            {/* <Query onSubmit={handleQuery} /> */}
           </nav>
 
           <hr />

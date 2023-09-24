@@ -24,6 +24,7 @@ import {
   createPass,
   getUsersByPass,
   getUsers,
+  logout,
 } from "./api";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
@@ -76,6 +77,7 @@ function App() {
   useEffect(() => {
     // chandra();
     // loginRegister(dispatch, creds);
+
     fetchEvents(dispatch)
       .then((res) => {
         //console.log("Events Fetched");
@@ -99,6 +101,8 @@ function App() {
   const curruser = useSelector((state) => state.auth.curruser);
   useEffect(() => {
     //console.log(land);
+   
+    
   }, [land]);
   // createEvent(dispatch, {}, {});
   // createPass(dispatch, {}, {});

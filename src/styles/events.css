@@ -357,6 +357,8 @@ color: #B9B9B9;
     display: flex;
     font-family: 'Inter';
     border-top: 2px dashed rgba(209, 208, 208, 0.875);
+    min-height: 180px;
+    align-items: center;
     
  }
 
@@ -373,10 +375,10 @@ color: #B9B9B9;
 .eventE-title
 {
     width: 100%;
-    word-wrap: break-word;
+   
 font-style: normal;
 font-weight: 900;
-font-size: 1.3rem;
+font-size: 20px;
 letter-spacing: 0.05em;
 margin-bottom: 15px;
 }
