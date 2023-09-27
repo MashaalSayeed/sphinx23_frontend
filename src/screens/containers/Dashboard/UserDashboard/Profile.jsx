@@ -13,6 +13,7 @@ import Query from "../../EventsView/Query.js";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { Margin } from "@mui/icons-material";
+import PassCard from "../SuperAdmin/Pass/PassCard";
 
 
 const Profile = () => {
@@ -23,11 +24,7 @@ const Profile = () => {
     console.log("CurrUser", currUser);
   }, [currUser]);
 
-  const tabs = {
-    Profile: "Profile" ,
-    // Events: "Events" ,
-    // Notification: "Notification" 
-  };
+
   const [currentTab, setCurrentTab] = useState("Profile");
   const uniqueCode=getUniqueId(currUser.profile.phoneNumber)
   const [event, setEvent] = useState();
@@ -52,13 +49,61 @@ const Profile = () => {
     } 
 
   }, [])
+ 
+  const passes = useSelector((state) => state.auth.allpasses);
+  const Passes=()=>{
+    return <div className="passes-sec">{passCardElements}</div>
+  }
+  const passCardElements = passes.map((onePass, i) => {
+    return (
+      
+       <div className="profPass">
+      <img className="profPass-img" src={onePass.imageUrl}></img>
+      <div className="profInfo">
+        <div className="profPass-name">{onePass.name} </div>
+        <div className="profPass-detail">{onePass.desc} </div>
+        <div className="profPass-name" style={{fontSize:"1rem"}}>
+           <span>Total</span>
+           <span >Rs.{onePass.amount}</span>
+        </div>
+        <div className="profPass-detail">The pass will be added to your Profile section as soon as you complete the payment</div>
+        <button>Proceed to Pay </button>
+      </div>
+    </div>
+   
+    );
+  });
   
+  const Prof=()=>{ return <div className="profile-container" >
+  <Qrcard Code={uniqueCode} name={currUser.profile.name} />
+
+  <div className="user-details" >
+    <img src={prof} alt="" className="user-img" />
+    <p className="username" style={{textTransform:"capitalize",textShadow:"none",fontWeight:"700"}} >{currUser.profile.name}</p>
+    <div className="details">
+        <p>Registered email</p>
+        <div className="user-email">{currUser.profile.email}</div>
+        <p>Registered Number</p>
+        <div className="user-number">{currUser.profile.phoneNumber}</div>
+      
+        <div className="referral-id">Referal id: 1DF34</div>
+    </div>
+  </div>
+</div>}
+
+
+
+const tabs = {
+  Profile: <Prof  />,
+  "My Passes": <Passes data={event} />,
+  // Notifcation: <Notification data={event} />,
+};
 
   return (
     <div className="ud__profile">
       
       
-      <div className={styles.eventsnav} style={{position:"absolute",top:"50px"}}>
+      <div className={styles.eventsnav} style={{position:"absolute",top:"50px",zIndex:'20'}}>
         {/* <div className="nav-list">
           {
             Object.keys(tabs).map((tab) => (
@@ -81,22 +126,9 @@ const Profile = () => {
           </nav>
             <hr style={{marginLeft:"0px"}}/>
         </div>
-      <div className="profile-container" >
-        <Qrcard Code={uniqueCode} name={currUser.profile.name} />
+          {tabs[currentTab]}
 
-        <div className="user-details" >
-          <img src={prof} alt="" className="user-img" />
-          <p className="username" style={{textTransform:"capitalize",textShadow:"none",fontWeight:"700"}} >{currUser.profile.name}</p>
-          <div className="details">
-              <p>Registered email</p>
-              <div className="user-email">{currUser.profile.email}</div>
-              <p>Registered Number</p>
-              <div className="user-number">{currUser.profile.phoneNumber}</div>
-            
-              <div className="referral-id">Referal id: 1DF34</div>
-          </div>
-        </div>
-      </div>
+     
     </div>
     
   );

@@ -40,6 +40,7 @@
 
 .ud__profile {
 	grid-area: 1 / 1 / 2 / 3;
+	width: 100vw;
 	display: flex;
 	gap: var(--gap-size);
 	/* padding: var(--padding-size); */

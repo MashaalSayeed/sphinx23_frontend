@@ -268,6 +268,50 @@ justify-content: center;
 /* PROFILE CONTAINER *
 
 /* MEDIA QUERIES */
+.passes-sec{
+  display: flex;
+  margin: auto;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.ud__profile{
+  width: 100vw;
+}
+.profPass{
+  border: 1px solid grey;
+  display: flex;
+}
+.profInfo{
+  width: max(10vw,200px);
+  padding: 9px;
+}
+.profPass-detail{
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.70);
+font-family: 'Inter';
+font-size: 6.6px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: 0.33px;
+}
+.profPass-name
+{
+  font-weight:600;
+  font-size: 1.2rem;
+}
+.profInfo>button{
+  border-radius: 3.4px;
+background: #FFA20F;
+width: 80%;
+padding: 12px 2px;
+margin-left: auto;
+margin-right: auto;
+color: white;
+font-size: 1rem;
+}
 
 
 
