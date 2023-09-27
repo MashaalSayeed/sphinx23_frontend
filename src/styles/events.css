@@ -357,15 +357,18 @@ color: #B9B9B9;
     display: flex;
     font-family: 'Inter';
     border-top: 2px dashed rgba(209, 208, 208, 0.875);
+    min-height: 170px;
+    align-items: flex-start;
     
  }
 
  .eventE-left
  {
     width: 50%;
+    height: 110px;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     color: #FFFFFF;
     
 
@@ -376,13 +379,13 @@ color: #B9B9B9;
     word-wrap: break-word;
 font-style: normal;
 font-weight: 900;
-font-size: 1.3rem;
+font-size: 1rem;
 letter-spacing: 0.05em;
 margin-bottom: 15px;
 }
 .eventE-register
 {
-    margin-top: 20px;
+    margin-top: auto;
     width: 90%;
     padding: 10px 20px;
     display: flex;

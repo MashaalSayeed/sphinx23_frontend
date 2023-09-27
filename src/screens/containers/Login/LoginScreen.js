@@ -1,5 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, {
+  useEffect,
+  useState,
+} from "react";
+import {
+  useNavigate,
+  Link,
+} from "react-router-dom";
 import "./Loginscreen.css";
 import apple from "./Apple.png";
 import google from "./Google.png";
@@ -22,10 +28,18 @@ import {
   isValidAmbassador,
 } from "../../../api";
 import { GoogleLogin } from "react-google-login";
-import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import {
+  useDispatch,
+  useSelector,
+} from "react-redux";
+import {
+  ToastContainer,
+  toast,
+} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Creatable, {
+  useCreatable,
+} from "react-select/creatable";
 import bg1 from "./bg1.png";
 import bg3 from "./bg3.png";
 import bg4 from "./bg4.png";
@@ -53,7 +67,8 @@ const btnCol = "#C1FF5C";
 
 function handleChange(event, setter) {
   // //console.log("Handle Called");
-  const { name, value, type, checked } = event.target;
+  const { name, value, type, checked } =
+    event.target;
   //console.log(name, value);
   setter((prevformData) => ({
     ...prevformData,
@@ -65,13 +80,19 @@ function Seprator() {
   return (
     <div className="login-form-seprator">
       <div className="login-form-seprator-line"></div>
-      <div className="login-form-seprator-text">or</div>
+      <div className="login-form-seprator-text">
+        or
+      </div>
       <div className="login-form-seprator-line"></div>
     </div>
   );
 }
 
-function SocialIcons({ handleSuccess, handleFailure, isRegistration }) {
+function SocialIcons({
+  handleSuccess,
+  handleFailure,
+  isRegistration,
+}) {
   return (
     <div className="login-social-icons-row">
       {/* <div className="login-social-icon-container" onClick={handleGoogleLogin}>
@@ -90,7 +111,11 @@ function SocialIcons({ handleSuccess, handleFailure, isRegistration }) {
 
       <GoogleLogin
         clientId="253528649688-tps0nfasvoejaetbbk429hmukssg9h9v.apps.googleusercontent.com"
-        buttonText={isRegistration ? "Signup with Google" : "Login with Google"}
+        buttonText={
+          isRegistration
+            ? "Signup with Google"
+            : "Login with Google"
+        }
         onSuccess={handleSuccess}
         onFailure={handleFailure}
       />
@@ -121,10 +146,18 @@ function Login(props) {
         //console.log(data);
         // alert("Success");
         if (!data.profile.isEmailVerified) {
-          toast.error("Please Complete Your Profile", toastStyle);
+          toast.error(
+            "Please Complete Your Profile",
+            toastStyle
+          );
           props.toreg(false);
-        } else if (!data.profile.isMobileNumberVerified) {
-          toast.error("Please Complete Your Profile", toastStyle);
+        } else if (
+          !data.profile.isMobileNumberVerified
+        ) {
+          toast.error(
+            "Please Complete Your Profile",
+            toastStyle
+          );
           props.toreg(false);
         } else {
           toast.info("Success", toastStyle);
@@ -153,7 +186,9 @@ function Login(props) {
     }
     gapi.load("client:auth2", start);
   }, []);
-  let profile = useSelector((state) => state.auth.curruser);
+  let profile = useSelector(
+    (state) => state.auth.curruser
+  );
   useEffect(() => {
     if (!profile) return;
     profile = profile.profile;
@@ -161,11 +196,19 @@ function Login(props) {
       props.toreg(false);
       props.setBg((present) => !present);
     }
-    if (profile && profile.isEmailVerified && !profile.isMobileNumberVerified) {
+    if (
+      profile &&
+      profile.isEmailVerified &&
+      !profile.isMobileNumberVerified
+    ) {
       props.toreg(false);
       props.setBg((present) => !present);
     }
-    if (profile && profile.isEmailVerified && profile.isMobileNumberVerified) {
+    if (
+      profile &&
+      profile.isEmailVerified &&
+      profile.isMobileNumberVerified
+    ) {
       navigate("/");
     }
     //
@@ -182,9 +225,14 @@ function Login(props) {
       .then((data) => {
         //console.log(data.profile);
         if (!data.profile.isEmailVerified) {
-          toast.error("Please Complete Your Profile", toastStyle);
+          toast.error(
+            "Please Complete Your Profile",
+            toastStyle
+          );
           props.toreg(false);
-        } else if (!data.profile.isMobileNumberVerified) {
+        } else if (
+          !data.profile.isMobileNumberVerified
+        ) {
           // toast.error("Please Complete Your Profile", toastStyle);
           props.toreg(false);
         } else {
@@ -207,12 +255,18 @@ function Login(props) {
     <>
       {!forgot && (
         <>
-          <div className="login-form-title">Log in</div>
+          <div className="login-form-title">
+            Log in
+          </div>
           <div className="login-form-signup">
-            <div className="login-form-signup-que">New User?</div>
+            <div className="login-form-signup-que">
+              New User?
+            </div>
             <Link
               className="login-form-signup-link"
-              style={{ textDecoration: "underline" }}
+              style={{
+                textDecoration: "underline",
+              }}
               onClick={() => {
                 props.toreg(false);
               }}
@@ -222,7 +276,10 @@ function Login(props) {
           </div>
           <div className="login-form-inputs">
             <div className="login-form-input-grp">
-              <label className="login-form-text-label" htmlFor="email">
+              <label
+                className="login-form-text-label"
+                htmlFor="email"
+              >
                 Email
               </label>
               <input
@@ -232,7 +289,8 @@ function Login(props) {
                 type="email"
                 onKeyDown={(e) => {
                   //console.log(e);
-                  if (e.key === "Enter") PassRef.current.focus();
+                  if (e.key === "Enter")
+                    PassRef.current.focus();
                 }}
                 value={formData.email}
                 onChange={(e) => {
@@ -241,7 +299,10 @@ function Login(props) {
               />
             </div>
             <div className="login-form-input-grp">
-              <label className="login-form-text-label" htmlFor="password">
+              <label
+                className="login-form-text-label"
+                htmlFor="password"
+              >
                 Password
               </label>
               <input
@@ -255,7 +316,8 @@ function Login(props) {
                 }}
                 onKeyDown={(e) => {
                   //console.log(e);
-                  if (e.key === "Enter") LoginRef.current.focus();
+                  if (e.key === "Enter")
+                    LoginRef.current.focus();
                 }}
               />
             </div>
@@ -274,7 +336,10 @@ function Login(props) {
               Remember me
             </label> */}
               </div>
-              <div className="login-form-forgot-pass" onClick={setForgot}>
+              <div
+                className="login-form-forgot-pass"
+                onClick={setForgot}
+              >
                 Forgot Password?
               </div>
             </div>
@@ -285,7 +350,8 @@ function Login(props) {
             onClick={handleSubmit}
             onKeyDown={(e) => {
               //console.log(e);
-              if (e.key === "Enter") handleSubmit();
+              if (e.key === "Enter")
+                handleSubmit();
             }}
           >
             Login
@@ -306,7 +372,9 @@ function Login(props) {
 function RegScreen1(props) {
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.auth.curruser);
+  const user = useSelector(
+    (state) => state.auth.curruser
+  );
   const handleSuccess = (response) => {
     //console.log(response);
     let body = {
@@ -322,9 +390,15 @@ function RegScreen1(props) {
         //console.log(res);
         //console.log("mail");
         // toast.info("Sending Mail", toastStyle);
-        toastId.current = toast.loading("Sending Mail");
-        ConRef.current.setAttribute("disabled", true);
-        ConRef.current.style.background = disabledCol;
+        toastId.current = toast.loading(
+          "Sending Mail"
+        );
+        ConRef.current.setAttribute(
+          "disabled",
+          true
+        );
+        ConRef.current.style.background =
+          disabledCol;
 
         sendVerificationMail()
           .then((res) => {
@@ -337,8 +411,11 @@ function RegScreen1(props) {
               ...toastStyle,
             });
             props.setter(2);
-            ConRef.current.removeAttribute("disabled");
-            ConRef.current.style.background = btnCol;
+            ConRef.current.removeAttribute(
+              "disabled"
+            );
+            ConRef.current.style.background =
+              btnCol;
             props.setBg((present) => !present);
           })
           .catch((err) => {
@@ -348,8 +425,11 @@ function RegScreen1(props) {
               type: "error",
               isLoading: false,
             });
-            ConRef.current.removeAttribute("disabled");
-            ConRef.current.style.background = btnCol;
+            ConRef.current.removeAttribute(
+              "disabled"
+            );
+            ConRef.current.style.background =
+              btnCol;
             // toast.error(err, toastStyle);
           });
       })
@@ -381,9 +461,15 @@ function RegScreen1(props) {
     if (user && !user.profile.isEmailVerified) {
       //console.log("mail");
       // toast.info("Sending Mail", toastStyle);
-      toastId.current = toast.loading("Sending Mail");
-      ConRef.current.setAttribute("disabled", true);
-      ConRef.current.style.background = disabledCol;
+      toastId.current = toast.loading(
+        "Sending Mail"
+      );
+      ConRef.current.setAttribute(
+        "disabled",
+        true
+      );
+      ConRef.current.style.background =
+        disabledCol;
       sendVerificationMail()
         .then((res) => {
           toast.update(toastId.current, {
@@ -392,15 +478,21 @@ function RegScreen1(props) {
             isLoading: false,
             ...toastStyle,
           });
-          ConRef.current.removeAttribute("disabled");
-          ConRef.current.style.background = btnCol;
+          ConRef.current.removeAttribute(
+            "disabled"
+          );
+          ConRef.current.style.background =
+            btnCol;
           props.setter(2);
           props.setBg((present) => !present);
         })
         .catch((err) => {
           // toast.error(err, toastStyle);
-          ConRef.current.removeAttribute("disabled");
-          ConRef.current.style.background = btnCol;
+          ConRef.current.removeAttribute(
+            "disabled"
+          );
+          ConRef.current.style.background =
+            btnCol;
           // toast.error(err, toastStyle);
           toast.update(toastId.current, {
             render: err,
@@ -416,7 +508,10 @@ function RegScreen1(props) {
       !user.profile.isMobileNumberVerified
     ) {
       //console.log("Called");
-      toast.info("Profile is not complete.", toastStyle);
+      toast.info(
+        "Profile is not complete.",
+        toastStyle
+      );
       // alert("Profile is not complete.");
       props.setter(3);
       props.setBg((present) => !present);
@@ -452,9 +547,15 @@ function RegScreen1(props) {
       .then((res) => {
         //console.log(res);
         // toast.info("Sending Mail", toastStyle);
-        toastId.current = toast.loading("Sending Mail");
-        ConRef.current.setAttribute("disabled", true);
-        ConRef.current.style.background = disabledCol;
+        toastId.current = toast.loading(
+          "Sending Mail"
+        );
+        ConRef.current.setAttribute(
+          "disabled",
+          true
+        );
+        ConRef.current.style.background =
+          disabledCol;
         sendVerificationMail()
           .then((res) => {
             // alert("Mail Sent");
@@ -475,8 +576,11 @@ function RegScreen1(props) {
             //   theme: "dark",
             // });
             props.setter(2);
-            ConRef.current.removeAttribute("disabled");
-            ConRef.current.style.background = btnCol;
+            ConRef.current.removeAttribute(
+              "disabled"
+            );
+            ConRef.current.style.background =
+              btnCol;
             props.setBg((present) => !present);
           })
           .catch((err) => {
@@ -488,15 +592,20 @@ function RegScreen1(props) {
               isLoading: false,
               ...toastStyle,
             });
-            ConRef.current.removeAttribute("disabled");
-            ConRef.current.style.background = btnCol;
+            ConRef.current.removeAttribute(
+              "disabled"
+            );
+            ConRef.current.style.background =
+              btnCol;
           });
       })
       .catch((err) => {
         // toast.error(err, toastStyle);
         toast.error(err, toastStyle);
         ConRef.current.style.background = btnCol;
-        ConRef.current.removeAttribute("disabled");
+        ConRef.current.removeAttribute(
+          "disabled"
+        );
       });
   };
   const PassRef = useRef(null);
@@ -504,10 +613,16 @@ function RegScreen1(props) {
 
   return (
     <>
-      <div className="login-form-title">Create an Account</div>
-      <div className="login-form-sub-title">Sign-up with email</div>
+      <div className="login-form-title">
+        Create an Account
+      </div>
+      <div className="login-form-sub-title">
+        Sign-up with email
+      </div>
       <div className="login-form-signup">
-        <div className="login-form-signup-que">Already have an account?</div>
+        <div className="login-form-signup-que">
+          Already have an account?
+        </div>
         <Link
           className="login-form-signup-link"
           style={{ textDecoration: "underline" }}
@@ -520,7 +635,10 @@ function RegScreen1(props) {
       </div>
       <div className="login-form-inputs">
         <div className="login-form-input-grp">
-          <label className="login-form-text-label" htmlFor="email">
+          <label
+            className="login-form-text-label"
+            htmlFor="email"
+          >
             Email
           </label>
           <input
@@ -531,7 +649,8 @@ function RegScreen1(props) {
             value={props.formData.email}
             onKeyDown={(e) => {
               //console.log(e);
-              if (e.key === "Enter") PassRef.current.focus();
+              if (e.key === "Enter")
+                PassRef.current.focus();
             }}
             onChange={(e) => {
               handleChange(e, props.setFormData);
@@ -539,7 +658,10 @@ function RegScreen1(props) {
           />
         </div>
         <div className="login-form-input-grp">
-          <label className="login-form-text-label" htmlFor="password">
+          <label
+            className="login-form-text-label"
+            htmlFor="password"
+          >
             Password
           </label>
           <input
@@ -553,7 +675,8 @@ function RegScreen1(props) {
             }}
             onKeyDown={(e) => {
               //console.log(e);
-              if (e.key === "Enter") ConRef.current.focus();
+              if (e.key === "Enter")
+                ConRef.current.focus();
             }}
           />
         </div>
@@ -576,8 +699,12 @@ function RegScreen1(props) {
 }
 
 function RegScreen2(props) {
-  const token = useSelector((state) => state.auth.curruser.token);
-  const profile = useSelector((state) => state.auth.curruser.profile);
+  const token = useSelector(
+    (state) => state.auth.curruser.token
+  );
+  const profile = useSelector(
+    (state) => state.auth.curruser.profile
+  );
 
   useEffect(() => {
     //console.log("Use Effect Called", token);
@@ -589,13 +716,25 @@ function RegScreen2(props) {
     // loginRegister(dispatch, creds);
     // fetchUpdates(dispatch);
   }, []);
-  const [otp, setOtp] = useState(new Array(6).fill(""));
-  let time = Session.get("time") - parseInt(Date.now() / 1000);
-  const [minutes, setMinutes] = useState(parseInt(time / 60));
-  const [seconds, setSeconds] = useState(parseInt(time % 60));
+  const [otp, setOtp] = useState(
+    new Array(6).fill("")
+  );
+  let time =
+    Session.get("time") -
+    parseInt(Date.now() / 1000);
+  const [minutes, setMinutes] = useState(
+    parseInt(time / 60)
+  );
+  const [seconds, setSeconds] = useState(
+    parseInt(time % 60)
+  );
   const handleChange = (element, index) => {
     if (isNaN(element.value)) return false;
-    setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
+    setOtp([
+      ...otp.map((d, idx) =>
+        idx === index ? element.value : d
+      ),
+    ]);
     if (element.value == "") return false;
 
     if (element.nextSibling) {
@@ -606,7 +745,11 @@ function RegScreen2(props) {
   };
   const handleBackChange = (element, index) => {
     if (isNaN(element.value)) return false;
-    setOtp([...otp.map((d, idx) => (idx === index ? "" : d))]);
+    setOtp([
+      ...otp.map((d, idx) =>
+        idx === index ? "" : d
+      ),
+    ]);
     //console.log(element.previousSibling);
     //console.log("delete");
     if (element.previousSibling) {
@@ -618,7 +761,8 @@ function RegScreen2(props) {
   function handleSubmit() {
     //console.log(otp.join(""));
     let otp_string = otp.join("");
-    if (otp_string == "") toast.info("OTP is Required", toastStyle);
+    if (otp_string == "")
+      toast.info("OTP is Required", toastStyle);
     else {
       let body = { otp: otp_string };
 
@@ -642,7 +786,9 @@ function RegScreen2(props) {
         // alert("Mail Sent");
         toast.info("Mail Sent", toastStyle);
         setOtp(new Array(6).fill(""));
-        let time = Session.get("time") - parseInt(Date.now() / 1000);
+        let time =
+          Session.get("time") -
+          parseInt(Date.now() / 1000);
         setMinutes(parseInt(time / 60));
         setSeconds(parseInt(time % 60));
       })
@@ -674,7 +820,9 @@ function RegScreen2(props) {
 
   return (
     <>
-      <div className="login-form-title">Enter OTP</div>
+      <div className="login-form-title">
+        Enter OTP
+      </div>
       <div className="login-form-comments">{`A 6 digit code has been sent to ${profile.email}`}</div>
       <div className="login-form-otp-row">
         {otp.map((data, index) => {
@@ -688,11 +836,19 @@ function RegScreen2(props) {
               key={index}
               value={data}
               maxLength="1"
-              onChange={(e) => handleChange(e.target, index)}
+              onChange={(e) =>
+                handleChange(e.target, index)
+              }
               onFocus={(e) => e.target.select()}
               onKeyDown={(e) => {
-                if (e.key === "Backspace" || e.key === "Delete")
-                  handleBackChange(e.target, index);
+                if (
+                  e.key === "Backspace" ||
+                  e.key === "Delete"
+                )
+                  handleBackChange(
+                    e.target,
+                    index
+                  );
               }}
             />
           );
@@ -706,20 +862,37 @@ function RegScreen2(props) {
       >
         Continue
       </button>
-      <div className="login-form-otp-resend" style={{ color: "white" }}>
+      <div
+        className="login-form-otp-resend"
+        style={{ color: "white" }}
+      >
         {seconds > 0 || minutes > 0 ? (
           <p className="login-form-timer">
-            Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
-            {seconds < 10 ? `0${seconds}` : seconds}
+            Time Remaining:{" "}
+            {minutes < 10
+              ? `0${minutes}`
+              : minutes}
+            :
+            {seconds < 10
+              ? `0${seconds}`
+              : seconds}
           </p>
         ) : (
           <></>
         )}
       </div>
       {!(seconds > 0 || minutes > 0) ? (
-        <div className="login-form-otp-resend" style={{ color: "white" }}>
-          <div className="login-form-otp-resend-que">Didn't recieve code?</div>
-          <Link className="login-form-otp-resend-link" onClick={ResetOtp}>
+        <div
+          className="login-form-otp-resend"
+          style={{ color: "white" }}
+        >
+          <div className="login-form-otp-resend-que">
+            Didn't recieve code?
+          </div>
+          <Link
+            className="login-form-otp-resend-link"
+            onClick={ResetOtp}
+          >
             Resend
           </Link>
         </div>
@@ -731,22 +904,35 @@ function RegScreen2(props) {
 }
 
 function RegScreen3(props) {
-  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [otp, setOtp] = useState(
+    new Array(6).fill("")
+  );
   const [sendOtp, setSendOtp] = useState(false);
   const [minutes, setMinutes] = useState(1);
   const [seconds, setSeconds] = useState(30);
-  const [ambassadorId, setambassadorId] = useState([]);
+  const [ambassadorId, setambassadorId] =
+    useState([]);
   const verifyRef = useRef(null);
   const clgRef = useRef(null);
   const ambRef = useRef(null);
   const mobRef = useRef(null);
 
   const navigate = useNavigate();
-  const token = useSelector((state) => state.auth.curruser.token);
+  const token = useSelector(
+    (state) => state.auth.curruser.token
+  );
   const handleChangeOtp = (element, index) => {
     if (isNaN(element.value)) return false;
-    setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
-    setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
+    setOtp([
+      ...otp.map((d, idx) =>
+        idx === index ? element.value : d
+      ),
+    ]);
+    setOtp([
+      ...otp.map((d, idx) =>
+        idx === index ? element.value : d
+      ),
+    ]);
     if (element.value == "") return false;
     if (element.nextSibling) {
       element.nextSibling.focus();
@@ -754,7 +940,11 @@ function RegScreen3(props) {
   };
   const handleBackChange = (element, index) => {
     if (isNaN(element.value)) return false;
-    setOtp([...otp.map((d, idx) => (idx === index ? "" : d))]);
+    setOtp([
+      ...otp.map((d, idx) =>
+        idx === index ? "" : d
+      ),
+    ]);
     //console.log(element.previousSibling);
     //console.log("delete");
     if (element.previousSibling) {
@@ -763,8 +953,12 @@ function RegScreen3(props) {
     }
   };
   function ResetOtp() {
-    let body = { phoneNumber: props.formData.mobile };
-    toastId.current = toast.loading("Sending OTP");
+    let body = {
+      phoneNumber: props.formData.mobile,
+    };
+    toastId.current = toast.loading(
+      "Sending OTP"
+    );
     sendMobileOTP(body)
       .then((res) => {
         // alert("OTP Sent");
@@ -777,7 +971,9 @@ function RegScreen3(props) {
           ...toastStyle,
         });
         setOtp(new Array(6).fill(""));
-        let time = Session.get("time") - parseInt(Date.now() / 1000);
+        let time =
+          Session.get("time") -
+          parseInt(Date.now() / 1000);
         setMinutes(parseInt(time / 60));
         setSeconds(parseInt(time % 60));
       })
@@ -793,19 +989,27 @@ function RegScreen3(props) {
   }
   const submitRef = useRef(null);
   const user = useSelector((state) => state.auth.curruser);
+  // console.log(user)
+
   const dispact=useDispatch();
   const handleSubmit = async () => {
-   
-    if (props.formData.name == "") toast.info("Name Required", toastStyle);
+    if (props.formData.name == "")
+      toast.info("Name Required", toastStyle);
     else if (props.formData.college == "")
       toast.info("College Required", toastStyle);
     else if (props.formData.mobile == "")
-      toast.info("Mobile No. Required", toastStyle);
+      toast.info(
+        "Mobile No. Required",
+        toastStyle
+      );
     else if (sendOtp && otp.join("") == "") {
       toast.info("OTP is Mandataory", toastStyle);
       // alert("OTP is Mandataory");
     } else if (!sendOtp) {
-      toast.info("Mobile Must be Verified", toastStyle);
+      toast.info(
+        "Mobile Must be Verified",
+        toastStyle
+      );
       // alert("Mobile Must be Verified");
     } else {
       //console.log("Called", otp.join(""));
@@ -821,37 +1025,64 @@ function RegScreen3(props) {
           token,
           props.formData.campusAmbassador,
           setambassadorId
+        );
+        isValidAmbassador(
+          token,
+          props.formData.campusAmbassador,
+          setambassadorId
         )
           .then((res) => {
             //console.log("Ambassador Correct", ambassadorId);
             // if(!res.isAmbassador)
-            body.refererId = props.formData.campusAmbassador;
+            body.refererId =
+              props.formData.campusAmbassador;
             //console.log(body);
             verifyMobileOTP(body)
               .then((res) => {
-                toast.info("Registration Completed", toastStyle);
+               
                 // alert("Registration Completed");
-                const profile= { ...user, profile: res.profile }
-                dispact(loginReg(profile))
-                navigate("/dashboard");
+               
+                // const profile= { ...user, profile: res.profile }
+                // Session.setObject("profile", profile);
+                // console.log(profile)
+              
+                // dispact(loginReg(profile))
+                toast.info("Registration Completed", toastStyle);
+                navigate("/");
+              
+                
               })
               .catch((err) => {
                 toast.error(err, toastStyle);
               });
           })
           .catch((err) => {
-            toast.info("Referer is Invalid", toastStyle);
+            toast.info(
+              "Referer is Invalid",
+              toastStyle
+            );
             // alert("Referer is Invalid");
             setambassadorId([]);
           });
       } else {
         verifyMobileOTP(body)
           .then((res) => {
-            toast.info("Registration Completed", toastStyle);
+          
+           
             // alert("Registration Completed");
-            const profile= { ...user, profile: res.profile }
-            dispact(loginReg(profile))
-            navigate("/dashboard");
+            console.log("complete")
+            // const profile= { ...user, profile: res.profile }
+            // Session.setObject("profile", profile);
+          
+            // console.log(profile)
+            // dispact(loginReg(profile))
+            toast.info("Registration Completed", toastStyle);
+            console.log("calledNavigate")
+            navigate('/')
+           
+            // console.log(profile)
+           
+            // navigate("/dashboard");
           })
           .catch((err) => {
             toast.error(err, toastStyle);
@@ -866,12 +1097,19 @@ function RegScreen3(props) {
   const sendOTP = () => {
     //console.log(props.formData.mobile);
     if (props.formData.mobile.length != 10) {
-      toast.info("Mobile No. must be of length 10.", toastStyle);
+      toast.info(
+        "Mobile No. must be of length 10.",
+        toastStyle
+      );
       return;
     }
 
-    toastId.current = toast.loading("Sending OTP");
-    let body = { phoneNumber: props.formData.mobile };
+    toastId.current = toast.loading(
+      "Sending OTP"
+    );
+    let body = {
+      phoneNumber: props.formData.mobile,
+    };
     sendMobileOTP(body)
       .then((res) => {
         toast.update(toastId.current, {
@@ -883,13 +1121,17 @@ function RegScreen3(props) {
         // toast.info("OTP Sent", toastStyle);
         // alert("OTP Sent");
         setSendOtp(true);
-        let time = Session.get("time") - parseInt(Date.now() / 1000);
+        let time =
+          Session.get("time") -
+          parseInt(Date.now() / 1000);
         setMinutes(parseInt(time / 60));
         setSeconds(parseInt(time % 60));
       })
       .catch((err) => {
         setSendOtp(true);
-        let time = Session.get("time") - parseInt(Date.now() / 1000);
+        let time =
+          Session.get("time") -
+          parseInt(Date.now() / 1000);
         setMinutes(parseInt(time / 60));
         setSeconds(parseInt(time % 60));
         toast.update(toastId.current, {
@@ -904,7 +1146,9 @@ function RegScreen3(props) {
     // if (props.formData.mobile.length) setSendOtp(true);
   };
   useEffect(() => {
-    if (!sendOtp) submitRef.current.style.background = "#1a686f";
+    if (!sendOtp)
+      submitRef.current.style.background =
+        "#1a686f";
     if (sendOtp) {
       submitRef.current.style.background = btnCol;
       const interval = setInterval(() => {
@@ -927,12 +1171,100 @@ function RegScreen3(props) {
       };
     }
   }, [seconds, sendOtp]);
-
+  const colleges = [
+    {
+      value: "mnit",
+      label:
+        "Malviya National Institute of Technology, Jaipur",
+    },
+    {
+      value: "bits",
+      label:
+        "Birla Institute of Technology, Pilani",
+    },
+    {
+      value: "muj",
+      label: "Manipal University Jaipur",
+    },
+    {
+      value: "uor",
+      label: "University of Rajasthan",
+    },
+    {
+      value: "jnu",
+      label: "Jaipur National University",
+    },
+    {
+      value: "iitd",
+      label:
+        "Indian Institute of Technology, Delhi",
+    },
+    {
+      value: "iitb",
+      label:
+        "Indian Institute of Technology, Bombay",
+    },
+    {
+      value: "iitj",
+      label:
+        "Indian Institute of Technology, Jodhpur",
+    },
+    {
+      value: "mnnit",
+      label:
+        "Motilal Nehru National Institute of Technology, Allahabad",
+    },
+    {
+      value: "mc",
+      label: "Maharaja College, Jaipur",
+    },
+    {
+      value: "jecrc",
+      label:
+        "Jaipur Engineering College and Research Centre",
+    },
+    {
+      value: "pu",
+      label: "Poornima University, Jaipur",
+    },
+    {
+      value: "auj",
+      label: "Amity University, Jaipur",
+    },
+  ].sort((a, b) => {
+    let one = a.label.toLowerCase();
+    let sec = b.label.toLowerCase();
+    return one < sec ? -1 : one > sec ? 1 : 0;
+  });
+  // useEffect(() => {
+  //   console.log(
+  //     "college: ",
+  //     props.formData.college
+  //   );
+  // }, [props.formData.college]);
+  const handleCollegeName = (obj) => {
+    props.setFormData((prevFormData) => ({
+      ...prevFormData,
+      college: obj.label,
+    }));
+  };
+  const selectStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      color: "black",
+      height: "100%",
+    }),
+  };
   return (
     <>
-      <div className="login-form-title">Add Details</div>
+      <div className="login-form-title">
+        Add Details
+      </div>
       <div className="login-form-input-grp">
-        <label className="login-form-text-label" htmlFor="name">
+        <label
+          className="login-form-text-label"
+          htmlFor="name"
+        >
           Name *
         </label>
         <input
@@ -940,7 +1272,8 @@ function RegScreen3(props) {
           name="name"
           onKeyDown={(e) => {
             //console.log(e);
-            if (e.key === "Enter") clgRef.current.focus();
+            if (e.key === "Enter")
+              clgRef.current.focus();
           }}
           autoFocus
           type="text"
@@ -952,10 +1285,31 @@ function RegScreen3(props) {
         />
       </div>
       <div className="login-form-input-grp">
-        <label className="login-form-text-label" htmlFor="college">
+        <label
+          className="login-form-text-label"
+          htmlFor="college"
+        >
           College *
         </label>
-        <input
+        <div
+          style={{
+            width: "100%",
+            height: "2rem",
+            marginBottom: "8px",
+          }}
+        >
+          <Creatable
+            //value={props.formData.college}
+            options={colleges}
+            onChange={(value) =>
+              handleCollegeName(value)
+            }
+            styles={selectStyles}
+            placeholder="Enter..."
+            required={true}
+          />
+        </div>
+        {/* <input
           ref={clgRef}
           className="login-form-text-inputs"
           name="college"
@@ -968,11 +1322,11 @@ function RegScreen3(props) {
             //console.log(e);
             if (e.key === "Enter") ambRef.current.focus();
           }}
-        />
+        /> */}
       </div>
-      {/* <div className="login-form-input-grp">
+      <div className="login-form-input-grp">
         <label className="login-form-text-label" htmlFor="college">
-          Campus Ambassador ID
+        Referrer ID
         </label>
         <input
           className="login-form-text-inputs"
@@ -985,12 +1339,16 @@ function RegScreen3(props) {
           }}
           onKeyDown={(e) => {
             //console.log(e);
-            if (e.key === "Enter") mobRef.current.focus();
+            if (e.key === "Enter")
+              mobRef.current.focus();
           }}
         />
-      </div> */}
+      </div>
       <div className="login-form-input-grp">
-        <label className="login-form-text-label" htmlFor="mobile">
+        <label
+          className="login-form-text-label"
+          htmlFor="mobile"
+        >
           Mobile *
         </label>
         <input
@@ -1005,15 +1363,16 @@ function RegScreen3(props) {
           }}
           onKeyDown={(e) => {
             //console.log(e);
-            if (e.key === "Enter") verifyRef.current.click();
+            if (e.key === "Enter")
+              verifyRef.current.click();
           }}
         />
       </div>
-      {!sendOtp && (
+      {/* {!sendOtp && (
         <div className="login-form-input-grp">
           <Link
             className="login-form-text-label login-form-otp-resend-link"
-            style={{ fontSize: "0.9rem" }}
+            style={{ fontSize: "0.9rem" ,backgroundColor:"#C1FF5C",padding:"10px",color:"black",boxShadow:"white",borderRadius:"5px" }}
             htmlFor="mobile"
             onClick={() => {
               sendOTP();
@@ -1023,11 +1382,14 @@ function RegScreen3(props) {
             Verify Mobile
           </Link>
         </div>
-      )}
+      )} */}
       {sendOtp ? (
         <>
           {" "}
-          <div className="login-form-text-label" style={{ fontSize: "0.8rem" }}>
+          <div
+            className="login-form-text-label"
+            style={{ fontSize: "0.8rem" }}
+          >
             Enter OTP
           </div>
           <div className="login-form-text-label">{`A 6 digit code has been sent to ${props.formData.mobile}`}</div>
@@ -1045,11 +1407,24 @@ function RegScreen3(props) {
                   key={index}
                   value={data}
                   maxLength="1"
-                  onChange={(e) => handleChangeOtp(e.target, index)}
-                  onFocus={(e) => e.target.select()}
+                  onChange={(e) =>
+                    handleChangeOtp(
+                      e.target,
+                      index
+                    )
+                  }
+                  onFocus={(e) =>
+                    e.target.select()
+                  }
                   onKeyDown={(e) => {
-                    if (e.key === "Backspace" || e.key === "Delete")
-                      handleBackChange(e.target, index);
+                    if (
+                      e.key === "Backspace" ||
+                      e.key === "Delete"
+                    )
+                      handleBackChange(
+                        e.target,
+                        index
+                      );
                   }}
                 />
               );
@@ -1058,8 +1433,14 @@ function RegScreen3(props) {
           <div className="login-form-otp-resend">
             {seconds > 0 || minutes > 0 ? (
               <p className="login-form-timer">
-                Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
-                {seconds < 10 ? `0${seconds}` : seconds}
+                Time Remaining:{" "}
+                {minutes < 10
+                  ? `0${minutes}`
+                  : minutes}
+                :
+                {seconds < 10
+                  ? `0${seconds}`
+                  : seconds}
               </p>
             ) : (
               <></>
@@ -1070,7 +1451,10 @@ function RegScreen3(props) {
               <div className="login-form-otp-resend-que">
                 Didn't recieve code?
               </div>
-              <Link className="login-form-otp-resend-link" onClick={ResetOtp}>
+              <Link
+                className="login-form-otp-resend-link"
+                onClick={ResetOtp}
+              >
                 Resend
               </Link>
             </div>
@@ -1081,14 +1465,30 @@ function RegScreen3(props) {
       ) : (
         <></>
       )}
+        {!sendOtp&& <Link
+        className="login-form-submit-btn"
+        disabled={!sendOtp}
+        style={!sendOtp ? { 'background': btnCol,textDecoration:"none",textAlign:"center" } : { 'background': btnCol }}
+       
+       
+        onClick={ 
+          sendOTP
+        } // call send otp
+        ref ={verifyRef}
+      >
+       
+        Verify Mobile
+      </Link>}
 
+      
       <button
         className="login-form-submit-btn"
         disabled={!sendOtp}
-        style={!sendOtp ? { background: disabledCol } : { background: btnCol }}
+        style={!sendOtp ? { 'background': disabledCol,display:"none" } : { 'background': btnCol }}
         ref={submitRef}
         onClick={handleSubmit}
       >
+       
         Submit
       </button>
     </>
@@ -1108,9 +1508,15 @@ function ForgotPass() {
   const sendOTP = () => {
     getUsersId(token, email, setUserId)
       .then((res) => {
-        toastId.current = toast.loading("Sending Mail");
-        ConRef.current.setAttribute("disabled", true);
-        ConRef.current.style.background = disabledCol;
+        toastId.current = toast.loading(
+          "Sending Mail"
+        );
+        ConRef.current.setAttribute(
+          "disabled",
+          true
+        );
+        ConRef.current.style.background =
+          disabledCol;
         setId(res);
         let body = { id: res };
         //console.log("Body", body);
@@ -1124,9 +1530,13 @@ function ForgotPass() {
               ...toastStyle,
             });
             // props.setter(2);
-            ConRef.current.removeAttribute("disabled");
-            ConRef.current.style.background = btnCol;
-            let time = resp - parseInt(Date.now() / 1000);
+            ConRef.current.removeAttribute(
+              "disabled"
+            );
+            ConRef.current.style.background =
+              btnCol;
+            let time =
+              resp - parseInt(Date.now() / 1000);
             setMinutes(parseInt(time / 60));
             setSeconds(parseInt(time % 60));
             setSent(true);
@@ -1138,20 +1548,27 @@ function ForgotPass() {
               isLoading: false,
               ...toastStyle,
             });
-            ConRef.current.removeAttribute("disabled");
-            ConRef.current.style.background = btnCol;
+            ConRef.current.removeAttribute(
+              "disabled"
+            );
+            ConRef.current.style.background =
+              btnCol;
           });
       })
       .catch((err) => {
         toast.error(err, toastStyle);
-        ConRef.current.removeAttribute("disabled");
+        ConRef.current.removeAttribute(
+          "disabled"
+        );
         ConRef.current.style.background = btnCol;
       });
     // setSent(true);
   };
   const resendOTP = () => {
     let body = { id: id };
-    toastId.current = toast.loading("Sending Mail");
+    toastId.current = toast.loading(
+      "Sending Mail"
+    );
     setOtp(new Array(6).fill(""));
     sendForgotOTP(body)
       .then((resp) => {
@@ -1162,7 +1579,8 @@ function ForgotPass() {
           isLoading: false,
           ...toastStyle,
         });
-        let time = resp - parseInt(Date.now() / 1000);
+        let time =
+          resp - parseInt(Date.now() / 1000);
         setMinutes(parseInt(time / 60));
         setSeconds(parseInt(time % 60));
         setSent(true);
@@ -1174,13 +1592,19 @@ function ForgotPass() {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-  const [otp, setOtp] = useState(new Array(6).fill(""));
+  const [otp, setOtp] = useState(
+    new Array(6).fill("")
+  );
   const [password, setPassword] = useState("");
   // let time = Session.get("time") - parseInt(Date.now() / 1000);
   const [secret, setSecret] = useState("");
   const handleChangeOtp = (element, index) => {
     if (isNaN(element.value)) return false;
-    setOtp([...otp.map((d, idx) => (idx === index ? element.value : d))]);
+    setOtp([
+      ...otp.map((d, idx) =>
+        idx === index ? element.value : d
+      ),
+    ]);
     if (element.value == "") return false;
 
     if (element.nextSibling) {
@@ -1206,7 +1630,11 @@ function ForgotPass() {
   };
   const handleResetPassword = () => {
     //console.log(secret, password);
-    let body = { secret: secret, password: password, id: id };
+    let body = {
+      secret: secret,
+      password: password,
+      id: id,
+    };
     resetPassword(body)
       .then((res) => {
         //console.log(res);
@@ -1219,7 +1647,11 @@ function ForgotPass() {
   };
   const handleBackChange = (element, index) => {
     if (isNaN(element.value)) return false;
-    setOtp([...otp.map((d, idx) => (idx === index ? "" : d))]);
+    setOtp([
+      ...otp.map((d, idx) =>
+        idx === index ? "" : d
+      ),
+    ]);
     //console.log(element.previousSibling);
     //console.log("delete");
     if (element.previousSibling) {
@@ -1253,10 +1685,15 @@ function ForgotPass() {
   const [verified, setVerify] = useState(false);
   return (
     <>
-      <div className="login-form-title">Recover Password</div>
+      <div className="login-form-title">
+        Recover Password
+      </div>
       {!sent && (
         <div className="login-form-input-grp">
-          <label className="login-form-text-label" htmlFor="name">
+          <label
+            className="login-form-text-label"
+            htmlFor="name"
+          >
             Email
           </label>
           <input
@@ -1274,7 +1711,10 @@ function ForgotPass() {
       {sent && !verified ? (
         <>
           {" "}
-          <div className="login-form-text-label" style={{ fontSize: "0.8rem" }}>
+          <div
+            className="login-form-text-label"
+            style={{ fontSize: "0.8rem" }}
+          >
             Enter OTP
           </div>
           <div className="login-form-text-label">{`A 6 digit code has been sent to ${email}`}</div>
@@ -1292,11 +1732,24 @@ function ForgotPass() {
                   value={data}
                   maxLength="1"
                   style={{ width: "2rem" }}
-                  onChange={(e) => handleChangeOtp(e.target, index)}
-                  onFocus={(e) => e.target.select()}
+                  onChange={(e) =>
+                    handleChangeOtp(
+                      e.target,
+                      index
+                    )
+                  }
+                  onFocus={(e) =>
+                    e.target.select()
+                  }
                   onKeyDown={(e) => {
-                    if (e.key === "Backspace" || e.key === "Delete")
-                      handleBackChange(e.target, index);
+                    if (
+                      e.key === "Backspace" ||
+                      e.key === "Delete"
+                    )
+                      handleBackChange(
+                        e.target,
+                        index
+                      );
                   }}
                 />
               );
@@ -1305,8 +1758,14 @@ function ForgotPass() {
           <div className="login-form-otp-resend">
             {seconds > 0 || minutes > 0 ? (
               <p className="login-form-timer">
-                Time Remaining: {minutes < 10 ? `0${minutes}` : minutes}:
-                {seconds < 10 ? `0${seconds}` : seconds}
+                Time Remaining:{" "}
+                {minutes < 10
+                  ? `0${minutes}`
+                  : minutes}
+                :
+                {seconds < 10
+                  ? `0${seconds}`
+                  : seconds}
               </p>
             ) : (
               <></>
@@ -1317,7 +1776,10 @@ function ForgotPass() {
               <div className="login-form-otp-resend-que">
                 Didn't recieve code?
               </div>
-              <Link className="login-form-otp-resend-link" onClick={resendOTP}>
+              <Link
+                className="login-form-otp-resend-link"
+                onClick={resendOTP}
+              >
                 Resend
               </Link>
             </div>
@@ -1352,7 +1814,10 @@ function ForgotPass() {
       )}
       {verified && (
         <div className="login-form-input-grp">
-          <label className="login-form-text-label" htmlFor="password">
+          <label
+            className="login-form-text-label"
+            htmlFor="password"
+          >
             New Password
           </label>
           <input
@@ -1365,7 +1830,8 @@ function ForgotPass() {
             }}
             onKeyDown={(e) => {
               //console.log(e);
-              if (e.key === "Enter") conRef.current.focus();
+              if (e.key === "Enter")
+                conRef.current.focus();
             }}
           />
         </div>
@@ -1392,7 +1858,14 @@ function ForgotPass() {
   );
 }
 
-function selector(x, setter, formData, setFormData, toreg, setBg) {
+function selector(
+  x,
+  setter,
+  formData,
+  setFormData,
+  toreg,
+  setBg
+) {
   switch (x) {
     case 1:
       return (
@@ -1405,7 +1878,13 @@ function selector(x, setter, formData, setFormData, toreg, setBg) {
         />
       );
     case 2:
-      return <RegScreen2 setter={setter} formData={formData} setBg={setBg} />;
+      return (
+        <RegScreen2
+          setter={setter}
+          formData={formData}
+          setBg={setBg}
+        />
+      );
     case 3:
       return (
         <RegScreen3
@@ -1429,7 +1908,9 @@ function Registration(props) {
   const [stepCount, setStepCount] = useState(1);
   return (
     <>
-      <div className="login-form-step-counter">Step {stepCount} of 3</div>
+      <div className="login-form-step-counter">
+        Step {stepCount} of 3
+      </div>
       {selector(
         stepCount,
         setStepCount,
@@ -1444,9 +1925,12 @@ function Registration(props) {
 
 export default function LoginScreen() {
   const [bgchange, setBg] = useState(true);
-  const [registered, setRegistered] = useState(true);
+  const [registered, setRegistered] =
+    useState(true);
   const arr = [bg0, bg1, bg3, bg4];
-  const [currentTab, setCurrentTab] = useState("Description");
+  const [currentTab, setCurrentTab] = useState(
+    "Description"
+  );
   const [currTab, setCurrTab] = useState("");
   const Tabs = ["Home", "Events", "Contact"];
 
@@ -1454,7 +1938,11 @@ export default function LoginScreen() {
     <div
       className="login-container"
       id="bgChange"
-      style={{ backgroundImage: `url(${arr[parseInt(Math.random() * 4)]})` }}
+      style={{
+        backgroundImage: `url(${
+          arr[parseInt(Math.random() * 4)]
+        })`,
+      }}
     >
       <HomeNav
         setCurrTab={setCurrTab}
@@ -1466,10 +1954,19 @@ export default function LoginScreen() {
       />
       <div className="login-image-darken">
         <div className="login-logo-container">
-          <img className="login-logo-img" src={sphinxLogo} />
+          <img
+            className="login-logo-img"
+            src={sphinxLogo}
+          />
           <div className="login-logo-text">
-            <img className="login-logo-institute" src={Institute}></img>
-            <img className="login-logo-fest" src={Fest}></img>
+            <img
+              className="login-logo-institute"
+              src={Institute}
+            ></img>
+            <img
+              className="login-logo-fest"
+              src={Fest}
+            ></img>
           </div>
         </div>
         <div className="login-form-container">
@@ -1477,10 +1974,16 @@ export default function LoginScreen() {
             <div className="login-form-content">
               {registered ? (
                 // <ForgotPass />
-                <Login toreg={setRegistered} setBg={setBg} />
+                <Login
+                  toreg={setRegistered}
+                  setBg={setBg}
+                />
               ) : (
                 // <ForgotPass />
-                <Registration toreg={setRegistered} setBg={setBg} />
+                <Registration
+                  toreg={setRegistered}
+                  setBg={setBg}
+                />
               )}
             </div>
           </div>

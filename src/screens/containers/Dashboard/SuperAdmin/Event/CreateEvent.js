@@ -51,6 +51,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
   const [updateList, setUpdateList] = useState([]);
   const [createStatus, setCreateStatus] = useState(null);
   const [eventImage, setImage] = useState(null);
+  const [redirectUrl,setRedirect]=useState(null)
   const token = useSelector((state) => state.auth.curruser.token);
   //console.log(token);
   const dispatch = useDispatch();
@@ -101,6 +102,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
           setfreeforMNIT(res.freeForMNIT);
           setStatus(res.status);
           setRulebook(res.rulebook);
+          setRedirect(res.redirectUrl)
           let a = [];
           for (let i in res.coordinators) {
             try {
@@ -286,6 +288,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       minTeamSize: minTeamSize,
       maxTeamSize: maxTeamSize,
       rulebook: rulebook,
+      redirectUrl:redirectUrl
       // imageUrl: "", //
     };
     console.log(event_Data);
@@ -358,6 +361,7 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
       minTeamSize: minTeamSize,
       rulebook: rulebook,
       maxTeamSize: maxTeamSize,
+      redirectUrl:redirectUrl,
       // imageUrl: "", //
     };
     if (!admin) {
@@ -636,7 +640,14 @@ function CreateEvent({ setCreate, editSuperAdmin, currEvent }) {
               setField: setLocation,
               value: location,
             })}
+             {CreateInput({
+              label: "Redirect URL",
+              setField: setRedirect,
+              value: redirectUrl,
+              disabled: disabled,
+            })}
             {editSuperAdmin ? edit() : submit()}
+           
           </div>
         </div>
       </div>

@@ -91,7 +91,7 @@ function EventCard(props) {
                 </span>
               </div>
 
-              <div className="eventE-sub2">
+              <div className="eventE-sub2" style={{marginTop:"25px"}} >
                 <span style={{ fontSize: "0.7rem" }}>Event Venue</span>
                 <br></br>
                 <span style={{ fontSize: "0.9rem", fontWeight: "800" }}>

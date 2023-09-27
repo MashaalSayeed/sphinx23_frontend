@@ -8,7 +8,8 @@ import Description from "../../EventsView/EventDetails.js";
 import Results from "../../EventsView/Results.js";
 import Notification from "../../EventsView/Notification.js";
 import { useParams } from "react-router-dom";
-import { getUniqueId } from "../../../../api";
+import { getUniqueId, loginRegister, logout } from "../../../../api";
+import { useNavigate, Link } from "react-router-dom";
 import Query from "../../EventsView/Query.js";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
@@ -18,11 +19,12 @@ import PassCard from "../SuperAdmin/Pass/PassCard";
 
 const Profile = () => {
   // const params = useParams();
-  const currUser = useSelector((state) => state.auth.curruser);
+  const currUser = Session.getObject("profile");
+  const navigate=useNavigate()
 
   useEffect(() => {
     console.log("CurrUser", currUser);
-  }, [currUser]);
+  }, []);
 
 
   const [currentTab, setCurrentTab] = useState("Profile");
@@ -40,11 +42,15 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (!currUser.profile.isEmailVerified) {
-      toast.error("Please Complete Your Profile", toastStyle);
+    if (currUser && !currUser.profile.isEmailVerified) {
+      // toast.error("Please Complete Your Profile", toastStyle);
+      navigate('/login')
+     
       // props.toreg(false);
-    } else if (!currUser.profile.isMobileNumberVerified) {
-      toast.error("Please Complete Your Profile", toastStyle);
+    } else if ( currUser&& !currUser.profile.isMobileNumberVerified) 
+    {
+      // toast.error("Please Complete Your Profile", toastStyle); 
+      navigate('/login')
       // props.toreg(false);
     } 
 

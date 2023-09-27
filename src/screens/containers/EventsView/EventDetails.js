@@ -84,6 +84,13 @@ function Description({ card }) {
   const [razorpayObject, setRazorPay] = useState();
   const currUser = useSelector((state) => state.auth.curruser);
   const handleRegister = () => {
+    if(card.redirectUrl!=null && card.redirectUrl!="")
+    {
+      window.open(
+       card.redirectUrl,
+        "_blank"
+      );
+    }
     toast.info("Registrations will be Live Soon. Stay Tuned.");
     // if (!currUser) {
     //   toast.error("You need to Login First", toastStyle);
