@@ -117,35 +117,7 @@ const Profile = () => {
             };
             let signature = "";
             return;
-            // registerForEvent(signature, body)
-            //   .then((res) => {
-            //     //console.log(res);
-            //     toast.success('You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.')
-            //     // toast.info(toastId.current, {
-            //     //   render: `You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.`,
-            //     //   type: "success",
-            //     //   isLoading: false,
-            //     //   ...toastStyle,
-            //     // });
-            //     // props.setter(2);
-            //     // ConRef.current.removeAttribute("disabled");
-            //     // ConRef.current.style.background = btnCol;
-            //     // alert(
-            //     //   `You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.`
-            //     // );
-            //   })
-            //   .catch((err) => {
-            //     // toast.update(toastId.current, {
-            //     //   render: err,
-            //     //   type: "error",
-            //     //   isLoading: false,
-            //     //   ...toastStyle,
-            //     // });
-            //     toast.error("error",toastStyle)
-            //     // ConRef.current.removeAttribute("disabled");
-            //     // ConRef.current.style.background = btnCol;
-            //   });
-            // //console.log(body);
+          
           } else {
             //console.log(process.env.REACT_APP_RAZORPAY_ID);
             toast.info('Pay Order');
@@ -182,29 +154,7 @@ const Profile = () => {
                 
                 
                 
-                // registerForEvent(signature, body)
-                //   .then((res) => {
-                //     //console.log(res);
-                //     // toast.update(toastId.current, {
-                //     //   render: `You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.`,
-                //     //   type: "success",
-                //     //   isLoading: false,
-                //     //   ...toastStyle,
-                //     // });
-                //     // props.setter(2);
-                //     // ConRef.current.removeAttribute("disabled");
-                //     // ConRef.current.style.background = btnCol;
-                //   })
-                //   .catch((err) => {
-                //     // toast.update(toastId.current, {
-                //     //   render: err,
-                //     //   type: "error",
-                //     //   isLoading: false,
-                //     //   ...toastStyle,
-                //     // });
-                //     // ConRef.current.removeAttribute("disabled");
-                //     // ConRef.current.style.background = btnCol;
-                //   });
+             
               },
               prefill: {
                 //Here we are prefilling random contact
