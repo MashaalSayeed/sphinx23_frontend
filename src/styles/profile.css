@@ -286,18 +286,21 @@ justify-content: center;
   display: flex;
 }
 .profInfo{
-  width: max(10vw,200px);
-  padding: 9px;
+  width: max(13vw,230px);
+  padding: 10px 12px;
+  display: flex;
+ 
+  flex-direction: column;
 }
 .profPass-detail{
-  margin-top: 4px;
+  margin-top: 10px;
   color: rgba(255, 255, 255, 0.70);
 font-family: 'Inter';
-font-size: 6.6px;
+font-size: 0.6rem;
 font-style: normal;
 font-weight: 500;
 line-height: normal;
-letter-spacing: 0.33px;
+margin-bottom: 10px;
 }
 .profPass-name
 {
@@ -305,14 +308,21 @@ letter-spacing: 0.33px;
   font-size: 1.2rem;
 }
 .profInfo>button{
-  border-radius: 3.4px;
+  border: none;
+  border-radius: 8px;
 background: #FFA20F;
 width: 80%;
 padding: 12px 2px;
 margin-left: auto;
+font-weight: 500;
 margin-right: auto;
 color: white;
-font-size: 1rem;
+font-size: 15px;
+letter-spacing: .66px;
+cursor: pointer;
+}
+.profInfo>button:hover{
+  background: #d48505;
 }
 
 

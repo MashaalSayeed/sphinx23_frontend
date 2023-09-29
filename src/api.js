@@ -14,10 +14,11 @@ import {
   adminEvents,
   loading,
 } from "./store/modules/auth/auth.action";
+import { toast } from "react-toastify";
 
-// const url="http://localhost:8000/api";
+const url = "http://localhost:8000/api";
 // const url = "https://sphinx-backend.onrender.com/api";
-const url = "https://sphinx-372511.de.r.appspot.com/api";
+// const url = "https://sphinx-372511.de.r.appspot.com/api";
 
 export const fetchEvents = async (dispatch) => {
   //console.log("Events Fetched");
@@ -254,6 +255,84 @@ export const createEventPaymentRequest = async (body) => {
       throw err;
     });
 };
+export const createPassPaymentRequest = async (body) => {
+  //console.log("Event Fetched", body.userList);
+  return fetch(`${url}/payment/pass`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then(async (response) => {
+      return response.json();
+    })
+    .then((data) => {
+      if (data.error != undefined) {
+        toast.error(data.error);
+        return;
+      }
+
+      return data;
+      console.log(data);
+      // throw data;
+    })
+    .catch((err) => {
+      toast.error(err.code);
+      // console.log(err);
+      // throw err;
+    });
+};
+
+export const addPassToUser = async (body, signature, onePass, setCurr) => {
+  //console.log("Event Fetched", body.userList);
+  return fetch(`${url}/passes/user`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+      "x-razorpay-signature": signature,
+    },
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+    .then(async (response) => {
+      if (response.status == 400) {
+        toast.error(response.statusText);
+        toast.error(response.text);
+      }
+      if (response.status === 401) toast.error(response.json());
+      return response.json();
+    })
+    .then((data) => {
+      if (data.error != undefined) {
+        toast.error(data.error);
+        return;
+      }
+      if (data.success != undefined) {
+        toast.success("Pass Added to Your Profile.");
+        let prof = Session.getObject("profile");
+        prof.profile.passes.push(onePass);
+        console.log(prof);
+        setCurr(prof);
+        Session.setObject("profile", prof);
+        return data;
+      }
+      return data;
+      console.log(data);
+      // throw data;
+    })
+    .catch((err) => {
+      toast.error(err.code);
+      // console.log(err);
+      // throw err;
+    });
+};
+
 export const registerForEvent = async (signature, body) => {
   //console.log("Event Fetched");
   return fetch(`${url}/events/register`, {
