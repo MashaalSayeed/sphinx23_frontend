@@ -11,7 +11,7 @@ function EventTab({ all }) {
     // chandra();
     fetchAdminEvents(token, dispatch)
       .then((res) => {
-        //console.log("ADmin Events Fethced");
+        ////console.log("ADmin Events Fethced");
       })
       .catch((err) => {
         alert(err);
@@ -20,8 +20,8 @@ function EventTab({ all }) {
 
   const events = useSelector((state) => state.auth.adminevents);
 
-  //console.log(events);
-  //console.log("Event_tab");
+  ////console.log(events);
+  ////console.log("Event_tab");
   return (
     <div className="eventTab-main">
       {events &&

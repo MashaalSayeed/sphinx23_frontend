@@ -40,12 +40,12 @@ function CreatePass() {
 
   const onCoverUpload = async () => {
     const file = document.getElementById("pass-img");
-    //console.log("upload image");
+    ////console.log("upload image");
     const new_Arr = [];
     checkedState.map((item, index) => {
-      //console.log(item);
+      ////console.log(item);
       if (item) {
-        //console.log(events[index]._id);
+        ////console.log(events[index]._id);
         new_Arr.push(events[index]._id);
       }
     });
@@ -59,7 +59,7 @@ function CreatePass() {
     //   const uploadTask = uploadBytesResumable(storageRef, file.files[0]).then(
     //     () => {
     //       getDownloadURL(storageRef).then(async (downloadURL) => {
-    //         //console.log(downloadURL);
+    //         ////console.log(downloadURL);
     //         setPassData({ ...PassData, imageUrl: downloadURL });
     //         handleSubmit(downloadURL);
     //       });
@@ -71,22 +71,22 @@ function CreatePass() {
   };
 
   const handleSubmit = async (downloadURL) => {
-    //console.log(downloadURL);
+    ////console.log(downloadURL);
     seterr(null);
     if (PassData.amount <= 0) seterr("Amount Not Valid");
     else if (PassData.name == null) seterr("Pass Name Cannot be Null");
     else if (PassData.detail == null) seterr("Details Cannot be Null");
     else if (PassData.imageUrl == null) {
-      //console.log(PassData.eventId);
-      //console.log(PassData);
+      ////console.log(PassData.eventId);
+      ////console.log(PassData);
       seterr("Upload Failed Please Try Again");
     } else {
-      //console.log(PassData);
+      ////console.log(PassData);
       seterr(null);
       seterr("Success");
     }
   };
-  //console.log(PassData);
+  ////console.log(PassData);
   return (
     <div className="passDetailCard-main">
       <div className="space-top"></div>

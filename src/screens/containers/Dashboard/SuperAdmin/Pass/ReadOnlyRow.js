@@ -1,7 +1,7 @@
 import React from "react";
 
 const ReadOnlyRow = ({ user, handleEditClick, handleDeleteClick }) => {
-  //console.log(user);
+  ////console.log(user);
   return (
     <tr>
       <td>{user.index + 1}</td>

@@ -10,10 +10,10 @@ const ReadOnlyRow = ({
   setteamId,
   setMembers,
 }) => {
-  //console.log("Read CAlled");
-  console.log(data);
-  // //console.log(value);
-  // //setconsole.log(data[value[0]]);
+  ////console.log("Read CAlled");
+  //console.log(data);
+  // ////console.log(value);
+  // //set//console.log(data[value[0]]);
   const handleClick = () => {
     setteamName(data["teamName"]);
     setteamId(data["teamId"]);

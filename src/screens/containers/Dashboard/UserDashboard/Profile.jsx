@@ -23,7 +23,7 @@ const Profile = () => {
   const navigate=useNavigate()
 
   useEffect(() => {
-    console.log("CurrUser", currUser);
+    //console.log("CurrUser", currUser);
   }, []);
 
 
@@ -80,7 +80,7 @@ const Profile = () => {
   });
 
   const handleBuyReq=(onePass)=>{
-    console.log(onePass)
+    //console.log(onePass)
        if (!currUser) {
       toast.error("You need to Login First", toastStyle);
       window.location.href = "/login";
@@ -100,12 +100,12 @@ const Profile = () => {
       };
       createPassPaymentRequest(body)
         .then((res) => {
-        console.log(res);
-        console.log(window.env);
+        //console.log(res);
+        //console.log(window.env);
           if (res.status) {
             toast.info('Free Created');
-            console.log('free order created')
-            //console.log(window.env);
+            //console.log('free order created')
+            ////console.log(window.env);
             let body = {
               pass: onePass._id,
               tName: "Not Applicable",
@@ -119,7 +119,7 @@ const Profile = () => {
             return;
           
           } else {
-            //console.log(process.env.REACT_APP_RAZORPAY_ID);
+            ////console.log(process.env.REACT_APP_RAZORPAY_ID);
             toast.info('Pay Order');
             var options = {
               key: process.env.REACT_APP_RAZORPAY_ID,
@@ -130,7 +130,7 @@ const Profile = () => {
 
               order_id: res.payment.razorpayInstance.id,
               handler: function (response)  {
-                //console.log(response);
+                ////console.log(response);
                 let body = {
                     userId:currUser.profile._id,
                     passId:onePass._id,
@@ -140,12 +140,12 @@ const Profile = () => {
                  
                 };
                 let signature = response.razorpay_signature;
-                console.log(body);
-                console.log(signature);
+                //console.log(body);
+                //console.log(signature);
              
                 addPassToUser(body,signature,onePass,setCurr).then((resp)=>
                 {
-                 console.log("success")
+                 //console.log("success")
                 }).
                 catch((err)=>{
                   toast.info(err)
@@ -183,14 +183,14 @@ const Profile = () => {
                 },
               },
             };
-            console.log(options);
+            //console.log(options);
             const razorpayObject = new Razorpay(options);
             // razorpayObject.open();
 
             // var razorpayObject = new Razorpay(options);
-            console.log(razorpayObject);
+            //console.log(razorpayObject);
             razorpayObject.on("payment.failed", function (response) {
-              //console.log(response);
+              ////console.log(response);
               toast.info("Payment Failed",toastStyle)
               // toast.update(toastId.current, {
               //   render: "Payment Failed",
@@ -202,7 +202,7 @@ const Profile = () => {
               // ConRef.current.style.background = btnCol;
             });
             razorpayObject.on("payment.ondismiss", function (response) {
-              //console.log(response);
+              ////console.log(response);
              toast.info('Payment Cacelled')
             });
             razorpayObject.open();
@@ -256,7 +256,7 @@ const Profile = () => {
    
     );
   });
-  console.log(currUser)
+  //console.log(currUser)
   const Prof=()=>{ return <div className="profile-container" >
   <Qrcard Code={uniqueCode} name={currUser.profile.name} />
 

@@ -80,7 +80,7 @@ function App() {
 
     fetchEvents(dispatch)
       .then((res) => {
-        //console.log("Events Fetched");
+        ////console.log("Events Fetched");
       })
       .catch((err) => {
         toast.error(err, toastStyle);
@@ -100,14 +100,12 @@ function App() {
 
   const curruser = useSelector((state) => state.auth.curruser);
   useEffect(() => {
-    //console.log(land);
-   
-    
+    ////console.log(land);
   }, [land]);
   // createEvent(dispatch, {}, {});
   // createPass(dispatch, {}, {});
-  // //console.log(getUsersByPass({}, {}));
-  // //console.log(getUsers("", token1));
+  // ////console.log(getUsersByPass({}, {}));
+  // ////console.log(getUsers("", token1));
   return (
     // <div className="App">
     //   <Navbar />

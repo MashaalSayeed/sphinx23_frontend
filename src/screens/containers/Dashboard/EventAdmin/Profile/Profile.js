@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 
 function Profile() {
   const currUser = useSelector((state) => state.auth.curruser.profile);
-  //console.log(currUser);
+  ////console.log(currUser);
   return (
     <div className="profile-main">
       <Card variant="outlined">

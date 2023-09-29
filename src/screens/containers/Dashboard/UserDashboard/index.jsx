@@ -15,7 +15,7 @@ const UserDashboard = () => {
     if (!currUser) {
       window.location.href = "/login";
     }
-    //console.log("USef Eeevt", currUser.token);
+    ////console.log("USef Eeevt", currUser.token);
     if (currUser.profile.type === "superAdmin") {
       navigate("/superAdmin");
     }

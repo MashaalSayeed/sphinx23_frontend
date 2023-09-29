@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 const useIntersection = (element, rootMargin, currTab) => {
   const [isVisible, setState] = useState(false);
   useEffect(() => {
-    //console.log(currTab);
+    ////console.log(currTab);
 
-    //console.log(element.current);
+    ////console.log(element.current);
 
     const observer = new IntersectionObserver(
       ([entry]) => {

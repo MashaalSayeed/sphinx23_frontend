@@ -6,12 +6,12 @@ import { render } from "@testing-library/react";
 
 export default function AboutSection(props) {
   const { event } = props;
-  //console.log(event.ended);
+  ////console.log(event.ended);
   const curruser = useSelector((state) => state.auth.curruser);
   const [editEvent, setEdit] = useState(false);
   const type = curruser.profile.type;
   const handleEdit = () => {
-    //console.log("handle edit event");
+    ////console.log("handle edit event");
   };
   return (
     <div className="aboutSection">

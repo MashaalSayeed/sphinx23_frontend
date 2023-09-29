@@ -22,9 +22,9 @@ const toastStyle = {
   theme: "dark",
 };
 const ComplaintsTable = ({ data, value, fetchComplaints }) => {
-  //console.log(data);
-  //console.log(value);
-  //console.log(data[value[0]]);
+  ////console.log(data);
+  ////console.log(value);
+  ////console.log(data[value[0]]);
   const [subject, setSubject] = useState("");
   const [description, setDescription] = useState("");
   const [fetchbutton, setfetchbutton] = useState(false);
@@ -34,7 +34,7 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
   const complaintReplyTextArea = useRef();
 
   // const handleReplyChange = (e) => {
-  //   //console.log("Text", e.target.value);
+  //   ////console.log("Text", e.target.value);
   //   setReply(e.target.value);
   // };
 
@@ -42,7 +42,7 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
     const handleSubmit = (event) => {
       event.preventDefault();
       const reply = complaintReplyTextArea.current.value;
-      //console.log(reply);
+      ////console.log(reply);
       let body = { queryId: id, responseDesc: reply };
 
       submitQueryResponse(token, body)
@@ -99,7 +99,7 @@ const ComplaintsTable = ({ data, value, fetchComplaints }) => {
   };
   const status = (isApproved, subject, text) => {
     const handleClick = () => {
-      //console.log("icon-clicked");
+      ////console.log("icon-clicked");
       setfetchbutton(!fetchbutton);
       setOpen(false);
       setSubject(subject);

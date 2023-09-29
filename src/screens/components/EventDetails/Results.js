@@ -21,7 +21,7 @@ function Results({ event }) {
   // const currentRecords = [{ name: "rupesh", mobileNumber: "8076240766" }];
 
   const token = useSelector((state) => state.auth.curruser.token);
-  //console.log(token);
+  ////console.log(token);
   const [currentRecords, setCurrentRecords] = useState([]);
   // {
   //   id: 21,
@@ -134,7 +134,7 @@ function Results({ event }) {
   const [checked, setChecked] = React.useState([]);
 
   const handleToggle = (value) => () => {
-    //console.log("toggle called");
+    ////console.log("toggle called");
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -153,7 +153,7 @@ function Results({ event }) {
     //change the currentRecords According to the roundNo;
   };
   const handleResultRound = (roundNo) => {
-    //console.log("Round", roundNo);
+    ////console.log("Round", roundNo);
 
     setResultRound(roundNo);
   };
@@ -187,15 +187,15 @@ function Results({ event }) {
     );
   };
   const handleResultUpdate = (complete) => {
-    //console.log("Callled");
-    //console.log(checked);
+    ////console.log("Callled");
+    ////console.log(checked);
     var teamIds = [];
     checked.forEach((index) => {
       teamIds.push(completeCurrentResults[index]._id);
     });
     var body = { event: event._id, teamIds, complete };
     if (currResultRound == event.status) {
-      //console.log("Latest Results");
+      ////console.log("Latest Results");
       addResults(token, body)
         .then((res) => {
           toast.info("Results Added Successfully.", toastStyle);
@@ -217,7 +217,7 @@ function Results({ event }) {
   };
 
   const CheckTeam = (value) => {
-    //console.log(completeCurrentResults[value], currResultRound);
+    ////console.log(completeCurrentResults[value], currResultRound);
     var flag =
       currResultRound < event.status &&
       completeCurrentResults[value].status > currResultRound;
@@ -297,8 +297,8 @@ function Results({ event }) {
       handleToggle(element);
     });
     setChecked([]);
-    //console.log("use effect");
-    //console.log(currRound);
+    ////console.log("use effect");
+    ////console.log(currRound);
     getResults({
       eventId: event._id,
       round: currRound,
@@ -319,15 +319,15 @@ function Results({ event }) {
     });
 
     // Rdata.forEach((element) => {
-    //   //console.log(element.staus);
+    //   ////console.log(element.staus);
     //   if (element.staus >= currRound) {
     //     newdata.push(element);
     //   }
     // });
-    // //console.log(newdata);
+    // ////console.log(newdata);
     // setCurrentRecords(newdata);
   }, [currRound, currResultRound]);
-  // //console.log(currentRecords);
+  // ////console.log(currentRecords);
   return (
     <div>
       {decide ? DecidePop() : <></>}

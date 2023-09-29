@@ -8,18 +8,18 @@ const Events = () => {
   const currUser = useSelector((state) => state.auth.curruser);
 
   useEffect(() => {
-    //console.log("USef Eeevt", currUser.token);
+    ////console.log("USef Eeevt", currUser.token);
     fetchRegisteredEvents(currUser.token)
       .then((res) => {
-        //console.log(res.events);
+        ////console.log(res.events);
         setEvents(res.events);
-        // //console.log(event);
+        // ////console.log(event);
       })
       .catch((err) => {
-        //console.log(err);
+        ////console.log(err);
       });
   }, []);
-//console.log(events.length)
+////console.log(events.length)
   return (
     <div className="ud__events">
       <h1 className="ud__events__title">My Registered Events</h1>

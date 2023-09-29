@@ -1,6 +1,6 @@
 import Session from "../../../Session";
 let profile = Session.getObject("profile") || null;
-//console.log(profile);
+////console.log(profile);
 const initialState = {
   curruser: Session.getObject("profile") ? Session.getObject("profile") : null,
   events: [],

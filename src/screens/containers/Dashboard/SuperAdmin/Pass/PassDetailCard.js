@@ -19,11 +19,11 @@ export default function PassDetailCard(props) {
     progress: undefined,
     theme: "dark",
   };
-  //console.log(pass);
+  ////console.log(pass);
   // useEffect(() => {
   //   fetchEvents(dispatch)
   //     .then((res) => {
-  //       //console.log("Events Fetched");
+  //       ////console.log("Events Fetched");
   //     })
   //     .catch((err) => {
   //       toast.error(err, toastStyle);
@@ -64,7 +64,7 @@ export default function PassDetailCard(props) {
         <ul>
           <h4>Events Covered are:</h4>
           {pass.eventId.map((item, index) => {
-            //console.log(item);
+            ////console.log(item);
             {
               /* const a = events.find((x) => x._id == item); */
             }

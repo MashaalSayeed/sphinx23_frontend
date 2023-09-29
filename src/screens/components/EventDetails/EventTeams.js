@@ -13,7 +13,7 @@ function EventTeams(props) {
   const [members, setMembers] = useState([]);
   const openDialog = () => setDialogOpen(true);
   const closeDialog = () => setDialogOpen(false);
-  //console.log(data.header);
+  ////console.log(data.header);
   return (
     <div>
       <form onSubmit={() => {}} className="resp-m-l-r teams">

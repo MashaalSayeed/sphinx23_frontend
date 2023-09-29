@@ -3,12 +3,12 @@ import ReadOnlyRow from "./ReadOnlyRow";
 
 function EventStudents({ currentRecords }) {
   // const currentRecords = [{ name: "rupesh", mobileNumber: "8076240766" }];
-  //console.log("Called");
+  ////console.log("Called");
   const data = {
     header: ["Sr.no", "TeamID", "Team Name", "Round Status"],
     value: ["index", "teamId", "teamName", "status"],
   };
-  //console.log(currentRecords);
+  ////console.log(currentRecords);
 
   return (
     <div>
