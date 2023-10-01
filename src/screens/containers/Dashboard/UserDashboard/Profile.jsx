@@ -269,7 +269,7 @@ const Profile = () => {
         <p>Registered Number</p>
         <div className="user-number">{currUser.profile.phoneNumber}</div>
       
-        <div className="referral-id">Referal id: 1DF34</div>
+        {currUser.profile.isAmbassador&&<div className="referral-id">Referal id: {uniqueCode}</div> }
     </div>
   </div>
 </div>}
