@@ -356,3 +356,67 @@ cursor: pointer;
     padding-top: 30px;
   }
 }
+
+/* css for my pass changed */
+/* Small screens */
+@media screen and (max-width: 480px) {
+  .profPass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+
+  }
+  .profPass-img {
+    width: 100%;
+  }
+  .profInfo {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .profPass-name {
+    font-size: 1rem;
+  }
+  .profPass-detail {
+    font-size: 0.8rem;
+  }
+  .profPass-price {
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+  .profPass-note {
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+}
+
+/* Medium screens */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .profPass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  .profPass-img {
+    width: 100%;
+  }
+  .profInfo {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .profPass-name {
+    font-size: 1.2rem;
+  }
+  .profPass-detail {
+    font-size: 0.9rem;
+  }
+  .profPass-price {
+    font-size: 1.2rem;
+    margin-top: 5px;
+  }
+  .profPass-note {
+    font-size: 0.9rem;
+    margin-top: 5px;
+  }
+}
