@@ -13,7 +13,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 function Ambassador(props) {
   const [currTab, setCurrTab] = useState("ambassador");
-  const Tabs = ["Home", "About", "Contact"];
+  const Tabs = ["Home", "About", "Profile"];
   const ref = useRef();
   const [progress, setProgress] = useState(0);
   const [progress2, setProgress2] = useState(0);

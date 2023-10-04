@@ -12,10 +12,7 @@ import { getUniqueId, loginRegister, logout } from "../../../../api";
 import { useNavigate, Link } from "react-router-dom";
 import Query from "../../EventsView/Query.js";
 import "react-toastify/dist/ReactToastify.css";
-import { toast } from "react-toastify";
-import { Margin } from "@mui/icons-material";
-import PassCard from "../SuperAdmin/Pass/PassCard";
-
+import Session from "../../../../Session";
 
 const Profile = () => {
   // const params = useParams();
@@ -92,7 +89,7 @@ const Profile = () => {
         <p>Registered Number</p>
         <div className="user-number">{currUser.profile.phoneNumber}</div>
       
-        <div className="referral-id">Referal id: 1DF34</div>
+        {currUser.profile.isAmbassador&& <div className="referral-id">Referal id: {uniqueCode}</div>}
     </div>
   </div>
 </div>}

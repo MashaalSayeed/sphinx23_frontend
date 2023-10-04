@@ -35,7 +35,7 @@ function TimeMachine({ notAnim, landing, setLand }) {
     section.scrollIntoView({ behavior: "auto" });
   };
 
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "Events", "Profile"];
   // //console.log(curruser);
   // if (curruser != null) {
   //   Tabs.push("Profile");

@@ -1932,7 +1932,7 @@ export default function LoginScreen() {
     "Description"
   );
   const [currTab, setCurrTab] = useState("");
-  const Tabs = ["Home", "Events", "Contact"];
+  const Tabs = ["Home", "Events", "Profile"];
 
   return (
     <div
