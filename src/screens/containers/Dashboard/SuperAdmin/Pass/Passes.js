@@ -6,7 +6,7 @@ import { useState } from "react";
 import PassForm from "./PassForm";
 export default function Passes() {
   const passes = useSelector((state) => state.auth.allpasses);
-  //console.log(passes);
+  ////console.log(passes);
   const [createPassBool, setCreate] = useState(false);
   const passCardElements = passes.map((onePass, i) => {
     return (

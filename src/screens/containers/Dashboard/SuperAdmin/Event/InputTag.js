@@ -34,13 +34,13 @@ const Tags = ({ disabled, data, handleDelete }) => {
 };
 
 export default function InputTag({ disabled, useData, setEventCoor }) {
-  // console.log(useData);
+  // //console.log(useData);
   const [tags, SetTags] = useState(useData);
   // useEffect(() => {
   //   SetTags(useData);
   //   // if (submitV) post_Create();
   // }, []);
-  console.log(tags);
+  //console.log(tags);
   const tagRef = useRef();
   const handleDelete = (value) => {
     const newtags = tags.filter((val) => val !== value);
@@ -50,7 +50,7 @@ export default function InputTag({ disabled, useData, setEventCoor }) {
   };
   const [inputEmail, setEmail] = useState("");
   const handleChange = (e) => {
-    //console.log(e.target.value);
+    ////console.log(e.target.value);
     if (e.target.value[e.target.value.length - 1] === " ") {
       handleOnSubmit(e);
       setEmail("");

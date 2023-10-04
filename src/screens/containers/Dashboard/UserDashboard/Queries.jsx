@@ -7,15 +7,15 @@ const Queries = () => {
 	const [queries, setQueries] = useState([1, 2, 3]);
 	const currUser = useSelector((state) => state.auth.curruser);
 	useEffect(() => {
-		//console.log("USef Eeevt", currUser.token);
+		////console.log("USef Eeevt", currUser.token);
 		fetchUserQueries(currUser.token)
 			.then((res) => {
-				//console.log(res);
+				////console.log(res);
 				setQueries(res);
-				// //console.log(event);
+				// ////console.log(event);
 			})
 			.catch((err) => {
-				//console.log(err);
+				////console.log(err);
 			});
 	}, []);
 	return (

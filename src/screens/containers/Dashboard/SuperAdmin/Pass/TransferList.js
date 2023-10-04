@@ -44,7 +44,7 @@ export default function TransferList({ setEvents, edit, present }) {
     setChecked(newChecked);
   };
   const changeEvent = () => {
-    //console.log(right);
+    ////console.log(right);
 
     setEvents(right);
   };
@@ -81,11 +81,11 @@ export default function TransferList({ setEvents, edit, present }) {
     if (edit) {
       eventa.forEach((element, i) => {
         const ind = present.find((x) => x._id == element._id);
-        //console.log(ind);
+        ////console.log(ind);
         if (typeof ind !== "undefined") {
-          //console.log(i);
+          ////console.log(i);
           editRarr.push(i);
-          //console.log(editLarr);
+          ////console.log(editLarr);
         } else {
           editLarr.push(i);
         }

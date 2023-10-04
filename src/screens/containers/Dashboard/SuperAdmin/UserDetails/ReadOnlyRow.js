@@ -3,7 +3,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const ReadOnlyRow = ({ user, handleEditClick, handleDeleteClick }) => {
-  //console.log(user);
+  ////console.log(user);
   return (
     <tr>
       <td>{user.index}</td>

@@ -12,7 +12,7 @@ export const loginReg = (data) => (dispatch) => {
       type: "LOGIN_REGISTER",
     },
     () => {
-      //console.log("callback");
+      ////console.log("callback");
     }
   );
 };

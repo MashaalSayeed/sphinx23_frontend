@@ -36,7 +36,7 @@ function TimeMachine({ notAnim, landing, setLand }) {
   };
 
   const Tabs = ["Home", "Events", "Profile"];
-  // //console.log(curruser);
+  // ////console.log(curruser);
   // if (curruser != null) {
   //   Tabs.push("Profile");
   //   Tabs.push("Logout");
@@ -44,7 +44,7 @@ function TimeMachine({ notAnim, landing, setLand }) {
   //   Tabs.push("Login/Register");
   // }
   const handelOver = () => {
-    //console.log("set anim over");
+    ////console.log("set anim over");
     setNotOver(false);
   };
   useEffect(() => {

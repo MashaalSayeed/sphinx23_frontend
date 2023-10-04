@@ -25,7 +25,7 @@ export default function DashboardEventAdmin() {
   const [isSidebar, SetSidebar] = useState(true);
   const params = useParams();
   const currtab = params.tab;
-  //console.log(currtab);
+  ////console.log(currtab);
 
   // const [Users, setUsers] = useState([]);
   // const [Ambassadors, setAmbassadors] = useState([]);
@@ -40,19 +40,19 @@ export default function DashboardEventAdmin() {
       if (tabNo >= 0 && tabNo < Sdata.options.length)
         setactive(Sdata.options[parseInt(currtab)]);
     } catch {
-      //console.log("invalid tab");
+      ////console.log("invalid tab");
     }
-    //console.log("Event Admin cAlled");
+    ////console.log("Event Admin cAlled");
     // getUsers("", token, setUsers);
     // getAmbassadors(token, setAmbassadors);
     // getPayments(token, setPayments);
-    // //console.log("USERS AMBASSADORS PAYMENT SET");
+    // ////console.log("USERS AMBASSADORS PAYMENT SET");
   }, []);
   // useEffect(() => {
   //   getUsers("", token, setUsers);
   //   getAmbassadors(token, setAmbassadors);
   //   getPayments(token, setPayments);
-  //   //console.log("USERS AMBASSADORS PAYMENT SET");
+  //   ////console.log("USERS AMBASSADORS PAYMENT SET");
   // }, []);
   const Tabs = ["Home", "Events", "Profile"];
   const [currTab, setCurrTab] = useState("");

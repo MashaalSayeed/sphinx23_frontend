@@ -16,14 +16,17 @@ function EventsCat() {
   const categories = new Map([
     ["Flagship", 0],
     ["Club", 1],
-    ["Branch", 2],
+    ["Department", 2],
+    ['Research',3],
+    ['Workshops',4]
   ]);
+ 
   const navigate = useNavigate();
   useEffect(() => {
     window.scrollTo(0, 0);
     let category = categories.get(params.cat);
-    // console.log(params.cat);
-    // console.log(category);
+    // //console.log(params.cat);
+    // //console.log(category);
     if (category === undefined) {
       alert("Category Invalid");
       return;
@@ -36,7 +39,7 @@ function EventsCat() {
         }
       })
       .catch((err) => {
-        //console.log(err);
+        ////console.log(err);
       });
   }, []);
 
@@ -54,7 +57,7 @@ function EventsCat() {
       <div className={"eventsM-title"}>EVENTS</div>
       <div className="eventsM-category-sec">
         {Ecat.map((item, i) => {
-          //console.log(item);
+          ////console.log(item);
           return (
             <EventCard card={item} key={i} index={i} category={item.category} />
           );

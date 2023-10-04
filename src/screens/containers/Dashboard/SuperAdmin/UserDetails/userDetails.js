@@ -151,8 +151,8 @@ const UserDetails = (props) => {
       setNpage: setNpage,
     });
   }, []);
-  //console.log(currentRecords);
-  //console.log(Pages);
+  ////console.log(currentRecords);
+  ////console.log(Pages);
 
   return (
     <div>

@@ -11,16 +11,16 @@ function Results({ data }) {
   const [totalPages, setNpage] = useState();
 
   useEffect(() => {
-    //console.log(data._id);
+    ////console.log(data._id);
     getAllResults(data._id)
       .then((res) => {
-        //console.log(res);
-        //console.log(data.status);
-        //console.log(Array(...Array(parseInt(data.status) + 1).keys()));
+        ////console.log(res);
+        ////console.log(data.status);
+        ////console.log(Array(...Array(parseInt(data.status) + 1).keys()));
         setResults(res);
       })
       .catch((err) => {
-        //console.log(err);
+        ////console.log(err);
       });
   }, []);
 

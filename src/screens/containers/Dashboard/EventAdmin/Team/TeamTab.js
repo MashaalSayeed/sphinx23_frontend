@@ -9,18 +9,18 @@ import dummy from "../../../../../images/dummy_user.png";
 function TeamTab() {
   const [team, setTeam] = useState([]);
   const token = useSelector((state) => state.auth.curruser.token);
-  //console.log(team);
+  ////console.log(team);
   const dispatch = useDispatch();
   let adminEvents = [];
   useEffect(() => {
     window.history.pushState(null, "Admin Events", "/eventAdmin/3");
-    //console.log(adminEvents);
+    ////console.log(adminEvents);
     fetchAdminEvents(token, dispatch)
       .then((res) => {
         res.forEach((event) => {
           event.coordinators.forEach((coordinator) => {
             coordinator.event = event.name;
-            //console.log(coordinator);
+            ////console.log(coordinator);
             setTeam((state) => [...state, coordinator]);
           });
         });
@@ -30,7 +30,7 @@ function TeamTab() {
       });
   }, []);
   // adminEvents = useSelector((state) => state.auth.adminevents);
-  // //console.log(adminEvents);
+  // ////console.log(adminEvents);
   // const teams = [
   //   {
   //     name: "Rupesh yadav",

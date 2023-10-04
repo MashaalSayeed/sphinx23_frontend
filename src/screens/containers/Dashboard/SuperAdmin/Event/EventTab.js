@@ -7,9 +7,9 @@ function EventTab(props) {
   const { all } = props;
   const events = useSelector((state) => state.auth.events);
   // const eventp = useSelector((state) => state.auth.completed);
-  // //console.log(eventp);
+  // ////console.log(eventp);
   // const events = all ? eventa : eventp;
-  //console.log("Event_tab");
+  ////console.log("Event_tab");
   return (
     <div className="eventTab-main">
       {events &&

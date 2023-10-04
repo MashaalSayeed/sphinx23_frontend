@@ -21,15 +21,15 @@ function formatDate(datef) {
 function Notification({ data }) {
   const [updates, setUpdates] = useState([]);
   useEffect(() => {
-    //console.log("USef Eeevt");
+    ////console.log("USef Eeevt");
     getUpdatesForEvent(data._id)
       .then((res) => {
-        //console.log(res);
+        ////console.log(res);
         setUpdates(res);
-        // //console.log(event);
+        // ////console.log(event);
       })
       .catch((err) => {
-        //console.log(err);
+        ////console.log(err);
       });
   }, []);
   return (

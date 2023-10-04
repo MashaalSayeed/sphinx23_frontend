@@ -34,7 +34,7 @@ const Ambassador = (props) => {
       setNpage: setNpage,
     });
   }, []);
-  //console.log(Pages);
+  ////console.log(Pages);
   return (
     <div>
       <div className="app-container">

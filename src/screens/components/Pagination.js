@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Pagination = ({ nPages, currentPage, setCurrentPage, apiCall }) => {
   let pageNumbers;
-  //console.log(nPages);
+  ////console.log(nPages);
   try {
     pageNumbers = [...Array(nPages + 1).keys()].slice(1);
   } catch {
@@ -29,7 +29,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage, apiCall }) => {
       setCurrentPage(currentPage + 1);
       apiCall(currentPage + 1)
         .then((res) => {
-          //console.log("Fetched");
+          ////console.log("Fetched");
         })
         .catch((err) => {
           toast.error(err, toastStyle);
@@ -42,7 +42,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage, apiCall }) => {
       setCurrentPage(currentPage - 1);
       apiCall(currentPage - 1)
         .then((res) => {
-          //console.log("Fetched");
+          ////console.log("Fetched");
         })
         .catch((err) => {
           toast.error(err, toastStyle);
@@ -84,7 +84,7 @@ const Pagination = ({ nPages, currentPage, setCurrentPage, apiCall }) => {
               <a
                 onClick={() => {
                   setCurrentPage(pgNumber);
-                  //console.log("Queries Called", pgNumber);
+                  ////console.log("Queries Called", pgNumber);
                   apiCall(pgNumber);
                 }}
                 className="page-link"

@@ -69,7 +69,7 @@ function Sec1() {
   };
   const user = useSelector((state) => state.auth.curruser);
   const handleSubmit = () => {
-    //console.log("Called");
+    ////console.log("Called");
     if (user == null) {
       toast.error("Please Login First", toastStyle);
       window.location.href = "/login";
@@ -179,7 +179,7 @@ function Cards(props) {
 function AmbassadorM() {
   const Tabs = ["Home", "Events", "Profile"];
   const [currTab, setCurrTab] = useState("AMBASSADOR");
-  // //console.log(currTab);
+  // ////console.log(currTab);
   return (
     <div className={style.main}>
       <HomeNav

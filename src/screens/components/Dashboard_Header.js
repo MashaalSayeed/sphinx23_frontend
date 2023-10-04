@@ -9,7 +9,7 @@ function createEventBtn(setCreateEvent) {
     <button
       className="create-event"
       onClick={() => {
-        //console.log("setTrues");
+        ////console.log("setTrues");
         setCreateEvent(true);
       }}
     >
@@ -40,7 +40,7 @@ function Dashboard_Header(props) {
     paginate,
     setCreateEvent,
   } = props;
-  //console.log(tabs);
+  ////console.log(tabs);
   return (
     <div className="dashboard-header">
       {" "}

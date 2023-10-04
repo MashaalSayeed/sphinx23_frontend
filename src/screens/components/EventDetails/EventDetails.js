@@ -14,25 +14,25 @@ import Footer from "../Footer";
 import HomeNav from "../../containers/Home/homeNav";
 export default function EventDetails() {
   const [tabActive, setTab] = useState("About");
-  //console.log("Event Called");
+  ////console.log("Event Called");
   const params = useParams();
   const eventName = params.id;
   const tab = params.tab;
   const event = useSelector((state) => state.auth.events);
-  //console.log(event);
+  ////console.log(event);
   const type = useSelector((state) => state.auth.curruser.profile.type);
   //make it dynamic
   // const type = "eventAdmin";
   const [currevent, setEvent] = useState();
 
   const token = useSelector((state) => state.auth.curruser.token);
-  //console.log(token);
+  ////console.log(token);
   const [currentRecords, setCurrentRecords] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [Pages, setNpage] = useState(1);
   useEffect(() => {
     if (tab == 1 || tabActive == "Registered Teams") {
-      //console.log("get teams by event", token);
+      ////console.log("get teams by event", token);
       getTeamsByEvent(
         eventName,
         token,
@@ -43,23 +43,23 @@ export default function EventDetails() {
     }
 
     //api call for reg studetnts ;
-    //console.log("get results by event"); //api call for results ;
+    ////console.log("get results by event"); //api call for results ;
   }, [tabActive]);
   useEffect(() => {
     if (tab == 1) setTab("Registered Teams");
     if (tab == 2) setTab("Results");
     fetchOneEvent(setEvent, eventName)
       .then((res) => {
-        //console.log("Event Fetched");
+        ////console.log("Event Fetched");
         setEvent(res);
       })
       .catch((err) => {
         alert(err);
       });
-    //console.log("API Called");
+    ////console.log("API Called");
   }, []);
-  //console.log(currentRecords);
-  //console.log(Pages);
+  ////console.log(currentRecords);
+  ////console.log(Pages);
   const SuperAdmintabs = ["About", "Registered Teams"];
   const EventAdminTabs = ["About", "Registered Teams", "Results"];
   const SuperAdminPaginate = () => {
@@ -124,8 +124,8 @@ export default function EventDetails() {
   };
   const Tabs = ["Home", "Events", "Profile"];
   const [currTab, setCurrTab] = useState("");
-  //console.log("cuurent tab");
-  //console.log(tabActive);
+  ////console.log("cuurent tab");
+  ////console.log(tabActive);
   return (
     <div style={{ background: "white" }}>
       <div style={{ background: "black" }}>

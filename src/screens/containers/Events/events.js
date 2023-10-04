@@ -16,7 +16,7 @@ function Events() {
   const curruser = useSelector((state) => state.auth.curruser);
 
   const Tabs = ["Home", "Events", "Profile"];
-  //console.log(curruser);
+  ////console.log(curruser);
   // if (curruser != null) {
   //   Tabs.push("Profile");
   //   Tabs.push("Logout");
@@ -24,46 +24,16 @@ function Events() {
   //   Tabs.push("Login/Register");
   // }
   const Cat = [
-    { title: "Flagship", icon: proCat, col: "#9672FF", back: tech },
-    { title: "Club", icon: proCat, col: "#9672FF", back: catCardImg },
-    { title: "Branch", icon: proCat, col: "#9672FF", back: edm },
+    { title: "Flagship", icon: proCat, col: "white", back: tech },
+    { title: "Club", icon: proCat, col: "white", back: catCardImg },
+    { title: "Department", icon: proCat, col: "white", back: edm },
+    { title: "Research", icon: proCat, col: "white", back: edm },
+    { title: "Workshops", icon: proCat, col: "white", back: edm }
   ];
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const Ecat = [
-    {
-      title: "ROBO WAR",
-      img: eventsImg,
-      price: "2000",
-      date: "22-07-23",
-      venue: "VLTC",
-      col: "#FF4B4B",
-      qr: "",
-      time: "12:30",
-      date: "29-03-10",
-    },
-    {
-      title: "ROBO WAR",
-      img: eventsImg,
-      price: "2000",
-      date: "22-07-23",
-      venue: "VLTC",
-      col: "#FF4B4B",
-      qr: "",
-      date: "29-03-10",
-    },
-    {
-      title: "ROBO WAR",
-      img: eventsImg,
-      price: "2000",
-      date: "22-07-23",
-      venue: "VLTC",
-      col: "#FF4B4B",
-      qr: "",
-      date: "29-03-10",
-    },
-  ];
+ 
   return (
     <div className="eventM-main">
       <div class="circle circle-hide"></div>
@@ -82,7 +52,7 @@ function Events() {
       <div className={"eventsM-title"}>CATEGORY</div>
       <div className="eventsM-category-sec">
         {Cat.map((item, i) => {
-          //console.log();
+          ////console.log();
           return <CatCard card={item} key={i} index={i} />;
         })}
       </div>

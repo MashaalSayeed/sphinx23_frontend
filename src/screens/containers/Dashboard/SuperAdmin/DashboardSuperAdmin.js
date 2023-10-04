@@ -37,7 +37,7 @@ export default function DashboardSuperAdmin() {
     // getUsers("", token, setUsers);
     // getAmbassadors(token, setAmbassadors);
     // getPayments(token, setPayments);
-    // //console.log("USERS AMBASSADORS PAYMENT SET");
+    // ////console.log("USERS AMBASSADORS PAYMENT SET");
   }, []);
   const Tabs = ["Home", "Events", "Profile"];
   const [currTab, setCurrTab] = useState("");

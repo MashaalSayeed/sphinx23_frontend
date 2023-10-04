@@ -11,7 +11,7 @@ function Complaints() {
   const [tabActive, setTab] = useState("All Complaints");
   const token = useSelector((state) => state.auth.curruser.token);
 
-  //console.log(token);
+  ////console.log(token);
   const data = {
     header: [
       "Sr.no",
@@ -47,7 +47,7 @@ function Complaints() {
   useEffect(() => {
     //
     if (tabActive == "All Complaints") {
-      //console.log("Tab Switched");
+      ////console.log("Tab Switched");
       setStatus(2);
       setCurrentPage(1);
       getQueriesByEventHandler(1);
@@ -56,10 +56,10 @@ function Complaints() {
     if (tabActive == "Pending Complaints") {
       setStatus(0);
       setCurrentPage(1);
-      //console.log("Tab Switched", status);
+      ////console.log("Tab Switched", status);
 
       getQueriesByEventHandler(1);
-      //console.log("Tab Switched 1", status);
+      ////console.log("Tab Switched 1", status);
     }
     if (tabActive == "Approved Complaints") {
       setStatus(1);
