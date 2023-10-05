@@ -25,8 +25,8 @@ function EventsCat() {
   useEffect(() => {
     window.scrollTo(0, 0);
     let category = categories.get(params.cat);
-    // //console.log(params.cat);
-    // //console.log(category);
+    console.log(params.cat);
+    console.log(category);
     if (category === undefined) {
       alert("Category Invalid");
       return;

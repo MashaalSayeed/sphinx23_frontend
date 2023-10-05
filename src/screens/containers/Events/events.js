@@ -2,7 +2,13 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import HomeNav from "../Home/homeNav";
 import back from "../../../images/events/back.png";
-import proCat from "../../../images/events/proCat.png";
+import Worki from "../../../images/events/wicon.svg";
+import club from "../../../images/events/club.svg";
+import dept from "../../../images/events/dep.svg";
+import flag from "../../../images/events/flag.svg";
+import src from "../../../images/events/src.svg";
+import srcback from "../../../images/events/srcback.png";
+import wback from "../../../images/events/workback.png";
 import CatCard from "./catCard";
 import catCardImg from "../../../images/events/catCard.png";
 import tech from "../../../images/events/techC.png";
@@ -24,11 +30,11 @@ function Events() {
   //   Tabs.push("Login/Register");
   // }
   const Cat = [
-    { title: "Flagship", icon: proCat, col: "white", back: tech },
-    { title: "Club", icon: proCat, col: "white", back: catCardImg },
-    { title: "Department", icon: proCat, col: "white", back: edm },
-    { title: "Research", icon: proCat, col: "white", back: edm },
-    { title: "Workshops", icon: proCat, col: "white", back: edm }
+    { title: "Flagship", icon: flag, col: "white", back: tech },
+    { title: "Club", icon: club, col: "white", back: catCardImg },
+    { title: "Department", icon: dept, col: "white", back: edm },
+    { title: "Research", icon: src, col: "white", back: srcback },
+    { title: "Workshops", icon: Worki, col: "white", back: wback }
   ];
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -17,9 +17,21 @@ function EventCard(props) {
       leftCol: "black",
       rightCol: "black",
     },
+    SRC: {
+      backCol: "white",
+      leftCol: "black",
+      rightCol: "black",
+    },
+    Workshops: {
+      backCol: "white",
+      leftCol: "black",
+      rightCol: "black",
+    },
+    
   };
   const { card, index, category } = props;
   const curr = styles[category];
+  console.log(category)
   const animDelay = (index * 6).toString() + "0ms";
   const weekday = [
     "Sunday",

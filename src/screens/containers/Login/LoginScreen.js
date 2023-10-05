@@ -913,7 +913,7 @@ function RegScreen3(props) {
         setSeconds(parseInt(time % 60));
       })
       .catch((err) => {
-        setSendOtp(true);
+        setSendOtp(false);
         let time = Session.get("time") - parseInt(Date.now() / 1000);
         setMinutes(parseInt(time / 60));
         setSeconds(parseInt(time % 60));

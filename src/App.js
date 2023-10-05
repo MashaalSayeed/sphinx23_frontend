@@ -146,7 +146,9 @@ function App() {
             <Route path="/events/:cat" element={<EventsCat />} />
             <Route path="/comming" element={<Coming />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/team" element={<OurTeam />} />
             <Route path="/events/:cat/:id" element={<EventsView />} />
+    
             {/* <Route path="/dashboard" element={<UserDashboard />} /> */}
             {/* <Route path="/test" element={<Test />} /> */}
             {land ? (
