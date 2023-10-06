@@ -266,6 +266,8 @@ const Profile = () => {
     <div className="details">
         <p>Registered email</p>
         <div className="user-email">{currUser.profile.email}</div>
+        <p>College</p>
+        <div className="user-number">{currUser.profile.collegeName}</div>
         <p>Registered Number</p>
         <div className="user-number">{currUser.profile.phoneNumber}</div>
       
