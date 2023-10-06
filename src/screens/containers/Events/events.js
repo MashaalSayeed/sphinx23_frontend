@@ -66,7 +66,7 @@ function Events() {
         setLand={() => {}}
       />
       <div className={"eventsM-title "}>CATEGORY</div>
-      <div className="eventsM-search "> <input className="eventsM-inp" ref={ipref} onFocus={()=>{ setFocus(true)}} onBlur={()=>{ setFocus(false)}} value={query} placeholder="Search for Events" type="text" onChange={(e)=>{
+      <div className="eventsM-search "> <input className="eventsM-inp" ref={ipref} onFocus={()=>{ setFocus(true)}} onBlur={()=>{ setTimeout(()=>{setFocus(false)}, 1000)} } value={query} placeholder="Search for Events" type="text" onChange={(e)=>{
 
          setQ(e.target.value)}}></input> </div>
       <div className="eventsM-category-sec">
