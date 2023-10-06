@@ -2,15 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 function EventCard(props) {
   const styles = {
-    Branch: {
-      backCol: "#FF4B4B",
-      leftCol: "white",
-      rightCol: "#FFC700",
+    Branch:{
+      backCol: "white",
+      leftCol: "black",
+      rightCol: "black",
     },
     Club: {
-      backCol: "#2E2D2D",
-      leftCol: "white",
-      rightCol: "#FFC700",
+      backCol: "white",
+      leftCol: "black",
+      rightCol: "black",
     },
     Flagship: {
       backCol: "white",
