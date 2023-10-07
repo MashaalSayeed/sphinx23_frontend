@@ -69,7 +69,7 @@ function EventCard(props) {
         </div>
         <div className="eventE-details" style={{ background: curr.backCol }}>
           <div className="eventE-left" style={{ color: curr.leftCol }}>
-            <div className="eventE-title" style={{ fontSize: "1.4rem" }}>
+            <div className="eventE-title" style={{ fontSize: "16px" }}>
               {card.name}
             </div>
             {/* {card.amount != 0 && (
@@ -84,12 +84,13 @@ function EventCard(props) {
           <div className="eventE-right" style={{ color: curr.rightCol }}>
             <div className="eventE-sub">
               <div className="eventE-sub1">
-                <span style={{ fontSize: "0.7rem" }}>Date</span>
+                <span style={{ fontSize: "0.7rem" ,color:"black",fontWeight:"500"}}>Date</span>
                 <br></br>
                 <span
                   style={{
                     fontSize: "0.9rem",
                     fontWeight: "800",
+                    color:"grey"
                   }}
                 >
                   3rd -5th Nov
@@ -104,9 +105,9 @@ function EventCard(props) {
               </div>
 
               <div className="eventE-sub2" style={{ marginTop: "25px" }}>
-                <span style={{ fontSize: "0.7rem" }}>Event Venue</span>
+                <span style={{ fontSize: "0.7rem",color:"black",fontWeight:"500" }}>Event Venue</span>
                 <br></br>
-                <span style={{ fontSize: "0.9rem", fontWeight: "800" }}>
+                <span style={{ fontSize: "0.9rem", fontWeight: "800",color:"grey" }}>
                   Stay Tuned
                 </span>
                 {/* <span style={{ fontSize: "1.2rem", fontWeight: "800" }}>
