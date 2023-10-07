@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 function EventCard(props) {
   const styles = {
-    Branch:{
+    Department:{
       backCol: "white",
       leftCol: "black",
       rightCol: "black",
