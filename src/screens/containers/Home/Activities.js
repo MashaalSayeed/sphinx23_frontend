@@ -116,10 +116,7 @@ function Activities(props) {
                 festivals also offer students the chance to collaborate with
                 their peers and form inter-college teams to participate in
                 events such as hackathons, where they can work together to
-                develop innovative solutions to real-world problems. These
-                festivals are a great way for students to hone their technical
-                skills, build their portfolios, and get recognized for their
-                achievements.
+                develop innovative solutions to real-world problems.
               </div>
               <button
                 className="home-about-btn"

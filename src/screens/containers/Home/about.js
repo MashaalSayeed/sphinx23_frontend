@@ -135,12 +135,8 @@ export default function About(props) {
             )}{" "}
           </div>
           <div className="about-page--text-body">
-            Malaviya National Institute of Technology Jaipur, an institute of
-            national importance, is a place for nurturing academic excellence,
-            personal and professional pursuits of an individual. Established in
-            1963, the institute is known for its ability to provide an all-round
-            growth and development space to the students.<br></br>
-            <br></br> Sphinx, the annual techno-management fest of MNIT Jaipur,
+         
+            Sphinx, the annual techno-management fest of MNIT Jaipur,
             is one of the most awaited events of the country. With the view of
             achieving the purpose of the institute, the event provides an
             unparalleled platform to learn, grow, excel, ideate and innovate.
