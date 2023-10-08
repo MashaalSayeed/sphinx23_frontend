@@ -5,6 +5,7 @@ import { getUniqueId } from "../../../../../api";
 
 const ReadOnlyRow = ({ ambassador, handleEditClick, handleDeleteClick }) => {
   //console.log("A", ambassador);
+  console.log(ambassador)
   return (
     <tr>
       <td>{ambassador && ambassador.index + 1}</td>
@@ -18,6 +19,7 @@ const ReadOnlyRow = ({ ambassador, handleEditClick, handleDeleteClick }) => {
             getUniqueId(ambassador.user.phoneNumber))}{" "}
       </td>
       <td>{ambassador && ambassador.profit}</td>
+      <td>{ambassador && ambassador.referral}</td>
 
       <td></td>
       {/* <td></td>

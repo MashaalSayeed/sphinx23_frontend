@@ -78,6 +78,7 @@ const Ambassador = (props) => {
                 <th>College Name</th>
                 <th>UID</th>
                 <th>Profit</th>
+                <th>Referrals</th>
               </tr>
             </thead>
 
