@@ -16,9 +16,9 @@ import {
 } from "./store/modules/auth/auth.action";
 import { toast } from "react-toastify";
 
-// const url = "http://localhost:8000/api";
+const url = "http://localhost:8000/api";
 // const url = "https://sphinx-backend.onrender.com/api";
-const url = "https://sphinx-372511.de.r.appspot.com/api";
+// const url = "https://sphinx-372511.de.r.appspot.com/api";
 
 export const fetchEvents = async (dispatch) => {
   ////console.log("Events Fetched");
@@ -951,9 +951,12 @@ export const getUsers = ({
   setCurrentRecords,
   currentPage,
   setNpage,
+  setCount,
+  setValid,
+  sortType
 }) => {
   ////console.log("getUsersbyPage");
-  fetch(`${url}/users/${currentPage}`, {
+  fetch(`${url}/users/${currentPage}/${sortType}`, {
     headers: {
       "Content-Type": "application/json",
       mode: "cors",
@@ -967,6 +970,8 @@ export const getUsers = ({
         ////console.log(data);
         if (data.users) {
           setCurrentRecords(data.users);
+          setCount(data.count);
+          setCount(data.validC);
           ////console.log(data.totalPages);
           setNpage(data.totalPages);
           return data.totalPages;

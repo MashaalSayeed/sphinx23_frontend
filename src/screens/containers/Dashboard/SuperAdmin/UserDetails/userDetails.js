@@ -139,6 +139,9 @@ const UserDetails = (props) => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [Pages, setNpage] = useState(1);
+  const [sort,setSort]=useState(1);
+  const [count,setCount]=useState(0);
+  const [validC,setValid]=useState(0);
   // const [recordsPerPage] = useState(1);
   // const indexOfLastRecord = currentPage * recordsPerPage;
   // const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
@@ -147,18 +150,30 @@ const UserDetails = (props) => {
     getUsers({
       token: token,
       currentPage: currentPage,
+      sortType:sort,
+      setCount:setCount,
+      setValid:setValid,
       setCurrentRecords: setCurrentRecords,
       setNpage: setNpage,
     });
-  }, []);
+  }, [sort]);
   ////console.log(currentRecords);
   ////console.log(Pages);
 
   return (
     <div>
+      
       <div className="app-container">
-        {/* <h2>User Details</h2> */}
-
+      <h5 style={{color:"black"}}>Total Registration: {validC}</h5>
+      <h5 style={{color:"black"}}>Completed Registration: {count}</h5>
+      <label style={{color:"black",marginTop:"10px"}}>
+      Sort By:
+      <select name="selectedSort" style={{marginLeft:"20px"}} onChange={(e)=>{setSort(e.target.value)}}> 
+        <option value={1}>Time</option>
+        <option value={2}>College</option>
+        <option value={3}>Name</option>
+      </select>
+    </label>
         <Dashboard_Header
           settab={setTab}
           tabactive={tabActive}
@@ -176,6 +191,7 @@ const UserDetails = (props) => {
                   getUsers({
                     token: token,
                     currentPage: pageNo,
+                    sortType:sort,
                     setCurrentRecords: setCurrentRecords,
                     setNpage: setNpage,
                   });
@@ -187,7 +203,7 @@ const UserDetails = (props) => {
           }
           dashBool={true}
         />
-
+     
         <form onSubmit={() => {}}>
           <table>
             <thead>
