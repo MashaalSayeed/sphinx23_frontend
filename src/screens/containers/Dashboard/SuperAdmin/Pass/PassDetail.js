@@ -34,6 +34,7 @@ export default function PassDetail() {
     "Second Day": "Cleopetra Pass",
     "Third Day": "Cleopetra Pass",
     "Golden Pass": "Cleopetra Pass",
+    "Platinum Pass":"Cleopetra Pass"
   };
   const [currpass, setPass] = useState();
 
