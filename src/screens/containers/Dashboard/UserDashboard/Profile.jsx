@@ -236,7 +236,7 @@ const Profile = () => {
       <div className="profInfo">
         <div className="profPass-name">{onePass.name} </div>
         <div className="profPass-detail" style={{fontSize:"0.7rem"}}>{onePass.detail} </div>
-        <div className="profPass-name" style={{fontSize:"1rem",display:"flex",justifyContent:"space-between",width:"100%",marginBottom:"5px"}}>
+        <div className="profPass-name" style={{marginTop:"auto", fontSize:"1rem",display:"flex",justifyContent:"space-between",width:"100%",marginBottom:"5px"}}>
            <span>Total</span>
            <span >Rs.{onePass.amount}</span>
         </div>
