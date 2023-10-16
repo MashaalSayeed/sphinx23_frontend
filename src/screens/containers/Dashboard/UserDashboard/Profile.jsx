@@ -8,24 +8,40 @@ import Description from "../../EventsView/EventDetails.js";
 import Results from "../../EventsView/Results.js";
 import Notification from "../../EventsView/Notification.js";
 import { useParams } from "react-router-dom";
-import { addPassToUser, createPassPaymentRequest, getUniqueId, loginRegister, logout } from "../../../../api";
+import { addPassToUser, createPassPaymentRequest, getUniqueId, loginRegister, logout, updateProf } from "../../../../api";
 import { useNavigate, Link } from "react-router-dom";
 import Query from "../../EventsView/Query.js";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import useRazorpay from "react-razorpay";
 import  Session  from  '../../../../Session';
+import { Update } from "@mui/icons-material";
 
 
 const Profile = () => {
   // const params = useParams();
   const [currUser,setCurr] = useState( Session.getObject("profile"));
   const navigate=useNavigate()
-
+ const [updates,setUpdates]=useState([]);
   useEffect(() => {
-    //console.log("CurrUser", currUser);
+    console.log(currUser)
+    updateProf({setUpdates:setUpdates})
+    setCurr(Session.getObject("profile"))
   }, []);
 
+ useEffect(()=>{
+   setCurr(Session.getObject("profile"))
+ updates.forEach(element => {
+  toast.info(element.type+" "+element.name+" has been added")
+  
+ }
+ );
+
+ },[updates])
+
+ useEffect(()=>{
+
+},[currUser])
 
   const [currentTab, setCurrentTab] = useState("Profile");
   const uniqueCode=getUniqueId(currUser.profile.phoneNumber)
@@ -47,8 +63,6 @@ const Profile = () => {
 
   }, [])
 
-
-  const Razorpay = useRazorpay();
   const toastStyle = {
     position: "top-right",
     autoClose: 3000,
@@ -61,23 +75,6 @@ const Profile = () => {
   };
 
   
-    const loadScript = (src) => {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  };
-
-  useEffect(() => {
-    loadScript("https://checkout.razorpay.com/v1/checkout.js");
-  });
 
   const handleBuyReq=(onePass)=>{
     //console.log(onePass)
@@ -106,44 +103,38 @@ const Profile = () => {
             toast.info('Free Created');
             //console.log('free order created')
             ////console.log(window.env);
-            let body = {
-              pass: onePass._id,
-              tName: "Not Applicable",
-              userList: userList,
-              payment: {
-                order_id: process.env.REACT_APP_FREE_ORDER_ID,
-                payment_id: process.env.REACT_APP_FREE_PAYMENT_ID,
-              },
-            };
-            let signature = "";
-            return;
-          
+            // let body = {
+            //   pass: onePass._id,
+            //   tName: "Not Applicable",
+            //   userList: userList,
+            //   payment: {
+            //     order_id: process.env.REACT_APP_FREE_ORDER_ID,
+            //     payment_id: process.env.REACT_APP_FREE_PAYMENT_ID,
+            //   },
+            // };
           } else {
             ////console.log(process.env.REACT_APP_RAZORPAY_ID);
-            toast.info('Pay Order');
-            var options = {
-              key: process.env.REACT_APP_RAZORPAY_ID,
-              amount: res.payment.razorpayInstance.amount,
-              currency: res.payment.razorpayInstance.currency,
-              name: "Sphinx",
-              description: `Payment Request for ${onePass.name}`,
+            toast.info('Payment Link created');
+            console.log(res)
+            window.open(res.payment.paymentLink, "_blank");
+            // var options = {
+            //   key: process.env.REACT_APP_RAZORPAY_ID,
+            //   amount: res.payment.razorpayInstance.amount,
+            //   currency: res.payment.razorpayInstance.currency,
+            //   name: "Sphinx",
+            //   description: `Payment Request for ${onePass.name}`,
 
-              order_id: res.payment.razorpayInstance.id,
-              handler: function (response)  {
-                ////console.log(response);
+            //   order_id: res.payment.razorpayInstance.id,
+            //   handler: function (response)  {
+            //     ////console.log(response);
                 let body = {
                     userId:currUser.profile._id,
-                    passId:onePass._id,
+                    passId:res.pass._id,
                     _id: res.payment._id,
-                    order_id: response.razorpay_order_id,
-                    payment_id: response.razorpay_payment_id,
+                    payId: res.payId,
                  
                 };
-                let signature = response.razorpay_signature;
-                //console.log(body);
-                //console.log(signature);
-             
-                addPassToUser(body,signature,onePass,setCurr).then((resp)=>
+                addPassToUser(body,onePass,setCurr).then((resp)=>
                 {
                  //console.log("success")
                 }).
@@ -155,57 +146,57 @@ const Profile = () => {
                 
                 
              
-              },
-              prefill: {
-                //Here we are prefilling random contact
-                contact: currUser.profile.phoneNumber,
-                //name and email id, so while checkout
-                name: currUser.profile.name,
-                email: currUser.profile.email,
-              },
-              notes: {
-                description: `Payment Request for ${onePass.name}`,
-              },
-              theme: {
-                color: "#2300a3",
-              },
-              modal: {
-                ondismiss: function () {
-                  toast.info("Payment Cancelled",toastStyle)
-                  // toast.update(toastId.current, {
-                  //   render: "Payment Cancelled",
-                  //   type: "error",
-                  //   isLoading: false,
-                  //   ...toastStyle,
-                  // });
-                  // ConRef.current.removeAttribute("disabled");
-                  // ConRef.current.style.background = btnCol;
-                },
-              },
-            };
+            //   },
+            //   prefill: {
+            //     //Here we are prefilling random contact
+            //     contact: currUser.profile.phoneNumber,
+            //     //name and email id, so while checkout
+            //     name: currUser.profile.name,
+            //     email: currUser.profile.email,
+            //   },
+            //   notes: {
+            //     description: `Payment Request for ${onePass.name}`,
+            //   },
+            //   theme: {
+            //     color: "#2300a3",
+            //   },
+            //   modal: {
+            //     ondismiss: function () {
+            //       toast.info("Payment Cancelled",toastStyle)
+            //       // toast.update(toastId.current, {
+            //       //   render: "Payment Cancelled",
+            //       //   type: "error",
+            //       //   isLoading: false,
+            //       //   ...toastStyle,
+            //       // });
+            //       // ConRef.current.removeAttribute("disabled");
+            //       // ConRef.current.style.background = btnCol;
+            //     },
+            //   },
+            // };
             //console.log(options);
-            const razorpayObject = new Razorpay(options);
-            // razorpayObject.open();
+            // const razorpayObject = new Razorpay(options);
+            // // razorpayObject.open();
 
-            // var razorpayObject = new Razorpay(options);
-            //console.log(razorpayObject);
-            razorpayObject.on("payment.failed", function (response) {
-              ////console.log(response);
-              toast.info("Payment Failed",toastStyle)
-              // toast.update(toastId.current, {
-              //   render: "Payment Failed",
-              //   type: "error",
-              //   isLoading: false,
-              //   ...toastStyle,
-              // });
-              // ConRef.current.removeAttribute("disabled");
-              // ConRef.current.style.background = btnCol;
-            });
-            razorpayObject.on("payment.ondismiss", function (response) {
-              ////console.log(response);
-             toast.info('Payment Cacelled')
-            });
-            razorpayObject.open();
+            // // var razorpayObject = new Razorpay(options);
+            // //console.log(razorpayObject);
+            // razorpayObject.on("payment.failed", function (response) {
+            //   ////console.log(response);
+            //   toast.info("Payment Failed",toastStyle)
+            //   // toast.update(toastId.current, {
+            //   //   render: "Payment Failed",
+            //   //   type: "error",
+            //   //   isLoading: false,
+            //   //   ...toastStyle,
+            //   // });
+            //   // ConRef.current.removeAttribute("disabled");
+            //   // ConRef.current.style.background = btnCol;
+            // });
+            // razorpayObject.on("payment.ondismiss", function (response) {
+            //   ////console.log(response);
+            //  toast.info('Payment Cacelled')
+            // });
+            // razorpayObject.open();
           }
         })
         .catch((err) => {

@@ -16,9 +16,9 @@ import {
 } from "./store/modules/auth/auth.action";
 import { toast } from "react-toastify";
 
-// const url = "http://localhost:8000/api";
+const url = "http://localhost:8000/api";
 // const url = "https://sphinx-backend.onrender.com/api";
-const url = "https://sphinx-372511.de.r.appspot.com/api";
+// const url = "https://sphinx-372511.de.r.appspot.com/api";
 
 export const fetchEvents = async (dispatch) => {
   ////console.log("Events Fetched");
@@ -287,7 +287,7 @@ export const createPassPaymentRequest = async (body) => {
     });
 };
 
-export const addPassToUser = async (body, signature, onePass, setCurr) => {
+export const addPassToUser = async (body, onePass, setCurr) => {
   ////console.log("Event Fetched", body.userList);
   return fetch(`${url}/passes/user`, {
     headers: {
@@ -295,7 +295,6 @@ export const addPassToUser = async (body, signature, onePass, setCurr) => {
       mode: "cors",
       "Access-Control-Allow-Origin": "*",
       Authorization: "Bearer " + Session.getObject("profile").token,
-      "x-razorpay-signature": signature,
     },
     method: "POST",
     body: JSON.stringify(body),
@@ -1176,6 +1175,36 @@ export const getTeamsByEvent = async (
     })
     .catch((error) => {
       throw error;
+    });
+};
+
+export const updateProf = async ({setUpdates}) => {
+ 
+  return fetch(`${url}/users/update`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+    },
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success && data.out.length) {
+        let profile = Session.getObject("profile");
+        console.log(profile.profile)
+        console.log(data.userProf)
+        profile.profile = data.userProf;
+        Session.setObject("profile", profile);
+        setUpdates(data.out);
+       
+      }
+     return data;
+    })
+    .catch((err) => {
+      console.log(err)
+      return err.message;
     });
 };
 

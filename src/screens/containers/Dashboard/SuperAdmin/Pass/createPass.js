@@ -104,6 +104,8 @@ function CreatePass() {
                 <option value="Second Day">Second Day</option>
                 <option value="Third Day">Third Day</option>
                 <option value="Golden Pass">Golden Pass</option>
+                <option value="Platinum Pass">Platinum Pass</option>
+                <option value="School Pass">School Pass</option>
               </select>
             </form>
           </h3>

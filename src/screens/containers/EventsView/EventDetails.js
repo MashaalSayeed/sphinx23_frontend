@@ -90,179 +90,179 @@ function Description({ card }) {
       toast.info("Registrations will be Live Soon. Stay Tuned.");
     }
 
-    // if (!currUser) {
-    //   toast.error("You need to Login First", toastStyle);
-    //   window.location.href = "/login";
-    //   return;
-    // }
-    // if (card.maxTeamSize == 1) {
-    //   toastId.current = toast.loading("Processing");
-    //   ConRef.current.setAttribute("disabled", true);
-    //   ConRef.current.style.background = disabledCol;
-    //   let userList = [];
-    //   userList.push(currUser.profile._id);
-    //   let body = {
-    //     eventId: card._id,
-    //     userList: userList,
-    //     tName: "Not Applicable",
-    //     receipt: `This is the Receipt for ${card.name}`,
-    //     notes: { description: `Payment Request for ${card.name}` },
-    //   };
-    //   createEventPaymentRequest(body)
-    //     .then((res) => {
-    //       ////console.log(res);
-    //       if (!res.status) {
-    //         ////console.log(window.env);
-    //         let body = {
-    //           event: card._id,
-    //           tName: "Not Applicable",
-    //           userList: userList,
-    //           payment: {
-    //             order_id: process.env.REACT_APP_FREE_ORDER_ID,
-    //             payment_id: process.env.REACT_APP_FREE_PAYMENT_ID,
-    //           },
-    //         };
-    //         let signature = "";
-    //         registerForEvent(signature, body)
-    //           .then((res) => {
-    //             ////console.log(res);
-    //             toast.update(toastId.current, {
-    //               render: `You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.`,
-    //               type: "success",
-    //               isLoading: false,
-    //               ...toastStyle,
-    //             });
-    //             // props.setter(2);
-    //             ConRef.current.removeAttribute("disabled");
-    //             ConRef.current.style.background = btnCol;
-    //             // alert(
-    //             //   `You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.`
-    //             // );
-    //           })
-    //           .catch((err) => {
-    //             toast.update(toastId.current, {
-    //               render: err,
-    //               type: "error",
-    //               isLoading: false,
-    //               ...toastStyle,
-    //             });
-    //             ConRef.current.removeAttribute("disabled");
-    //             ConRef.current.style.background = btnCol;
-    //           });
-    //         ////console.log(body);
-    //       } else {
-    //         ////console.log(process.env.REACT_APP_RAZORPAY_ID);
-    //         var options = {
-    //           key: process.env.REACT_APP_RAZORPAY_ID,
-    //           amount: res.order.razorpayInstance.amount,
-    //           currency: res.order.razorpayInstance.currency,
-    //           name: "Sphinx",
-    //           description: `Payment Request for ${card.name}`,
+    if (!currUser) {
+      toast.error("You need to Login First", toastStyle);
+      window.location.href = "/login";
+      return;
+    }
+    if (card.maxTeamSize == 1) {
+      toastId.current = toast.loading("Processing");
+      ConRef.current.setAttribute("disabled", true);
+      ConRef.current.style.background = disabledCol;
+      let userList = [];
+      userList.push(currUser.profile._id);
+      let body = {
+        eventId: card._id,
+        userList: userList,
+        tName: "Not Applicable",
+        receipt: `This is the Receipt for ${card.name}`,
+        notes: { description: `Payment Request for ${card.name}` },
+      };
+      createEventPaymentRequest(body)
+        .then((res) => {
+          ////console.log(res);
+          if (!res.status) {
+            ////console.log(window.env);
+            let body = {
+              event: card._id,
+              tName: "Not Applicable",
+              userList: userList,
+              payment: {
+                order_id: process.env.REACT_APP_FREE_ORDER_ID,
+                payment_id: process.env.REACT_APP_FREE_PAYMENT_ID,
+              },
+            };
+            let signature = "";
+            registerForEvent(signature, body)
+              .then((res) => {
+                ////console.log(res);
+                toast.update(toastId.current, {
+                  render: `You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.`,
+                  type: "success",
+                  isLoading: false,
+                  ...toastStyle,
+                });
+                // props.setter(2);
+                ConRef.current.removeAttribute("disabled");
+                ConRef.current.style.background = btnCol;
+                // alert(
+                //   `You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.`
+                // );
+              })
+              .catch((err) => {
+                toast.update(toastId.current, {
+                  render: err,
+                  type: "error",
+                  isLoading: false,
+                  ...toastStyle,
+                });
+                ConRef.current.removeAttribute("disabled");
+                ConRef.current.style.background = btnCol;
+              });
+            ////console.log(body);
+          } else {
+            ////console.log(process.env.REACT_APP_RAZORPAY_ID);
+            var options = {
+              key: process.env.REACT_APP_RAZORPAY_ID,
+              amount: res.order.razorpayInstance.amount,
+              currency: res.order.razorpayInstance.currency,
+              name: "Sphinx",
+              description: `Payment Request for ${card.name}`,
 
-    //           order_id: res.order.razorpayInstance.id,
-    //           handler: function (response) {
-    //             ////console.log(response);
-    //             let body = {
-    //               payment: {
-    //                 _id: res.order._id,
-    //                 order_id: response.razorpay_order_id,
-    //                 payment_id: response.razorpay_payment_id,
-    //               },
-    //             };
-    //             let signature = response.razorpay_signature;
-    //             ////console.log(body);
-    //             registerForEvent(signature, body)
-    //               .then((res) => {
-    //                 ////console.log(res);
-    //                 toast.update(toastId.current, {
-    //                   render: `You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.`,
-    //                   type: "success",
-    //                   isLoading: false,
-    //                   ...toastStyle,
-    //                 });
-    //                 // props.setter(2);
-    //                 ConRef.current.removeAttribute("disabled");
-    //                 ConRef.current.style.background = btnCol;
-    //               })
-    //               .catch((err) => {
-    //                 toast.update(toastId.current, {
-    //                   render: err,
-    //                   type: "error",
-    //                   isLoading: false,
-    //                   ...toastStyle,
-    //                 });
-    //                 ConRef.current.removeAttribute("disabled");
-    //                 ConRef.current.style.background = btnCol;
-    //               });
-    //           },
-    //           prefill: {
-    //             //Here we are prefilling random contact
-    //             contact: currUser.profile.phoneNumber,
-    //             //name and email id, so while checkout
-    //             name: currUser.profile.name,
-    //             email: currUser.profile.email,
-    //           },
-    //           notes: {
-    //             description: `Payment Request for ${card.name}`,
-    //           },
-    //           theme: {
-    //             color: "#2300a3",
-    //           },
-    //           modal: {
-    //             ondismiss: function () {
-    //               toast.update(toastId.current, {
-    //                 render: "Payment Cancelled",
-    //                 type: "error",
-    //                 isLoading: false,
-    //                 ...toastStyle,
-    //               });
-    //               ConRef.current.removeAttribute("disabled");
-    //               ConRef.current.style.background = btnCol;
-    //             },
-    //           },
-    //         };
-    //         ////console.log(window.env);
-    //         const razorpayObject = new Razorpay(options);
-    //         // razorpayObject.open();
+              order_id: res.order.razorpayInstance.id,
+              handler: function (response) {
+                ////console.log(response);
+                let body = {
+                  payment: {
+                    _id: res.order._id,
+                    order_id: response.razorpay_order_id,
+                    payment_id: response.razorpay_payment_id,
+                  },
+                };
+                let signature = response.razorpay_signature;
+                ////console.log(body);
+                registerForEvent(signature, body)
+                  .then((res) => {
+                    ////console.log(res);
+                    toast.update(toastId.current, {
+                      render: `You have successfully registered. Your Team Id is ${res}.Remember it for your Future Reference.`,
+                      type: "success",
+                      isLoading: false,
+                      ...toastStyle,
+                    });
+                    // props.setter(2);
+                    ConRef.current.removeAttribute("disabled");
+                    ConRef.current.style.background = btnCol;
+                  })
+                  .catch((err) => {
+                    toast.update(toastId.current, {
+                      render: err,
+                      type: "error",
+                      isLoading: false,
+                      ...toastStyle,
+                    });
+                    ConRef.current.removeAttribute("disabled");
+                    ConRef.current.style.background = btnCol;
+                  });
+              },
+              prefill: {
+                //Here we are prefilling random contact
+                contact: currUser.profile.phoneNumber,
+                //name and email id, so while checkout
+                name: currUser.profile.name,
+                email: currUser.profile.email,
+              },
+              notes: {
+                description: `Payment Request for ${card.name}`,
+              },
+              theme: {
+                color: "#2300a3",
+              },
+              modal: {
+                ondismiss: function () {
+                  toast.update(toastId.current, {
+                    render: "Payment Cancelled",
+                    type: "error",
+                    isLoading: false,
+                    ...toastStyle,
+                  });
+                  ConRef.current.removeAttribute("disabled");
+                  ConRef.current.style.background = btnCol;
+                },
+              },
+            };
+            ////console.log(window.env);
+            const razorpayObject = new Razorpay(options);
+            // razorpayObject.open();
 
-    //         // var razorpayObject = new Razorpay(options);
-    //         ////console.log(razorpayObject);
-    //         razorpayObject.on("payment.failed", function (response) {
-    //           ////console.log(response);
-    //           toast.update(toastId.current, {
-    //             render: "Payment Failed",
-    //             type: "error",
-    //             isLoading: false,
-    //             ...toastStyle,
-    //           });
-    //           ConRef.current.removeAttribute("disabled");
-    //           ConRef.current.style.background = btnCol;
-    //         });
-    //         // razorpayObject.on("payment.ondismiss", function (response) {
-    //         //   ////console.log(response);
-    //         //   toast.update(toastId.current, {
-    //         //     render: "Payment Cancelled",
-    //         //     type: "error",
-    //         //     isLoading: false,
-    //         //     ...toastStyle,
-    //         //   });
-    //         // });
-    //         razorpayObject.open();
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       toast.update(toastId.current, {
-    //         render: err,
-    //         type: "error",
-    //         isLoading: false,
-    //         ...toastStyle,
-    //       });
-    //       ConRef.current.removeAttribute("disabled");
-    //       ConRef.current.style.background = btnCol;
-    //     });
-    // } else {
-    //   setReg(true);
-    // }
+            // var razorpayObject = new Razorpay(options);
+            ////console.log(razorpayObject);
+            razorpayObject.on("payment.failed", function (response) {
+              ////console.log(response);
+              toast.update(toastId.current, {
+                render: "Payment Failed",
+                type: "error",
+                isLoading: false,
+                ...toastStyle,
+              });
+              ConRef.current.removeAttribute("disabled");
+              ConRef.current.style.background = btnCol;
+            });
+            // razorpayObject.on("payment.ondismiss", function (response) {
+            //   ////console.log(response);
+            //   toast.update(toastId.current, {
+            //     render: "Payment Cancelled",
+            //     type: "error",
+            //     isLoading: false,
+            //     ...toastStyle,
+            //   });
+            // });
+            razorpayObject.open();
+          }
+        })
+        .catch((err) => {
+          toast.update(toastId.current, {
+            render: err,
+            type: "error",
+            isLoading: false,
+            ...toastStyle,
+          });
+          ConRef.current.removeAttribute("disabled");
+          ConRef.current.style.background = btnCol;
+        });
+    } else {
+      setReg(true);
+    }
   };
   return (
     <div className="eventD-con">
