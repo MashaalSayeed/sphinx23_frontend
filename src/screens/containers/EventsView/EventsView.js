@@ -15,6 +15,8 @@ import HomeNav from "../Home/homeNav";
 import Register from "./Register";
 import Query from "./Query";
 
+
+
 function EventsView() {
   const [event, setEvent] = useState();
   const params = useParams();

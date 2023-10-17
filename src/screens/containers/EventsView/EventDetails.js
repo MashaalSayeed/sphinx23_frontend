@@ -261,7 +261,7 @@ function Description({ card }) {
           ConRef.current.style.background = btnCol;
         });
     } else {
-      setReg(true);
+      setReg(false);
     }
   };
   return (

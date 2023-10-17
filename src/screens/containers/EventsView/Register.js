@@ -239,7 +239,7 @@ function Register(props) {
   }, [userList]);
   const getUsersId = async (email) => {
     // let userData = [];
-    ////console.log(process.env);
+    console.log(email);
     return fetch(
       `${process.env.REACT_APP_SERVER_URL}/users/validatemail/${email}`,
       {
@@ -262,7 +262,7 @@ function Register(props) {
       })
       .catch((err) => {
         // toast.error(err, toastStyle);
-        ////console.log(err);
+       
         throw err;
       });
 
@@ -305,10 +305,16 @@ function Register(props) {
         const id = await getUsersId(mail);
 
         a.push(id);
-      } catch (err) {
-        // toast.error(err, toastStyle);
+      } catch (err) 
+      {
+        toast.error(err, toastStyle);
         let m = parseInt(i) + 1;
         ////console.log(m);
+        let mem = members;
+        mem[m-1] = "";
+       
+        setMembers(mem);
+       
         toast.error(`Team Member ${m} is not valid.`, toastStyle);
         return;
       }
