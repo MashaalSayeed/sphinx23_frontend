@@ -16,9 +16,9 @@ import {
 } from "./store/modules/auth/auth.action";
 import { toast } from "react-toastify";
 
-// const url = "http://localhost:8000/api";
+const url = "http://localhost:8000/api";
 // const url = "https://sphinx-backend.onrender.com/api";
-const url = "https://sphinx-372511.de.r.appspot.com/api";
+// const url = "https://sphinx-372511.de.r.appspot.com/api";
 
 export const fetchEvents = async (dispatch) => {
   ////console.log("Events Fetched");
@@ -244,15 +244,15 @@ export const createEventPaymentRequest = async (body) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.success) {
-        // setEvent(data.event);
-        ////console.log(data);
+      if(data.message)
+      {
         return data;
       }
-      throw data;
+
+      toast.error(data);
     })
     .catch((err) => {
-      throw err;
+      toast.error(err);
     });
 };
 export const createPassPaymentRequest = async (body) => {

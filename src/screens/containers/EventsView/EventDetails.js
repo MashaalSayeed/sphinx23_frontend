@@ -89,7 +89,7 @@ function Description({ card }) {
     } else {
       toast.info("Registrations will be Live Soon. Stay Tuned.");
     }
-
+    return;
     if (!currUser) {
       toast.error("You need to Login First", toastStyle);
       window.location.href = "/login";
@@ -314,22 +314,37 @@ function Description({ card }) {
               </a>
             </span>
           </div>
-          {/* {card.amount && card.amount > 0 && (
+          {card.amount && card.amount > 0 && (
             <div className="eventD-sub1">
               <span style={{ fontSize: "0.8rem" }}>Price</span>
               <br></br>
               <span style={{ fontSize: "1.4rem", fontWeight: "800" }}>
-                Rs.{card.amount}/Member
+                Rs.{card.amount}
               </span>
             </div>
-          )} */}
+          )}
         </div>
         <div className="eventD-desc">{card.description}</div>
+
+        {card.amount && card.amount > 0 && (
+            <div className="eventD-sub1">
+              <span style={{ fontSize: "0.8rem" }}>Price</span>
+              <br></br>
+              <span style={{ fontSize: "1.4rem", fontWeight: "800" }}>
+                Rs.{card.amount}
+              </span>
+            </div>
+          )}
         <button
           className="eventD-reg"
           ref={ConRef}
           disabled={card.status != 1}
-          onClick={handleRegister}
+          onClick={()=>{
+           if( card.amount && card.amount > 0)
+           setReg(true)
+           else
+           handleRegister()
+          }}
         >
           {card.status == 1 ? "Register Now" : "Registrations Closed"}
         </button>

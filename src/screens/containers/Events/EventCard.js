@@ -27,9 +27,14 @@ function EventCard(props) {
       leftCol: "black",
       rightCol: "black",
     },
-    
+    Esports:{
+      backCol: "white",
+      leftCol: "black",
+      rightCol: "black",
+    }
   };
-  const { card, index, category } = props;
+  const { card, index, category,isOwn } = props;
+  console.log(card)
   const curr = styles[category];
   console.log(category)
   const animDelay = (index * 6).toString() + "0ms";
@@ -58,10 +63,11 @@ function EventCard(props) {
     "December",
   ];
   let date = new Date(card.from);
+
   return (
     <Link
-      to={"/events/" + card.category + "/" + card._id}
-      style={{ "text-decoration": "none" }}
+      to={ "/events/" + card.category + "/" + card._id}
+      style= {isOwn?{pointerEvents:"none", "text-decoration": "none"}: { "text-decoration": "none" }}
     >
       <div className="eventE-card" style={{ animationDelay: animDelay }}>
         <div className="eventE-imgCon" style={{ background: curr.backCol }}>
@@ -79,7 +85,7 @@ function EventCard(props) {
                 Rs.{card.amount}
               </div>
             )} */}
-            <button className="eventE-register">EXPLORE</button>
+            <button className="eventE-register"> {isOwn?"Owned":"EXPLORE"} </button>
           </div>
           <div className="eventE-right" style={{ color: curr.rightCol }}>
             <div className="eventE-sub">

@@ -16,6 +16,7 @@ import { ToastContainer, toast } from "react-toastify";
 import useRazorpay from "react-razorpay";
 import  Session  from  '../../../../Session';
 import { Update } from "@mui/icons-material";
+import EventCard from "../../Events/EventCard";
 
 
 const Profile = () => {
@@ -127,20 +128,20 @@ const Profile = () => {
             //   order_id: res.payment.razorpayInstance.id,
             //   handler: function (response)  {
             //     ////console.log(response);
-                let body = {
-                    userId:currUser.profile._id,
-                    passId:res.pass._id,
-                    _id: res.payment._id,
-                    payId: res.payId,
+                // let body = {
+                //     userId:currUser.profile._id,
+                //     passId:res.pass._id,
+                //     _id: res.payment._id,
+                //     payId: res.payId,
                  
-                };
-                addPassToUser(body,onePass,setCurr).then((resp)=>
-                {
-                 //console.log("success")
-                }).
-                catch((err)=>{
-                  toast.info(err)
-                });
+                // };
+                // addPassToUser(body,onePass,setCurr).then((resp)=>
+                // {
+                //  //console.log("success")
+                // }).
+                // catch((err)=>{
+                //   toast.info(err)
+                // });
               
                 
                 
@@ -247,6 +248,23 @@ const Profile = () => {
    
     );
   });
+
+  const eve = currUser.profile.events
+  const allEvents = useSelector((state) => state.auth.upcoming);
+  const EventShow=()=>{
+    return <div className="passes-sec" style={{flexDirection:"row",flexWrap:"wrap",justifyContent:"center",alignItems:"center",left:"0"}}>{EventC}</div>
+  }
+  const EventC = eve.map((e, i) => {
+    let data=allEvents.find(x=>x._id==e.event)
+    return (
+       <div className="profPass" style={{border:"none"}}>
+
+        <EventCard card={data} index={i} category={data.category}  isOwn={true} />
+     
+    </div>
+   
+    );
+  });
   //console.log(currUser)
   const Prof=()=>{ return <div className="profile-container" >
   <Qrcard Code={uniqueCode} name={currUser.profile.name} />
@@ -271,8 +289,8 @@ const Profile = () => {
 
 const tabs = {
   Profile: <Prof  />,
-  "My Passes": <Passes data={event} />,
-  // Notifcation: <Notification data={event} />,
+  "My Passes": <Passes  />,
+  "My Events": <EventShow />,
 };
   return (
     <div className="ud__profile">

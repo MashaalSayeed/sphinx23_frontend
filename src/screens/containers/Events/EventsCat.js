@@ -18,7 +18,8 @@ function EventsCat() {
     ["Club", 1],
     ["Department", 2],
     ['Research',3],
-    ['Workshops',4]
+    ['Workshops',4],
+    ['Esports',5]
   ]);
  
   const navigate = useNavigate();

@@ -37,7 +37,9 @@ function Events() {
     { title: "Club", icon: club, col: "white", back: catCardImg },
     { title: "Department", icon: dept, col: "white", back: edm },
     { title: "Research", icon: src, col: "white", back: srcback },
-    { title: "Workshops", icon: Worki, col: "white", back: wback }
+    { title: "Workshops", icon: Worki, col: "white", back: wback },
+    { title: "Esports", icon: Worki, col: "white", back: wback }
+    
   ];
   useEffect(() => {
     window.scrollTo(0, 0);
