@@ -16,9 +16,9 @@ import {
 } from "./store/modules/auth/auth.action";
 import { toast } from "react-toastify";
 
-const url = "http://localhost:8000/api";
+// const url = "http://localhost:8000/api";
 // // const url = "https://sphinx-backend.onrender.com/api";
-// const url = "https://sphinx-372511.de.r.appspot.com/api";
+const url = "https://sphinx-372511.de.r.appspot.com/api";
 
 export const fetchEvents = async (dispatch) => {
   ////console.log("Events Fetched");
@@ -1209,6 +1209,27 @@ export const updateProf = async ({setUpdates}) => {
     });
 };
 
+export const fetchTeam = async ({ teamid }) => {
+  return fetch(`${url}/participant/team/${teamid}`, {
+    headers: {
+      "Content-Type": "application/json",
+      mode: "cors",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: "Bearer " + Session.getObject("profile").token,
+    },
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) console.log(data)
+      return data;
+    })
+    .catch((err) => {
+      console.log(err)
+      return err.message;
+    });
+};
+
 export const getUniqueId = (x) => {
   const digs = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const base = digs.length;
@@ -1234,3 +1255,5 @@ export const getUniqueId = (x) => {
   digits.reverse();
   return digits.join("");
 };
+
+

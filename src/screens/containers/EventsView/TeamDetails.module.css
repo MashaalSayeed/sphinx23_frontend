@@ -1,0 +1,39 @@
+.topsec {
+    display: flex;
+    justify-content: center;
+    gap: 6rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.toptext {
+    color: rgb(255, 199, 0);
+}
+
+.memberimage {
+    height: 40px;
+}
+
+.memberlist {
+    margin: 20px auto;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    background: rgba(41, 41, 41, 0.5);
+    border: solid 0px #000;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+}
+
+.memberdetails {
+    margin-top: -4px;
+    margin-left: 25px;
+    width: 100%;
+    /* text-align: center; */
+}
+
+.memberdetails span {
+    color: gray;
+    font-size: 0.8rem;
+}

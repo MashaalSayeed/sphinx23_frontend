@@ -14,11 +14,13 @@ import { useSelector } from "react-redux";
 import HomeNav from "../Home/homeNav";
 import Register from "./Register";
 import Query from "./Query";
+import TeamDetails from "./TeamDetails";
 
 
 
 function EventsView() {
   const [event, setEvent] = useState();
+  const [tabs, setTabs] = useState({})
   const params = useParams();
   const toastStyle = {
     position: "top-right",
@@ -38,6 +40,12 @@ function EventsView() {
       .then((res) => {
         ////console.log(res);
         setEvent(res);
+        setTabs({
+          ...tabs,
+          Description: <Description card={res} />,
+          Results: <Results data={res} />,
+          Notifcation: <Notification data={res} />
+        })
         // ////console.log(event);
       })
       .catch((err) => {
@@ -62,13 +70,25 @@ function EventsView() {
         ////console.log(err);
       });
     ////console.log(query);
-  };
+  }
 
-  const tabs = {
-    Description: <Description card={event} />,
-    Results: <Results data={event} />,
-    Notifcation: <Notification data={event} />,
-  };
+
+  // const tabs = {
+  //   Description: <Description card={event} />,
+  //   Results: <Results data={event} />,
+  //   Notifcation: <Notification data={event} />
+  // };
+
+  useEffect(() => {
+    if (currUser && event) {
+
+      const userEvent = currUser.profile.events.find(x=> x.event===event._id ||  x.event._id===event._id)
+      console.log("woo")
+      // if (userEvent) tabs['Team'] = <TeamDetails data={event} userEvent={userEvent} />
+      if (userEvent) setTabs({ ...tabs, Team: <TeamDetails data={event} userEvent={userEvent} /> })
+    }
+  }, [event])
+
   const [currentTab, setCurrentTab] = useState("Description");
   const [currTab, setCurrTab] = useState("");
   const Tabs = ["Home", "Events", "Profile"];
