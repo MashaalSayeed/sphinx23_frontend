@@ -236,7 +236,8 @@ function Register(props) {
     if(event.maxTeamSize==1)
     {
     
-      handleSubmit()
+      handleSubmit().then(()=>{setReg(false)})
+      
      
     }
   },[])

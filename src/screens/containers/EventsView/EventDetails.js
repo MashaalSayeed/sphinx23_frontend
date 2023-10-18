@@ -68,6 +68,7 @@ function Description({ card }) {
   const toastId = useRef(null);
   const disabledCol = "#6e9efa";
   const btnCol = "#95FF42";
+
   // const card = {
   //   title: "ROBO WAR",
   //   img: eventsImg,
@@ -264,6 +265,26 @@ function Description({ card }) {
       setReg(false);
     }
   };
+  const [iSowned,setOwn]=useState(false)
+  useEffect(()=>{ 
+    try{
+      if(currUser)
+      {
+        console.log("is oWNDED")
+      
+       const y=currUser.profile.events.find(x=> x.event==card._id ||  x.event._id==card._id)
+
+       console.log(currUser.profile.passes)
+      
+       if(y) setOwn(true)
+       
+      }
+    }
+    catch(e)
+    {
+      console.log(e)
+    }},[])
+  
   return (
     <div className="eventD-con">
       {regState && (
@@ -326,7 +347,14 @@ function Description({ card }) {
         </div>
         <div className="eventD-desc">{card.description}</div>
 
-        {card.amount && card.amount > 0 && (
+      {
+        iSowned&&
+        <div className="eventD-reg" style={{background:"rgb(255, 199, 0)",color:"black"}}>
+            Registered
+           </div>
+      }
+
+        {/* {card.amount && card.amount > 0 && (
             <div className="eventD-sub1">
               <span style={{ fontSize: "0.8rem" }}>Price</span>
               <br></br>
@@ -334,8 +362,8 @@ function Description({ card }) {
                 Rs.{card.amount}
               </span>
             </div>
-          )}
-        <button
+          )} */}
+       {!iSowned&& <button
           className="eventD-reg"
           ref={ConRef}
           disabled={card.status != 1}
@@ -347,7 +375,7 @@ function Description({ card }) {
           }}
         >
           {card.status == 1 ? "Register Now" : "Registrations Closed"}
-        </button>
+        </button>}
       </div>
       <div className="eventD-sec2">
         <img src={card.imageUrl}></img>

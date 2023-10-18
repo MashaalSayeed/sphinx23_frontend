@@ -38,7 +38,7 @@ function Query({ onSubmit }) {
   };
 
   return (
-    <div className={styles.query}>
+    <div className={styles.query} style={{position:"sticky",top:"0px",left:"30px"}}>
       {open ? (
         <>
           <img
